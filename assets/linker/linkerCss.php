@@ -1,6 +1,6 @@
 <?php 
 //define('$rootAdress', "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/");
-
+$APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
 
 
 
@@ -12,7 +12,7 @@ $bootstrap_reboot = $rootAdress."assets/css/bootstrap-reboot.css" ;
 $bootstrap = $rootAdress."assets/css/bootstrap.css" ; 
 $jquery_ui_structure = $rootAdress."assets/css/jquery-ui.structure.css" ; 
 $jquery_ui_theme = $rootAdress."assets/css/jquery-ui.theme.css" ; 
-$style = $rootAdress."assets/css/style.css" ; 
+$style = $rootAdress."assets/css/style.php" ; 
 
 ?>
 
@@ -23,12 +23,16 @@ $style = $rootAdress."assets/css/style.css" ;
 		hellow
 	</title>
 	
- <link rel="stylesheet" href="<?= $bootstrap_grid ?>">
- <link rel="stylesheet" href="<?= $bootstrap_reboot ?>">
- <link rel="stylesheet" href="<?= $bootstrap ?>">
- <link rel="stylesheet" href="<?= $jquery_ui_structure ?>">
- <link rel="stylesheet" href="<?= $jquery_ui_theme ?>">
- <link rel="stylesheet" href="<?= $style ?>">
+	<link rel="stylesheet" href="<?= $bootstrap_grid ?>">
+	<link rel="stylesheet" href="<?= $bootstrap_reboot ?>">
+	<link rel="stylesheet" href="<?= $bootstrap ?>">
+	<link rel="stylesheet" href="<?= $jquery_ui_structure ?>">
+	<link rel="stylesheet" href="<?= $jquery_ui_theme ?>">
+	
+
+	<?php 
+	include $APP_ROOT."assets/css/style.php";
+	?>
 
 </head>
 <body>

@@ -5,6 +5,25 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 
 
+<div class="row">
+	
+	<div class="col-6 loginPage_background">
+		
+	</div>
+
+	<div class="col-6">
+			
+		Welcome back!
+		<br>
+		Please login.		
+		
+	</div>
+
+
+</div>
+
+
+
 
 
 

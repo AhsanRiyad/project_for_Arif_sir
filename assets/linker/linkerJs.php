@@ -27,9 +27,10 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     <!-- <script src="font-awesome/js/all.js" type="text/javascript"></script> -->
     
     <!-- custome js -->
-    <script src=<?php echo $jsMain; ?> ></script>
 
-
+    <?php 
+    include $APP_ROOT."assets/js/main.php";
+     ?>
 
 
 
