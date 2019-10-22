@@ -12,7 +12,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 
   <div class="container-fluid">
-    <div class="row justify-content-xl-center admin_background ">
+    <div class="row justify-content-xl-center _background ">
       <div class="col-12 col-xl-4 ">
         <div class="container margin_">
           <div class="row py-4 ">

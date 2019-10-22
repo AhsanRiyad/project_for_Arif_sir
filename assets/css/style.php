@@ -7,29 +7,56 @@ label {
 	font-weight: bolder;
 }
 
-.admin_background{
+
+/*login page*/
+._background{
 	height: 100vh;
 	background-color:  #d3d3d3 ;
 }
-.reg_background{
-	
-	background-color:  #d3d3d3 ;
-}
 
 
+/*main margin*/
 .margin_{
 	margin-top: 25%;
 }
 
 
 
-@media only screen and (max-width: 768px) {
-  
-.margin_{
-	margin-top: 5%;
+/*login page*/
+/*registration page*/
+.reg_background{
+	
+	background-color:  #d3d3d3 ;
+}
+
+/*registration page*/
+
+
+
+
+/*forgot passwor page*/
+
+._background{
+
 }
 
 
+/*forgot passwor page*/
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  
+/*login page*/
+/*main margin*/
+.margin_{
+	margin-top: 5%;
+}
+/*login page*/
 
 
 }
