@@ -12,7 +12,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
   <div class="container-fluid">
     <div class="row justify-content-xl-center admin_background ">
-      <div class="col-12 col-xl-6 ">
+      <div class="col-12 col-xl-4 ">
         <div class="container margin_">
           <div class="row py-4 ">
             
@@ -21,13 +21,16 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
             
               
                 <p class="text-dark h4" id="login_id">
-              Welcome Back! Please login
+             Forgot Password?
+             <br>
+             Please enter your email to recover..
+            </p>
               
           </div>
 
           <div class="row justify-content-xl-center bg-white py-5 mb-5">
 
-            <div class="col-12 col-xl-6 ">
+            <div class="col-12 col-xl-9 ">
 
               <div class="form-group">
                 <label for="exampleInputEmail1" ><small id="idExampleInputEmail1Small">Email address*</small>
@@ -40,31 +43,25 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
                 value=""
                 >
               </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1"><small>Password*</small>
-                  <br>
 
+              <button type="submit" name="submit" value="submit" class="btn btn-success rounded-0 mb-1 w-100 py-2">Recover Password</button>
 
+              <!-- <button type="submit" name="submit" value="submit" class="btn btn-info rounded-0 mb-1 w-100 py-2">Back to Login</button> -->
+              
+              <br>
 
-                </label>
-                <input name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password"
-                value=""
-
-                >
-                <p class="text-right text-danger">
-                  <small><a href="<?php echo $forgotPage; ?>">Forgot password?</a></small>
-                </p>
+              <div class="row justify-content-end">
+              <div class="col-lg-auto">
+              <a href="<?php echo $loginPage; ?>" class="">Go Back to Login</a>
               </div>
+              </div>
+              
+            
+
+
 
             </div>
-            <div class="col-12 col-xl-5 align-self-xl-center">
-              <button type="submit" name="submit" value="submit" class="btn btn-success rounded-0 w-100 py-2">Log In</button>
-
-              <p class="text-danger h5 mt-2"><i>Not a member yet?</i></p>
-
-              <a href="<?php echo $registationPage; ?>"><button type="button" class="btn btn-primary rounded-0 w-100 py-2">Register Here</button></a>
-
-            </div>
+            
 
 
           </div>

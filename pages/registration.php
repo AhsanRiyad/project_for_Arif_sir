@@ -417,11 +417,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 								</div>
 
 
-
-
 								<label for="exampleInputEmail1" ><small id="idExampleInputEmail1Small">Blood Group*
-
-
 
 								</small>
 								<small class="text-danger">
@@ -431,7 +427,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 							</label>
 
-							<div class="input-group">
+							<div class="input-group mb-xl-3">
 								<select  name="country" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
 									<option selected value="bangladesh">BLOOD GROUP</option>
 									<option  value="">A+</option>
@@ -449,12 +445,34 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 							</div>
 
 							
+							<div class="form-group mb-xl-3">
+								<label for="exampleInputPassword1"><small id='idexampleInputPassword1'>Password*</small>
+
+									
+									<br>
+								</label>
+								<input name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password" value="{{ old('password') }}">
+							</div>
+
+							<!-- re-enter password input -->
+							<div class="form-group mb-4">
+								<label for="exampleInputPassword1"><small>Re-enter password*</small>
+								
+								
+
+								</label>
+								<input name="confirm_password" type="password" class="form-control rounded-0" id="exampleInputPassword2" placeholder="Password" value="" >
+							</div>
+
+
+
+
 
 							<!-- toc terms and condition input -->
 							
 
 							<!-- submit button -->
-							<button type="submit" name="submit" value="submit" class="btn btn-success rounded-0 w-100 py-2 mt-5 mt-xl-4">Register</button>
+							<button type="submit" name="submit" value="submit" class="btn btn-success rounded-0 w-100 py-2  mt-xl-4">Register</button>
 
 							<!-- <p class="text-danger h5 mt-4"><i>Already have an account?</i></p>
 
@@ -469,9 +487,6 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 			</div>
 		</div>
 	</form>
-
-
-
 
 
 	<?php 

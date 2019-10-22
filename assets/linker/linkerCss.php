@@ -20,7 +20,7 @@ $style = $rootAdress."assets/css/style.php" ;
 // address
 $registationPage =  $rootAdress."pages/registration.php" ;
 $loginPage = $rootAdress.'pages/login.php';
-
+$forgotPage = $rootAdress.'pages/forgot.php';
 
 
 
