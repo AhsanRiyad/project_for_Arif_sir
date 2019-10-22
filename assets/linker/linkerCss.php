@@ -33,7 +33,7 @@ $forgotPage = $rootAdress.'pages/forgot.php';
 <html>
 <head>
 	<title>
-		hellow
+		<?php echo $pageName ;  ?>
 	</title>
 	
 	<link rel="stylesheet" href="<?= $bootstrap_grid ?>">
