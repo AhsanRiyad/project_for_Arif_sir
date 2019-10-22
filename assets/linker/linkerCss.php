@@ -14,6 +14,19 @@ $jquery_ui_structure = $rootAdress."assets/css/jquery-ui.structure.css" ;
 $jquery_ui_theme = $rootAdress."assets/css/jquery-ui.theme.css" ; 
 $style = $rootAdress."assets/css/style.php" ; 
 
+
+
+
+// address
+$registationPage =  $rootAdress."pages/registration.php" ;
+$loginPage = $rootAdress.'pages/login.php';
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>

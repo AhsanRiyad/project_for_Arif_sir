@@ -1,10 +1,25 @@
 
 <style>
 
-h1{color: red;}
-
-.loginPage_background{
-	background-image: url(" <?php echo $rootAdress.'assets/img/purple-gradient-starry-night-background_23-2148278894.jpg'; ?> ");
+label {
+	color: #428df5;
+	font-size: 20px;
+	font-weight: bolder;
 }
+
+.admin_background{
+	height: 100vh;
+	background-color:  #d3d3d3 ;
+}
+.reg_background{
+	
+	background-color:  #d3d3d3 ;
+}
+
+
+.margin_{
+	margin-top: 25%;
+}
+
 
 </style >
