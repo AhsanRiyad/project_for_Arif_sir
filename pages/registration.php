@@ -382,20 +382,20 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 								
 								<!-- mobile number input -->
-							<div class="form-group mb-xl-3">
-								<label for="exampleInputEmail1"><small id="exampleLabelMobile">Mobile Number*</small>
+								<div class="form-group mb-xl-3">
+									<label for="exampleInputEmail1"><small id="exampleLabelMobile">Mobile Number*</small>
 
-									<small class="text-danger">
+										<small class="text-danger">
 
-									</small>
+										</small>
 
-									<br>
+										<br>
 
-								</label>
+									</label>
 
-								<input name="phone" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
-								value="">
-							</div>
+									<input name="phone" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
+									value="">
+								</div>
 
 
 
@@ -430,24 +430,42 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 								<select  name="country" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
 									<option selected value="bangladesh">BLOOD GROUP</option>
 									<option  value="">A+</option>
-									<option  value="">A+</option>
+									<option  value="">A-</option>
 									<option  value="">B+</option>
 									<option  value="">B-</option>
 									<option  value="">AB+</option>
 									<option  value="">AB-</option>
 									<option  value="">O+</option>
 									<option  value="">O-</option>
-									
-			
 
 								</select>
 							</div>
-
 							
+
+
+							<!-- DOB input -->
+							<div class="form-group mb-xl-3">
+								<label for="exampleInputEmail1"><small id="exampleLabelMobile">Date of Birth*</small>
+
+									<small class="text-danger">
+
+									</small>
+
+									<br>
+
+								</label>
+
+								<input name="dob" type="text" class="form-control rounded-0" id="datepicker" aria-describedby="emailHelp" placeholder="Date of birth"
+								value="">
+							</div>
+
+
+
+
+
+
 							<div class="form-group mb-xl-3">
 								<label for="exampleInputPassword1"><small id='idexampleInputPassword1'>Password*</small>
-
-									
 									<br>
 								</label>
 								<input name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password" value="{{ old('password') }}">
@@ -456,8 +474,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 							<!-- re-enter password input -->
 							<div class="form-group mb-4">
 								<label for="exampleInputPassword1"><small>Re-enter password*</small>
-								
-								
+
 
 								</label>
 								<input name="confirm_password" type="password" class="form-control rounded-0" id="exampleInputPassword2" placeholder="Password" value="" >
