@@ -16,6 +16,13 @@ $style = $rootAdress."assets/css/style.php" ;
 
 
 
+// images
+$logoSrc = $rootAdress."assets/img/logo_dashboard.png";
+
+
+
+
+
 
 // address
 $registationPage =  $rootAdress."pages/registration.php" ;
