@@ -110,7 +110,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
           </div></a>
 
-            <a class="text-white" href=>
+            <a class="text-white" href="<?php echo $loginPage; ?>">
               <div class="  bg-danger py-2 text-center my-4">
 
                 <i class="fas fa-sign-out-alt"></i>Sign Out

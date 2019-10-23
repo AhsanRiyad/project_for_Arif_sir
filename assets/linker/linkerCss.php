@@ -28,7 +28,7 @@ $logoSrc = $rootAdress."assets/img/logo_dashboard.png";
 $registationPage =  $rootAdress."pages/registration.php" ;
 $loginPage = $rootAdress.'pages/login.php';
 $forgotPage = $rootAdress.'pages/forgot.php';
-
+$dashboardPage = $rootAdress.'pages/dashboard.php';
 
 
 

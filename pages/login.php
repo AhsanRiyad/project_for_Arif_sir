@@ -7,7 +7,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 
 <!-- login form starts -->
-<form  method="post" action="#">
+<form  method="post" action="<?php echo $dashboardPage; ?>">
 
 
 
