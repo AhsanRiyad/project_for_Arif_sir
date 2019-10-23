@@ -21,7 +21,8 @@ $logoSrc = $rootAdress."assets/img/logo_dashboard.png";
 
 
 
-
+// pages
+$reg_for_admin = $APP_ROOT.'pages/reg_for_admin.php';
 
 
 // address

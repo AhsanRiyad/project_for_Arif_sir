@@ -10,4 +10,11 @@ $( function() {
   } );
 
 
+
+
+var dashboard_height = $('#dashboard_height').height();
+//alert(dashboard_height);
+
+$("#dashboard_vertical_menu_height").attr("height", dashboard_height );
+
 </script>

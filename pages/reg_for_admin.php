@@ -1,16 +1,8 @@
-<?php 
-$pageName = 'registration';
-$APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
-include $APP_ROOT."assets\linker\linkerCss.php" ; 
-?>
-
-
-
 <!-- registration page starts now -->
-<form action="#" method="post">
+<form action="#" method="post" >
 	
-	<div class="container-fluid">
-		<div class="row justify-content-xl-center reg_background no-gutters">
+	
+		<div class="row justify-content-xl-center reg_background no-gutters " >
 			<div class="col-12 col-xl-6 ">
 				<div class="container">
 					<div class="row pt-4 pb-1">
@@ -501,10 +493,5 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	</form>
-
-
-	<?php 
-	include $APP_ROOT."assets/linker/linkerJs.php" ; 
-	?>

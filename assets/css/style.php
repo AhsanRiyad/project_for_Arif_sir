@@ -8,6 +8,12 @@ label {
 }
 
 
+#dashboard_vertical_menu_height{
+	
+	background-color: #343a40;
+}
+
+
 /*login page*/
 ._background{
 	height: 100vh;
@@ -46,7 +52,10 @@ label {
 
 
 
-
+.no-padding {
+	padding-left: 0;
+	padding-right: 0;
+}
 
 
 
@@ -118,36 +127,31 @@ body{
 
     /*admin page starts*/
 .admin_navbar_veritcal{
-    height: 100vh;
-    position:fixed;
-    height: 100vh;
-    width: 250px;
-    z-index: 1001;
+    
+    /*height: 100vh;*/
+    /* z-index: 1001;
     top: 0;
-    left:0;
+    left:0; */
 
 
 }
 
 .admin_navbar_horizontal{
-height:61px;
-position: fixed;
-width: calc(100vw - 250px);
+
+/*position: relative;*/
+/*width: calc(100vw - 250px);*/
 color: white;
-z-index: 1000;
+/* z-index: 1000;
 top:0;
-left:250px;
+left:250px; */
+height: 59px;
 
 
 }
 
 .admin_margin{
 
-margin-top: 100px;
-margin-left: 300px;
-height: 100vh !important;
-    max-height: 100vh;
-    position:relative;
+
 
 }
 
