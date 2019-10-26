@@ -7,7 +7,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 
 <!-- registration page starts now -->
-<form action="#" method="post">
+<form action="<?php echo $modelRegirstration; ?>" method="post">
 	
 	<div class="container-fluid">
 		<div class="row justify-content-xl-center reg_background no-gutters">
@@ -65,7 +65,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 
 									</label>
-									<input name="Middle_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Middle name" value="">
+									<input name="middle_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Middle name" value="">
 								</div>
 
 								<!-- last name input -->
@@ -95,11 +95,11 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 								<div class="input-group">
 
-									<select  name="country" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
-										<option selected value="bangladesh">Gender</option>
-										<option  value="">Male</option>
-										<option  value="">Female</option>
-										<option  value="">Others</option>
+									<select  name="gender" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
+										<option selected value="Gender">Gender</option>
+										<option  value="Male">Male</option>
+										<option  value="Female">Female</option>
+										<option  value="Others">Others</option>
 
 
 									</select>
@@ -130,7 +130,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter nid/passport number" value="">
+									<input name="nid_or_passport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter nid/passport number" value="">
 								</div>
 
 
@@ -144,7 +144,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter fathers name" value="">
+									<input name="fathers_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter fathers name" value="">
 								</div>
 
 								<!-- mother's name input -->
@@ -157,7 +157,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter mothers name" value="">
+									<input name="mother_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter mothers name" value="">
 								</div>
 								<!-- spouse's name input -->
 								<div class="form-group mt-3">
@@ -169,7 +169,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter spouses name" value="">
+									<input name="spouse_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter spouses name" value="">
 								</div>
 								
 
@@ -186,11 +186,11 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 								<div class="input-group">
 
-									<select  name="country" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
-										<option selected value="bangladesh">Number Of Children</option>
-										<option  value="">01</option>
-										<option  value="">02</option>
-										<option  value="">03</option>
+									<select  name="number_of_children" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
+										<option selected value="null">Number Of Children</option>
+										<option  value="1">01</option>
+										<option  value="2">02</option>
+										<option  value="3">03</option>
 									</select>
 								</div>
 
@@ -210,7 +210,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1" value="">
+									<input name="present_line_1"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1" value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -222,7 +222,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="">
+									<input name="present_line_2"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -234,7 +234,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter city/district" value="">
+									<input name="present_city_or_district"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter city/district" value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -246,7 +246,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="">
+									<input name="present_post_code"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -258,7 +258,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country" value="">
+									<input name="present_country"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country" value="">
 								</div>
 
 
@@ -279,7 +279,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1 " value="">
+									<input name="parmanent_line_1"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1 " value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -291,7 +291,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="">
+									<input name="parmanent_line_2"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -303,7 +303,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter district/city" value="">
+									<input name="parmanent_city_or_district"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter district/city" value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -315,7 +315,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="">
+									<input name="parmanent_post_code"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="">
 								</div>
 
 								<div class="form-group mt-3">
@@ -327,7 +327,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 										
 
 									</label>
-									<input name="nidOrpassport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country name" value="">
+									<input name="parmanent_country"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country name" value="">
 								</div>
 
 								<!-- profession -->
@@ -342,7 +342,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 									</label>
 
-									<input name="phone" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter profession"
+									<input name="profession" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter profession"
 									value="">
 								</div>
 
@@ -360,7 +360,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 									</label>
 
-									<input name="phone" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter designation"
+									<input name="designation" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter designation"
 									value="">
 								</div>
 
@@ -376,7 +376,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 									</label>
 
-									<input name="phone" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter institution"
+									<input name="institution" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter institution"
 									value="">
 								</div>
 
@@ -393,7 +393,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 									</label>
 
-									<input name="phone" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
+									<input name="mobile" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
 									value="">
 								</div>
 
@@ -411,7 +411,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 									</label>
 
-									<input name="phone" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter email address"
+									<input name="email" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter email address"
 									value="">
 								</div>
 
@@ -427,7 +427,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 							</label>
 
 							<div class="input-group mb-xl-3">
-								<select  name="country" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
+								<select  name="blood_group" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
 									<option selected value="bangladesh">BLOOD GROUP</option>
 									<option  value="">A+</option>
 									<option  value="">A-</option>
@@ -455,7 +455,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 								</label>
 
-								<input name="dob" type="text" class="form-control rounded-0" id="datepicker" aria-describedby="emailHelp" placeholder="Date of birth"
+								<input name="date_of_birth" type="text" class="form-control rounded-0" id="datepicker" aria-describedby="emailHelp" placeholder="Date of birth"
 								value="">
 							</div>
 

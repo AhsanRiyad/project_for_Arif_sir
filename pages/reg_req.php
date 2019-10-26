@@ -21,10 +21,10 @@ include $dashboard_head;
 <div class="row  text-center bg-info">
   
 
-<div class="col">
+<div class="col text-center bg-info">
   
-
-  <h2 class="  text-white py-2 ">New Account Request</h2>
+<h2 class="  text-white py-2 ">New Account Request</h2>
+  
 </div>
 </div>
  
@@ -52,9 +52,9 @@ include $dashboard_head;
         <td>{{ $reqs->req_date }}</td>
         <td>{{ $reqs->last_name }}</td>
         
-        <td><button onclick="ship_details('{{ $reqs->id }}')" class="btn btn-success" >Details</button></td>
-        <td><button onclick="ship_accept('{{ $reqs->id }}')" class="btn btn-success" >Accept</button></td>
-        <td><button onclick="ship_reject('{{ $reqs->id }}')" class="btn btn-danger" >Reject</button></td>
+        <td><button onclick="ship_details('{{ $reqs->id }}')" class="btn btn-success">Details</button></td>
+        <td><button onclick="ship_accept('{{ $reqs->id }}')" class="btn btn-success">Accept</button></td>
+        <td><button onclick="ship_reject('{{ $reqs->id }}')" class="btn btn-danger">Reject</button></td>
       </tr>
 
 
@@ -67,8 +67,12 @@ include $dashboard_head;
 </div>
 </div>
 
+
+
 <div id="dialog" title="Shipment Dtails">
 </div>
+
+
 
 </div>
 
