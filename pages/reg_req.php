@@ -9,22 +9,22 @@ include $dashboard_head;
 
 
 
-
+<div class="row">
 
 <p id="user_id" hidden >{{ $userinfo[0]['u_id'] }}</p>
 
 
-<div class="col-lg-8 col-7 offset-1">
+<div class="col-lg-8 col-7 offset-1 mt-4">
   
 
 
-<div class="row top-margin text-center bg-info">
+<div class="row  text-center bg-info">
   
 
 <div class="col">
   
 
-  <h2 class="  text-white py-2 ">Shipment Request</h2>
+  <h2 class="  text-white py-2 ">New Account Request</h2>
 </div>
 </div>
  
@@ -70,7 +70,7 @@ include $dashboard_head;
 <div id="dialog" title="Shipment Dtails">
 </div>
 
-
+</div>
 
 
 
