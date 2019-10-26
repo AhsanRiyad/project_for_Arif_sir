@@ -1,50 +1,12 @@
-<?php 
-$pageName = 'dashboard';
-$APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
-include $APP_ROOT."assets\linker\linkerCss.php" ; 
-?>
-
-<!-- navigation bar and search bar starts -->
-<!-- fixed horizontal -->
-
-<div class="container-fluid no-padding">
-	<div class="row no-gutters">
-
-		
-
-		<div class="col-10 order-2 " id="dashboard_height">
-			<div class="admin_navbar_horizontal bg-secondary justify-content-center d-flex align-items-center">
-				<p class="text-white h3">Good Morning, 
-				</p>
-			</div>
-
-			
-				
-
-				<?php 
-					include $reg_for_admin ;
-
-				 ?>
-
-
-
-
-
-
-
-
-
-			
-
 
 		</div>
 
 
 
 
-		<div class="col-2 order-1" id="dashboard_vertical_menu_height">
+		<div class="col-2 order-1 dashboard_vertical_menu_height">
 			<!-- fixed vertical -->
-			<div class=" admin_navbar_veritcal bg-dark ">
+			<div class=" bg-dark ">
 				<div class=" bg-light d-flex justify-content-center">
 					<a href=><img class=" py-1" src="<?php echo $logoSrc; ?>" alt=""></a>
 
@@ -154,7 +116,3 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 						</div>
 
 					</div>
-
-					<?php 
-					include $APP_ROOT."assets/linker/linkerJs.php" ; 
-					?>

@@ -8,7 +8,7 @@ label {
 }
 
 
-#dashboard_vertical_menu_height{
+.dashboard_vertical_menu_height{
 	
 	background-color: #343a40;
 }
