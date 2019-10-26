@@ -30,7 +30,7 @@
 
 				</div></a>
 
-				<a class="text-white" href="#">
+				<a class="text-white" href="<?php echo $add_user; ?>">
 					<div class=" bg-secondary py-2 text-center my-4">
 
 						<i class="fas w_f fa-chart-line"></i> Add Users
@@ -57,7 +57,7 @@
 					</div></a>
 
 
-					<a class="text-light" href=>
+					<a class="text-light" href="<?php echo $reg_req; ?>">
 						<div class="  
 						<?php 
 

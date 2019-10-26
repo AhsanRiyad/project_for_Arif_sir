@@ -23,6 +23,7 @@ $logoSrc = $rootAdress."assets/img/logo_dashboard.png";
 
 // pages
 $reg_for_admin = $APP_ROOT.'pages/reg_for_admin.php';
+
 $dashboard_head = $APP_ROOT.'pages/dashboard_head.php';
 $dashboard_foot = $APP_ROOT.'pages/dashboard_foot.php';
 
@@ -34,6 +35,8 @@ $registationPage =  $rootAdress."pages/registration.php" ;
 $loginPage = $rootAdress.'pages/login.php';
 $forgotPage = $rootAdress.'pages/forgot.php';
 $dashboardPage = $rootAdress.'pages/add_user.php';
+$add_user = $rootAdress.'pages/add_user.php';
+$reg_req = $rootAdress.'pages/reg_req.php';
 
 
 

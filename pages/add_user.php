@@ -507,28 +507,6 @@ include $dashboard_head;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php 
 include $dashboard_foot ;
 ?>
