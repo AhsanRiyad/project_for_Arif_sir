@@ -5,16 +5,12 @@ $userName = 'root';
 $password = '';
 $databaseName = 'intern_project';
 
-$conn = mysqli_connect($hostName, $userName, $password , $databaseName);
-
-
-
+// Create connection
+$conn = new mysqli($hostName, $userName, $password, $databaseName);
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-
-
 
 
 
