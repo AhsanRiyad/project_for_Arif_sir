@@ -47,4 +47,12 @@ $modelRegirstration = $rootAdress."model/registration.php" ;
 
 
 
+
+// database
+$hostName = 'localhost';
+$userName = 'root';
+$password = '';
+$databaseName = 'intern_project';
+
+
 ?>
