@@ -28,8 +28,8 @@ include "../assets\linker\linkerCss.php";
               
               <span class="text-danger">
               <?php 
-              if(isset($_COOKIE['cookie_login_error'])){
-                echo $_COOKIE['cookie_login_error'];
+              if(isset($_COOKIE['login_error'])){
+                echo $_COOKIE['login_error'];
 
               }
               ?>
@@ -50,8 +50,8 @@ include "../assets\linker\linkerCss.php";
                   <input name='email'  type="text" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                   value="<?php
 
-                  if(isset($_COOKIE['cookie_email'])){
-                    echo $_COOKIE['cookie_email'];
+                  if(isset($_COOKIE['email'])){
+                    echo $_COOKIE['email'];
                   }
 
 

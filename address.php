@@ -4,8 +4,6 @@ session_start();
 
 $APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
 
-
-
 $rootAdress = 'http://localhost/project_for_Arif_sir/';
 
 // assets

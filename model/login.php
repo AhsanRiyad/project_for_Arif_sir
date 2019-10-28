@@ -6,9 +6,9 @@ include $APP_ROOT.'assets/linker/db.php' ;
 
 
 if(isset($_POST['email'])){
-    $cookie_name = 'cookie_email' ;
+    $cookie_name = 'email' ;
     $cookie_value = $_POST['email'] ; 
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+    setcookie($cookie_name, $cookie_value, time()+6, "/");
 }
 
 if(isset($_POST['email']) && isset($_POST['password'])){
@@ -45,7 +45,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             // return $row !== false ? $row['level'] : null;
         if($row['level']=='NO'){
 
-            setcookie('cookie_login_error', 'wrong email/password', time()+6, "/");
+            setcookie('login_error', 'wrong email/password', time()+6, "/");
 
             header("Location: ".$loginPage);
 
@@ -53,7 +53,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         }else if($row['level']=='YES'){
 
                 //echo 'successfull' ;
-            setcookie('cookie_login_error', 'wrong email/password', time()-20, "/");
+            setcookie('login_error', 'wrong email/password', time()-20, "/");
 
             header("Location: ".$registationPage);
         }

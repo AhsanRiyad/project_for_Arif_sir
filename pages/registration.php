@@ -3,7 +3,6 @@ $pageName = 'registration';
 
 include "../assets\linker\linkerCss.php";
 
-
 ?>
 
 
@@ -26,6 +25,27 @@ include "../assets\linker\linkerCss.php";
 
 							<p class="text-dark  h4" id='msg'>
 								Welcome, Create your Account
+
+								<span class="text-danger">
+									<?php 
+									if(isset($_COOKIE['registration_email_error'])){
+										echo $_COOKIE['registration_email_error'];
+									}
+
+									 ?>
+
+									 </span>
+
+									<span class="text-success">
+									<?php 
+									if(isset($_COOKIE['registration_status'])){
+										echo $_COOKIE['registration_status'];
+									}
+
+									 ?>
+
+									 </span>
+
 							</p>		
 
 
@@ -54,12 +74,9 @@ include "../assets\linker\linkerCss.php";
 
 
 									</label>
-									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value=" 
-									
-									
-
-
-									">
+									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value="<?php if(isset($_COOKIE['first_name'])){
+										echo $_COOKIE['first_name'];
+									} ?>">
 								</div>
 
 								<!-- Middle name input -->
@@ -72,7 +89,9 @@ include "../assets\linker\linkerCss.php";
 
 
 									</label>
-									<input name="middle_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Middle name" value="">
+									<input name="middle_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Middle name" value="<?php if(isset($_COOKIE['middle_name'])){
+										echo $_COOKIE['middle_name'];
+									} ?>">
 								</div>
 
 								<!-- last name input -->
@@ -85,7 +104,9 @@ include "../assets\linker\linkerCss.php";
 
 
 									</label>
-									<input name="last_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Last name" value="">
+									<input name="last_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Last name" value="<?php if(isset($_COOKIE['last_name'])){
+										echo $_COOKIE['last_name'];
+									} ?>">
 								</div>
 								
 
@@ -103,12 +124,10 @@ include "../assets\linker\linkerCss.php";
 								<div class="input-group">
 
 									<select  name="gender" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
-										<option selected value="Gender">Gender</option>
+										<option  selected value="Gender">Gender</option>
 										<option  value="Male">Male</option>
 										<option  value="Female">Female</option>
 										<option  value="Others">Others</option>
-
-
 									</select>
 								</div>
 
@@ -123,7 +142,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="institution_id"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter institution_id" value="">
+									<input name="institution_id"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter institution_id" value="<?php if(isset($_COOKIE['institution_id'])){
+										echo $_COOKIE['institution_id'];
+									} ?>">
 								</div>
 
 
@@ -137,7 +158,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="nid_or_passport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter nid/passport number" value="">
+									<input name="nid_or_passport"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter nid/passport number" value="<?php if(isset($_COOKIE['nid_or_passport'])){
+										echo $_COOKIE['nid_or_passport'];
+									} ?>">
 								</div>
 
 
@@ -151,7 +174,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="fathers_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter fathers name" value="">
+									<input name="fathers_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter fathers name" value="<?php if(isset($_COOKIE['fathers_name'])){
+										echo $_COOKIE['fathers_name'];
+									} ?>">
 								</div>
 
 								<!-- mother's name input -->
@@ -164,7 +189,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="mother_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter mothers name" value="">
+									<input name="mother_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter mothers name" value="<?php if(isset($_COOKIE['mother_name'])){
+										echo $_COOKIE['mother_name'];
+									} ?>">
 								</div>
 								<!-- spouse's name input -->
 								<div class="form-group mt-3">
@@ -176,7 +203,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="spouse_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter spouses name" value="">
+									<input name="spouse_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter spouses name" value="<?php if(isset($_COOKIE['spouse_name'])){
+										echo $_COOKIE['spouse_name'];
+									} ?>">
 								</div>
 								
 
@@ -217,7 +246,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="present_line_1"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1" value="">
+									<input name="present_line_1"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1" value="<?php if(isset($_COOKIE['present_line_1'])){
+										echo $_COOKIE['present_line_1'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -229,7 +260,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="present_line_2"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="">
+									<input name="present_line_2"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="<?php if(isset($_COOKIE['present_line_2'])){
+										echo $_COOKIE['present_line_2'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -241,7 +274,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="present_city_or_district"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter city/district" value="">
+									<input name="present_city_or_district"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter city/district" value="<?php if(isset($_COOKIE['present_city_or_district'])){
+										echo $_COOKIE['present_city_or_district'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -253,7 +288,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="present_post_code"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="">
+									<input name="present_post_code"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="<?php if(isset($_COOKIE['present_post_code'])){
+										echo $_COOKIE['present_post_code'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -265,7 +302,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="present_country"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country" value="">
+									<input name="present_country"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country" value="<?php if(isset($_COOKIE['present_country'])){
+										echo $_COOKIE['present_country'];
+									} ?>">
 								</div>
 
 
@@ -286,7 +325,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="parmanent_line_1"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1 " value="">
+									<input name="parmanent_line_1"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter line 1 " value="<?php if(isset($_COOKIE['parmanent_line_1'])){
+										echo $_COOKIE['parmanent_line_1'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -298,7 +339,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="parmanent_line_2"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="">
+									<input name="parmanent_line_2"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter line 2" value="<?php if(isset($_COOKIE['parmanent_line_2'])){
+										echo $_COOKIE['parmanent_line_2'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -310,7 +353,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="parmanent_city_or_district"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter district/city" value="">
+									<input name="parmanent_city_or_district"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter district/city" value="<?php if(isset($_COOKIE['parmanent_city_or_district'])){
+										echo $_COOKIE['parmanent_city_or_district'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -322,7 +367,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="parmanent_post_code"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="">
+									<input name="parmanent_post_code"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="enter post code" value="<?php if(isset($_COOKIE['parmanent_post_code'])){
+										echo $_COOKIE['parmanent_post_code'];
+									} ?>">
 								</div>
 
 								<div class="form-group mt-3">
@@ -334,7 +381,9 @@ include "../assets\linker\linkerCss.php";
 										
 
 									</label>
-									<input name="parmanent_country"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country name" value="">
+									<input name="parmanent_country"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter country name" value="<?php if(isset($_COOKIE['parmanent_country'])){
+										echo $_COOKIE['parmanent_country'];
+									} ?>">
 								</div>
 
 								<!-- profession -->
@@ -350,7 +399,9 @@ include "../assets\linker\linkerCss.php";
 									</label>
 
 									<input name="profession" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter profession"
-									value="">
+									value="<?php if(isset($_COOKIE['profession'])){
+										echo $_COOKIE['profession'];
+									} ?>">
 								</div>
 
 
@@ -368,7 +419,9 @@ include "../assets\linker\linkerCss.php";
 									</label>
 
 									<input name="designation" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter designation"
-									value="">
+									value="<?php if(isset($_COOKIE['designation'])){
+										echo $_COOKIE['designation'];
+									} ?>">
 								</div>
 
 								<!-- institute input -->
@@ -384,7 +437,9 @@ include "../assets\linker\linkerCss.php";
 									</label>
 
 									<input name="institution" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter institution"
-									value="">
+									value="<?php if(isset($_COOKIE['institution'])){
+										echo $_COOKIE['institution'];
+									} ?>">
 								</div>
 
 								
@@ -401,14 +456,28 @@ include "../assets\linker\linkerCss.php";
 									</label>
 
 									<input name="mobile" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
-									value="">
+									value="<?php if(isset($_COOKIE['mobile'])){
+										echo $_COOKIE['mobile'];
+									} ?>">
 								</div>
 
 
 
 								<!-- Email input -->
 								<div class="form-group mb-xl-3">
-									<label for="exampleInputEmail1"><small id="exampleLabelMobile">Email*</small>
+									<label for="exampleInputEmail1"><small id="exampleLabelMobile">Email*
+									
+									<span class="text-danger">
+									<?php 
+									if(isset($_COOKIE['registration_email_error'])){
+										echo $_COOKIE['registration_email_error'];
+									}
+
+									 ?>
+
+									 </span>
+
+									</small>
 
 										<small class="text-danger">
 
@@ -419,7 +488,9 @@ include "../assets\linker\linkerCss.php";
 									</label>
 
 									<input name="email" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter email address"
-									value="">
+									value="<?php if(isset($_COOKIE['email'])){
+										echo $_COOKIE['email'];
+									} ?>">
 								</div>
 
 
@@ -463,7 +534,9 @@ include "../assets\linker\linkerCss.php";
 								</label>
 
 								<input name="date_of_birth" type="text" class="form-control rounded-0" id="datepicker" aria-describedby="emailHelp" placeholder="Date of birth"
-								value="">
+								value="<?php if(isset($_COOKIE['date_of_birth'])){
+										echo $_COOKIE['date_of_birth'];
+									} ?>">
 							</div>
 
 

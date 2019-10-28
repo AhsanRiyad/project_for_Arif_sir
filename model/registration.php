@@ -2,7 +2,6 @@
 
 include "../address.php";
 
-
 include $APP_ROOT.'assets/linker/db.php' ; 
 
 
@@ -37,36 +36,101 @@ $date_of_birth = $_REQUEST['date_of_birth'];
 $type = 'users';
 $password = $_REQUEST['password'];*/
 
+
+$pdo = get_PDO_connection(); 
+$sql = 'CALL registration(:email ,  @status)';
+          // prepare for execution of the stored procedure
+$stmt = $pdo->prepare($sql);
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+        // pass value to the command
+$stmt->bindParam(':email', $_REQUEST['email'], PDO::PARAM_STR);
+        // execute the stored procedure
+$stmt->execute();
+$stmt->closeCursor();
+       // execute the second query to get customer's status
+$row = $pdo->query("SELECT @status AS status")->fetch(PDO::FETCH_ASSOC);
+print_r($row);
+if ($row) {
+        	//echo  $row['status'];
+            // return $row !== false ? $row['status'] : null;
+	if($row['status']=='NO'){
+
+		setcookie('registration_email_error', 'email already used', time()+6, "/");
+		setcookie('email', $_REQUEST['email'], time()+6, "/");
+		header("Location: ".$registationPage);
+
+                //echo 'no';
+	}else if($row['status']=='YES'){
+
+                //echo 'successfull' ;
+		setcookie('registration_status', 'successful', time()+6, "/");           
+
+		header("Location: ".$registationPage);
+	}
+
+
+}
+
+
 $conn = get_mysqli_connection();
 
 $first_name = mysqli_real_escape_string( $conn , $_REQUEST['first_name']);
+setcookie('first_name', $first_name, time()+6, "/");
 $middle_name = mysqli_real_escape_string( $conn ,$_REQUEST['middle_name']);
+setcookie('middle_name', $middle_name, time()+6, "/");
 $last_name = mysqli_real_escape_string( $conn ,$_REQUEST['last_name']);
+setcookie('last_name', $last_name, time()+6, "/");
 $gender = mysqli_real_escape_string( $conn ,$_REQUEST['gender']);
+setcookie('gender', $gender, time()+6, "/");
 $membership_number = 'membership_number';
 $institution_id = mysqli_real_escape_string( $conn ,$_REQUEST['institution_id']);
+setcookie('institution_id', $institution_id, time()+6, "/");
 $nid_or_passport = mysqli_real_escape_string( $conn ,$_REQUEST['nid_or_passport']);
+setcookie('nid_or_passport', $nid_or_passport, time()+6, "/");
 $fathers_name = mysqli_real_escape_string( $conn ,$_REQUEST['fathers_name']);
+setcookie('fathers_name', $fathers_name, time()+6, "/");
 $mother_name = mysqli_real_escape_string( $conn ,$_REQUEST['mother_name']);
+setcookie('mother_name', $mother_name, time()+6, "/");
 $spouse_name = mysqli_real_escape_string( $conn ,$_REQUEST['spouse_name']);
+setcookie('spouse_name', $spouse_name, time()+6, "/");
 $number_of_children = mysqli_real_escape_string( $conn ,$_REQUEST['number_of_children']);
+setcookie('number_of_children', $number_of_children, time()+6, "/");
 $present_line_1 = mysqli_real_escape_string( $conn ,$_REQUEST['present_line_1']);
+setcookie('present_line_1', $present_line_1, time()+6, "/");
 $present_line_2 = mysqli_real_escape_string( $conn ,$_REQUEST['present_line_2']);
+setcookie('present_line_2', $present_line_2, time()+6, "/");
 $present_city_or_district = mysqli_real_escape_string( $conn ,$_REQUEST['present_city_or_district']);
+setcookie('present_city_or_district', $present_city_or_district, time()+6, "/");
 $present_post_code = mysqli_real_escape_string( $conn ,$_REQUEST['present_post_code']);
+setcookie('present_post_code', $present_post_code, time()+6, "/");
 $present_country = mysqli_real_escape_string( $conn ,$_REQUEST['present_country']);
+setcookie('present_country', $present_country, time()+6, "/");
 $parmanent_line_1 = mysqli_real_escape_string( $conn ,$_REQUEST['parmanent_line_1']);
+setcookie('parmanent_line_1', $parmanent_line_1, time()+6, "/");
 $parmanent_line_2 = mysqli_real_escape_string( $conn ,$_REQUEST['parmanent_line_2']);
+setcookie('parmanent_line_2', $parmanent_line_2, time()+6, "/");
 $parmanent_post_code = mysqli_real_escape_string( $conn ,$_REQUEST['parmanent_post_code']);
+setcookie('parmanent_post_code', $parmanent_post_code, time()+6, "/");
 $parmanent_country = mysqli_real_escape_string( $conn ,$_REQUEST['parmanent_country']);
+setcookie('parmanent_country', $parmanent_country, time()+6, "/");
 $parmanent_city_or_district = mysqli_real_escape_string( $conn ,$_REQUEST['parmanent_city_or_district']);
+setcookie('parmanent_city_or_district', $parmanent_city_or_district, time()+6, "/");
 $profession = mysqli_real_escape_string( $conn ,$_REQUEST['profession']);
+setcookie('profession', $profession, time()+6, "/");
 $designation = mysqli_real_escape_string( $conn ,$_REQUEST['designation']);
+setcookie('designation', $designation, time()+6, "/");
 $institution = mysqli_real_escape_string( $conn ,$_REQUEST['institution']);
+setcookie('institution', $institution, time()+6, "/");
 $mobile = mysqli_real_escape_string( $conn ,$_REQUEST['mobile']);
-$email = mysqli_real_escape_string( $conn ,$_REQUEST['email']);
+setcookie('mobile', $mobile, time()+6, "/");
+$email = strtolower(mysqli_real_escape_string( $conn ,$_REQUEST['email']));
+setcookie('email', $email, time()+6, "/");
 $blood_group = mysqli_real_escape_string( $conn ,$_REQUEST['blood_group']);
+setcookie('blood_group', $blood_group, time()+6, "/");
 $date_of_birth = mysqli_real_escape_string( $conn ,$_REQUEST['date_of_birth']);
+setcookie('date_of_birth', $date_of_birth, time()+6, "/");
 $type = 'user';
 $password = mysqli_real_escape_string( $conn ,$_REQUEST['password']);
 
@@ -135,6 +199,8 @@ $stmt->execute();
 
 // $conn = null;
 mysqli_close($conn);
+
+
 
 
 ?>
