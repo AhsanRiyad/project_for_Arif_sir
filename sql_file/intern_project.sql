@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2019 at 02:47 PM
+-- Generation Time: Oct 28, 2019 at 10:56 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -26,25 +26,41 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `LOGIN` (IN `EMAIL` VARCHAR(100), IN `PASSWORD1` VARCHAR(100), OUT `STATUS` VARCHAR(100))  BEGIN
-DECLARE UID VARCHAR(100); 
-SET UID = NULL ; 
-SELECT ID INTO UID FROM USERS WHERE `EMAIL` = EMAIL AND `PASSWORD` = PASSWORD1 LIMIT 1 ;   
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LOGIN` (IN `EMAIL1` VARCHAR(100), IN `PASSWORD1` VARCHAR(100), OUT `STATUS` VARCHAR(100))  BEGIN
+DECLARE UID INT(3); 
+SET UID = 0 ;
+SELECT COUNT(*) INTO UID FROM USERS WHERE `EMAIL`=EMAIL1 AND `PASSWORD`=PASSWORD1 LIMIT 1 ;   
 
+SELECT UID;
 
-
-IF UID IS NOT NULL
+IF UID>0
 THEN 
-SET STATUS = "YES" ;
+SET STATUS="YES" ;
 
-ELSE
-SET STATUS = "NO";
+ELSE 
+SET STATUS="NO";
 
 END IF ;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTRATION` (IN `FN` VARCHAR(100), IN `LN` VARCHAR(100))  INSERT INTO users (`first_name` , `last_name`) VALUES (FN , LN)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTRATION` (IN `EMAIL1` VARCHAR(100), OUT `STATUS` VARCHAR(100))  BEGIN
+DECLARE UID INT(3); 
+SET UID = 0 ;
+SELECT COUNT(*) INTO UID FROM USERS WHERE `EMAIL`=lower(EMAIL1) ;   
+
+SELECT UID;
+
+IF UID>0
+THEN 
+SET STATUS="NO" ;
+
+ELSE 
+SET STATUS="YES";
+
+END IF ;
+
+END$$
 
 DELIMITER ;
 
@@ -85,15 +101,37 @@ CREATE TABLE `users` (
   `date_of_birth` date DEFAULT NULL,
   `type` varchar(20) DEFAULT NULL,
   `mobile` int(20) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL
+  `password` varchar(100) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`first_name`, `middle_name`, `last_name`, `gender`, `membership_number`, `id`, `institution_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `present_line_1`, `present_line_2`, `present_city_or_district`, `present_post_code`, `present_country`, `parmanent_line_1`, `parmanent_line_2`, `parmanent_post_code`, `parmanent_country`, `parmanent_city_or_district`, `profession`, `designation`, `institution`, `email`, `blood_group`, `date_of_birth`, `type`, `mobile`, `password`) VALUES
-('', '', '', 'Gender', NULL, 39, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '3200', 'Bangladesh', 'Dhaka', '', '', '', 'riyad298@gmail.com', 'bangladesh', '0000-00-00', 'user', 1919448787, '1');
+INSERT INTO `users` (`first_name`, `middle_name`, `last_name`, `gender`, `membership_number`, `id`, `institution_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `present_line_1`, `present_line_2`, `present_city_or_district`, `present_post_code`, `present_country`, `parmanent_line_1`, `parmanent_line_2`, `parmanent_post_code`, `parmanent_country`, `parmanent_city_or_district`, `profession`, `designation`, `institution`, `email`, `blood_group`, `date_of_birth`, `type`, `mobile`, `password`, `status`) VALUES
+('', '', '', 'Gender', NULL, 39, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '3200', 'Bangladesh', 'Dhaka', '', '', '', 'riyad298@gmail.com', 'bangladesh', '0000-00-00', 'user', 1919448787, '1', NULL),
+('', '', '', 'Gender', NULL, 40, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('arfefa', '', '', 'Gender', NULL, 41, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('Md Ahsan', 'Ferdous', 'Riyad', 'Gender', NULL, 42, 'riyad', '', '', '', '', 0, '', '', 'Dhaka', '3200', 'Bangladesh', '', '', '', '', '', '', '', '', '', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('Md Ahsanfff', 'Ferdousff', 'Riyadff', 'Gender', NULL, 43, 'riyad', '', '', '', '', 0, '', '', 'Dhaka', '3200', 'Bangladesh', '', '', 'fff', '', '', '', '', '', '', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 44, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 45, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 46, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 47, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 48, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 49, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 50, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 51, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 52, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 53, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 54, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 55, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 56, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 57, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffff', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 58, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'arfarfffffffffffffffrefer', 'bangladesh', '0000-00-00', 'user', 0, '448787', NULL),
+('', '', '', 'Gender', NULL, 59, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '3200', 'Bangladesh', 'Dhaka', '', '', '', 'riyad298@gmail.com', 'bangladesh', '0000-00-00', 'user', 1919448787, '448787', NULL),
+('', '', '', 'Gender', NULL, 60, 'riyad', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', 'ffffffffffffffffffffffffffffaaaaaaaa', 'bangladesh', '0000-00-00', 'user', 0, '448787', 'not_verified');
 
 --
 -- Indexes for dumped tables
@@ -113,7 +151,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
