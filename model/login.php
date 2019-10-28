@@ -1,13 +1,11 @@
 <?php 
-include "../address.php";
 
+include $APP_ROOT.'assets/linker/db.php' ; 
 
+   
+if(isset($_POST['email']) && isset($_POST['password'])){
 
-
-
-
-    try {
-        $pdo = new PDO("mysql:host=$hostName;dbname=$databaseName", $userName, $password);
+        $pdo = get_PDO_connection();
  
         // calling stored procedure command
         $sql = 'CALL login(:email , :pass , @level)';
@@ -16,8 +14,8 @@ include "../address.php";
         $stmt = $pdo->prepare($sql);
 
 
- 		$email = $_REQUEST['email'];
-        $password = $_REQUEST['password'];
+ 		$email = $_POST['email'];
+        $password = $_POST['password'];
 
         // pass value to the command
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -36,17 +34,19 @@ include "../address.php";
         	//echo  $row['level'];
             // return $row !== false ? $row['level'] : null;
             if($row['level']=='NO'){
-                header('Location: '.$loginPage);
+                //echo 'no';
             }else if($row['level']=='YES'){
-                echo 'yes' ;
+
+                //echo 'successfull' ;
+
+                header("Location: ".$registationPage);
             }
 
 
         }
-    } catch (PDOException $e) {
-        die("Error occurred:" . $e->getMessage());
+     
     }
-    
+
 
 
  ?>

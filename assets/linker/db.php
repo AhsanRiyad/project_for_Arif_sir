@@ -5,12 +5,42 @@ $userName = 'root';
 $password = '';
 $databaseName = 'intern_project';
 
-// Create connection
-$conn = new mysqli($hostName, $userName, $password, $databaseName);
+
+
+
+function get_mysqli_connection(){
+	// Create connection
+$conn = new mysqli( $GLOBALS['hostName'],  $GLOBALS['userName'],  $GLOBALS['password'],  $GLOBALS['databaseName']);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+
+return $conn; 
+
+}
+
+
+
+
+function get_PDO_connection(){
+
+
+	$hostName = $GLOBALS['hostName'];
+	$databaseName = $GLOBALS['databaseName'];
+
+	try {
+        $pdo = new PDO("mysql:host=$hostName;dbname=$databaseName", $GLOBALS['userName'], $GLOBALS['password']);	
+ 		return $pdo; 
+       
+    } catch (PDOException $e) {
+        die("Error occurred:" . $e->getMessage());
+    }
+
+
+}
+
 
 
 

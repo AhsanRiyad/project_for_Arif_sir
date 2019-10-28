@@ -37,7 +37,7 @@ $date_of_birth = $_REQUEST['date_of_birth'];
 $type = 'users';
 $password = $_REQUEST['password'];*/
 
-
+$conn = get_mysqli_connection();
 
 $first_name = mysqli_real_escape_string( $conn , $_REQUEST['first_name']);
 $middle_name = mysqli_real_escape_string( $conn ,$_REQUEST['middle_name']);

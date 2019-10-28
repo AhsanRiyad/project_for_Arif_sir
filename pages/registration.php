@@ -1,7 +1,9 @@
 <?php 
 $pageName = 'registration';
-$APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
-include $APP_ROOT."assets\linker\linkerCss.php" ; 
+
+include "../assets\linker\linkerCss.php";
+
+
 ?>
 
 
@@ -52,7 +54,12 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
 
 
 									</label>
-									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value="">
+									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value=" 
+									
+									
+
+
+									">
 								</div>
 
 								<!-- Middle name input -->
