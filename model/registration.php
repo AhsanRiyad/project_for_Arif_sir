@@ -37,41 +37,6 @@ $type = 'users';
 $password = $_REQUEST['password'];*/
 
 
-$pdo = get_PDO_connection(); 
-$sql = 'CALL registration(:email ,  @status)';
-          // prepare for execution of the stored procedure
-$stmt = $pdo->prepare($sql);
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-        // pass value to the command
-$stmt->bindParam(':email', $_REQUEST['email'], PDO::PARAM_STR);
-        // execute the stored procedure
-$stmt->execute();
-$stmt->closeCursor();
-       // execute the second query to get customer's status
-$row = $pdo->query("SELECT @status AS status")->fetch(PDO::FETCH_ASSOC);
-print_r($row);
-if ($row) {
-        	//echo  $row['status'];
-            // return $row !== false ? $row['status'] : null;
-	if($row['status']=='NO'){
-
-		setcookie('registration_email_error', 'email already used', time()+6, "/");
-		setcookie('email', $_REQUEST['email'], time()+6, "/");
-		header("Location: ".$registationPage);
-
-                //echo 'no';
-	}else if($row['status']=='YES'){
-
-                //echo 'successfull' ;
-		setcookie('registration_status', 'successful', time()+6, "/");           
-
-		header("Location: ".$registationPage);
-	}
-
-
-}
 
 
 $conn = get_mysqli_connection();
@@ -136,9 +101,35 @@ $password = mysqli_real_escape_string( $conn ,$_REQUEST['password']);
 
 //echo print_r($_REQUEST);
 
-
 // $sql =  "INSERT INTO `users`(`first_name`, `middle_name`, `last_name`, `gender`, `membership_number`,  `institution_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `present_line_1`, `present_line_2`, `present_city_or_district`, `present_post_code`, `present_country`, `parmanent_line_1`, `parmanent_line_2`, `parmanent_post_code`, `parmanent_country`, `parmanent_city_or_district`, `profession`, `designation`, `institution` , `mobile`  `email`, `blood_group`, `date_of_birth` , `type` , `password`) VALUES ( first_name, middle_name, last_name, gender, membership_number,  institution_id, nid_or_passport, fathers_name, mother_name, spouse_name, number_of_children, present_line_1, present_line_2, present_city_or_district, present_post_code, present_country, parmanent_line_1, parmanent_line_2, parmanent_post_code, parmanent_country, parmanent_city_or_district, profession, designation, institution , mobile ,  email, blood_group, date_of_birth , type , password )" ; 
 
+
+$stmt = $conn->prepare("select count(*) as number from users where email=(?)");
+$stmt->bind_param('s' , $email) ; 
+$stmt->execute();
+$result = $stmt->get_result();
+//print_r($result);
+$row = $result->fetch_assoc();
+//print_r($row);
+//echo $row['number'];
+//echo  $row['status'];
+// return $row !== false ? $row['status'] : null;
+if($row['number']>0){
+
+	setcookie('registration_email_error', 'email already used', time()+6, "/");
+	setcookie('email', $_REQUEST['email'], time()+6, "/");
+	header("Location: ".$registationPage);
+
+                //echo 'no';
+}else{
+             //echo 'successfull' ;
+	setcookie('registration_status', 'successful', time()+6, "/");           
+
+	
+}
+// while ($row = $result->fetch_assoc()) {
+//     echo $row['f'];
+// }
 $stmt = $conn->prepare('INSERT INTO USERS (`FIRST_NAME` , `middle_name` , `last_name` , `gender` , `institution_id` , `nid_or_passport` , `fathers_name` , `mother_name` , `spouse_name` , `number_of_children` , `present_line_1` , `present_line_2` , present_city_or_district , present_post_code , present_country  , `parmanent_line_1` , `parmanent_line_2` , parmanent_city_or_district , parmanent_post_code , parmanent_country  ,  profession, designation, institution , mobile ,  email, blood_group, date_of_birth , type , password ) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?  , ? , ? , ? , ? , ?  , ? , ? , ? , ? , ? , ? , ?  , ? , ? )');
 
 
@@ -200,7 +191,7 @@ $stmt->execute();
 // $conn = null;
 mysqli_close($conn);
 
-
+header("Location: ".$registationPage);
 
 
 ?>

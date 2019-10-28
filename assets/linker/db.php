@@ -21,6 +21,16 @@ return $conn;
 
 }
 
+function get_mysqli_connect(){
+
+$conn = mysqli_connect($GLOBALS['hostName'],  $GLOBALS['userName'],  $GLOBALS['password'],  $GLOBALS['databaseName']);
+
+
+return $conn;
+
+}
+
+
 
 
 
