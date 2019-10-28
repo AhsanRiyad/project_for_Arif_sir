@@ -43,6 +43,7 @@ $reg_req = $rootAdress.'pages/reg_req.php';
 
 //model
 $modelRegirstration = $rootAdress."model/registration.php" ; 
+$modelLogin = $rootAdress."model/login.php" ; 
 
 
 

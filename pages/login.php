@@ -4,10 +4,8 @@ $APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
 include $APP_ROOT."assets\linker\linkerCss.php" ; 
 ?>
 
-
-
 <!-- login form starts -->
-<form  method="post" action="<?php echo $dashboardPage; ?>">
+<form  method="post" action="<?php echo $modelLogin; ?>">
 
 
 
@@ -17,10 +15,7 @@ include $APP_ROOT."assets\linker\linkerCss.php" ;
         <div class="container margin_">
           <div class="row py-4 ">
             
-              
-
-       
-              
+           
                 <p class="text-dark h4" id="login_id">
               Welcome Back! Please login
               
