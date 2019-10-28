@@ -53,9 +53,9 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         }else if($row['level']=='YES'){
 
                 //echo 'successfull' ;
-            setcookie('login_error', 'wrong email/password', time()-20, "/");
+            
 
-            header("Location: ".$registationPage);
+            header("Location: ".$dashboardPage);
         }
 
 

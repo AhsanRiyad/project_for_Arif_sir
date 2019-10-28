@@ -98,7 +98,7 @@ $date_of_birth = mysqli_real_escape_string( $conn ,$_REQUEST['date_of_birth']);
 setcookie('date_of_birth', $date_of_birth, time()+6, "/");
 $type = 'user';
 $password = mysqli_real_escape_string( $conn ,$_REQUEST['password']);
-
+$status = 'not_verified';
 //echo print_r($_REQUEST);
 
 // $sql =  "INSERT INTO `users`(`first_name`, `middle_name`, `last_name`, `gender`, `membership_number`,  `institution_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `present_line_1`, `present_line_2`, `present_city_or_district`, `present_post_code`, `present_country`, `parmanent_line_1`, `parmanent_line_2`, `parmanent_post_code`, `parmanent_country`, `parmanent_city_or_district`, `profession`, `designation`, `institution` , `mobile`  `email`, `blood_group`, `date_of_birth` , `type` , `password`) VALUES ( first_name, middle_name, last_name, gender, membership_number,  institution_id, nid_or_passport, fathers_name, mother_name, spouse_name, number_of_children, present_line_1, present_line_2, present_city_or_district, present_post_code, present_country, parmanent_line_1, parmanent_line_2, parmanent_post_code, parmanent_country, parmanent_city_or_district, profession, designation, institution , mobile ,  email, blood_group, date_of_birth , type , password )" ; 
@@ -130,10 +130,10 @@ if($row['number']>0){
 // while ($row = $result->fetch_assoc()) {
 //     echo $row['f'];
 // }
-$stmt = $conn->prepare('INSERT INTO USERS (`FIRST_NAME` , `middle_name` , `last_name` , `gender` , `institution_id` , `nid_or_passport` , `fathers_name` , `mother_name` , `spouse_name` , `number_of_children` , `present_line_1` , `present_line_2` , present_city_or_district , present_post_code , present_country  , `parmanent_line_1` , `parmanent_line_2` , parmanent_city_or_district , parmanent_post_code , parmanent_country  ,  profession, designation, institution , mobile ,  email, blood_group, date_of_birth , type , password ) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?  , ? , ? , ? , ? , ?  , ? , ? , ? , ? , ? , ? , ?  , ? , ? )');
+$stmt = $conn->prepare('INSERT INTO USERS (`FIRST_NAME` , `middle_name` , `last_name` , `gender` , `institution_id` , `nid_or_passport` , `fathers_name` , `mother_name` , `spouse_name` , `number_of_children` , `present_line_1` , `present_line_2` , present_city_or_district , present_post_code , present_country  , `parmanent_line_1` , `parmanent_line_2` , parmanent_city_or_district , parmanent_post_code , parmanent_country  ,  profession, designation, institution , mobile ,  email, blood_group, date_of_birth , type , password , status ) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?  , ? , ? , ? , ? , ?  , ? , ? , ? , ? , ? , ? , ?  , ? , ? , ? )');
 
 
-$stmt->bind_param('sssssssssisssssssssssssisssss', $first_name , $middle_name , $last_name , $gender , $institution_id , $nid_or_passport ,  $fathers_name ,  $mother_name , $spouse_name , $number_of_children , $present_line_1 , $present_line_2 , $present_city_or_district , $present_post_code , $present_country , $parmanent_line_1 , $parmanent_line_2 , $parmanent_city_or_district , $parmanent_post_code , $parmanent_country ,  $profession, $designation, $institution , $mobile ,  $email, $blood_group, $date_of_birth  , $type , $password ); 
+$stmt->bind_param('sssssssssisssssssssssssissssss', $first_name , $middle_name , $last_name , $gender , $institution_id , $nid_or_passport ,  $fathers_name ,  $mother_name , $spouse_name , $number_of_children , $present_line_1 , $present_line_2 , $present_city_or_district , $present_post_code , $present_country , $parmanent_line_1 , $parmanent_line_2 , $parmanent_city_or_district , $parmanent_post_code , $parmanent_country ,  $profession, $designation, $institution , $mobile ,  $email, $blood_group, $date_of_birth  , $type , $password , $status ); 
 
 // 's' specifies the variable type => 'string'
 
