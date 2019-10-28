@@ -1,5 +1,7 @@
 <?php 
 //define('$rootAdress', "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/");
+session_start();
+
 $APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
 
 

@@ -3,13 +3,15 @@ $pageName = 'login';
 //$APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
 //include $APP_ROOT."assets\linker\linkerCss.php" ; 
 include "../assets\linker\linkerCss.php";
-include $APP_ROOT."model/login.php";
+
+
+
 
 ?>
 
 
 <!-- login form starts -->
-<form  method="post" action="<?php echo $loginPage; ?>">
+<form  method="post" action="<?php echo $modelLogin; ?>">
 
 
 
@@ -21,8 +23,17 @@ include $APP_ROOT."model/login.php";
 
 
             <p class="text-dark h4" id="login_id">
-              Welcome Back! Please login
+              Welcome Back! Please login 
+              <br>
               
+              <span class="text-danger">
+              <?php 
+              if(isset($_COOKIE['cookie_login_error'])){
+                echo $_COOKIE['cookie_login_error'];
+
+              }
+              ?>
+              </span>
             </div>
 
             <div class="row justify-content-xl-center bg-white py-5 mb-5">
@@ -37,10 +48,14 @@ include $APP_ROOT."model/login.php";
 
                   </label>
                   <input name='email'  type="text" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-                  value="<?php 
-                  if(isset($_POST['email'])){
-                    echo $_POST['email'];
-                  }?>"
+                  value="<?php
+
+                  if(isset($_COOKIE['cookie_email'])){
+                    echo $_COOKIE['cookie_email'];
+                  }
+
+
+                  ?>"
                   >
                 </div>
                 <div class="form-group">
