@@ -53,8 +53,6 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         }else if($row['level']=='YES'){
 
                 //echo 'successfull' ;
-            
-
             header("Location: ".$dashboardPage);
         }
 

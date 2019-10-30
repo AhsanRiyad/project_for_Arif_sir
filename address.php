@@ -17,7 +17,8 @@ $style = $rootAdress."assets/css/style.php" ;
 
 
 // images
-$logoSrc = $rootAdress."assets/img/logo_dashboard.png";
+$logoSrc = $rootAdress."assets/img/logo.jpg";
+$fev_icon = $rootAdress."assets/img/fev_icon.jpg";
 
 
 

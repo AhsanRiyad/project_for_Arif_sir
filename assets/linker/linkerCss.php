@@ -13,7 +13,7 @@ include "../address.php";
 	<title>
 		<?php echo $pageName ;  ?>
 	</title>
-	
+	<link rel="shortcut icon" href="<?php echo $fev_icon ;  ?>" />
 	<link rel="stylesheet" href="<?= $bootstrap_grid ?>">
 	<link rel="stylesheet" href="<?= $bootstrap_reboot ?>">
 	<link rel="stylesheet" href="<?= $bootstrap ?>">
