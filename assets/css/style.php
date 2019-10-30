@@ -8,6 +8,10 @@ label {
 }
 
 
+.dashboard_backgorund_color{
+    background-color: #343a40;
+}
+
 .dashboard_vertical_menu_height{
 	
 	background-color: #343a40;

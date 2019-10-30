@@ -1,5 +1,5 @@
 
-<div class="container-fluid no-padding">
+<div class="container-fluid no-padding dashboard_backgorund_color">
 	<div class="row no-gutters">
 
 		

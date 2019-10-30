@@ -19,7 +19,7 @@ include "../address.php";
 	<link rel="stylesheet" href="<?= $bootstrap ?>">
 	<link rel="stylesheet" href="<?= $jquery_ui_structure ?>">
 	<link rel="stylesheet" href="<?= $jquery_ui_theme ?>">
-	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 	<?php 
 	include $APP_ROOT."assets/css/style.php";
