@@ -13,7 +13,7 @@ include $dashboard_head;
 	
 	
 		<div class="row justify-content-xl-center reg_background no-gutters " >
-			<div class="col-12 col-xl-6 ">
+			<div class="col-12 col-xl-8 ">
 				<div class="container">
 					<div class="row pt-4 pb-1">
 						
