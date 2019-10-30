@@ -1,11 +1,3 @@
-<?php 
-
-include "../address.php"; 
-
-
-
-
- ?>
 
 <!DOCTYPE html>
 <html>

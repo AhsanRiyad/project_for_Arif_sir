@@ -27,10 +27,10 @@ $fev_icon = $rootAdress."assets/img/fev_icon.jpg";
 
 // pages
 $reg_for_admin = $APP_ROOT.'pages/reg_for_admin.php';
-
 $dashboard_head = $APP_ROOT.'pages/dashboard_head.php';
 $dashboard_foot = $APP_ROOT.'pages/dashboard_foot.php';
-
+$linkerCss = $APP_ROOT.'assets/linker/linkerCss.php';
+$linkerJs = $APP_ROOT.'assets/linker/linkerJs.php';
 
 
 

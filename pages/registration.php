@@ -1,7 +1,8 @@
 <?php 
 $pageName = 'registration';
 
-include "../assets\linker\linkerCss.php";
+include "../address.php"; 
+include $linkerCss;
 
 ?>
 
@@ -586,5 +587,5 @@ include "../assets\linker\linkerCss.php";
 
 
 	<?php 
-	include $APP_ROOT."assets/linker/linkerJs.php" ; 
+	include $linkerJs;
 	?>

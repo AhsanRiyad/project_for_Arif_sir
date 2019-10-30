@@ -1,7 +1,7 @@
 <?php 
 $pageName = 'reg_req';
-$APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
-include $APP_ROOT."assets\linker\linkerCss.php" ; 
+include "../address.php"; 
+include $linkerCss;
 ?>
 <?php 
 include $dashboard_head;
@@ -83,5 +83,5 @@ include $dashboard_head;
 include $dashboard_foot ;
 ?>
 <?php 
-include $APP_ROOT."assets/linker/linkerJs.php" ; 
+include $linkerJs;
 ?>
