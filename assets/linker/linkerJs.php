@@ -28,9 +28,21 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     
     <!-- custome js -->
 
+
+
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <!-- vuetify -->
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <!-- vue resource -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+
+
+
     <?php 
     include $APP_ROOT."assets/js/main.php";
-     ?>
+    ?>
 
 
 

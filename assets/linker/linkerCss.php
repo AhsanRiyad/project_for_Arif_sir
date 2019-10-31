@@ -11,7 +11,16 @@
 	<link rel="stylesheet" href="<?= $bootstrap ?>">
 	<link rel="stylesheet" href="<?= $jquery_ui_structure ?>">
 	<link rel="stylesheet" href="<?= $jquery_ui_theme ?>">
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	
+	
+
+
+	<!-- materials icon -->
+	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+	<!-- vuetify -->
+	<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+
 
 	<?php 
 	include $APP_ROOT."assets/css/style.php";
