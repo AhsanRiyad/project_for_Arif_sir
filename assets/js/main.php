@@ -36,29 +36,29 @@ if(dashboard_height<windowHeight){
 */
 
 // vue example
-new Vue({
-  el: '#vue-app' ,
-  data: {
-    name: 'riyad' , 
-    job : 'student' , 
-    website : 'www.facebook.com/riyadahsan6',
-    fullTag: '<p> hello this is a complete emement </p>'
-  } , 
-  methods: {
-  	greet : function(){
-  		return 'good morning' ; 
-  	}, 
-  	time : function(time1){
-  		return time1 + ' ' + this.name; 
-  	}
-  }
+/*var vue_test =  new Vue({
+	el: '#vue-app' ,
+	data: {
+		name: 'riyad' , 
+		job : 'student' , 
+		website : 'www.facebook.com/riyadahsan6',
+		fullTag: '<p> hello this is a complete emement </p>'
+	} , 
+	methods: {
+		greet : function(){
+			return 'good morning' ; 
+		}, 
+		time : function(time1){
+			return time1 + ' ' + this.name; 
+		}
+	}
 })
 
-
+*/
 
 
 // vuetify example
-new Vue({
+/*var vuetify_test = new Vue({
 	el: '#app',
 	vuetify: new Vuetify(),
 	data: {
@@ -82,8 +82,40 @@ new Vue({
 
 
 
-})
+})*/
 
+
+
+var registration_page = new Vue({
+	el: '#reg_vue' , 
+	data : {
+		name: 'riyad---vue',
+		name_result: ''
+	} , 
+	methods : {
+		first_name_change : function(){
+			//alert(this.$refs.first_name.value);
+			//alert('hi');
+			var patt = /(^[A-Za-z\s\.]{3,}$)/g;
+			var result = patt.test(this.$refs.first_name.value);
+			//var result = true ;
+			if(result){
+				//alert('name change');
+				this.name_result = 'Name is accepeted' ; 
+
+			}else{
+				//alert('name_result');
+				this.name_result = 'Name is not accepeted' ; 
+				
+				
+			}
+
+
+
+
+		}
+	}
+})
 
 
 

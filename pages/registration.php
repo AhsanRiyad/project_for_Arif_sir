@@ -7,25 +7,22 @@ include $linkerCss;
 ?>
 
 
+<div id="reg_vue">
 
-<!-- registration page starts now -->
-<form action="<?php echo $modelRegirstration; ?>" method="post">
-	
-	<div class="container-fluid">
-		<div class="row justify-content-xl-center reg_background no-gutters">
-			<div class="col-12 col-xl-6 ">
-				<div class="container">
-					<div class="row pt-4 pb-1">
-						
+	<!-- registration page starts now -->
+	<form action="<?php echo $modelRegirstration; ?>" method="post">
+
+		<div class="container-fluid">
+			<div class="row justify-content-xl-center reg_background no-gutters">
+				<div class="col-12 col-xl-6 ">
+					<div class="container">
+						<div class="row pt-4 pb-1">
+
 						<!-- @foreach($errors->all() as $e)
 							{{ $e }}
 							@endforeach -->
-
-
-
-
 							<p class="text-dark  h4" id='msg'>
-								Welcome, Create your Account
+								Welcome, Create your Account 
 
 								<span class="text-danger">
 									<?php 
@@ -33,19 +30,19 @@ include $linkerCss;
 										echo $_COOKIE['registration_email_error'];
 									}
 
-									 ?>
+									?>
 
-									 </span>
+								</span>
 
-									<span class="text-success">
+								<span class="text-success">
 									<?php 
 									if(isset($_COOKIE['registration_status'])){
 										echo $_COOKIE['registration_status'];
 									}
 
-									 ?>
+									?>
 
-									 </span>
+								</span>
 
 							</p>		
 
@@ -68,8 +65,8 @@ include $linkerCss;
 								<!-- first name input -->
 								<div class="form-group mt-3">
 									<label for="exampleInputEmail1"><small id="lnLabel">first Name*</small>
-										<small class="text-danger">
-
+										<small  >
+												{{ name_result }}
 										</small>
 										<br>
 
@@ -77,7 +74,7 @@ include $linkerCss;
 									</label>
 									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value="<?php if(isset($_COOKIE['first_name'])){
 										echo $_COOKIE['first_name'];
-									} ?>">
+									} ?>" ref='first_name' v-on:change='first_name_change()' v-bind:class="{ hellow: true }">
 								</div>
 
 								<!-- Middle name input -->
@@ -467,64 +464,18 @@ include $linkerCss;
 								<!-- Email input -->
 								<div class="form-group mb-xl-3">
 									<label for="exampleInputEmail1"><small id="exampleLabelMobile">Email*
-									
-									<span class="text-danger">
-									<?php 
-									if(isset($_COOKIE['registration_email_error'])){
-										echo $_COOKIE['registration_email_error'];
-									}
 
-									 ?>
+										<span class="text-danger">
+											<?php 
+											if(isset($_COOKIE['registration_email_error'])){
+												echo $_COOKIE['registration_email_error'];
+											}
 
-									 </span>
+											?>
+
+										</span>
 
 									</small>
-
-										<small class="text-danger">
-
-										</small>
-
-										<br>
-
-									</label>
-
-									<input name="email" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter email address"
-									value="<?php if(isset($_COOKIE['email'])){
-										echo $_COOKIE['email'];
-									} ?>">
-								</div>
-
-
-								<label for="exampleInputEmail1" ><small id="idExampleInputEmail1Small">Blood Group*
-
-								</small>
-								<small class="text-danger">
-
-								</small>
-								<br>
-
-							</label>
-
-							<div class="input-group mb-xl-3">
-								<select  name="blood_group" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
-									<option selected value="bangladesh">BLOOD GROUP</option>
-									<option  value="">A+</option>
-									<option  value="">A-</option>
-									<option  value="">B+</option>
-									<option  value="">B-</option>
-									<option  value="">AB+</option>
-									<option  value="">AB-</option>
-									<option  value="">O+</option>
-									<option  value="">O-</option>
-
-								</select>
-							</div>
-							
-
-
-							<!-- DOB input -->
-							<div class="form-group mb-xl-3">
-								<label for="exampleInputEmail1"><small id="exampleLabelMobile">Date of Birth*</small>
 
 									<small class="text-danger">
 
@@ -534,42 +485,88 @@ include $linkerCss;
 
 								</label>
 
-								<input name="date_of_birth" type="text" class="form-control rounded-0" id="datepicker" aria-describedby="emailHelp" placeholder="Date of birth"
-								value="<?php if(isset($_COOKIE['date_of_birth'])){
-										echo $_COOKIE['date_of_birth'];
-									} ?>">
+								<input name="email" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter email address"
+								value="<?php if(isset($_COOKIE['email'])){
+									echo $_COOKIE['email'];
+								} ?>">
 							</div>
 
 
+							<label for="exampleInputEmail1" ><small id="idExampleInputEmail1Small">Blood Group*
+
+							</small>
+							<small class="text-danger">
+
+							</small>
+							<br>
+
+						</label>
+
+						<div class="input-group mb-xl-3">
+							<select  name="blood_group" class="custom-select rounded-0 pl-1 pl-lg-2 " id="inputGroupSelect01">
+								<option selected value="bangladesh">BLOOD GROUP</option>
+								<option  value="">A+</option>
+								<option  value="">A-</option>
+								<option  value="">B+</option>
+								<option  value="">B-</option>
+								<option  value="">AB+</option>
+								<option  value="">AB-</option>
+								<option  value="">O+</option>
+								<option  value="">O-</option>
+
+							</select>
+						</div>
+
+
+
+						<!-- DOB input -->
+						<div class="form-group mb-xl-3">
+							<label for="exampleInputEmail1"><small id="exampleLabelMobile">Date of Birth*</small>
+
+								<small class="text-danger">
+
+								</small>
+
+								<br>
+
+							</label>
+
+							<input name="date_of_birth" type="text" class="form-control rounded-0" id="datepicker" aria-describedby="emailHelp" placeholder="Date of birth"
+							value="<?php if(isset($_COOKIE['date_of_birth'])){
+								echo $_COOKIE['date_of_birth'];
+							} ?>">
+						</div>
 
 
 
 
-							<div class="form-group mb-xl-3">
-								<label for="exampleInputPassword1"><small id='idexampleInputPassword1'>Password*</small>
-									<br>
-								</label>
-								<input name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password" value="{{ old('password') }}">
-							</div>
-
-							<!-- re-enter password input -->
-							<div class="form-group mb-4">
-								<label for="exampleInputPassword1"><small>Re-enter password*</small>
 
 
-								</label>
-								<input name="confirm_password" type="password" class="form-control rounded-0" id="exampleInputPassword2" placeholder="Password" value="" >
-							</div>
+						<div class="form-group mb-xl-3">
+							<label for="exampleInputPassword1"><small id='idexampleInputPassword1'>Password*</small>
+								<br>
+							</label>
+							<input name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password" value="">
+						</div>
+
+						<!-- re-enter password input -->
+						<div class="form-group mb-4">
+							<label for="exampleInputPassword1"><small>Re-enter password*</small>
+
+
+							</label>
+							<input name="confirm_password" type="password" class="form-control rounded-0" id="exampleInputPassword2" placeholder="Password" value="" >
+						</div>
 
 
 
 
 
-							<!-- toc terms and condition input -->
-							
+						<!-- toc terms and condition input -->
 
-							<!-- submit button -->
-							<button type="submit" name="submit" value="submit" class="btn btn-success rounded-0 w-100 py-2  mt-xl-4">Register</button>
+
+						<!-- submit button -->
+						<button type="submit" name="submit" value="submit" class="btn btn-success rounded-0 w-100 py-2  mt-xl-4">Register</button>
 
 							<!-- <p class="text-danger h5 mt-4"><i>Already have an account?</i></p>
 
@@ -586,6 +583,9 @@ include $linkerCss;
 	</form>
 
 
-	<?php 
-	include $linkerJs;
-	?>
+</div>
+
+
+<?php 
+include $linkerJs;
+?>

@@ -13,7 +13,6 @@ include $linkerCss;
 <form  method="post" action="<?php echo $modelLogin; ?>">
 
 
-
   <div class="container-fluid">
     <div class="row justify-content-xl-center _background ">
       <div class="col-12 col-xl-6 ">
