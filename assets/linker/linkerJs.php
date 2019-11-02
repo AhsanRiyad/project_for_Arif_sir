@@ -30,9 +30,9 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
 
 
-    <!-- vue -->
+    <!-- vue  2.x-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <!-- vuetify -->
+    <!-- vuetify 2.1.9 -->
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <!-- vue resource -->
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
