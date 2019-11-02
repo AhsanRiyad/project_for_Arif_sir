@@ -55,8 +55,38 @@ else if($d2->purpose=='reject_user'){
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('i' , $id);
 	$stmt->execute();
-	mysqli_close($conn);
+	//mysqli_close($conn);
+
+	$stmt->close();
+	$conn->close();
 }
+else if($d2->purpose=='get_user_details'){
+	echo 'hi';
+	
+/*
+	$id = $d2->id;
+	echo $id;
+	
+	$conn = get_mysqli_connection();
+	
+
+	$sql = "select * from users WHERE id=(?)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('i' , $id);
+	$stmt->execute();
+
+
+	$result = $stmt->get_result();
+	if($result->num_rows === 0) exit('No rows');
+	while($row = $result->fetch_assoc()) {
+
+	}
+
+
+	$stmt->close();
+	$conn->close();*/
+}
+
 else{
 	echo $d2->purpose;
 	echo $d2->id;

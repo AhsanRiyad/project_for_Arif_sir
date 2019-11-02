@@ -46,10 +46,6 @@ label {
 
 /*forgot passwor page*/
 
-._background{
-
-}
-
 
 /*forgot passwor page*/
 
