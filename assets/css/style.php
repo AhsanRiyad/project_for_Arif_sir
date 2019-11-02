@@ -9,7 +9,7 @@ label {
 
 
 .dashboard_backgorund_color{
-    background-color: #343a40;
+    background-color: #d3d3d3;
 }
 
 .dashboard_vertical_menu_height{

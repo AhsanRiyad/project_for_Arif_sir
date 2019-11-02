@@ -13,11 +13,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 
-    <!--bootstrap js on server-->
-    <script src=<?php echo $jsJquery ?> type="text/javascript"></script> 
-    <script src=<?php echo $jsBootstrap; ?> type="text/javascript"></script>
-    <script src=<?php echo $jsBootstrap_bundle; ?> type="text/javascript"></script>
-    <script src=<?php echo $jquery_ui; ?> type="text/javascript"></script>
+    
     
     
     <!-- font-awesome js cdn -->
@@ -37,11 +33,11 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     <!-- vue resource -->
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 
-
+    
     
 
     <?php 
-    include $APP_ROOT."assets/js/main.php";
+    
 
     // vue_file
     if($pageName == 'registration'){
@@ -55,7 +51,19 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     ?>
 
 
+    <!--bootstrap js on server-->
+    <script src=<?php echo $jsJquery ?> type="text/javascript"></script> 
+    <script src=<?php echo $jsBootstrap; ?> type="text/javascript"></script>
+    <script src=<?php echo $jsBootstrap_bundle; ?> type="text/javascript"></script>
+    <script src=<?php echo $jquery_ui; ?> type="text/javascript"></script>
 
+
+    <?php 
+
+    
+    include $APP_ROOT."assets/js/main.php";
+
+     ?>
 
 
 

@@ -53,6 +53,9 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     else if($pageName == 'reg_req'){
         include $APP_ROOT."assets/js/vue_file/reg_req.php";
     }
+    else if($pageName == 'add_user'){
+        include $APP_ROOT."assets/js/vue_file/add_user.php";
+    }
 
 
     ?>

@@ -34,15 +34,27 @@ var registration_page = new Vue({
 				//alert('name_result');
 				this.name_result = 'Name is not accepeted' ; 
 
-				this.first_name_color = 'red' ; 
-				
-				
+				this.first_name_color = 'red' ;								
 			}
-
-
-
-
 		}
+	},
+	beforeCreate(){
+
+	},
+	created(){
+
+	},
+	beforeMount(){
+
+	},
+	mounted(){
+
+	},
+	beforeUpdated(){
+
+	},
+	updated(){
+
 	}
 })
 
