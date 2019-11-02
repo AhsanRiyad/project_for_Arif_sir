@@ -9,9 +9,9 @@ include $dashboard_head;
 
 
 
-<div  id="reg_req">
-<!-- 
-<p id="user_id" hidden ></p>
+<div class="row">
+
+<p id="user_id" hidden >{{ $userinfo[0]['u_id'] }}</p>
 
 
 <div class="col-lg-8 col-7 offset-1 mt-4">
@@ -30,6 +30,8 @@ include $dashboard_head;
  
 <div class="row">
   
+
+
   <table class="table">
     <thead  class="thead-dark">
       <tr>
@@ -46,13 +48,13 @@ include $dashboard_head;
 
   
       <tr>
-        <td> $reqs->id </td>
-        <td> $reqs->req_date </td>
-        <td> $reqs->last_name </td>
+        <td>{{ $reqs->id }}</td>
+        <td>{{ $reqs->req_date }}</td>
+        <td>{{ $reqs->last_name }}</td>
         
-        <td><button onclick="ship_details(' $reqs->id ')" class="btn btn-success">Details</button></td>
-        <td><button onclick="ship_accept(' $reqs->id ')" class="btn btn-success">Accept</button></td>
-        <td><button onclick="ship_reject(' $reqs->id ')" class="btn btn-danger">Reject</button></td>
+        <td><button onclick="ship_details('{{ $reqs->id }}')" class="btn btn-success">Details</button></td>
+        <td><button onclick="ship_accept('{{ $reqs->id }}')" class="btn btn-success">Accept</button></td>
+        <td><button onclick="ship_reject('{{ $reqs->id }}')" class="btn btn-danger">Reject</button></td>
       </tr>
 
 
@@ -69,10 +71,8 @@ include $dashboard_head;
 
 <div id="dialog" title="Shipment Dtails">
 </div>
- -->
 
 
-<reg_req></reg_req>
 
 </div>
 

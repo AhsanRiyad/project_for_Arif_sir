@@ -2,12 +2,12 @@
 //define('$rootAdress', "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/");
 session_start();
 
-$APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/project_for_Arif_sir/";
+$APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/project_for_Arif_sir/vue_js_for_project/";
 
 
 
 
-$rootAdress = 'http://localhost/project_for_Arif_sir/';
+$rootAdress = 'http://localhost/project_for_Arif_sir/vue_js_for_project/';
 
 // assets
 $bootstrap_grid = $rootAdress."assets/css/bootstrap-grid.css" ; 

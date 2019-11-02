@@ -45,13 +45,10 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
     // vue_file
     if($pageName == 'registration'){
-        include $APP_ROOT."assets/js/vue_file/registration.php";
+    include $APP_ROOT."assets/js/vue_file/registration.php";
     }
     else if($pageName == 'login'){
-        include $APP_ROOT."assets/js/vue_file/registration.php";
-    }
-    else if($pageName == 'reg_req'){
-        include $APP_ROOT."assets/js/vue_file/reg_req.php";
+    include $APP_ROOT."assets/js/vue_js/registration.php";
     }
 
 
