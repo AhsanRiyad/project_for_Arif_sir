@@ -1,7 +1,5 @@
 <?php 
 include "address.php" ; 
-
-
 include $linkerCss;
 ?>
 
@@ -9,10 +7,6 @@ include $linkerCss;
 <div id=vue-app>
 <h1>{{name}}</h1>
 </div>
-
-
-
-
 
 <!-- for vuetify with resouce or http request-->
 <div id="app">
@@ -29,10 +23,6 @@ include $linkerCss;
   </div>
 
 
-
-
-
 <?php 
 include $linkerJs;
-
 ?>

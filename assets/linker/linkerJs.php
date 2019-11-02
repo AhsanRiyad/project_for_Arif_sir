@@ -38,10 +38,20 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 
 
-
+    
 
     <?php 
     include $APP_ROOT."assets/js/main.php";
+
+    // vue_file
+    if($pageName == 'registration'){
+    include $APP_ROOT."assets/js/vue_file/registration.php";
+    }
+    else if($pageName == 'login'){
+    include $APP_ROOT."assets/js/vue_js/registration.php";
+    }
+
+
     ?>
 
 

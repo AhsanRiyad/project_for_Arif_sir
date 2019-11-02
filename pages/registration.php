@@ -65,7 +65,7 @@ include $linkerCss;
 								<!-- first name input -->
 								<div class="form-group mt-3">
 									<label for="exampleInputEmail1"><small id="lnLabel">first Name*</small>
-										<small  >
+										<small v-bind:style="{ color : first_name_color }" >
 												{{ name_result }}
 										</small>
 										<br>
@@ -74,7 +74,7 @@ include $linkerCss;
 									</label>
 									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value="<?php if(isset($_COOKIE['first_name'])){
 										echo $_COOKIE['first_name'];
-									} ?>" ref='first_name' v-on:change='first_name_change()' v-bind:class="{ hellow: true }">
+									} ?>" ref='first_name' v-on:change='first_name_change()'>
 								</div>
 
 								<!-- Middle name input -->
