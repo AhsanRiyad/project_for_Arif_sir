@@ -57,6 +57,21 @@
 			changeName: function(){
 
 			},
+			get_users : function(){
+				this.$http.post('<?php echo $modelReg_req; ?>', {
+				purpose : 'get_data'
+			} ).then(function(data){
+				//var obj = JSON.parse(data);
+				// console.log(obj);
+				this.user_list = JSON.parse(data.bodyText);
+				//alert(data);
+				//console.log(obj[0].status);
+				console.log(this.user_list);
+				//console.log(obj.length);
+
+
+			})
+			},
 			approve_id: function(id){
 				console.log(id);
 			},
@@ -73,6 +88,7 @@
 				//alert(data);
 				//console.log(obj[0].status);
 				console.log(data);
+				this.get_users();
 				//console.log(obj.length);
 
 
