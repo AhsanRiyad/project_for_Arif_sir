@@ -11,9 +11,9 @@
 	</div>
 	</div>
 	<div class="row">
-	<table class="table">
-	<thead  class="thead-dark">
-	<tr>
+	<table class="table" >
+	<thead  class="thead-dark" >
+	<tr >
 	<th>id</th>
 	<th>Req Date</th>
 	<th>Req From</th>
@@ -22,14 +22,14 @@
 	<th>Reject</th>
 	</tr>
 	</thead>
-	<tbody id="tbody">
+	<tbody id="tbody" v-for="user in user_list">
 	<tr>
-	<td> $reqs->id </td>
-	<td> $reqs->req_date </td>
-	<td> $reqs->last_name </td>
+	<td> {{ user.id }} </td>
+	<td> {{ user.registration_date }} </td>
+	<td> {{ user.last_name }} </td>
 	<td><button onclick="ship_details(' $reqs->id ')" class="btn btn-success">Details</button></td>
-	<td><button onclick="ship_accept(' $reqs->id ')" class="btn btn-success">Accept</button></td>
-	<td><button onclick="ship_reject(' $reqs->id ')" class="btn btn-danger">Reject</button></td>
+	<td><button @click="approve_id(user.id)" class="btn btn-success">Accept</button></td>
+	<td><button @click="reject_id(user.id)" class="btn btn-danger">Reject</button></td>
 	</tr>
 	</tbody>
 	</table>
@@ -51,21 +51,49 @@
 	Vue.component('reg_req', {
 		template: code , 
 		data(){
-			return {}
+			return { user_list : ''  }
 		}, 
 		methods: {
 			changeName: function(){
+
+			},
+			approve_id: function(id){
+				console.log(id);
+			},
+			reject_id: function(id){
+				console.log(id);
+
+				this.$http.post('<?php echo $modelReg_req; ?>', {
+				purpose : 'reject_user', 
+				id: id
+			} ).then(function(data){
+				//var obj = JSON.parse(data);
+				// console.log(obj);
+				//this.user_list = JSON.parse(data.bodyText);
+				//alert(data);
+				//console.log(obj[0].status);
+				console.log(data);
+				//console.log(obj.length);
+
+
+			})
+
 
 			}
 		},
 		beforeCreate(){
 			this.$http.post('<?php echo $modelReg_req; ?>', {
-				title: 'rfaef',
-				body: 'raefaref',
-				userId: 1
-			}).then(function(data){
-				console.log(data);
+				purpose : 'get_data'
+			} ).then(function(data){
+				//var obj = JSON.parse(data);
+				// console.log(obj);
+				this.user_list = JSON.parse(data.bodyText);
 				//alert(data);
+				//console.log(obj[0].status);
+				console.log(this.user_list);
+				//console.log(obj.length);
+
+
 			})
 		},
 		mounted(){
@@ -112,7 +140,7 @@
 
 		},
 		updated(){
-			
+
 		}
 	})
 </script>

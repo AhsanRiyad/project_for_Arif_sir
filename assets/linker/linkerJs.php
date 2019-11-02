@@ -60,11 +60,5 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
     ?>
 
-
-
-
-
-
-
 </body>
 </html>

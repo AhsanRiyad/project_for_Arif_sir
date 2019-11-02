@@ -1,10 +1,8 @@
 <?php 
-
 $hostName = 'localhost';
 $userName = 'root';
 $password = '';
 $databaseName = 'intern_project';
-
 
 
 
