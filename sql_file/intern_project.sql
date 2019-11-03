@@ -89,13 +89,8 @@ DELIMITER ;
 --
 
 CREATE TABLE `users` (
-  `first_name` varchar(100) DEFAULT NULL,
-  `middle_name` varchar(100) DEFAULT NULL,
-  `last_name` varchar(100) DEFAULT NULL,
   `gender` varchar(100) DEFAULT NULL,
-  `membership_number` varchar(100) DEFAULT NULL,
   `id` int(100) NOT NULL,
-  `institution_id` varchar(100) DEFAULT NULL,
   `nid_or_passport` varchar(100) DEFAULT NULL,
   `fathers_name` varchar(100) DEFAULT NULL,
   `mother_name` varchar(100) DEFAULT NULL,
@@ -114,15 +109,36 @@ CREATE TABLE `users` (
   `profession` varchar(100) DEFAULT NULL,
   `designation` varchar(100) DEFAULT NULL,
   `institution` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
   `blood_group` varchar(10) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `type` varchar(20) DEFAULT NULL,
-  `mobile` int(20) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `status` varchar(20) DEFAULT NULL,
-  `registration_date` datetime(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+drop table `users_registration`;
+
+CREATE TABLE `users_registration` (
+  `id` int(100) NOT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `mobile` int(20) DEFAULT NULL,
+  `institution_id` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `registration_date` datetime(6) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `membership_number` varchar(100) DEFAULT NULL,
+  `recent_photo` varchar(200) DEFAULT NULL
+ );
+
+
+ALTER TABLE `users_registration`
+ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `users_registration`
+MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+COMMIT;
 
 --
 -- Dumping data for table `users`
@@ -166,7 +182,7 @@ INSERT INTO `users` (`first_name`, `middle_name`, `last_name`, `gender`, `member
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -176,7 +192,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
