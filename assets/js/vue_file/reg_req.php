@@ -4,26 +4,111 @@
 
 	var modal_user_details =  `
 	<v-row justify="center">
-	<v-dialog v-model="dialog" scrollable max-width="450px">
+	<v-dialog v-model="dialog" scrollable max-width="400px">
 	<template v-slot:activator="{ on }">
-	<v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+	<v-btn color="primary" dark v-on="on">Details</v-btn>
 	</template>
 	<v-card>
-	<v-card-title>User Details {{ id }}</v-card-title>
+	<v-card-title>User Details</v-card-title>
 	<v-divider></v-divider>
-	<v-simple-table>
-	<template v-slot:default>
-	<thead>
-	<tr>
-	<th class="text-left">Name</th>
-	<th class="text-left">Info</th>
-	</tr>
-	</thead>
-	<tbody>
+	<v-card-text style="height: 300px;">
+	<v-container>
+	<v-row>
+	<v-col cols="6">
+	<p>First Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.first_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>last Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.last_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+	<v-col cols="6">
+	<p>middle Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.middle_name }} </p>
+	</v-col>
+
+	</v-row>
+	</v-container>
+	</v-card-text>
 	
-	</tbody>
-	</template>
-	</v-simple-table>
 	<v-divider></v-divider>
 	<v-card-actions>
 	<v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
@@ -47,7 +132,7 @@
 			return {
 				dialogm1: '',
 				dialog: false,
-				user_details: ''
+				user_details: []
 			}
 		},
 		mounted(){
@@ -57,13 +142,16 @@
 			} ).then(function(data){
 				//var obj = JSON.parse(data);
 				// console.log(obj);
-				//this.user_details = JSON.parse(data.bodyText);
+				this.user_details = JSON.parse(data.bodyText);
 				//alert(data);
 				//console.log(obj[0].status);
 				//console.log(this.user_details);
 				//console.log(obj.length);
-				console.log(data);
+				//console.log(Object.keys(this.user_details[0]));
+				//console.log(Object.values(this.user_details));
+				this.user_details = this.user_details[0];
 
+				console.log(this.user_details.status);
 
 			})
 		}
@@ -115,14 +203,48 @@
 	</table>
 	</div>
 	</div>
-	<div id="dialog" title="Shipment Dtails">
-	</div> </div>`;
+	
+
+	<template>
+  <v-row justify="center"> 
+    </v-btn>
+    <v-dialog
+      v-model="dialog"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title class="headline">Action Status</v-card-title>
+
+        <v-card-text>
+          {{ admin_approval_status }}
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false"
+          >OK
+          </v-btn>
+
+            
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
+</template>
+
+</div>
+	`;
 
 
 	Vue.component('reg_req', {
 		template: code , 
 		data(){
-			return { user_list : ''  }
+			return { user_list : '' , dialog: false, admin_approval_status: ''  }
 		}, 
 		methods: {
 			changeName: function(){
@@ -145,6 +267,26 @@
 			},
 			approve_id: function(id){
 				console.log(id);
+
+				this.$http.post('<?php echo $modelReg_req; ?>', {
+					purpose : 'approve_user', 
+					id: id
+				} ).then(function(data){
+				//var obj = JSON.parse(data);
+				// console.log(obj);
+				//this.user_list = JSON.parse(data.bodyText);
+				//alert(data);
+				//console.log(obj[0].status);
+				console.log(data);
+				
+				this.admin_approval_status = 'User is approved';
+				this.dialog = true;
+				this.get_users();
+				//console.log(obj.length);
+
+
+			})
+
 			},
 			reject_id: function(id){
 				console.log(id);
@@ -159,6 +301,8 @@
 				//alert(data);
 				//console.log(obj[0].status);
 				console.log(data);
+				this.admin_approval_status = 'User is rejected';
+				this.dialog = true;
 				this.get_users();
 				//console.log(obj.length);
 
@@ -213,6 +357,13 @@
 
 		},
 		mounted(){
+			
+		},
+		beforeUpdated(){
+
+		},
+		updated(){
+
 			var dashboard_height = $('#dashboard_height').height();
 			var windowHeight = $(document).height();
 			console.log(dashboard_height);
@@ -223,11 +374,6 @@
 				var ht = dashboard_height+'px';
 				$('.dashboard_vertical_menu_height').height(ht);
 			}
-		},
-		beforeUpdated(){
-
-		},
-		updated(){
 
 		}
 	})
