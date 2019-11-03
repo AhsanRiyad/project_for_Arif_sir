@@ -10,9 +10,6 @@ include $linkerCss;
 <div id="reg_vue">
 	
 	<registration></registration>
-
-
-
 	
 </div>
 

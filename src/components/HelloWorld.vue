@@ -90,17 +90,6 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  },
-  methods: {
-  mounted: function(){
-    alert('mounted');
-  },
-  beforeCreate: function(){
-    alert('alert');
-  }
-  },
-  beforeCreate: function(){
-    alert('alert');
   }
 }
 </script>
