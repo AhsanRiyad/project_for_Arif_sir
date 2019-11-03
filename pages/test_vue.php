@@ -15,7 +15,6 @@ include $linkerCss;
   // include $APP_ROOT."assets/linker/linkerJs.php" ; 
 include $linkerJs;
 
-
 ?>
 
 
@@ -40,24 +39,38 @@ include $linkerJs;
 		},
 		methods: {
 			submitFile: function(){
+
+				const config = {
+					onUploadProgress: function(progressEvent) {
+						var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+						console.log(percentCompleted)
+					}
+				}
+
 				let formData = new FormData();
-				formData.append('file', this.file);
+				formData.append('file_image', this.file);
 
-				//console.log(this.file.size/1024/1024);
+				console.log(this.file.size/1024/1024);
 
-				axios.post( '/single-file',
-					formData,
+
+				axios.post( '<?php echo $modeltest; ?>',
+					formData, config,
 					{
 						headers: {
 							'Content-Type': 'multipart/form-data'
 						}
 					}
-					).then(function(){
+					).then(function(response){
 						console.log('SUCCESS!!');
+						// console.log(response.status);
+						console.log(response);
+						
+
 					})
-					.catch(function(){
+					.catch(function(err){
 						console.log('FAILURE!!');
 					});
+
 
 
 
