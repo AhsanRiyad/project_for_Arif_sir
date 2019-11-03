@@ -1,4 +1,3 @@
-
 <?php 
 $jsMain = $rootAdress."assets/js/main.js";
 $jsJquery = $rootAdress.'assets/js/jquery-3.4.1.js';
@@ -34,8 +33,10 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <!-- vuetify 2.1.9 -->
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <!-- vue resource -->
+    <!-- vue resource version 1.5.1-->
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <!-- axios version 0.19.0-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js" ></script>
 
 
     

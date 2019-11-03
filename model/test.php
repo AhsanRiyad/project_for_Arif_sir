@@ -17,17 +17,17 @@
 
 header("Content-Type: application/json; charset=UTF-8");
 
-$data =  file_get_contents('php://input');
+/*$data =  file_get_contents('php://input');*/
 // echo $data->purpose;
 
 //print_r($_REQUEST['purpose']);
 
 //$data = '{"purpose":"get_data"}';
 
-$d2 = json_decode($data);
+/*$d2 = json_decode($data);
 
-echo $d2->purpose;
+echo $d2->purpose;*/
 
-
+echo 'hellow';
 
 // echo $data;
