@@ -17,14 +17,39 @@ include $linkerJs;
 
 ?>
 
+<style>
+	input[type="file"]{
+		position: absolute;
+		top: -500px;
+	}
 
+	div.file-listing{
+		width: 200px;
+	}
+
+	span.remove-file{
+		color: red;
+		cursor: pointer;
+		float: right;
+	}
+</style>
 <script>
 	var code = `<div class="container">
 	<div class="large-12 medium-12 small-12 cell">
-	<label>File
-	<input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+	<label>Files
+	<input type="file" id="files" ref="files" multiple v-on:change="handleFilesUpload()"/>
 	</label>
-	<button class="btn btn-success" v-on:click="submitFile()">Submit</button>
+	</div>
+	<div class="large-12 medium-12 small-12 cell">
+	<div v-for="(file, key) in files" class="file-listing">{{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span></div>
+	</div>
+	<br>
+	<div class="large-12 medium-12 small-12 cell">
+	<button v-on:click="addFiles()">Add Files</button>
+	</div>
+	<br>
+	<div class="large-12 medium-12 small-12 cell">
+	<button v-on:click="submitFiles()">Submit</button>
 	</div>
 	</div>`;
 
@@ -32,54 +57,81 @@ include $linkerJs;
 	Vue.component('file_upload' , {
 		template: code , 
 		data(){
-			return {
-				name_riyad: 'riyad' , 
-				file: '' ,
-			}
-		},
-		methods: {
-			submitFile: function(){
+      return {
+        files: []
+      }
+    },
 
-				const config = {
-					onUploadProgress: function(progressEvent) {
-						var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-						console.log(percentCompleted)
-					}
-				}
+    /*
+      Defines the method used by the component
+    */
+    methods: {
+      /*
+        Adds a file
+      */
+      addFiles(){
+        this.$refs.files.click();
+      },
 
-				let formData = new FormData();
-				formData.append('file_image', this.file);
+      /*
+        Submits files to the server
+      */
+      submitFiles(){
+        /*
+          Initialize the form data
+        */
+        let formData = new FormData();
 
-				console.log(this.file.size/1024/1024);
+        /*
+          Iteate over any file sent over appending the files
+          to the form data.
+        */
+        for( var i = 0; i < this.files.length; i++ ){
+          let file = this.files[i];
 
+          formData.append('files[' + i + ']', file);
+        }
 
-				axios.post( '<?php echo $modeltest; ?>',
-					formData, config,
-					{
-						headers: {
-							'Content-Type': 'multipart/form-data'
-						}
-					}
-					).then(function(response){
-						console.log('SUCCESS!!');
-						// console.log(response.status);
-						console.log(response);
-						
+        /*
+          Make the request to the POST /select-files URL
+        */
+        axios.post( '/select-files',
+          formData,
+          {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+          }
+        ).then(function(){
+          console.log('SUCCESS!!');
+        })
+        .catch(function(){
+          console.log('FAILURE!!');
+        });
+      },
 
-					})
-					.catch(function(err){
-						console.log('FAILURE!!');
-					});
+      /*
+        Handles the uploading of files
+      */
+      handleFilesUpload(){
+        let uploadedFiles = this.$refs.files.files;
 
+        /*
+          Adds the uploaded file to the files array
+        */
+        for( var i = 0; i < uploadedFiles.length; i++ ){
+          this.files.push( uploadedFiles[i] );
+        }
+      },
 
-
-
-				},
-				handleFileUpload: function(){
-					this.file = this.$refs.file.files[0];
-				}
-			}
-		})
+      /*
+        Removes a select file the user has uploaded
+      */
+      removeFile( key ){
+        this.files.splice( key, 1 );
+      }
+    }
+	});
 
 
 
