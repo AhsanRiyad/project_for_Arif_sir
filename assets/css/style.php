@@ -27,7 +27,7 @@ label {
 
 /*main margin*/
 .margin_{
-	margin-top: 25%;
+	margin-top: 2%;
 }
 
 
