@@ -12,8 +12,8 @@ include $dashboard_head;
 <form action="#" method="post" >
 	
 	
-		<div class="row justify-content-xl-center reg_background no-gutters " >
-			<div class="col-12 col-xl-8 ">
+		<div class="row justify-content-xl-center justify-content-md-center reg_background no-gutters " >
+			<div class="col-12 col-xl-8 col-md-9 ">
 				<div class="container">
 					<div class="row pt-4 pb-1">
 						
@@ -30,10 +30,10 @@ include $dashboard_head;
 
 						</div>
 
-						<div class="row justify-content-xl-center bg-white py-5 mb-5">
+						<div class="row justify-content-xl-center justify-content-md-center bg-white py-5 mb-5">
 
 							<!-- email input -->
-							<div class="col-12 col-xl-5 ">
+							<div class="col-12 col-xl-5 col-md-5 ">
 
 								<p class="text-danger h4 bg-white">
 
@@ -266,7 +266,7 @@ include $dashboard_head;
 							</div>
 
 							<!-- Present Address name input -->
-							<div class="col-12 col-xl-5 ">
+							<div class="col-12 col-xl-5 col-md-5 ">
 
 								<!-- parmanent address input name -->
 								<div class="form-group mt-3">

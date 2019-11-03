@@ -16,8 +16,8 @@ include $linkerCss;
 
 
   <div class="container-fluid">
-    <div class="row justify-content-xl-center _background ">
-      <div class="col-12 col-xl-4 ">
+    <div class="row justify-content-xl-center justify-content-md-center _background ">
+      <div class="col-12 col-xl-4 col-md-4 align-self-center ">
         <div class="container margin_">
           <div class="row py-4 ">
             

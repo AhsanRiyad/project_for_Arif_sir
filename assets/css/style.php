@@ -283,7 +283,7 @@ height: 59px;
 
 /*view add product css */
 .classFormAddProductBySeller{
-    margin-top:200px;
+   /*margin-top:200px;*/
 }
 
 
@@ -323,7 +323,7 @@ height: 59px;
 /*login page*/
 /*main margin*/
 .margin_{
-	margin-top: 5%;
+	/*margin-top: 5%;*/
 }
 /*login page*/
 
