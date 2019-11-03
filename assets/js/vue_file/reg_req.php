@@ -11,9 +11,9 @@
 	<v-card>
 	<v-card-title>User Details</v-card-title>
 	<v-divider></v-divider>
-	<v-card-text style="height: 300px;">
+	<v-card-text style="height: 300px;" class="black--text">
 	<v-container>
-	<v-row>
+	<v-row >
 	<v-col cols="6">
 	<p>First Name</p>
 	</v-col>
@@ -157,16 +157,6 @@
 		}
 	}
 	);
-
-
-
-
-
-
-
-
-
-
 
 
 	var code = `
