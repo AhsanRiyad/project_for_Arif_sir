@@ -20,9 +20,7 @@ var code = `<!-- registration page starts now -->
 					<div class="container">
 						<div class="row pt-4 pb-1">
 
-						<!-- @foreach($errors->all() as $e)
-							{{ $e }}
-							@endforeach -->
+						
 							<p class="text-dark  h4" id='msg'>
 								Welcome, Create your Account 
 
@@ -31,12 +29,7 @@ var code = `<!-- registration page starts now -->
 								</span>
 
 								<span class="text-success">
-									<?php 
-									if(isset($_COOKIE['registration_status'])){
-										echo $_COOKIE['registration_status'];
-									}
-
-									?>
+									
 
 								</span>
 
@@ -44,7 +37,7 @@ var code = `<!-- registration page starts now -->
 
 
 
-							<span class="ml-auto mt-auto pt-3"><small >Alredy member? <a href="">Login</a> here</small></span>
+							<span class="ml-auto mt-auto pt-3"><small >Alredy member? <a href="<?php echo $loginPage; ?>">Login</a> here</small></span>
 						</div>
 
 						<div class="row justify-content-xl-center bg-white py-5 mb-5">
@@ -68,9 +61,7 @@ var code = `<!-- registration page starts now -->
 
 
 									</label>
-									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value="<?php if(isset($_COOKIE['first_name'])){
-										echo $_COOKIE['first_name'];
-									} ?>" ref='first_name' v-on:change='first_name_change()'>
+									<input name="first_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter first name" value="" ref='first_name' v-on:change='first_name_change()'>
 								</div>
 
 
