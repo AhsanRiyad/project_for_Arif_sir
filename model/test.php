@@ -39,21 +39,32 @@ echo $d2->purpose;*/
 
 $conn = get_mysqli_connection();
 
-$sql = "CALL REGISTRATION( ? , @STATUS)";
-    $stmt = $conn->prepare($sql);
-    $em =  'riyad298@gmail.com';
-    $stmt->bind_param('s' , $em );
-    $stmt->execute();
-    //mysqli_close($conn);    
+$sql = "CALL REGISTRATION( ?, ?, ?, ?, ?, ?, @result)";
+$stmt = $conn->prepare($sql);
+$email =  'riyad298@afhorfooefoe.com';
+$full_name = 'Ahsan Riyad';
+$mobile = '01919448787';
+$institution_id = '01919448787';
+$password = '1';
+$otp = 'aofhoerf';
 
-    $stmt->close();
-    //$conn->close();
-    $sql = 'select @STATUS as st'; 
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
+$stmt->bind_param('ssssss' , $email, $full_name, $mobile, $institution_id, $password, $otp);
+$stmt->execute();   
+
+$stmt->close();
+$sql = 'select @result as st'; 
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+
+$conn->close();
+print_r($row);
 
 
-    print_r($row);
 
 
-    
+
+
+
+
+
+

@@ -27,8 +27,8 @@ CREATE TABLE `verification_info`(
  `otp_time` datetime(6) DEFAULT NULL,
  `status` varchar(20) DEFAULT NULL,
  `type` varchar(20) DEFAULT NULL,
- `visibility` varchar(20) DEFAULT NULL
-
+ `visibility` varchar(20) DEFAULT NULL,
+ `completeness` int(5) DEFAULT NULL
 );
 
 
@@ -43,7 +43,7 @@ CREATE TABLE `users_registration` (
   `email` varchar(100) DEFAULT NULL,
   `id` int(100) NOT NULL,
   `full_name` varchar(100) DEFAULT NULL,
-  `mobile` int(20) DEFAULT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
   `institution_id` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `registration_date` datetime(6) DEFAULT NULL,
@@ -65,3 +65,42 @@ INSERT INTO `users_registration`(`email`,  `full_name`, `mobile`, `institution_i
 INSERT INTO `verification_info`(`email`, `otp`, `otp_time`, `status`, `type`, `visibility`) VALUES (`email`, `otp`, `otp_time`, `status`, `type`, `visibility`)
 
 -- query
+
+INSERT INTO users_registration (email,full_name,mobile,institution_id,password,registration_date,membership_number) VALUES (email1,full_name1, mobile1,institution_id1,password1,NOW(), 'not_set');
+
+INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'name,email' , 20);
+SET result="YES";
+
+
+
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE REGISTRATION(IN email1 VARCHAR(100),IN full_name1 VARCHAR(100),IN mobile1 VARCHAR(20),IN institution_id1 VARCHAR(100),IN password1 VARCHAR(100),IN otp1 VARCHAR(100),OUT result VARCHAR(100))
+BEGIN
+
+DECLARE UID INT(3); 
+SET UID = 0 ;
+SELECT COUNT(*) INTO UID FROM users_registration  WHERE EMAIL=lower(email1) ;   
+
+SELECT UID;
+
+IF UID>0
+THEN 
+SET result="NO";
+ELSE 
+SET result="NO";
+
+INSERT INTO users_registration (email,full_name,mobile,institution_id,password,registration_date,membership_number) VALUES (email1,full_name1, mobile1,institution_id1,password1,NOW(), 'not_set');
+
+INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'name,email' , 20);
+SET result="YES";
+
+END IF ;
+
+
+END$$
+DELIMITER ;
+
+
+
+
+CREATE OR REPLACE PROCEDURE `REGISTRATION`(IN )
