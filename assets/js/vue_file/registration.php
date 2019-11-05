@@ -24,7 +24,6 @@ var code = `<!-- registration page starts now -->
 Welcome, Create your Account 
 {{ registratrion_status }}
 
-{{ registratrion_status }}
 
 
 </p>		
@@ -155,7 +154,7 @@ value="">
 
 `;
 
-
+registratrion_status = '';
 
 Vue.component('registration' , {
 	template: code, 
@@ -190,30 +189,44 @@ Vue.component('registration' , {
 				this.full_name_color = 'red' ;								
 			}
 		},
+
+		
+		changeType: function(){
+			this.registratrion_status = 'NO';
+		},
+
 		submit: function(){
 			//alert('on click');
+			var registration = this;
 
-			axios.post('<?php echo $modelRegirstration; ?>', {
+			var reg_s = axios.post('<?php echo $modelRegirstration; ?>', {
 				full_name: this.$refs.full_name.value,
 				institution_id: this.institution_id,
 				email: this.email,
 				mobile: this.mobile,
 				password: this.password
-
 			})
 			.then(function (response) {
 				console.log(response.data);
-				// alert(response.data);
-				
+				// alert(response.data);				
 				//this.registratrion_status = response.data;
-				this.registratrion_status = response.data;	
+				//this.registratrion_status = response.data;	
+				//alert(this.registratrion_status);
+
+				registration.count = response.data;
+				//return 'NOtting';
+
+				//alert(registration);
+				
+
 
 			})
 			.catch(function (error) {
 				console.log(error);
+				//return 'hi';
 			});
 
-
+			this.registratrion_status = registration.count ;
 			//window.location.href = '';
 		}
 	},
