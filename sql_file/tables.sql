@@ -4,6 +4,7 @@ drop table `users_registration`;
 drop table `users_info`;
 drop table `verification_info`;
 drop table `user_uploads`;
+drop table `user_photos`;
 
 CREATE TABLE `users_info` (
  `email` varchar(100) DEFAULT NULL,
@@ -35,8 +36,13 @@ CREATE TABLE `verification_info`(
 CREATE TABLE `user_uploads`(
  `email` varchar(100) DEFAULT NULL,
  `recent_photo` varchar(400) DEFAULT NULL,
- `old_photo` varchar(400) DEFAULT NULL,
- `group_photo` varchar(400) DEFAULT NULL
+ `old_photo` varchar(400) DEFAULT NULL
+);
+
+CREATE TABLE `user_photos`(
+ `group_photo` varchar(400) DEFAULT NULL,
+ `email` varchar(100) DEFAULT NULL
+
 );
 
 CREATE TABLE `users_registration` (
@@ -82,14 +88,24 @@ SELECT UID;
 
 IF UID>0
 THEN 
+
 SET result="NO";
+
 ELSE 
-SET result="NO";
 
 INSERT INTO users_registration (email,full_name,mobile,institution_id,password,registration_date,membership_number) VALUES (email1,full_name1, mobile1,institution_id1,password1,NOW(), 'not_set');
 
 INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'name,email' , 20);
+
+INSERT INTO users_info (email) VALUES (email1);
+
+INSERT INTO user_uploads (email) VALUES (email1);
+INSERT INTO user_photos (email) VALUES (email1);
+
+
 SET result="YES";
+
+
 
 END IF ;
 

@@ -6,6 +6,8 @@ include $APP_ROOT.'assets/linker/db.php' ;
 header("Content-Type: application/json; charset=UTF-8");
 
 
+
+
 //print_r(json_encode($_REQUEST));
 //print_r($_REQUEST['title']);
 
@@ -14,8 +16,10 @@ $d2 = json_decode($data);
 //echo $d2->purpose;
 
 if($d2->purpose=='get_data'){
+
+	//echo 'get data';
 	$conn = get_mysqli_connection();
-	$sql = 'select * from users where status = "not_verified"';
+	$sql = "select * from users_registration , verification_info where users_registration.email = verification_info.email and verification_info.status = 'not_verified'";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
 
@@ -45,15 +49,15 @@ else if($d2->purpose=='reject_user'){
 
 	//echo 'hi';
 
-	$id = $d2->id;
-	echo $id;
+	$email = $d2->email;
+	echo $email;
 	// mysqli_close($conn);
 	$conn = get_mysqli_connection();
 	//mysqli_close($conn);
 
-	$sql = "UPDATE users SET status ='rejected' WHERE id=(?)";
+	$sql = "UPDATE verification_info SET status ='rejected' WHERE email=(?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $id);
+	$stmt->bind_param('i' , $email);
 	$stmt->execute();
 	//mysqli_close($conn);
 
@@ -64,15 +68,15 @@ else if($d2->purpose=='approve_user'){
 
 	//echo 'hi';
 
-	$id = $d2->id;
-	echo $id;
+	$email = $d2->email;
+	echo $email;
 	// mysqli_close($conn);
 	$conn = get_mysqli_connection();
 	//mysqli_close($conn);
 
-	$sql = "UPDATE users SET status ='approved' WHERE id=(?)";
+	$sql = "UPDATE verification_info SET status ='approved' WHERE email=(?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $id);
+	$stmt->bind_param('i' , $email);
 	$stmt->execute();
 	//mysqli_close($conn);
 
@@ -83,13 +87,13 @@ else if($d2->purpose=='get_user_details'){
 	//echo 'hi';
 	
 
-	$id = $d2->id;
-	//echo $id;
+	$email = $d2->email;
+	//echo $email;
 	
 	$conn = get_mysqli_connection();
-	$sql = "select * from users WHERE id=(?)";
+	$sql = "select * from verification_info WHERE email=(?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $id);
+	$stmt->bind_param('i' , $email);
 	$stmt->execute();
 	//print_r($row);
 	$i = 0 ;
@@ -112,7 +116,7 @@ else if($d2->purpose=='get_user_details'){
 
 else{
 	echo $d2->purpose;
-	echo $d2->id;
+	echo $d2->email;
 }
 
 

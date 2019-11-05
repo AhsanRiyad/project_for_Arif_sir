@@ -126,7 +126,7 @@
 
 
 	Vue.component('component_user_datails', {
-		props: ['id'] , 
+		props: ['email'] , 
 		template: modal_user_details ,
 		data(){
 			return {
@@ -138,7 +138,7 @@
 		mounted(){
 			this.$http.post('<?php echo $modelReg_req; ?>', {
 				purpose : 'get_user_details',
-				id : this.id 
+				email : this.email ,
 			} ).then(function(data){
 				//var obj = JSON.parse(data);
 				// console.log(obj);
@@ -184,10 +184,10 @@
 	<tr>
 	<td> {{ user.id }} </td>
 	<td> {{ user.registration_date }} </td>
-	<td> {{ user.last_name }} </td>
-	<td><component_user_datails v-bind:id="user.id"></component_user_datails></td>
-	<td><button @click="approve_id(user.id)" class="btn btn-success">Accept</button></td>
-	<td><button @click="reject_id(user.id)" class="btn btn-danger">Reject</button></td>
+	<td> {{ user.full_name }} </td>
+	<td><component_user_datails v-bind:id="user.email"></component_user_datails></td>
+	<td><button @click="approve_id(user.email)" class="btn btn-success">Accept</button></td>
+	<td><button @click="reject_id(user.email)" class="btn btn-danger">Reject</button></td>
 	</tr>
 	</tbody>
 	</table>
@@ -255,12 +255,12 @@
 
 			})
 			},
-			approve_id: function(id){
-				console.log(id);
+			approve_id: function(email){
+				console.log(email);
 
 				this.$http.post('<?php echo $modelReg_req; ?>', {
 					purpose : 'approve_user', 
-					id: id
+					email: email
 				} ).then(function(data){
 				//var obj = JSON.parse(data);
 				// console.log(obj);
@@ -278,12 +278,12 @@
 			})
 
 			},
-			reject_id: function(id){
-				console.log(id);
+			reject_id: function(email){
+				console.log(email);
 
 				this.$http.post('<?php echo $modelReg_req; ?>', {
 					purpose : 'reject_user', 
-					id: id
+					email: email
 				} ).then(function(data){
 				//var obj = JSON.parse(data);
 				// console.log(obj);
@@ -308,6 +308,7 @@
 			} ).then(function(data){
 				//var obj = JSON.parse(data);
 				// console.log(obj);
+				console.log(data);
 				this.user_list = JSON.parse(data.bodyText);
 				//alert(data);
 				//console.log(obj[0].status);
