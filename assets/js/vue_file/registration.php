@@ -22,8 +22,10 @@ var code = `<!-- registration page starts now -->
 
 <p class="text-dark  h4" id='msg'>
 Welcome, Create your Account 
-{{ registratrion_status }}
 
+<span  class="red--text" v-if='registratrion_status === "NO"'> Email Already used! </span>
+
+<span  class="green--text" v-if='registratrion_status === "YES"'> Registration Successful! </span>
 
 
 </p>		
@@ -139,8 +141,13 @@ value="">
 
 
 <!-- submit button -->
-<small>By registering, I agree with the TOC</small>
-<button  class="btn btn-success rounded-0 w-100 py-2  mt-xl-2" @click='submit()'>Register</button>
+<p class="mt-9 mb-0">By registering, I agree with the TOC</p>
+
+
+
+<v-btn @click='submit()' :loading='loading' class="green white--text w-100 mt-0 pt-3 pb-3" tile>REGISTRATION</v-btn>
+
+
 
 </div>
 
@@ -167,7 +174,8 @@ Vue.component('registration' , {
 			mobile: '',
 			institution_id: '',
 			password: '',
-			registratrion_status: 'default'
+			registratrion_status: 'default',
+			loading: false
 		}
 	},
 	methods:{
@@ -197,7 +205,7 @@ Vue.component('registration' , {
 
 		submit: function(){
 			//alert('on click');
-
+			this.loading = true;
 			axios.post('<?php echo $modelRegirstration; ?>', {
 				full_name: this.$refs.full_name.value,
 				institution_id: this.institution_id,
@@ -207,13 +215,16 @@ Vue.component('registration' , {
 			})
 			.then( function(response){
 				this.registratrion_status = response.data ; 
+				this.loading = false;
+
 			}.bind(this))
 			.catch(function (error) {
 				console.log(error);
+				this.loading = false;
 				//return 'hi';
 			});
 
-			this.registratrion_status = this.item_count ;
+			
 
 			//alert(this.registratrion_status+ 'outside');
 
@@ -255,6 +266,7 @@ Vue.component('registration' , {
 
 var registration_page = new Vue({
 	el: '#reg_vue' , 
+	vuetify: new Vuetify(),
 	data : {
 		name: 'riyad---vue',
 		name_result: '' , 
