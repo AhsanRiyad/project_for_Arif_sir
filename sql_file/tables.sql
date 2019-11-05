@@ -60,16 +60,13 @@ MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 -- query
 
-INSERT INTO `users_registration`(`email`,  `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES ( email,  full_name, mobile, institution_id, password, registration_date, membership_number )
-
-INSERT INTO `verification_info`(`email`, `otp`, `otp_time`, `status`, `type`, `visibility`) VALUES (`email`, `otp`, `otp_time`, `status`, `type`, `visibility`)
-
--- query
 
 INSERT INTO users_registration (email,full_name,mobile,institution_id,password,registration_date,membership_number) VALUES (email1,full_name1, mobile1,institution_id1,password1,NOW(), 'not_set');
 
 INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'name,email' , 20);
 SET result="YES";
+
+-- query
 
 
 
