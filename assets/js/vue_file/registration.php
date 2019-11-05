@@ -197,36 +197,26 @@ Vue.component('registration' , {
 
 		submit: function(){
 			//alert('on click');
-			var registration = this;
 
-			var reg_s = axios.post('<?php echo $modelRegirstration; ?>', {
+			axios.post('<?php echo $modelRegirstration; ?>', {
 				full_name: this.$refs.full_name.value,
 				institution_id: this.institution_id,
 				email: this.email,
 				mobile: this.mobile,
 				password: this.password
 			})
-			.then(function (response) {
-				console.log(response.data);
-				// alert(response.data);				
-				//this.registratrion_status = response.data;
-				//this.registratrion_status = response.data;	
-				//alert(this.registratrion_status);
-
-				registration.count = response.data;
-				//return 'NOtting';
-
-				//alert(registration);
-				
-
-
-			})
+			.then( function(response){
+				this.registratrion_status = response.data ; 
+			}.bind(this))
 			.catch(function (error) {
 				console.log(error);
 				//return 'hi';
 			});
 
-			this.registratrion_status = registration.count ;
+			this.registratrion_status = this.item_count ;
+
+			//alert(this.registratrion_status+ 'outside');
+
 			//window.location.href = '';
 		}
 	},
