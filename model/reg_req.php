@@ -19,7 +19,7 @@ if($d2->purpose=='get_data'){
 
 	//echo 'get data';
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration , verification_info where users_registration.email = verification_info.email and verification_info.status = 'not_verified'";
+	$sql = "select * from users_registration , verification_info where users_registration.email = verification_info.email and verification_info.status = 'not_verified' limit 0 , 10";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);

@@ -154,6 +154,22 @@
 	</tr>
 	</tbody>
 	</table>
+
+	
+	<div hidden>
+	
+	<v-btn class="ma-2" color="orange darken-2" dark>
+	<v-icon dark left>mdi-arrow-left</v-icon>Back
+	</v-btn>
+
+	<v-btn class="ma-2" color="orange darken-2" dark> Next  &nbsp
+	<v-icon dark left>mdi-arrow-right </v-icon>
+	</v-btn>
+	
+	</div>
+
+
+
 	</div>
 	</div>
 	
