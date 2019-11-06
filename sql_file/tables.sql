@@ -23,6 +23,7 @@ CREATE TABLE `users_info` (
 );
 
 CREATE TABLE `verification_info`(
+ `id_v_info` INT(5) DEFAULT NULL,
  `email` varchar(100) DEFAULT NULL,
  `otp` varchar(100) DEFAULT NULL,
  `otp_time` datetime(6) DEFAULT NULL,
@@ -61,6 +62,18 @@ ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `users_registration`
 MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+
+
+
+
+ALTER TABLE `verification_info`
+ADD PRIMARY KEY (`id_v_info`);
+
+ALTER TABLE `verification_info`
+MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+
 
 -- tables
 

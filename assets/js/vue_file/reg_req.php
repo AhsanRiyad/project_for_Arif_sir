@@ -13,98 +13,56 @@
 	<v-divider></v-divider>
 	<v-card-text style="height: 300px;" class="black--text">
 	<v-container>
-	<v-row >
-	<v-col cols="6">
-	<p>First Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.first_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>last Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.last_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
-	</v-col>
-	<v-col cols="6">
-	<p>middle Name</p>
-	</v-col>
-	<v-col  cols="6" >
-	<p> {{ user_details.middle_name }} </p>
+	<v-row>
+
+
+	<v-col cols="12">
+	<v-row align="center" justify="center">
+	<v-img
+	src="https://picsum.photos/id/11/500/300"
+	lazy-src="https://picsum.photos/id/11/10/6"
+	aspect-ratio="1"
+	class="grey lighten-2"
+	max-width="200"
+	max-height="150"
+	></v-img>
+	</v-row>
 	</v-col>
 
+
+	<v-col cols="6">
+	<p>Full Name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.full_name }} </p>
+	</v-col>
+
+	<v-col cols="6">
+	<p>Email</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.email }} </p>
+	</v-col>
+
+	<v-col cols="6">
+	<p>Mobile</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.mobile }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>institution_id</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.institution_id }} </p>
+	</v-col>
+
+
+	
+	
 	</v-row>
 	</v-container>
 	</v-card-text>
@@ -136,22 +94,27 @@
 			}
 		},
 		mounted(){
+
+			console.log('user details');
 			this.$http.post('<?php echo $modelReg_req; ?>', {
 				purpose : 'get_user_details',
 				email : this.email ,
 			} ).then(function(data){
+
+				console.log('inside fff');
 				//var obj = JSON.parse(data);
 				// console.log(obj);
-				this.user_details = JSON.parse(data.bodyText);
+				//this.user_details = JSON.parse(data.bodyText);
 				//alert(data);
 				//console.log(obj[0].status);
 				//console.log(this.user_details);
 				//console.log(obj.length);
 				//console.log(Object.keys(this.user_details[0]));
 				//console.log(Object.values(this.user_details));
-				this.user_details = this.user_details[0];
-
-				console.log(this.user_details.status);
+				//this.user_details = this.user_details[0];
+				this.user_details = JSON.parse(data.bodyText)[0];
+				console.log(JSON.parse(data.bodyText)[0]);
+				//console.log(this.user_details.status);
 
 			})
 		}
@@ -180,12 +143,12 @@
 	<th>Reject</th>
 	</tr>
 	</thead>
-	<tbody id="tbody" v-for="user in user_list">
+	<tbody v-if="array_size" id="tbody" v-for="user in user_list">
 	<tr>
 	<td> {{ user.id }} </td>
 	<td> {{ user.registration_date }} </td>
 	<td> {{ user.full_name }} </td>
-	<td><component_user_datails v-bind:id="user.email"></component_user_datails></td>
+	<td><component_user_datails v-bind:email="user.email"></component_user_datails></td>
 	<td><button @click="approve_id(user.email)" class="btn btn-success">Accept</button></td>
 	<td><button @click="reject_id(user.email)" class="btn btn-danger">Reject</button></td>
 	</tr>
@@ -196,67 +159,80 @@
 	
 
 	<template>
-  <v-row justify="center"> 
-    </v-btn>
-    <v-dialog
-      v-model="dialog"
-      max-width="290"
-    >
-      <v-card>
-        <v-card-title class="headline">Action Status</v-card-title>
+	<v-row justify="center"> 
+	</v-btn>
+	<v-dialog
+	v-model="dialog"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline">Action Status</v-card-title>
 
-        <v-card-text>
-          {{ admin_approval_status }}
-        </v-card-text>
+	<v-card-text>
+	{{ admin_approval_status }}
+	</v-card-text>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
+	<v-card-actions>
+	<v-spacer></v-spacer>
 
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >OK
-          </v-btn>
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog = false"
+	>OK
+	</v-btn>
 
-            
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-row>
-</template>
 
-</div>
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+	</template>
+
+	</div>
 	`;
 
 
 	Vue.component('reg_req', {
 		template: code , 
 		data(){
-			return { user_list : '' , dialog: false, admin_approval_status: ''  }
+			return { user_list : [] , dialog: false, admin_approval_status: '',
+			array_size: true  }
 		}, 
 		methods: {
 			changeName: function(){
 
 			},
 			get_users : function(){
+				//alert('get_data_method');
+
 				this.$http.post('<?php echo $modelReg_req; ?>', {
 					purpose : 'get_data'
-				} ).then(function(data){
-				//var obj = JSON.parse(data);
-				// console.log(obj);
-				this.user_list = JSON.parse(data.bodyText);
-				//alert(data);
-				//console.log(obj[0].status);
-				console.log(this.user_list);
-				//console.log(obj.length);
+				} ).then(function(response){
+					console.log(response);
+
+
+				// console.log(JSON.parse(response.data));
+
+				console.log(response.data);
+
+				if(response.data.length == 1){
+					this.user_list = []; 
+					this.user_list[0] =  JSON.parse(response.data);
+					console.log(this.user_list[0]);
+				}else if(response.data.length > 1){
+					this.user_list =  response.data;
+					console.log(this.user_list[0].email);
+				}else if(response.data == 0){
+					this.user_list =  [];
+				}
 
 
 			})
 			},
 			approve_id: function(email){
-				console.log(email);
+				//console.log(email);
 
 				this.$http.post('<?php echo $modelReg_req; ?>', {
 					purpose : 'approve_user', 
@@ -270,8 +246,8 @@
 				console.log(data);
 				
 				this.admin_approval_status = 'User is approved';
-				this.dialog = true;
 				this.get_users();
+				this.dialog = true;
 				//console.log(obj.length);
 
 
@@ -279,7 +255,7 @@
 
 			},
 			reject_id: function(email){
-				console.log(email);
+				//console.log(email);
 
 				this.$http.post('<?php echo $modelReg_req; ?>', {
 					purpose : 'reject_user', 
@@ -294,6 +270,7 @@
 				this.admin_approval_status = 'User is rejected';
 				this.dialog = true;
 				this.get_users();
+
 				//console.log(obj.length);
 
 
@@ -303,20 +280,36 @@
 			}
 		},
 		beforeCreate(){
-			this.$http.post('<?php echo $modelReg_req; ?>', {
+			
+
+			axios.post('<?php echo $modelReg_req; ?>', {
 				purpose : 'get_data'
-			} ).then(function(data){
-				//var obj = JSON.parse(data);
-				// console.log(obj);
-				console.log(data);
-				this.user_list = JSON.parse(data.bodyText);
-				//alert(data);
-				//console.log(obj[0].status);
-				console.log(this.user_list);
-				//console.log(obj.length);
-
-
 			})
+			.then(function (response) {
+				console.log(response);
+
+
+				// console.log(JSON.parse(response.data));
+
+				console.log(response.data.length);
+
+				if(response.data.length == 1){
+					this.user_list = []; 
+					this.user_list[0] =  JSON.parse(response.data);
+					console.log(this.user_list[0]);
+				}else if(response.data.length > 1){
+					this.user_list =  response.data;
+					console.log(this.user_list[0].email);
+				}
+
+
+			}.bind(this))
+			.catch(function (error) {
+				console.log(error);
+			});
+
+
+
 		},
 		mounted(){
 			//alert('the page is mounted');

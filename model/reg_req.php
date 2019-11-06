@@ -21,28 +21,44 @@ if($d2->purpose=='get_data'){
 	$conn = get_mysqli_connection();
 	$sql = "select * from users_registration , verification_info where users_registration.email = verification_info.email and verification_info.status = 'not_verified'";
 	$result = mysqli_query($conn, $sql);
-	$row = mysqli_fetch_assoc($result);
-
-//echo json_encode($row);
+	//$row = mysqli_fetch_assoc($result);
+	//$array2d[0] = json_encode($row);
+	//echo json_encode($array2d);
 
 	mysqli_close($conn);
 //print_r($row);
 	$i = 0 ;
 
 //echo json_encode($row);
-	$array2d ;
+	
 
-	if (mysqli_num_rows($result) > 0) {
+	//echo mysqli_num_rows($result);
+	//print_r(mysqli_fetch_assoc($result));
+
+	if (mysqli_num_rows($result) > 1) {
     // output data of each row
+		$array2d ;
 		while($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['array2d'][$i++] = $row;
+			//$GLOBALS['array2d'][$i++] = $row;
+			$array2d[$i++] = $row;
     	// $array2d[$i++][$row];
+			//echo $row['status'];
 		}
-	} else {
-		echo "0 results";
+		//echo 'get_>1';
+		echo json_encode($array2d);
+
+	} else if (mysqli_num_rows($result) == 1) {
+		// echo 'get_=1';
+
+		$row = mysqli_fetch_assoc($result);
+		$array2d[0] = json_encode($row);
+		echo json_encode($array2d);
+	}else{
+		echo mysqli_num_rows($result);
+
 	}
 
-	echo json_encode($array2d);
+	//echo json_encode($array2d);
 //echo 'hi';
 }
 else if($d2->purpose=='reject_user'){
@@ -57,7 +73,7 @@ else if($d2->purpose=='reject_user'){
 
 	$sql = "UPDATE verification_info SET status ='rejected' WHERE email=(?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $email);
+	$stmt->bind_param('s' , $email);
 	$stmt->execute();
 	//mysqli_close($conn);
 
@@ -76,7 +92,7 @@ else if($d2->purpose=='approve_user'){
 
 	$sql = "UPDATE verification_info SET status ='approved' WHERE email=(?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $email);
+	$stmt->bind_param('s' , $email);
 	$stmt->execute();
 	//mysqli_close($conn);
 
@@ -88,12 +104,12 @@ else if($d2->purpose=='get_user_details'){
 	
 
 	$email = $d2->email;
+	//echo 'hi';
 	//echo $email;
-	
 	$conn = get_mysqli_connection();
-	$sql = "select * from verification_info WHERE email=(?)";
+	$sql = "select * from users_registration , verification_info where users_registration.email = verification_info.email and verification_info.status = 'not_verified' and verification_info.email = (?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $email);
+	$stmt->bind_param('s' , $email);
 	$stmt->execute();
 	//print_r($row);
 	$i = 0 ;
