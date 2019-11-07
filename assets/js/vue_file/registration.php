@@ -204,7 +204,7 @@ Vue.component('registration' , {
 		},
 
 		submit: function(){
-			//alert('on click');
+			// alert('on click');
 			this.loading = true;
 			axios.post('<?php echo $modelRegirstration; ?>', {
 				full_name: this.$refs.full_name.value,

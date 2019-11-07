@@ -41,6 +41,7 @@ $forgotPage = $rootAdress.'pages/forgot.php';
 $dashboardPage = $rootAdress.'pages/add_user.php';
 $add_user = $rootAdress.'pages/add_user.php';
 $reg_req = $rootAdress.'pages/reg_req.php';
+$profilePage = $rootAdress.'pages/profile.php';
 
 
 

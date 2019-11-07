@@ -38,7 +38,7 @@
 					</div></a>
 
 
-					<a class="text-light" href=>
+					<a class="text-light" href="<?php echo $profilePage; ?>">
 						<div class="  
 						<?php 
 
