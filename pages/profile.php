@@ -52,7 +52,7 @@ include $dashboard_head;
 					</div>
 
 					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-						<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' smallText' > <span>Name</span> <span @click="enable_input('full_name')" id="idSpanEmailChangeDashboard" v-bind:style="smallChange" class="small_button">Change</span></small>
+						<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.full_name.smallText ' > <span>Name</span> <span @click="enable_input('full_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.full_name.smallButton" class="small_button">Change</span></small>
 
 						<input :disabled='full_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
 
