@@ -118,18 +118,54 @@
 		data : {
 			name: 'riyad---vue',
 			full_name_input: true,
-			mobile_input: false,
-			institution_id_input: false,
-			nid_input: false,
-			dob_input_input: false,
+			mobile_input: true,
+			institution_id_input: true,
+			nid_or_passport_input: true,
+			dob_input: true,
 			changes:{
 				full_name:{
 					smallText: {
-						color: 'blue'					
+						color: '#2196f3'					
 					},
 					smallButton: {
 						color: 'white',
-						backgroundColor: 'blue' 
+						backgroundColor: '#2196f3' 
+					}
+				},
+				mobile:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+				institution_id:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+				nid_or_passport:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+				dob:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
 					}
 				}				
 			} 
@@ -142,6 +178,30 @@
 					this.changes.full_name.smallButton.color = 'white';
 					this.changes.full_name.smallButton.backgroundColor = 'red';
 					//alert(this.full_name_input);
+				}else if(name=='mobile'){
+					this.mobile_input = false;
+					this.changes.mobile.smallText.color = 'red';
+					this.changes.mobile.smallButton.color = 'white';
+					this.changes.mobile.smallButton.backgroundColor = 'red';
+					//alert(this.mobile_input);
+				}else if(name=='institution_id'){
+					this.institution_id_input = false;
+					this.changes.institution_id.smallText.color = 'red';
+					this.changes.institution_id.smallButton.color = 'white';
+					this.changes.institution_id.smallButton.backgroundColor = 'red';
+					//alert(this.mobile_input);
+				}else if(name=='nid_or_passport'){
+					this.nid_or_passport_input = false;
+					this.changes.nid_or_passport.smallText.color = 'red';
+					this.changes.nid_or_passport.smallButton.color = 'white';
+					this.changes.nid_or_passport.smallButton.backgroundColor = 'red';
+					//alert(this.mobile_input);
+				}else if(name=='dob'){
+					this.dob_input = false;
+					this.changes.dob.smallText.color = 'red';
+					this.changes.dob.smallButton.color = 'white';
+					this.changes.dob.smallButton.backgroundColor = 'red';
+					//alert(this.mobile_input);
 				}
 			}
 

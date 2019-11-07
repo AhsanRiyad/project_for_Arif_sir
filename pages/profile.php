@@ -23,22 +23,13 @@ include $dashboard_head;
 					<div class="col-3 mr-0 pr-0 my-2">
 						<img class="rounded img-thumbnail img-fluid" src=> alt="">
 						<div class="w-100"></div>
-						
-						
-						
-
-
 					</div>
 					<div class="col-9  ml-0">
 						<p class="h3 ">
 							
-
 						</p>
 						<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
 					</div>
-
-					
-
 
 				</div>
 
@@ -48,7 +39,7 @@ include $dashboard_head;
 				<!-- update field part starts -->
 				<div class="row bg-white mt-4 justify-content-center mx-1">
 					<div class="w-100 bg-info">
-						<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> About</p>
+						<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Basic Info</p>
 					</div>
 
 					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
@@ -59,33 +50,33 @@ include $dashboard_head;
 					</div>
 
 					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-						<small id='idSmallEmailChangeDashboard'  class="blue--text"> <span>Mobile</span> <span @click="enable_input()"  id="idSpanEmailChangeDashboard" class="small_button blue">Change</span></small>
+						<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mobile.smallText ' > <span>Mobile</span> <span @click="enable_input('mobile')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mobile.smallButton" class="small_button">Change</span></small>
 
-						<input id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here"  type="text" value="" >
-
-					</div>
-
-
-					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-						<small id='idSmallEmailChangeDashboard'  class="blue--text"> <span>Institution_id</span> <span @click="enable_input()"  id="idSpanEmailChangeDashboard" class="small_button blue">Change</span></small>
-
-						<input id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here"  type="text" value="" >
+						<input :disabled='mobile_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
 
 					</div>
 
 
 					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-						<small id='idSmallEmailChangeDashboard'  class="blue--text"> <span>nid/passport</span> <span  @click="enable_input()" id="idSpanEmailChangeDashboard" class="small_button blue">Change</span></small>
+						<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.institution_id.smallText ' > <span>institution_id</span> <span @click="enable_input('institution_id')" id="idSpanEmailChangeDashboard" v-bind:style="changes.institution_id.smallButton" class="small_button">Change</span></small>
 
-						<input id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here"  type="text" value="" >
+						<input :disabled='institution_id_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
 
 					</div>
 
 
-					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0 mb-3"> 
-						<small class="blue--text"><span>Enter new DOB or Keep it same</span> <span @click="enable_input()" id="changeDOBSpan" class="small_button blue">Change</span></small>
+					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+						<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.nid_or_passport.smallText ' > <span>nid_or_passport</span> <span @click="enable_input('nid_or_passport')" id="idSpanEmailChangeDashboard" v-bind:style="changes.nid_or_passport.smallButton" class="small_button">Change</span></small>
 
-						<input  id="idInputDobUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 pl-2 mr-0" placeholder="20-12-1996"  type="date" value="" >
+						<input :disabled='nid_or_passport_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
+
+					</div>
+
+
+					<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+						<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.dob.smallText ' > <span>Date of Birth</span> <span @click="enable_input('dob')" id="idSpanEmailChangeDashboard" v-bind:style="changes.dob.smallButton" class="small_button">Change</span></small>
+
+						<input :disabled='dob_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="date" value="" >
 
 					</div>
 
