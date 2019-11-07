@@ -86,4 +86,21 @@ if(dashboard_height<windowHeight){
 
 */
 
+
+
+
+
+
+function removeDisabled(obj){
+		
+		obj.parentNode.nextSibling.nextElementSibling.disabled = false;
+		obj.style.backgroundColor = "#51A5D0";
+		var objectSmall = obj.parentNode;
+
+
+		$(objectSmall).removeClass('text-danger');
+		$(objectSmall).addClass('text-info');
+		
+	}
+
 </script>

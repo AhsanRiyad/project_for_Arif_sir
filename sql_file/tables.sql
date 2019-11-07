@@ -5,6 +5,8 @@ drop table `users_info`;
 drop table `verification_info`;
 drop table `user_uploads`;
 drop table `user_photos`;
+drop table `users_address`;
+
 
 CREATE TABLE `users_info` (
  `email` varchar(100) DEFAULT NULL,
@@ -57,6 +59,21 @@ CREATE TABLE `users_registration` (
   `membership_number` varchar(100) DEFAULT NULL
   );
 
+CREATE TABLE `users_address` (
+  `users_address_id` int(100) NOT NULL,
+  `present_line1` varchar(300) DEFAULT NULL,
+  `present_line2` varchar(300) DEFAULT NULL,
+  `present_district` varchar(100) DEFAULT NULL,
+  `present_post_code` varchar(100) DEFAULT NULL,
+  `present_country` varchar(100) DEFAULT NULL,
+  `parmanent_line1` varchar(300) DEFAULT NULL,
+  `parmanent_line2` varchar(300) DEFAULT NULL,
+  `parmanent_district` varchar(100) DEFAULT NULL,
+  `parmanent_post_code` varchar(100) DEFAULT NULL,
+  `parmanent_country` varchar(100) DEFAULT NULL
+  
+  );
+
 ALTER TABLE `users_registration`
 ADD PRIMARY KEY (`id`);
 
@@ -72,6 +89,14 @@ ADD PRIMARY KEY (`id_v_info`);
 
 ALTER TABLE `verification_info`
 MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+
+
+ALTER TABLE `users_address`
+ADD PRIMARY KEY (`users_address_id`);
+
+ALTER TABLE `users_address`
+MODIFY `users_address_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 
 

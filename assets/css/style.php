@@ -275,7 +275,7 @@ height: 59px;
 }
 .small_button:hover{
 
-    background: #51A5D0;
+   
     cursor: pointer;
 }
 

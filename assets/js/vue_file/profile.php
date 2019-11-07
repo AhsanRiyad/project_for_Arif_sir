@@ -117,8 +117,30 @@
 		vuetify: new Vuetify(), 
 		data : {
 			name: 'riyad---vue',
+			full_name_input: true,
+			mobile_input: false,
+			institution_id_input: false,
+			nid_input: false,
+			dob_input_input: false,
+			smallText: {
+				color: 'blue',
+
+			},
+			smallChange: {
+				color: 'white',
+				backgroundColor: 'blue' 
+			}
 		} , 
 		methods : {
+			enable_input: function(name){
+				if(name=='full_name'){
+					this.full_name_input = false;
+					this.smallText.color = 'red';
+					this.smallChange.color = 'white';
+					this.smallChange.backgroundColor = 'red';
+					alert(this.full_name_input);
+				}
+			}
 
 
 		},
