@@ -152,5 +152,78 @@ END$$
 DELIMITER ;
 
 
+-- upload photos
+
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE current_photo(in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
+BEGIN
 
 
+Select recent_photo into existing_link from user_uploads where email = email1 ;
+
+
+if existing_link = NULL
+then 
+
+set existing_link = 'not_set' ; 
+
+end if;
+
+
+update user_uploads set recent_photo = upload_link where email = email1 ; 
+
+
+
+END$$
+DELIMITER ;
+
+
+
+
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE old_photo(in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
+BEGIN
+
+
+Select old_photo into existing_link from user_uploads where email = email1 ;
+
+
+if existing_link = NULL
+then 
+
+set existing_link = 'not_set' ; 
+
+end if;
+
+
+update user_uploads set old_photo = upload_link where email = email1 ; 
+
+
+
+END$$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+-- ideal code
+        $conn = get_mysqli_connection();
+        $sql = "call current_photo( ? , ? , @result )";
+        $stmt = $conn->prepare($sql);
+        $email = 'riyad298@gmail.com';
+        $basename = 'jtogstgjoigjsogogosjgiotgoisr';
+        $stmt->bind_param('ss' , $basename , $email );
+        $stmt->execute();
+        $stmt->close();
+        $sql = 'select @result as st';
+        $result = mysqli_query($conn , $sql);
+        $row = mysqli_fetch_assoc($result);
+        $conn->close();
+        echo $row['st'];
+-- ideal code

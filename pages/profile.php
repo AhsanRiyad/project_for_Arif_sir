@@ -27,10 +27,10 @@ include $dashboard_head;
 
 	<!-- <component v-bind:is="componet_name"> -->
 			<keep-alive>
-			<component v-bind:is="componet_name"></component>
+			<component :csrf_token1='csrf_token1' :recent_photo='recent_photo' v-bind:is="componet_name"></component>
 			</keep-alive>
 		
-		<buttons></buttons>
+			<buttons></buttons>
 
 
 	</v-app>

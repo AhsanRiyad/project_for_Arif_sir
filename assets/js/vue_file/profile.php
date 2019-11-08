@@ -6,7 +6,7 @@
 
 
 	var code = `
-	<div class="container-fluid bg-light mt-1 ">
+	<div class="container-fluid bg-light mt-1 mb-5">
 	<div class="row justify-content-center align-items-center">
 	
 
@@ -23,6 +23,7 @@
 
 
 	Vue.component('buttons' , {
+		props: ['recent_photo' , 'CSRF_TOKEN'],
 		template: code,
 		data(){
 			return {
@@ -57,7 +58,7 @@
 	<div class="row bg-white mx-1">
 
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" src=> alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -146,6 +147,7 @@
 	</div>`;
 
 	Vue.component('basic' , {
+		props: ['recent_photo' , 'CSRF_TOKEN'],
 		template: code,
 		data(){
 			return {
@@ -280,7 +282,7 @@
 	<div class="row bg-white mx-1">
 
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" src=> alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -389,6 +391,7 @@
 	</div>	`;
 
 	Vue.component('photos' , {
+		props: ['recent_photo' , 'csrf_token1'],
 		template: code,
 		data(){
 			return {
@@ -398,39 +401,52 @@
 				current_photo: '',
 				current_photo_name: 'choose file',
 				loading: false,
+				file_type: false,
 				
 			}
 		},
 		methods: {
 			uploadPhoto: function(){
 
-				this.loading = true;
+				//alert(this.csrf_token1);
+				if(this.file_type == true){
+					this.loading = true;
 
-				let formData = new FormData();
-				formData.append('current_photo', this.current_photo);
-				formData.append('purpose', 'upload_current_photo');
-				formData.append('email', 'riyad298@gmail.com');
-				axios.post( '<?php echo $modelUploadPhotos; ?>',
-					formData,
-					{
-						headers: {
-							'Content-Type': 'multipart/form-data'
+					let formData = new FormData();
+					formData.append('current_photo', this.current_photo);
+					formData.append('purpose', 'upload_current_photo');
+					formData.append('email', 'riyad298@gmail.com');
+					formData.append('csrf_token1', this.csrf_token1);
+					axios.post( '<?php echo $modelUploadPhotos; ?>',
+						formData,
+						{	
+
+							headers: {
+								'Content-Type': 'multipart/form-data'
+							}
 						}
+						).then(function(response){
+							this.loading = false;
+							this.status = 'upload successful';
+							this.dialog = true;
+							console.log(response);
+						}.bind(this))
+						.catch(function(error){
+							this.loading = false;
+							this.status = 'You are not authorized';
+							this.dialog = true;
+							console.log(error);
+						}.bind(this));
+						
+
+						this.file_type = false;
+
+					}else{
+
+						this.status = 'select right type of file first';
+						this.dialog = true;
+
 					}
-					).then(function(response){
-						this.loading = false;
-						console.log(response);
-					}.bind(this))
-					.catch(function(error){
-						this.loading = false;
-						console.log('FAILURE!!');
-					}.bind(this));
-					this.status = 'upload successful';
-					this.dialog = true;
-
-
-
-
 				},
 				handleFileUpload: function(){
 				//alert('uploading files');
@@ -443,10 +459,12 @@
 
 
 				if(!result){
+					this.file_type = false;
 					this.status = 'incorrect file type\n select again';
 					this.dialog = true;
 				}else{
-					this.current_photo_name = this.current_photo.name.slice(0,10);
+					this.file_type = true;
+					this.current_photo_name = this.current_photo.name.slice(0,15);
 					this.current_photo = this.$refs.current_photo.files[0];
 				}
 
@@ -477,7 +495,7 @@
 	<div class="row bg-white mx-1">
 
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" src=> alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -556,6 +574,7 @@
 	</div>`;
 
 	Vue.component('personal' , {
+		props: ['recent_photo' , 'CSRF_TOKEN' ],
 		template: code,
 		data(){
 			return {
@@ -691,7 +710,7 @@
 	<div class="row bg-white mx-1">
 
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" src=> alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -823,6 +842,7 @@
 	</div>`;
 
 	Vue.component('address1' , {
+		props: ['recent_photo' , 'CSRF_TOKEN'],
 		template: code,
 		data(){
 			return {
@@ -997,6 +1017,9 @@
 				}
 			}
 
+		},
+		created(){
+			
 		}
 	})
 
@@ -1012,127 +1035,46 @@ var reg_req = new Vue({
 		number_of_children_input: true,
 		dob_input: true,
 		componet_name: 'basic',
-		changes:{
-			full_name:{
-				smallText: {
-					color: '#2196f3'					
-				},
-				smallButton: {
-					color: 'white',
-					backgroundColor: '#2196f3' 
-				}
-			},
-			mobile:{
-				smallText: {
-					color: '#2196f3'					
-				},
-				smallButton: {
-					color: 'white',
-					backgroundColor: '#2196f3' 
-				}
-			},
-			institution_id:{
-				smallText: {
-					color: '#2196f3'					
-				},
-				smallButton: {
-					color: 'white',
-					backgroundColor: '#2196f3' 
-				}
-			},
-			number_of_children:{
-				smallText: {
-					color: '#2196f3'					
-				},
-				smallButton: {
-					color: 'white',
-					backgroundColor: '#2196f3' 
-				}
-			},
-			dob:{
-				smallText: {
-					color: '#2196f3'					
-				},
-				smallButton: {
-					color: 'white',
-					backgroundColor: '#2196f3' 
-				}
-			}				
-		} 
+		recent_photo: '<?php echo $recent_photo; ?>' ,
+		csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>'
+		
 	}, 
 	methods : {
 		enable_input: function(name){
-			if(name=='full_name'){
-				this.full_name_input = false;
-				this.changes.full_name.smallText.color = 'red';
-				this.changes.full_name.smallButton.color = 'white';
-				this.changes.full_name.smallButton.backgroundColor = 'red';
-					//alert(this.full_name_input);
-				}else if(name=='mobile'){
-					this.mobile_input = false;
-					this.changes.mobile.smallText.color = 'red';
-					this.changes.mobile.smallButton.color = 'white';
-					this.changes.mobile.smallButton.backgroundColor = 'red';
-					//alert(this.mobile_input);
-				}else if(name=='institution_id'){
-					this.institution_id_input = false;
-					this.changes.institution_id.smallText.color = 'red';
-					this.changes.institution_id.smallButton.color = 'white';
-					this.changes.institution_id.smallButton.backgroundColor = 'red';
-					//alert(this.mobile_input);
-				}else if(name=='number_of_children'){
-					this.number_of_children_input = false;
-					this.changes.number_of_children.smallText.color = 'red';
-					this.changes.number_of_children.smallButton.color = 'white';
-					this.changes.number_of_children.smallButton.backgroundColor = 'red';
-					//alert(this.mobile_input);
-				}else if(name=='dob'){
-					this.dob_input = false;
-					this.changes.dob.smallText.color = 'red';
-					this.changes.dob.smallButton.color = 'white';
-					this.changes.dob.smallButton.backgroundColor = 'red';
-					//alert(this.mobile_input);
-				}
-			}
-
-
-		},
-		beforeCreate(){
-
-		},
-		created(){
-			bus.$on('changeComponent' , (data)=>{
-
-				this.componet_name = data;
-
-				//alert(this.componet_name);
-			})
-		},
-		beforeMount(){
-
-		},
-		mounted(){
-
-		},
-		beforeUpdated(){
-
-		},
-		updated(){
-
-
-			var dashboard_height = $('#dashboard_height').height();
-			var windowHeight = $(document).height();
-			console.log(dashboard_height);
-			if(dashboard_height<windowHeight){
-
-				$('.dashboard_vertical_menu_height').height('100vh');
-			}else{
-				var ht = dashboard_height+'px';
-				$('.dashboard_vertical_menu_height').height(ht);
-			}
-
+			
 		}
-	})
+
+
+	},
+	beforeCreate(){
+
+	},
+	created(){
+		bus.$on('changeComponent' , (data)=>{
+			this.componet_name = data;
+		})
+	},
+	beforeMount(){
+
+	},
+	mounted(){
+
+	},
+	beforeUpdated(){
+
+	},
+	updated(){
+		//alert(this.CSRF_TOKEN);
+
+		var dashboard_height = $('#dashboard_height').height();
+		var windowHeight = $(document).height();
+		console.log('dashboard height= '+dashboard_height);
+		console.log('window height= '+windowHeight);
+		var ht = dashboard_height+'px';
+		$('.dashboard_vertical_menu_height').height(ht)
+		
+	}
+})
 
 
 

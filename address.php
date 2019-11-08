@@ -22,7 +22,7 @@ $style = $rootAdress."assets/css/style.php" ;
 // images
 $logoSrc = $rootAdress."assets/img/logo.jpg";
 $fev_icon = $rootAdress."assets/img/fev_icon.jpg";
-$recent_photo = '';
+$recent_photo = $rootAdress."assets/img/uploads/default.jpg";
 
 
 // pages
@@ -63,6 +63,9 @@ $password = '';
 $databaseName = 'intern_project';
 
 
+
+//CSRF_TOKEN token securty session
+//$_SESSION['csrf_token1'] = bin2hex(random_bytes(32));
 
 
 ?>

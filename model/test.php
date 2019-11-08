@@ -39,16 +39,18 @@ echo $d2->purpose;*/
 
 $conn = get_mysqli_connection();
 
-$sql = "CALL REGISTRATION( ?, ?, ?, ?, ?, ?, @result)";
+$sql = "CALL current_photo( ?, ?, @result)";
 $stmt = $conn->prepare($sql);
-$email =  'riyad298@afhorfooefoe.com';
-$full_name = 'Ahsan Riyad';
-$mobile = '01919448787';
-$institution_id = '01919448787';
-$password = '1';
-$otp = 'aofhoerf';
+// $email =  'riyad298@afhorfooefoe.com';
+// $full_name = 'Ahsan Riyad';
+// $mobile = '01919448787';
+// $institution_id = '01919448787';
+// $password = '1';
+ // $otp = 'aofhoerf';
 
-$stmt->bind_param('ssssss' , $email, $full_name, $mobile, $institution_id, $password, $otp);
+$email = 'riyad298@gmail.com';
+$basename = 'faerfojrferfoajf';
+$stmt->bind_param('ss' , $basename, $email);
 $stmt->execute();   
 
 $stmt->close();
@@ -57,14 +59,24 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 $conn->close();
-print_r($row);
+//print_r($row);
+echo $row['st'];
 
 
 
 
 
-
-
-
-
+				$conn = get_mysqli_connection();
+				$sql = "call current_photo( ? , ? , @result )";
+				$stmt = $conn->prepare($sql);
+				$email = 'riyad298@gmail.com';
+				$basename = 'jtogstgjoigjsogogosjgiotgoisr';
+				$stmt->bind_param('ss' , $basename , $email );
+				$stmt->execute();
+				$stmt->close();
+				$sql = 'select @result as st';
+				$result = mysqli_query($conn , $sql);
+				$row = mysqli_fetch_assoc($result);
+				$conn->close();
+				echo $row['st'];
 
