@@ -414,7 +414,7 @@
 
 					let formData = new FormData();
 					formData.append('current_photo', this.current_photo);
-					formData.append('purpose', 'upload_current_photo');
+					formData.append('purpose', 'current_photo');
 					formData.append('email', 'riyad298@gmail.com');
 					formData.append('csrf_token1', this.csrf_token1);
 					axios.post( '<?php echo $modelUploadPhotos; ?>',
