@@ -206,6 +206,36 @@ DELIMITER ;
 
 
 
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE upload_photo(in purpose varchar(100) , in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
+BEGIN
+
+
+if purpose = 'current_photo'
+then
+Select current_photo into existing_link from user_uploads where email = email1 ;
+update user_uploads set current_photo = upload_link where email = email1 ; 
+else if purpose = 'old_photo'
+then
+select old_photo into existing_link from user_uploads where email = email1;
+update user_uploads set old_photo = upload_link where email = email1;
+end if
+
+
+
+end if;
+
+
+
+
+
+
+END$$
+DELIMITER ;
+
+
+
+
 
 
 
