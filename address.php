@@ -22,7 +22,7 @@ $style = $rootAdress."assets/css/style.php" ;
 // images
 $logoSrc = $rootAdress."assets/img/logo.jpg";
 $fev_icon = $rootAdress."assets/img/fev_icon.jpg";
-
+$recent_photo = '';
 
 
 // pages
@@ -51,7 +51,7 @@ $modelRegirstration = $rootAdress."model/registration.php" ;
 $modelLogin = $rootAdress."model/login.php" ; 
 $modelReg_req = $rootAdress."model/reg_req.php" ; 
 $modeltest = $rootAdress."model/test.php" ; 
-
+$modelUploadPhotos = $rootAdress."model/upload_photos.php";
 
 
 
