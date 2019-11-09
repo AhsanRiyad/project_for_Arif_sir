@@ -17,7 +17,13 @@ if (!empty($_POST['csrf_token1'])) {
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 		$email = $_POST['email'];
 		if (file_exists($target_file)){ 
-			unlink($target_file);
+
+			if($purpose_type == 'group_photo'){
+				$target_file = $target_dir . basename($_POST["email"].'_1'.$_FILES[$purpose_type]["name"]);
+			}else{
+				unlink($target_file);
+			}
+			
 		}
 		if ($uploadOk == 0) {
 			echo "Sorry, your file was not uploaded.";
@@ -33,7 +39,7 @@ if (!empty($_POST['csrf_token1'])) {
 				$sql = 'select @result as st'; 
 				$result = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($result);
-				if (file_exists($target_dir.$row['st'])) {
+				if (file_exists($target_dir.$row['st'] && $purpose_type == 'group_photo')) {
 					unlink($target_dir.$row['st']);
 				}
 				$conn->close();

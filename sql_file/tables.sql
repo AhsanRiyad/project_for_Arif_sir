@@ -213,21 +213,23 @@ BEGIN
 
 if purpose = 'current_photo'
 then
-Select current_photo into existing_link from user_uploads where email = email1 ;
-update user_uploads set current_photo = upload_link where email = email1 ; 
-else if purpose = 'old_photo'
+Select recent_photo into existing_link from user_uploads where email = email1 ;
+update user_uploads set recent_photo = upload_link where email = email1 ; 
+ELSEIF purpose = 'old_photo'
 then
 select old_photo into existing_link from user_uploads where email = email1;
 update user_uploads set old_photo = upload_link where email = email1;
-end if
-
-
-
+elseif purpose = 'group_photo'
+then
+insert into user_photos (email , group_photo) values (email1 , upload_link); 
 end if;
 
 
 
-
+if existing_link = NULL
+then 
+set existing_link = 'not_set' ; 
+end if;
 
 
 END$$
