@@ -44,8 +44,10 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
     
 <script>
-    
-    Vue.mixin({
+   
+
+
+      Vue.mixin({
         data: function() {
             return {
                 images:{
@@ -80,6 +82,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
             }
         }
     })
+
 
 
 

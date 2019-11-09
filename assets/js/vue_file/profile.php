@@ -1,5 +1,20 @@
 <script type="text/javascript">
 	
+      Vue.mixin({
+        data: function() {
+            return {
+                componet_name: '<?php echo $_GET['pn']; ?>',
+                csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
+
+            }
+        }
+    })
+
+
+
+	
+
+
 
 	const bus = new Vue();
 
@@ -22,17 +37,18 @@
 
 
 	Vue.component('buttons' , {
-		props: ['recent_photo' , 'CSRF_TOKEN' , 'componet_name'],
+		props: ['recent_photo' , 'CSRF_TOKEN'  ],
 		template: code,
 		data(){
 			return {
 				name: 'Riyad',
-				input_disabled: 'basic'
+				//input_disabled: 'basic'
 			}
 		},
 		methods: {
 			changeComponent: function(comp_type){
-				this.input_disabled = comp_type;
+				//this.input_disabled = comp_type;
+				this.componet_name = comp_type;
 				bus.$emit('changeComponent' , comp_type );
 				
 			}
@@ -390,7 +406,7 @@
 	</div>	`;
 
 	Vue.component('photos' , {
-		props: ['recent_photo' , 'csrf_token1'],
+		props: ['recent_photo'],
 		template: code,
 		data(){
 			return {
@@ -420,7 +436,7 @@
 					formData.append('purpose', 'current_photo');
 					formData.append('email', 'riyad298@gmail.com');
 					formData.append('csrf_token1', this.csrf_token1);
-					axios.post( '<?php echo $modelUploadPhotos; ?>',
+					axios.post( this.model.modelUploadPhotos ,
 						formData,
 						{	
 
@@ -487,7 +503,7 @@
 					formData.append('purpose', 'old_photo');
 					formData.append('email', 'riyad298@gmail.com');
 					formData.append('csrf_token1', this.csrf_token1);
-					axios.post( '<?php echo $modelUploadPhotos; ?>',
+					axios.post( this.model.modelUploadPhotos,
 						formData,
 						{	
 
@@ -556,7 +572,7 @@
 					formData.append('purpose', 'group_photo');
 					formData.append('email', 'riyad298@gmail.com');
 					formData.append('csrf_token1', this.csrf_token1);
-					axios.post( '<?php echo $modelUploadPhotos; ?>',
+					axios.post( this.model.modelUploadPhotos,
 						formData,
 						{	
 
@@ -1177,9 +1193,8 @@ var reg_req = new Vue({
 		institution_id_input: true,
 		number_of_children_input: true,
 		dob_input: true,
-		componet_name: '<?php echo $_GET['pn']; ?>',
-		recent_photo: '<?php echo $recent_photo; ?>' ,
-		csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>'
+		recent_photo: '',
+		
 		
 	}, 
 	methods : {
@@ -1196,6 +1211,9 @@ var reg_req = new Vue({
 		bus.$on('changeComponent' , (data)=>{
 			this.componet_name = data;
 		})
+
+		this.recent_photo = this.images.recent_photo;
+
 	},
 	beforeMount(){
 
@@ -1214,7 +1232,7 @@ var reg_req = new Vue({
 		console.log('dashboard height= '+dashboard_height);
 		console.log('window height= '+windowHeight);
 		var ht = dashboard_height+'px';
-		$('.dashboard_vertical_menu_height').height(ht)
+		$('.dashboard_vertical_menu_height').height(ht);
 		
 	}
 })
