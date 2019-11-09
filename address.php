@@ -46,6 +46,10 @@ $profilePage = $rootAdress.'pages/profile.php?pn=basic';
 
 
 
+
+
+
+
 //model
 $modelRegirstration = $rootAdress."model/registration.php" ; 
 $modelLogin = $rootAdress."model/login.php" ; 

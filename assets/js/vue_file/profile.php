@@ -4,7 +4,6 @@
 	const bus = new Vue();
 
 
-
 	var code = `
 	<div class="container-fluid bg-light mt-1 mb-5">
 	<div class="row justify-content-center align-items-center">

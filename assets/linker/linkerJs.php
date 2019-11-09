@@ -38,6 +38,59 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     <!-- axios version 0.19.0-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js" ></script>
 
+    
+
+
+
+    
+<script>
+    
+    Vue.mixin({
+        data: function() {
+            return {
+                images:{
+                    logoSrc: '<?php echo $logoSrc; ?>',
+                    fev_icon: '<?php echo $fev_icon; ?>',
+                    recent_photo: '<?php echo $recent_photo; ?>',
+
+                },
+                pages:{
+                    reg_for_admin: '<?= $reg_for_admin ?>',
+                    dashboard_head: '<?= $dashboard_head ?>',
+                },
+                address:{
+                    registationPage:'<?php echo $registationPage ?>',
+                    loginPage: '<?php echo $loginPage; ?>',
+                    forgotPage: '<?php echo $forgotPage; ?>',
+                    dashboardPage: '<?php echo $dashboardPage; ?>',
+                    add_user: '<?php echo $add_user; ?>',
+                    reg_req: '<?php echo $reg_req; ?>',
+                    profilePage: '<?php echo $profilePage; ?>',
+
+                },
+                model:{
+                    modelRegirstration: '<?php echo $modelRegirstration; ?>',
+                    modelLogin: '<?php echo $modelLogin; ?>',
+                    modelReg_req: '<?php echo $modelReg_req; ?>',
+                    modeltest: '<?php echo $modeltest; ?>',
+                    modelUploadPhotos: '<?php echo $modelUploadPhotos; ?>',
+
+                },
+
+            }
+        }
+    })
+
+
+
+
+</script>
+
+
+
+
+
+
 
     
 
