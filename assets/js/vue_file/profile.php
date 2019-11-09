@@ -308,35 +308,34 @@
 
 	
 	<div class="custom-file">
-	<input type="file" ref="current_photo" v-on:change="handleFileUpload()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+	<input type="file" ref="current_photo" v-on:change="handleFileUpload_current()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 	<label class="custom-file-label" for="inputGroupFile01">{{ current_photo_name }}</label>
 	</div>
 
 	</div>
 	
 	<div class="col-10 mx-0 px-0 ">
-	<v-btn :loading='loading' @click="uploadPhoto()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+	<v-btn :loading='loading' @click="uploadPhoto_current()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
 	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
 	</v-btn>
 	</div>
 
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class=""  > <span>Old Photo</span></small>
+	<small id='idSmallEmailChangeDashboard'  class=""  > <span>old Photo</span></small>
 
 	
 	<div class="custom-file">
-	<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-	<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+	<input type="file" ref="old_photo" v-on:change="handleFileUpload_old()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+	<label class="custom-file-label" for="inputGroupFile01">{{ old_photo_name }}</label>
 	</div>
 
 	</div>
-
+	
 	<div class="col-10 mx-0 px-0 ">
-	<v-btn block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+	<v-btn :loading='loading' @click="uploadPhoto_old()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
 	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
 	</v-btn>
 	</div>
-
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
 	<small id='idSmallEmailChangeDashboard'  class=""  > <span>Group Photo</span></small>
 
@@ -399,14 +398,16 @@
 				dialog: false,
 				status: '',
 				current_photo: '',
+				old_photo: '',
 				current_photo_name: 'choose file',
+				old_photo_name: 'choose file',
 				loading: false,
 				file_type: false,
 				
 			}
 		},
 		methods: {
-			uploadPhoto: function(){
+			uploadPhoto_current: function(){
 
 				//alert(this.csrf_token1);
 				if(this.file_type == true){
@@ -448,7 +449,7 @@
 
 					}
 				},
-				handleFileUpload: function(){
+				handleFileUpload_current: function(){
 				//alert('uploading files');
 				this.current_photo = this.$refs.current_photo.files[0];
 				console.log(this.current_photo.size/1024/1024);
@@ -466,6 +467,71 @@
 					this.file_type = true;
 					this.current_photo_name = this.current_photo.name.slice(0,15);
 					this.current_photo = this.$refs.current_photo.files[0];
+				}
+
+
+
+			},
+			uploadPhoto_old: function(){
+
+				//alert(this.csrf_token1);
+				if(this.file_type == true){
+					this.loading = true;
+
+					let formData = new FormData();
+					formData.append('old_photo', this.old_photo);
+					formData.append('purpose', 'old_photo');
+					formData.append('email', 'riyad298@gmail.com');
+					formData.append('csrf_token1', this.csrf_token1);
+					axios.post( '<?php echo $modelUploadPhotos; ?>',
+						formData,
+						{	
+
+							headers: {
+								'Content-Type': 'multipart/form-data'
+							}
+						}
+						).then(function(response){
+							this.loading = false;
+							this.status = 'upload successful';
+							this.dialog = true;
+							console.log(response);
+						}.bind(this))
+						.catch(function(error){
+							this.loading = false;
+							this.status = 'You are not authorized';
+							this.dialog = true;
+							console.log(error);
+						}.bind(this));
+						
+
+						this.file_type = false;
+
+					}else{
+
+						this.status = 'select right type of file first';
+						this.dialog = true;
+
+					}
+				},
+				handleFileUpload_old: function(){
+				//alert('uploading files');
+				this.old_photo = this.$refs.old_photo.files[0];
+				console.log(this.old_photo.size/1024/1024);
+				console.log(this.old_photo);
+
+				var patt = /^(image\/){1}[A-Za-z]*/g;
+				var result = patt.test(this.old_photo.type);
+
+
+				if(!result){
+					this.file_type = false;
+					this.status = 'incorrect file type\n select again';
+					this.dialog = true;
+				}else{
+					this.file_type = true;
+					this.old_photo_name = this.old_photo.name.slice(0,15);
+					this.old_photo = this.$refs.old_photo.files[0];
 				}
 
 
