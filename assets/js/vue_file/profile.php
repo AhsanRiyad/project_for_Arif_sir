@@ -433,12 +433,14 @@
 							this.loading = false;
 							this.status = 'upload successful';
 							this.dialog = true;
+							this.current_photo_name = 'choose file';
 							console.log(response);
 						}.bind(this))
 						.catch(function(error){
 							this.loading = false;
 							this.status = 'You are not authorized';
 							this.dialog = true;
+							this.current_photo_name = 'choose file';
 							console.log(error);
 						}.bind(this));
 						
@@ -498,12 +500,16 @@
 							this.loading = false;
 							this.status = 'upload successful';
 							this.dialog = true;
+							this.old_photo_name = 'choose file';
+
 							console.log(response);
 						}.bind(this))
 						.catch(function(error){
 							this.loading = false;
 							this.status = 'You are not authorized';
 							this.dialog = true;
+							this.old_photo_name = 'choose file';
+
 							console.log(error);
 						}.bind(this));
 						
@@ -563,12 +569,16 @@
 							this.loading = false;
 							this.status = 'upload successful';
 							this.dialog = true;
+							this.group_photo_name = 'choose file';
+
 							console.log(response);
 						}.bind(this))
 						.catch(function(error){
 							this.loading = false;
 							this.status = 'You are not authorized';
 							this.dialog = true;
+							this.group_photo_name = 'choose file';
+
 							console.log(error);
 						}.bind(this));
 						
