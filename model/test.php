@@ -47,7 +47,7 @@ $stmt = $conn->prepare($sql);
 // $institution_id = '01919448787';
 // $password = '1';
  // $otp = 'aofhoerf';
-
+/*
 $email = 'riyad298@gmail.com';
 $basename = 'faerfojrferfoajf';
 $stmt->bind_param('ss' , $basename, $email);
@@ -61,10 +61,10 @@ $row = mysqli_fetch_assoc($result);
 $conn->close();
 //print_r($row);
 echo $row['st'];
+*/
 
 
-
-
+/*
 
 				$conn = get_mysqli_connection();
 				$sql = "call current_photo( ? , ? , @result )";
@@ -80,3 +80,7 @@ echo $row['st'];
 				$conn->close();
 				echo $row['st'];
 
+*/
+
+
+				echo $_GET['hellow'];

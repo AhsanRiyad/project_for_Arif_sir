@@ -10,10 +10,10 @@
 	<div class="row justify-content-center align-items-center">
 	
 
-	<v-btn :disabled="input_disabled == 'basic'" @click="changeComponent('basic')" large class="ml-1" color="success">Basic</v-btn>
-	<v-btn :disabled="input_disabled == 'personal'" @click="changeComponent('personal')" large class="ml-1" color="success">Personal</v-btn>
-	<v-btn :disabled="input_disabled == 'address1'" @click="changeComponent('address1')" large class="ml-1" color="success">address</v-btn>
-	<v-btn :disabled="input_disabled == 'photos'" @click="changeComponent('photos')" large class="ml-1" color="success">photo</v-btn>
+	<v-btn :disabled="componet_name == 'basic'" @click="changeComponent('basic')" large class="ml-1" color="success">Basic</v-btn>
+	<v-btn :disabled="componet_name == 'personal'" @click="changeComponent('personal')" large class="ml-1" color="success">Personal</v-btn>
+	<v-btn :disabled="componet_name == 'address1'" @click="changeComponent('address1')" large class="ml-1" color="success">address</v-btn>
+	<v-btn :disabled="componet_name == 'photos'" @click="changeComponent('photos')" large class="ml-1" color="success">photo</v-btn>
 
 	</div>
 
@@ -23,7 +23,7 @@
 
 
 	Vue.component('buttons' , {
-		props: ['recent_photo' , 'CSRF_TOKEN'],
+		props: ['recent_photo' , 'CSRF_TOKEN' , 'componet_name'],
 		template: code,
 		data(){
 			return {
@@ -1034,7 +1034,7 @@ var reg_req = new Vue({
 		institution_id_input: true,
 		number_of_children_input: true,
 		dob_input: true,
-		componet_name: 'basic',
+		componet_name: '<?php echo $_GET['pn']; ?>',
 		recent_photo: '<?php echo $recent_photo; ?>' ,
 		csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>'
 		
