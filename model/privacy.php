@@ -82,17 +82,7 @@ echo $row['st'];
 
 
 
-
-
-
-				//echo $_GET['hellow'];
-
-
-				$data =  file_get_contents('php://input');
-				$d2 = json_decode($data);
-
-				if($d2->purpose == 'getPrivacy'){
-
+				function getPrivacyData(){
 					$conn = get_mysqli_connection();
 					$sql = 'select * from verification_info where email = "riyad298@gmail.com"';
 					$result = mysqli_query($conn , $sql);
@@ -104,7 +94,7 @@ echo $row['st'];
 				//echo '<br>';
 
 
-					$sql = 'select * from users_registration where email = "riyad298@gmail.com"';
+					$sql = 'select * from  users_registration ur , users_info ui  where ur.email = ui.email and   ur.email = "riyad298@gmail.com"';
 					$result = mysqli_query($conn , $sql);
 					$row_users_registration = mysqli_fetch_assoc($result);
 
@@ -130,6 +120,18 @@ echo $row['st'];
 				// echo json_encode($arrayInfo);
 					echo json_encode($privacyArray);
 					$conn->close();
+				}
+
+
+				//echo $_GET['hellow'];
+
+
+				$data =  file_get_contents('php://input');
+				$d2 = json_decode($data);
+
+				if($d2->purpose == 'getPrivacy'){
+					echo getPrivacyData();
+					
 
 				}else if($d2->purpose == 'updatePrivacy'){
 
@@ -153,8 +155,9 @@ echo $row['st'];
 					$stmt->bind_param('ss' , $privacyArrayInString ,  $email);
 					$stmt->execute();   
 
-					echo $privacyArrayInString;
+					//echo $privacyArrayInString;
 
+					echo getPrivacyData();
 					
 					//echo 'hi hellow';
 

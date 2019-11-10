@@ -76,10 +76,10 @@
 					</div></a>
 
 
-					<a class="text-white" href="#">
+					<a class="text-white" href="<?php echo $privacyPage; ?>">
 						<div class="  bg-secondary py-2 text-center my-4">
 
-							<i class="fas w_f fa-envelope"></i> Message Request
+							<i class="fas w_f fa-envelope"></i> Privacy
 
 						</div></a>
 
