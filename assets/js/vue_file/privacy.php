@@ -9,94 +9,108 @@
 	var code = `
 	
 	<v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">Name</th>
-          <th class="text-left">Calories</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in desserts" :key="item.name">
-          <td>{{ item.name }}</td>
-          <td>{{ item.calories }}</td>
-        </tr>
-      </tbody>
-    </template>
+  <template v-slot:default>
+  <thead>
+  <tr>
+  <th class="text-left">Name</th>
+  <th class="text-left">Calories</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr v-for="(item , index) in users_info">
+  <td>{{ item[0] }} <br> {{ item[1] }}</td>
+  <td>
+
+
+  <v-radio-group @change="updatePrivacy(index)" v-model="item[2] "   >
+  <v-radio
+  label="private"
+  value="private"
+  ></v-radio>
+  <v-radio
+  label="public"
+  value="public"
+  ></v-radio>
+  </v-radio-group>
+
+  </td>
+  </tr>
+  </tbody>
+  </template>
   </v-simple-table>
 
 
-	`;
-	
+  `;
 
-	Vue.component('privacy' , {
-		template: code,
-		data(){
-			return{
-desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-          },
-        ],
-			}
-		},
-		methods: {
-			
 
-		},
-		created(){
+  Vue.component('privacy' , {
+    template: code,
+    data(){
+     return{
+      users_info: [],
+      radioGroup: [],
+    }
+  },
+  methods: {
+    updatePrivacy(index){
+      //alert('upadate privacy');
 
-		},
-		updated(){
+      console.log(this.users_info[index][2]);
 
-		}
-	})
+      axios.post( this.model.modelPrivacy ,
+      {
+        users_info: this.users_info,
+        purpose: 'updatePrivacy',
+      }
+      ).then(function(response){
+        //this.users_info = response.data;
+        console.log(response);
+        
+      }.bind(this))
+      .catch(function(error){
+
+        console.log(error);
+      }.bind(this));
 
 
 
 
+      //console.log();
+    }
 
-	var login = new Vue({
-		el: '#privacy' ,
-		vuetify: new Vuetify(), 
-	})
+
+  },
+  created(){
+    axios.post( this.model.modelPrivacy ,
+    {
+      purpose: 'getPrivacy',
+    },
+    { 
+
+      
+    }
+    ).then(function(response){
+      this.users_info = response.data;
+      console.log(response);
+    }.bind(this))
+    .catch(function(error){
+
+      console.log(error);
+    }.bind(this));
+  },
+  updated(){
+    console.log('updated');
+  }
+})
+
+
+
+
+
+  var login = new Vue({
+    el: '#privacy' ,
+    vuetify: new Vuetify(), 
+  })
 
 
 

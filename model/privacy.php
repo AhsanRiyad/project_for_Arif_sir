@@ -88,48 +88,78 @@ echo $row['st'];
 				//echo $_GET['hellow'];
 
 
+				$data =  file_get_contents('php://input');
+				$d2 = json_decode($data);
 
-				$conn = get_mysqli_connection();
-				$sql = 'select * from verification_info where email = "riyad298@gmail.com"';
-				$result = mysqli_query($conn , $sql);
-				$row_verification_info = mysqli_fetch_assoc($result);
+				if($d2->purpose == 'getPrivacy'){
+
+					$conn = get_mysqli_connection();
+					$sql = 'select * from verification_info where email = "riyad298@gmail.com"';
+					$result = mysqli_query($conn , $sql);
+					$row_verification_info = mysqli_fetch_assoc($result);
 				//echo $row_verification_info['visibility'];
-				$arrayE =  explode(',', $row_verification_info['visibility']);
+					$arrayE =  explode(',', $row_verification_info['visibility']);
 				//print_r($arrayE);
-				
+
 				//echo '<br>';
 
 
-				$sql = 'select * from users_registration where email = "riyad298@gmail.com"';
-				$result = mysqli_query($conn , $sql);
-				$row_users_registration = mysqli_fetch_assoc($result);
-				
+					$sql = 'select * from users_registration where email = "riyad298@gmail.com"';
+					$result = mysqli_query($conn , $sql);
+					$row_users_registration = mysqli_fetch_assoc($result);
+
 
 				//print_r($row_users_registration);
-				$privacyArray;
-				$arrayInfo;
-				$i = 0;
-				foreach ($arrayE as $key => $value) {
+					$privacyArray;
+					$arrayInfo;
+					$i = 0;
+					foreach ($arrayE as $key => $value) {
 
-					
 
-					$arrayInfo[$value] = $row_users_registration[$value];
+
+						$arrayInfo[$value] = $row_users_registration[$value];
 					//echo $x;
-				}
+					}
 				//echo '<br>' ; 
-				foreach ($row_users_registration as $key => $value) {
+					foreach ($row_users_registration as $key => $value) {
 					# code...
 					//echo $value;
-					in_array($key, $arrayE) ? $privacyArray[$i++]= array($key , $value , 'public') : $privacyArray[$i++]= array($key , $value , 'private');
+						in_array($key, $arrayE) ? $privacyArray[$i++]= array($key , $value , 'public') : $privacyArray[$i++]= array($key , $value , 'private');
 					//echo $key .'<br>'. $value;
+					}
+				// echo json_encode($arrayInfo);
+					echo json_encode($privacyArray);
+					$conn->close();
+
+				}else if($d2->purpose == 'updatePrivacy'){
+
+					//print_r($d2->users_info[0][0]);
+					//echo sizeof($d2->users_info);
+					// foreach (  $d2->users_info as $value) {
+					// 	print_r($value);
+					// }
+					$arrayTobeUpdated;
+					$j = 0 ; 
+					for($i=0 ; $i<sizeof($d2->users_info); $i++){
+
+						$d2->users_info[$i][2]=='public' ? $arrayTobeUpdated[$j++] = $d2->users_info[$i][0] : '' ;  
+					}
+					$privacyArrayInString =  implode(',', $arrayTobeUpdated);
+					//print_r($arrayTobeUpdated);
+					$email = 'riyad298@gmail.com';
+					$conn = get_mysqli_connection();
+					$sql = "UPDATE `verification_info` SET visibility = (?) WHERE email = (?)";
+					$stmt = $conn->prepare($sql);
+					$stmt->bind_param('ss' , $privacyArrayInString ,  $email);
+					$stmt->execute();   
+
+					echo $privacyArrayInString;
+
+					
+					//echo 'hi hellow';
+
 				}
 
-
-				// echo json_encode($arrayInfo);
-				echo json_encode($privacyArray);
-
-
-				$conn->close();
 
 
 

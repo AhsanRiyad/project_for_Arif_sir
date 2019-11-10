@@ -76,6 +76,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelReg_req: '<?php echo $modelReg_req; ?>',
                     modeltest: '<?php echo $modeltest; ?>',
                     modelUploadPhotos: '<?php echo $modelUploadPhotos; ?>',
+                    modelPrivacy: '<?php echo $modelPrivacy; ?>',
 
                 },
 

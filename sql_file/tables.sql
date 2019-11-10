@@ -31,7 +31,7 @@ CREATE TABLE `verification_info`(
  `otp_time` datetime(6) DEFAULT NULL,
  `status` varchar(20) DEFAULT NULL,
  `type` varchar(20) DEFAULT NULL,
- `visibility` varchar(20) DEFAULT NULL,
+ `visibility` varchar(1000) DEFAULT NULL,
  `completeness` int(5) DEFAULT NULL
 );
 

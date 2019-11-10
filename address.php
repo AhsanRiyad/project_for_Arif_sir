@@ -56,6 +56,7 @@ $modelLogin = $rootAdress."model/login.php" ;
 $modelReg_req = $rootAdress."model/reg_req.php" ; 
 $modeltest = $rootAdress."model/test.php" ; 
 $modelUploadPhotos = $rootAdress."model/upload_photos.php";
+$modelPrivacy = $rootAdress."model/privacy.php";
 
 
 
