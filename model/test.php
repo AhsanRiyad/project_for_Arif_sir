@@ -37,10 +37,10 @@ echo $d2->purpose;*/
 // print_r($_FILES);
 
 
-$conn = get_mysqli_connection();
+/*$conn = get_mysqli_connection();
 
 $sql = "CALL current_photo( ?, ?, @result)";
-$stmt = $conn->prepare($sql);
+$stmt = $conn->prepare($sql);*/
 // $email =  'riyad298@afhorfooefoe.com';
 // $full_name = 'Ahsan Riyad';
 // $mobile = '01919448787';
@@ -78,9 +78,61 @@ echo $row['st'];
 				$result = mysqli_query($conn , $sql);
 				$row = mysqli_fetch_assoc($result);
 				$conn->close();
-				echo $row['st'];
-
-*/
+				echo $row['st'];*/
 
 
-				echo $_GET['hellow'];
+
+
+
+
+				//echo $_GET['hellow'];
+
+
+
+				$conn = get_mysqli_connection();
+				$sql = 'select * from verification_info where email = "riyad298@gmail.com"';
+				$result = mysqli_query($conn , $sql);
+				$row_verification_info = mysqli_fetch_assoc($result);
+				//echo $row_verification_info['visibility'];
+				$arrayE =  explode(',', $row_verification_info['visibility']);
+				//print_r($arrayE);
+				
+				//echo '<br>';
+
+
+				$sql = 'select * from users_registration where email = "riyad298@gmail.com"';
+				$result = mysqli_query($conn , $sql);
+				$row_users_registration = mysqli_fetch_assoc($result);
+				
+
+				//print_r($row_users_registration);
+
+				$arrayInfo;
+				$i = 0;
+				foreach ($arrayE as $key => $value) {
+					$arrayInfo[$value] = $row_users_registration[$value];
+					//echo $x;
+				}
+
+				//echo '<br>' ; 
+
+				foreach ($arrayInfo  as $value) {
+					# code...
+					//echo $value;
+				}
+
+
+				echo json_encode($arrayInfo);
+
+
+
+
+
+
+
+				$conn->close();
+
+
+
+
+

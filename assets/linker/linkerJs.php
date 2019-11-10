@@ -116,6 +116,9 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     else if($pageName == 'profile'){
         include $APP_ROOT."assets/js/vue_file/profile.php";
     }
+    else if($pageName == 'privacy'){
+        include $APP_ROOT."assets/js/vue_file/privacy.php";
+    }
 
 
     ?>

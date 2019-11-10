@@ -174,61 +174,90 @@ update user_uploads set recent_photo = upload_link where email = email1 ;
 
 
 
-END$$
-DELIMITER ;
+  END$$
+  DELIMITER ;
 
 
+
+
+  DELIMITER $$
+  CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE old_photo(in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
+  BEGIN
+
+
+  Select old_photo into existing_link from user_uploads where email = email1 ;
+
+
+  if existing_link = NULL
+  then 
+
+  set existing_link = 'not_set' ; 
+
+  end if;
+
+
+  update user_uploads set old_photo = upload_link where email = email1 ; 
+
+
+
+    END$$
+    DELIMITER ;
+
+
+
+
+    DELIMITER $$
+    CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE upload_photo(in purpose varchar(100) , in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
+    BEGIN
+
+
+    if purpose = 'current_photo'
+    then
+    Select recent_photo into existing_link from user_uploads where email = email1 ;
+    update user_uploads set recent_photo = upload_link where email = email1 ; 
+      ELSEIF purpose = 'old_photo'
+      then
+      select old_photo into existing_link from user_uploads where email = email1;
+      update user_uploads set old_photo = upload_link where email = email1;
+        elseif purpose = 'group_photo'
+        then
+        insert into user_photos (email , group_photo) values (email1 , upload_link); 
+          end if;
+
+
+
+          if existing_link = NULL
+          then 
+          set existing_link = 'not_set' ; 
+          end if;
+
+
+          END$$
+          DELIMITER ;
+
+
+
+
+
+-- login starts
 
 
 DELIMITER $$
-CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE old_photo(in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE login(in email1 varchar(500) , in password1 varchar(100) , out result varchar(500))
+
 BEGIN
 
-
-Select old_photo into existing_link from user_uploads where email = email1 ;
-
-
-if existing_link = NULL
-then 
-
-set existing_link = 'not_set' ; 
-
-end if;
+DECLARE i int(3);
 
 
-update user_uploads set old_photo = upload_link where email = email1 ; 
+select count(*) into i from users_registration where email = email1 and password = password1;
 
 
-
-END$$
-DELIMITER ;
-
-
-
-
-DELIMITER $$
-CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE upload_photo(in purpose varchar(100) , in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
-BEGIN
-
-
-if purpose = 'current_photo'
+if i < 1 
 then
-Select recent_photo into existing_link from user_uploads where email = email1 ;
-update user_uploads set recent_photo = upload_link where email = email1 ; 
-ELSEIF purpose = 'old_photo'
-then
-select old_photo into existing_link from user_uploads where email = email1;
-update user_uploads set old_photo = upload_link where email = email1;
-elseif purpose = 'group_photo'
-then
-insert into user_photos (email , group_photo) values (email1 , upload_link); 
-end if;
-
-
-
-if existing_link = NULL
-then 
-set existing_link = 'not_set' ; 
+set result = 'NO' ; 
+else
+set result = 'YES' ; 
 end if;
 
 
@@ -240,22 +269,25 @@ DELIMITER ;
 
 
 
+
+
+-- login ends
 
 
 
 
 -- ideal code
-        $conn = get_mysqli_connection();
-        $sql = "call current_photo( ? , ? , @result )";
-        $stmt = $conn->prepare($sql);
-        $email = 'riyad298@gmail.com';
-        $basename = 'jtogstgjoigjsogogosjgiotgoisr';
-        $stmt->bind_param('ss' , $basename , $email );
-        $stmt->execute();
-        $stmt->close();
-        $sql = 'select @result as st';
-        $result = mysqli_query($conn , $sql);
-        $row = mysqli_fetch_assoc($result);
-        $conn->close();
-        echo $row['st'];
+$conn = get_mysqli_connection();
+$sql = "call current_photo( ? , ? , @result )";
+$stmt = $conn->prepare($sql);
+$email = 'riyad298@gmail.com';
+$basename = 'jtogstgjoigjsogogosjgiotgoisr';
+$stmt->bind_param('ss' , $basename , $email );
+$stmt->execute();
+$stmt->close();
+$sql = 'select @result as st';
+$result = mysqli_query($conn , $sql);
+$row = mysqli_fetch_assoc($result);
+$conn->close();
+echo $row['st'];
 -- ideal code

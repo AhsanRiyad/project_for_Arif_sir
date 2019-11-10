@@ -1,6 +1,21 @@
 <script>
 	// This is a global mixin, it is applied to every vue instance
 	
+	   Vue.mixin({
+        data: function() {
+            return {
+                csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
+
+            }
+        }
+    })
+
+
+
+	
+
+
+
 
 	var code = `
 
@@ -17,7 +32,7 @@
 	<br>
 
 	<span class="text-danger">
-
+	{{ login_status }}
 	</span>
 	</p>
 	</div>
@@ -33,7 +48,7 @@
 
 
 	</label>
-	<input name='email'  type="text" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+	<input name='email' v-model='email' type="text" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
 	value=""
 	>
 	</div>
@@ -44,7 +59,7 @@
 
 
 	</label>
-	<input name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password"
+	<input @keyup.enter="submit()" name="password" v-model='password' type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password"
 	value=""
 
 	>
@@ -55,7 +70,7 @@
 
 	</div>
 	<div class="col-12 col-xl-5 align-self-xl-center">
-	<button type="submit" name="submit" value="submit" class="btn btn-success rounded-0 w-100 py-2">Log In</button>
+	<v-btn tile block :loading="loading" color="success" @click="submit()" class="">Log In</v-btn>
 
 	<p class="text-danger h5 mt-2"><i>Not a member yet?</i></p>
 
@@ -68,20 +83,42 @@
 	</div>
 	</div>
 	</div>
-	</div>
-
-
-	`;
+	</div>`;
 	
 
 	Vue.component('login' , {
 		template: code,
 		data(){
 			return{
-
+				loading: false,
+				email: '',
+				password: '',
+				login_status: '',
 			}
 		},
 		methods: {
+			submit: function(){
+				//alert('submit clicked');
+				this.loading = true;
+				axios.post( this.model.modelLogin , {
+					email: this.email,  
+					password: this.password,
+					csrf_token1: this.csrf_token1,
+
+				})
+				.then( function(response){
+					this.loading = false;
+					//window.location.href = 'http://google.com';
+					response.data == 'YES' ? window.location.href = this.address.profilePage : this.login_status = 'email/password doesnt match';  
+
+					console.log(response);	
+				}.bind(this))
+				.catch(function (error) {
+					console.log(error);
+					this.loading = false;
+                //return 'hi';
+            }.bind(this)); 
+			}
 
 		},
 		created(){
@@ -91,6 +128,7 @@
 
 		}
 	})
+
 
 
 

@@ -23,19 +23,15 @@ include $dashboard_head;
 		<template v-else-if="componet_name == 'address'">
 		<basic></basic>
 	</template> -->
-			
+	
 
 	<!-- <component v-bind:is="componet_name"> -->
-			<keep-alive>
+		<keep-alive>
 			<component  :recent_photo='recent_photo' v-bind:is="componet_name"></component>
-			</keep-alive>
-		
-			<buttons ></buttons>
-
-
+		</keep-alive>
+		<buttons ></buttons>
 	</v-app>
 </div>
-
 
 
 <?php 
