@@ -92,9 +92,9 @@ echo $row['st'];
 				//print_r($arrayE);
 
 				//echo '<br>';
+					//$hello = 'select ui.email'
 
-
-					$sql = 'select * from  users_registration ur , users_info ui  where ur.email = ui.email and   ur.email = "riyad298@gmail.com"';
+					$sql ='select ui.email , ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth , ur.mobile , ur.institution_id , ur.registration_date from users_info ui , users_registration ur WHERE ui.email  = ur.email and ur.email = "riyad298@gmail.com"';
 					$result = mysqli_query($conn , $sql);
 					$row_users_registration = mysqli_fetch_assoc($result);
 
