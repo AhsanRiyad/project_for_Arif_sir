@@ -84,10 +84,10 @@
 						</div></a>
 
 
-						<a class="text-white" href="#">
+						<a class="text-white" href="<?=  $galleryPage; ?>">
 							<div class="  bg-secondary py-2 text-center my-4">
 
-								<i class="fab fa-product-hunt"></i> New Product Request
+								<i class="fab fa-product-hunt"></i> Gallery
 
 							</div></a>
 

@@ -6,7 +6,6 @@ $APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/project_for_Arif_sir/";
 
 
 
-
 $rootAdress = 'http://localhost/project_for_Arif_sir/';
 
 // assets
@@ -43,6 +42,7 @@ $add_user = $rootAdress.'pages/add_user.php';
 $reg_req = $rootAdress.'pages/reg_req.php';
 $profilePage = $rootAdress.'pages/profile.php?pn=basic';
 $privacyPage = $rootAdress.'pages/privacy.php';
+$galleryPage = $rootAdress.'pages/gallery.php';
 
 
 
@@ -58,6 +58,7 @@ $modelReg_req = $rootAdress."model/reg_req.php" ;
 $modeltest = $rootAdress."model/test.php" ; 
 $modelUploadPhotos = $rootAdress."model/upload_photos.php";
 $modelPrivacy = $rootAdress."model/privacy.php";
+$modelGallery = $rootAdress."model/gallery.php";
 
 
 

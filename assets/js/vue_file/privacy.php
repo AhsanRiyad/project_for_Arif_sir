@@ -1,36 +1,28 @@
 <script>
-	
-
-
-	
-	
-
-	
 	var code = `
 	<v-container>
-  
   <v-row  justify="center">
-      <v-col lg="8" class="text-center success white--text" >
-        <h1>
-        Privacy
-        </h1>
-      </v-col>
+  <v-col lg="8" class="text-center success white--text" >
+  <h1>
+  Privacy
+  </h1>
+  </v-col>
   </v-row>
 
 
-  <v-row justify="center">
+  <v-row justify="center" >
   <v-col lg="8" >
-	<v-simple-table>
+  <v-simple-table>
   <template v-slot:default>
   <thead>
   <tr>
-  <th class="text-left">Name</th>
-  <th class="text-left">Privacy</th>
+  <th class="text-left title">Name</th>
+  <th class="text-left title">Privacy</th>
   </tr>
   </thead>
   <tbody>
   <tr v-for="(item , index) in users_info">
-  <td>{{ item[0] }} <br> {{ item[1] }}</td>
+  <td class="body-1">{{ item[0] }} <br> {{ item[1] }}</td>
   <td>
 
 
@@ -52,9 +44,7 @@
   </v-simple-table>
   </v-col >
   </v-row>
-  </v-container>
-
-  `;
+  </v-container>`;
 
 
   Vue.component('privacy' , {
@@ -101,7 +91,7 @@
     },
     { 
 
-      
+
     }
     ).then(function(response){
       this.users_info = response.data;

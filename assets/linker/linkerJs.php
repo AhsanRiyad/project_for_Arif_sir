@@ -50,6 +50,8 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
       Vue.mixin({
         data: function() {
             return {
+                APP_ROOT: '<?= $APP_ROOT ?>' , 
+                rootAdress: '<?= $rootAdress ?>',
                 images:{
                     logoSrc: '<?php echo $logoSrc; ?>',
                     fev_icon: '<?php echo $fev_icon; ?>',
@@ -77,6 +79,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modeltest: '<?php echo $modeltest; ?>',
                     modelUploadPhotos: '<?php echo $modelUploadPhotos; ?>',
                     modelPrivacy: '<?php echo $modelPrivacy; ?>',
+                    modelGallery: '<?php echo $modelGallery; ?>',
 
                 },
 
@@ -120,6 +123,11 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     else if($pageName == 'privacy'){
         include $APP_ROOT."assets/js/vue_file/privacy.php";
     }
+    else if($pageName == 'gallery'){
+        include $APP_ROOT."assets/js/vue_file/gallery.php";
+    }
+
+
 
 
     ?>
