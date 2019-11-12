@@ -105,8 +105,21 @@
   </v-card-text>
   <v-divider></v-divider>
   <v-card-actions class="mb-5">
-  <v-btn @click="deletePhoto()" large :loading='loading' color="error"  >Delete</v-btn>
+  
+  <v-container>
+  <v-row class="ml-3">
+  
+  <p class="red--text"> <b>{{ photo_delete_status }} </b></p>
+  </v-row>
+  <v-row>
+  <v-col xs="12">
+  <v-btn :disabled="button_disabled" @click="deletePhoto()" large :loading='loading' color="error"  >Delete</v-btn>
   <v-btn large color="primary"  @click="dialog = false">Close</v-btn>
+  </v-col>
+  </v-row>
+ </v-container>
+
+
   </v-card-actions>
   </v-card>
   </v-dialog>
@@ -134,12 +147,16 @@
       old_photos: 'assets/img/uploads/old_photos/',
       group_photos:  'assets/img/uploads/group_photos/',
       loading:false,
+      photo_delete_status: '',
+      button_disabled: false,
 
     }
   },
   methods : {
     zoom_in(photo , baseName){
       //alert(photo);
+      this.button_disabled = false;
+      this.photo_delete_status = '';
       this.dialog_photo_baseName = baseName;
       this.dialog_photo = photo;
       this.dialog = true;
@@ -147,6 +164,7 @@
     },
     deletePhoto(){
       this.loading = true;
+
       //alert('deleting photo');
       axios.post( this.model.modelGallery ,
       {
@@ -155,6 +173,11 @@
       }
       ).then(function(response){
         this.loading = false;
+        this.recent_photo = response.data.recent_photo;
+        this.old_photo = response.data.old_photo;
+        this.group_photo = response.data.group_photo;
+        this.photo_delete_status = "Your photo has been deleted";
+        this.button_disabled = true ;
         console.log(response);
 
 
