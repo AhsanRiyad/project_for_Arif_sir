@@ -65,60 +65,52 @@
 
 
   <div class="container">
-    <div class="row  justify-content-center">
-    <div class="row col-md-8">
-    
-    <div class="col-md-12">
-    <h1 class="text-center" > Group Photos </h1>
-     </div> 
+  <div class="row  justify-content-center">
+  <div class="row col-md-8">
 
-      <div class="col-md-4" v-for="(photo , index) in group_photo">
-        <img @click="zoom_in(rootAdress+group_photos+photo)" style="height: 250px; width: 250px;" :src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">
-      </div>
-      </div>
-    </div>
+  <div class="col-md-12">
+  <h1 class="text-center" > Group Photos </h1>
+  </div> 
+
+  <div class="col-md-4" v-for="(photo , index) in group_photo">
+  <img @click="zoom_in(rootAdress+group_photos+photo , photo)" style="height: 250px; width: 250px;" 
+  aspect-ratio="1"
+  :src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">
+  </div>
+  </div>
+  </div>
   </div>
 
 
 
 
   <v-row justify="center">
-  <v-dialog v-model="dialog" scrollable max-width="500px">
+  <v-dialog v-model="dialog" scrollable max-width="700px">
 
   <v-card>
-  <v-card-title>Select Country</v-card-title>
+  <v-card-title>Image</v-card-title>
   <v-divider></v-divider>
-  <v-card-text style="height: 300px;">
+  <v-card-text style="height: 400px;">
   
-    <v-row align="center" justify="center">
-    <v-img
-      :src="dialog_photo"
-      class="grey lighten-2"
-      max-width="500"
-      max-height="300"
-    ></v-img>
+  <v-row align="center" justify="center">
+  <v-img
+  :src="dialog_photo"
+  class="grey lighten-2"
+  max-width="600"
+
+  aspect-ratio="1"
+  ></v-img>
   </v-row>
 
   </v-card-text>
   <v-divider></v-divider>
-  <v-card-actions>
-  <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-  <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+  <v-card-actions class="mb-5">
+  <v-btn @click="deletePhoto()" large :loading='loading' color="error"  >Delete</v-btn>
+  <v-btn large color="primary"  @click="dialog = false">Close</v-btn>
   </v-card-actions>
   </v-card>
   </v-dialog>
   </v-row>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -134,21 +126,48 @@
       dialogm1: '',
       dialog: false,
       dialog_photo: '',
+      dialog_photo_baseName: '',
       recent_photo: '' ,
       old_photo: '' ,
       group_photo: [],
       recent_photos: 'assets/img/uploads/current_photos/',
       old_photos: 'assets/img/uploads/old_photos/',
       group_photos:  'assets/img/uploads/group_photos/',
+      loading:false,
 
     }
   },
   methods : {
-    zoom_in(photo){
-      alert(photo);
+    zoom_in(photo , baseName){
+      //alert(photo);
+      this.dialog_photo_baseName = baseName;
       this.dialog_photo = photo;
       this.dialog = true;
       // alert('zooming in photo');
+    },
+    deletePhoto(){
+      this.loading = true;
+      //alert('deleting photo');
+      axios.post( this.model.modelGallery ,
+      {
+        purpose: 'deletePhoto',
+        basename: this.dialog_photo_baseName
+      }
+      ).then(function(response){
+        this.loading = false;
+        console.log(response);
+
+
+      }.bind(this))
+      .catch(function(error){
+
+        this.loading = false;
+
+
+        //console.log(error);
+      }.bind(this));
+
+
     },
   },
   created(){
