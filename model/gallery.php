@@ -41,7 +41,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param('s' , $email);
 $stmt->execute();
 $result = $stmt->get_result();
-$row = $result->fetch_assoc();
+// $row = $result->fetch_assoc();
 
 
 
@@ -49,8 +49,8 @@ $i = 0;
 // echo json_encode(var_dump($row));
 while($row = $result->fetch_assoc()) {
 	
-	$arrayPhoto['group_photo'][$i++] = $row['group_photo']; 
-	
+	$arrayPhoto['group_photo'][$i] = $row['group_photo']; 
+	$i++;
 }
 
 $stmt->close();

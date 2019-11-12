@@ -11,16 +11,49 @@ if (!empty($_POST['csrf_token1'])) {
 
 
 		$target_dir = $APP_ROOT."assets/img/uploads/".$purpose_type."s/";
-		$base_name = basename($_POST["email"].$_FILES[$purpose_type]["name"]);
-		$target_file = $target_dir . basename($_POST["email"].$_FILES[$purpose_type]["name"]);
+		$target_file1 = $target_dir . basename($_FILES[$purpose_type]["name"]);
 		$uploadOk = 1;
-		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		$imageFileType = strtolower(pathinfo($target_file1,PATHINFO_EXTENSION));
+		$target_file = $target_dir . basename($_POST["email"].'.'.$imageFileType);
+		$base_name = basename($_POST["email"].'.'.$imageFileType);
 		$email = $_POST['email'];
 		if (file_exists($target_file)){ 
 
 			//unlink($target_file);
 
-				$purpose_type == 'group_photo' ? $target_file = $target_dir . basename($_POST["email"].'_1'.$_FILES[$purpose_type]["name"]) : unlink($target_file); 
+				// $purpose_type == 'group_photo' ? $target_file = $target_dir . basename($_POST["email"].'_1'.$imageFileType)  : unlink($target_file); 
+
+			if($purpose_type == 'group_photo'){
+					// $target_file = $target_dir . basename($_POST["email"].'_1.'.$imageFileType);
+
+
+
+				$email = 'riyad298@gmail.com';
+				$conn = get_mysqli_connection();
+				$sql = "select count(*) as count from user_photos where  email = (?)";
+				$stmt = $conn->prepare($sql);
+				$stmt->bind_param('s' , $email);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				$row = $result->fetch_assoc();
+				// print_r($row['count']);
+				$count = $row['count'];
+				$stmt->close();
+
+
+
+
+
+
+
+				$newName = basename($_POST["email"].'_'.++$count.'.');
+					// $base_name = basename($_POST["email"].'_1.'.$imageFileType);
+				$base_name = $newName.$imageFileType;
+				$target_file = $target_dir . $base_name;
+			}else{
+				unlink($target_file); 
+			}
+
 			
 		}
 		if ($uploadOk == 0) {

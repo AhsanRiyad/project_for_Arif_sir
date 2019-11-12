@@ -30,8 +30,8 @@
   <v-col cols="12"  align="center" justify="center">
 
   <v-img
-  src=""
-  lazy-src="https://picsum.photos/id/11/10/6"
+  :src="rootAdress+recent_photos+recent_photo"
+  lazy-src=""
   aspect-ratio="1"
   class="grey lighten-2"
   max-width="400"
@@ -51,8 +51,8 @@
   <v-row >
   <v-col cols="12"  align="center" justify="center">
   <v-img
-  src="https://picsum.photos/id/11/500/300"
-  lazy-src="https://picsum.photos/id/11/10/6"
+  :src="rootAdress+old_photos+old_photo"
+  lazy-src=""
   aspect-ratio="1"
   class="grey lighten-2"
   max-width="400"
@@ -79,14 +79,14 @@
   <v-container fluid>
   <v-row>
   <v-col @click="zoom_in()"
-  v-for="n in 9"
-  :key="n"
+  v-for="(photo , index) in group_photo"
   class="d-flex child-flex"
   cols="4"
   >
   <v-card flat tile class="d-flex">
   <v-img
-  src=""
+  :src="rootAdress+group_photos+photo"
+  :key="index"
   aspect-ratio="1"
   class="grey lighten-2"
   >
@@ -113,7 +113,10 @@
     return {
       recent_photo: '' ,
       old_photo: '' ,
-      group_photo: []
+      group_photo: [],
+      recent_photos: 'assets/img/uploads/current_photos/',
+      old_photos: 'assets/img/uploads/old_photos/',
+      group_photos:  'assets/img/uploads/group_photos/',
 
     }
   },
@@ -137,10 +140,11 @@
 
         console.log(response);
         this.recent_photo = response.data.recent_photo;
-        this.old = response.data.old;
+        this.old_photo = response.data.old_photo;
         this.group_photo = response.data.group_photo;
 
-        alert(this.rootAdress+'assets/img/uploads/recent_photo/'+this.recent_photo);
+        //alert(this.rootAdress+'assets/img/uploads/current_photos/'+this.recent_photo);
+        //alert(this.rootAdress+'assets/img/uploads/group_photos/'+this.group_photo[0]);
 
       }.bind(this))
       .catch(function(error){
