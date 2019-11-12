@@ -1,25 +1,37 @@
 <?php 
-$pageName = 'vue_test';
-//$APP_ROOT = "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/";
-//include $APP_ROOT."assets\linker\linkerCss.php" ; 
-include "../address.php"; 
-include $APP_ROOT.'assets/linker/db.php' ; 
+$pageName = 'registration';
 
+include "../address.php"; 
 include $linkerCss;
+
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+
+  
+  <div class="container">
+    <div class="row" >
+      <div class="col-md-4">
+        <img src="http://localhost/project_for_Arif_sir/assets/img/uploads/old_photos/riyad298@gmail.com.jpg" class="rounded mx-auto d-block img-fluid" alt="...">
+      </div>
+    </div>
+  </div>
+
+
+
+
+</body>
+</html>
+
+</div>
+
 <?php 
+include $linkerJs;
+?>
 
-
-
-
-$email = 'riyad298@gmail.com';
-$conn = get_mysqli_connection();
-$sql = "select count(*) as count from user_photos where  email = (?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('s' , $email);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-print_r($row['count']);
-$stmt->close();
