@@ -62,6 +62,7 @@ CREATE TABLE `users_registration` (
 CREATE TABLE `users_address` (
   `users_address_id` int(100) NOT NULL,
   `present_line1` varchar(300) DEFAULT NULL,
+  `email` varchar(300) DEFAULT NULL,
   `present_line2` varchar(300) DEFAULT NULL,
   `present_district` varchar(100) DEFAULT NULL,
   `present_post_code` varchar(100) DEFAULT NULL,
@@ -136,7 +137,7 @@ INSERT INTO users_registration (email,full_name,mobile,institution_id,password,r
 INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'name,email' , 20);
 
 INSERT INTO users_info (email) VALUES (email1);
-
+INSERT INTO users_address (email) VALUES (email1);
 INSERT INTO user_uploads (email) VALUES (email1);
 INSERT INTO user_photos (email) VALUES (email1);
 

@@ -7,13 +7,25 @@
 
 	
 	var code = `
-	
+	<v-container>
+  
+  <v-row  justify="center">
+      <v-col lg="8" class="text-center success white--text" >
+        <h1>
+        Privacy
+        </h1>
+      </v-col>
+  </v-row>
+
+
+  <v-row justify="center">
+  <v-col lg="8" >
 	<v-simple-table>
   <template v-slot:default>
   <thead>
   <tr>
   <th class="text-left">Name</th>
-  <th class="text-left">Calories</th>
+  <th class="text-left">Privacy</th>
   </tr>
   </thead>
   <tbody>
@@ -38,7 +50,9 @@
   </tbody>
   </template>
   </v-simple-table>
-
+  </v-col >
+  </v-row>
+  </v-container>
 
   `;
 
