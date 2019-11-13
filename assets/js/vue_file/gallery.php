@@ -1,3 +1,7 @@
+
+
+
+
 <script>
 
 
@@ -15,79 +19,50 @@
 
 
 
-  var code = `<v-container>
+  var code = `
+ <div class="container">
+  <div class="row justify-content-md-center">
 
-  <v-row align="center" justify="center">
-  <v-col cols="12"  class="text-center">
-  <h1>
-  Recent Photo
-  </h1>
-  </v-col>
-  </v-row>
 
-  <v-row >
 
-  <v-col cols="12"  align="center" justify="center">
+  <div class="col col-md-5">
+  <h1 class="text-center">Recent Photo</h1>
 
-  <v-img v-if="recent_photo != 'not_set'"
+
+  <img class="text-center img-fluid img-thumbnail" v-if="recent_photo != 'not_set'"
   :src="rootAdress+recent_photos+recent_photo"
-  lazy-src=""
-  aspect-ratio="1"
-  class="grey lighten-2"
-  max-width="400"
-  max-height="300"
-  ></v-img>
+   style="max-height: 400px; width: 600px;">
 
 
-  <v-img v-if="recent_photo == 'not_set'"
+  <img class="text-center img-fluid img-thumbnail" v-if="recent_photo == 'not_set'"
   :src="images.default_photo"
-  lazy-src=""
-  aspect-ratio="1"
-  class="grey lighten-2"
-  max-width="400"
-  max-height="300"
-  ></v-img>
+  style="max-height: 400px; width: 600px;">
+  </div>
 
 
 
-  </v-col>
-  </v-row>
 
-  <v-row align="center" justify="center">
-  <v-col cols="12"  class="text-center">
-  <h1>
-  Old Photo
-  </h1>
-  </v-col>
-  </v-row>
-
-  <v-row >
-  <v-col cols="12"  align="center" justify="center">
+  <div class="w-100">
+  </div>
   
-  <v-img v-if="old_photo != 'not_set'"
+  <div class="col col-md-5">
+  <h1 class="text-center">old Photo</h1>
+
+
+  <img class="text-center img-fluid img-thumbnail" v-if="old_photo != 'not_set'"
   :src="rootAdress+old_photos+old_photo"
-  lazy-src=""
-  aspect-ratio="1"
-  class="grey lighten-2"
-  max-width="400"
-  max-height="300"
-  ></v-img>
+   style="max-height: 400px; width: 600px;">
 
-  <v-img v-if="old_photo == 'not_set'"
+
+  <img class="text-center img-fluid img-thumbnail" v-if="old_photo == 'not_set'"
   :src="images.default_photo"
-  lazy-src=""
-  aspect-ratio="1"
-  class="grey lighten-2"
-  max-width="400"
-  max-height="300"
-  ></v-img>
-  </v-col>
-  </v-row>
+  style="max-height: 400px; width: 600px;">
+  </div>
 
 
 
+  </div>
 
-  <div class="container">
   <div class="row  justify-content-center">
   <div class="row col-md-8">
 
@@ -102,11 +77,10 @@
   </div>
   </div>
   </div>
-  </div>
+  
 
 
-
-
+  
   <v-row justify="center">
   <v-dialog v-model="dialog" scrollable max-width="700px">
 
@@ -150,7 +124,18 @@
 
 
 
-  </v-container>
+
+
+
+
+
+
+
+
+
+
+  </div>
+
   `;
 
 

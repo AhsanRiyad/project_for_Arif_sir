@@ -1,9 +1,4 @@
 <?php 
-$hostName = 'localhost';
-$userName = 'root';
-$password = '';
-$databaseName = 'intern_project';
-
 
 
 function get_mysqli_connection(){

@@ -1,0 +1,5 @@
+database
+$hostName = '127.0.0.1';
+$userName = 'frieomkc_riyad';
+$password = '01919448787';
+$databaseName = 'frieomkc_intern_project';

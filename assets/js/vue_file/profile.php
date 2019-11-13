@@ -1,14 +1,14 @@
 <script type="text/javascript">
 	
-      Vue.mixin({
-        data: function() {
-            return {
-                componet_name: '<?php echo $_GET['pn']; ?>',
-                csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
+	Vue.mixin({
+		data: function() {
+			return {
+				componet_name: '<?php echo $_GET['pn']; ?>',
+				csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
 
-            }
-        }
-    })
+			}
+		}
+	})
 
 
 
@@ -275,6 +275,25 @@
 				}
 			}
 
+		},
+		created(){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'Profile_update',
+				
+			}
+			).then(function(response){
+				
+				console.log(response);
+
+
+			}.bind(this))
+			.catch(function(error){
+
+				
+
+        //console.log(error);
+    }.bind(this));
 		}
 	})
 
@@ -329,7 +348,7 @@
 	</div>
 	
 	<div class="col-10 mx-0 px-0 ">
-	<v-btn :loading='loading' @click="uploadPhoto_recent()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+	<v-btn :loading='loading_recent_photo' @click="uploadPhoto_recent()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
 	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
 	</v-btn>
 	</div>
@@ -346,7 +365,7 @@
 	</div>
 	
 	<div class="col-10 mx-0 px-0 ">
-	<v-btn :loading='loading' @click="uploadPhoto_old()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+	<v-btn :loading='loading_old_photo' @click="uploadPhoto_old()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
 	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
 	</v-btn>
 	</div>
@@ -363,7 +382,7 @@
 	</div>
 	
 	<div class="col-10 mx-0 px-0 ">
-	<v-btn :loading='loading' @click="uploadPhoto_group()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+	<v-btn :loading='loading_group_photo' @click="uploadPhoto_group()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
 	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
 	</v-btn>
 	</div>
@@ -418,7 +437,9 @@
 				old_photo_name: 'choose file',
 				group_photo: '',
 				group_photo_name: 'choose file',
-				loading: false,
+				loading_recent_photo:false,
+				loading_old_photo:false,
+				loading_group_photo:false,
 				file_type: false,
 				
 			}
@@ -428,7 +449,7 @@
 
 				//alert(this.csrf_token1);
 				if(this.file_type == true){
-					this.loading = true;
+					this.loading_recent_photo = true;
 
 					let formData = new FormData();
 					formData.append('recent_photo', this.recent_photo);
@@ -444,14 +465,14 @@
 							}
 						}
 						).then(function(response){
-							this.loading = false;
+							this.loading_recent_photo = false;
 							this.status = 'upload successful';
 							this.dialog = true;
 							this.recent_photo_name = 'choose file';
 							console.log(response);
 						}.bind(this))
 						.catch(function(error){
-							this.loading = false;
+							this.loading_recent_photo = false;
 							this.status = 'You are not authorized';
 							this.dialog = true;
 							this.recent_photo_name = 'choose file';
@@ -495,7 +516,7 @@
 
 				//alert(this.csrf_token1);
 				if(this.file_type == true){
-					this.loading = true;
+					this.loading_old_photo = true;
 
 					let formData = new FormData();
 					formData.append('old_photo', this.old_photo);
@@ -511,7 +532,7 @@
 							}
 						}
 						).then(function(response){
-							this.loading = false;
+							this.loading_old_photo = false;
 							this.status = 'upload successful';
 							this.dialog = true;
 							this.old_photo_name = 'choose file';
@@ -519,7 +540,7 @@
 							console.log(response);
 						}.bind(this))
 						.catch(function(error){
-							this.loading = false;
+							this.loading_old_photo = false;
 							this.status = 'You are not authorized';
 							this.dialog = true;
 							this.old_photo_name = 'choose file';
@@ -564,7 +585,7 @@
 
 				//alert(this.csrf_token1);
 				if(this.file_type == true){
-					this.loading = true;
+					this.loading_group_photo = true;
 
 					let formData = new FormData();
 					formData.append('group_photo', this.group_photo);
@@ -580,7 +601,7 @@
 							}
 						}
 						).then(function(response){
-							this.loading = false;
+							this.loading_group_photo = false;
 							this.status = 'upload successful';
 							this.dialog = true;
 							this.group_photo_name = 'choose file';
@@ -588,7 +609,7 @@
 							console.log(response);
 						}.bind(this))
 						.catch(function(error){
-							this.loading = false;
+							this.loading_group_photo = false;
 							this.status = 'You are not authorized';
 							this.dialog = true;
 							this.group_photo_name = 'choose file';

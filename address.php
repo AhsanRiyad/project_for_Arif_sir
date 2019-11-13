@@ -60,6 +60,7 @@ $modeltest = $rootAdress."model/test.php" ;
 $modelUploadPhotos = $rootAdress."model/upload_photos.php";
 $modelPrivacy = $rootAdress."model/privacy.php";
 $modelGallery = $rootAdress."model/gallery.php";
+$modelProfile_update = $rootAdress."model/profile_update.php";
 
 
 

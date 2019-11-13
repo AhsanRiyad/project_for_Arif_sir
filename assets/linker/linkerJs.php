@@ -81,6 +81,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelUploadPhotos: '<?php echo $modelUploadPhotos; ?>',
                     modelPrivacy: '<?php echo $modelPrivacy; ?>',
                     modelGallery: '<?php echo $modelGallery; ?>',
+                    modelProfile_update: '<?php echo $modelProfile_update; ?>',
 
                 },
 
