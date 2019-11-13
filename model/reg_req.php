@@ -90,7 +90,7 @@ else if($d2->purpose=='approve_user'){
 	$conn = get_mysqli_connection();
 	//mysqli_close($conn);
 
-	$sql = "UPDATE verification_info SET status ='approved' WHERE email=(?)";
+	$sql = "call user_request(? , @result)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('s' , $email);
 	$stmt->execute();

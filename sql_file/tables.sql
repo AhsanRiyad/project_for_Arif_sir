@@ -37,10 +37,10 @@ CREATE TABLE `verification_info`(
 
 
 CREATE TABLE `user_uploads`(
-`id_user_uploads` int(100) DEFAULT NULL,
-`email` varchar(100) DEFAULT NULL,
- `recent_photo` varchar(400) DEFAULT NULL,
- `old_photo` varchar(400) DEFAULT NULL
+  `id_user_uploads` int(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `recent_photo` varchar(400) DEFAULT NULL,
+  `old_photo` varchar(400) DEFAULT NULL
 );
 
 CREATE TABLE `user_photos`(
@@ -59,7 +59,7 @@ CREATE TABLE `users_registration` (
   `institution_id` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `registration_date` datetime(6) DEFAULT NULL,
-  `membership_number` varchar(100) DEFAULT NULL
+  `membership_number` int(255) DEFAULT NULL
   );
 
 CREATE TABLE `users_address` (
@@ -148,13 +148,13 @@ SET result="NO";
 
 ELSE 
 
-INSERT INTO users_registration (email,full_name,mobile,institution_id,password,registration_date,membership_number) VALUES (email1,full_name1, mobile1,institution_id1,password1,NOW(), 'not_set');
+INSERT INTO users_registration (email,full_name,mobile,institution_id,password,registration_date,membership_number) VALUES (email1,full_name1, mobile1,institution_id1,password1,NOW(), 1000);
 
 INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'name,email' , 20);
 
 INSERT INTO users_info (email) VALUES (email1);
 INSERT INTO users_address (email) VALUES (email1);
-INSERT INTO user_uploads (email) VALUES (email1);
+INSERT INTO user_uploads (email , recent_photo , old_photo) VALUES (email1 , 'not_set' , 'not_set');
 INSERT INTO user_photos (email) VALUES (email1);
 
 
@@ -165,60 +165,10 @@ SET result="YES";
 END IF ;
 
 
+END
+
 END$$
 DELIMITER ;
-
-
--- upload photos
-
-DELIMITER $$
-CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE current_photo(in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
-BEGIN
-
-
-Select recent_photo into existing_link from user_uploads where email = email1 ;
-
-
-if existing_link = NULL
-then 
-
-set existing_link = 'not_set' ; 
-
-end if;
-
-
-update user_uploads set recent_photo = upload_link where email = email1 ; 
-
-
-
-  END$$
-  DELIMITER ;
-
-
-
-
-  DELIMITER $$
-  CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE old_photo(in upload_link varchar(500) , in email1 varchar(100) , out existing_link varchar(500))
-  BEGIN
-
-
-  Select old_photo into existing_link from user_uploads where email = email1 ;
-
-
-  if existing_link = NULL
-  then 
-
-  set existing_link = 'not_set' ; 
-
-  end if;
-
-
-  update user_uploads set old_photo = upload_link where email = email1 ; 
-
-
-
-    END$$
-    DELIMITER ;
 
 
 
@@ -289,6 +239,48 @@ DELIMITER ;
 
 
 -- login ends
+
+
+
+
+
+
+
+
+
+-- user_request
+
+
+
+
+
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE user_request(IN email1 VARCHAR(100), OUT result VARCHAR(100))
+BEGIN
+
+DECLARE count int(5);
+
+
+SELECT max(membership_number) into count from users_registration;
+-- SELECT COUNT(*) int count FROM verification_info WHERE status = 'approved' ; 
+
+
+
+UPDATE verification_info SET status ='approved' , membership_number = count  WHERE email = email1 ;
+
+
+
+
+END$$
+DELIMITER ;
+
+
+
+
+
+
+
+
 
 
 
