@@ -143,7 +143,7 @@
       recent_photo: '' ,
       old_photo: '' ,
       group_photo: [],
-      recent_photos: 'assets/img/uploads/current_photos/',
+      recent_photos: 'assets/img/uploads/recent_photos/',
       old_photos: 'assets/img/uploads/old_photos/',
       group_photos:  'assets/img/uploads/group_photos/',
       loading:false,
@@ -204,14 +204,14 @@
       }
       ).then(function(response){
         //this.users_info = response.data;
-        // alert(rootAdress+'/assets/img/uploads/current_photo/'+recent_photo);
+        // alert(rootAdress+'/assets/img/uploads/recent_photo/'+recent_photo);
 
         console.log(response);
         this.recent_photo = response.data.recent_photo;
         this.old_photo = response.data.old_photo;
         this.group_photo = response.data.group_photo;
 
-        //alert(this.rootAdress+'assets/img/uploads/current_photos/'+this.recent_photo);
+        //alert(this.rootAdress+'assets/img/uploads/recent_photos/'+this.recent_photo);
         //alert(this.rootAdress+'assets/img/uploads/group_photos/'+this.group_photo[0]);
 
       }.bind(this))
