@@ -55,7 +55,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                 images:{
                     logoSrc: '<?php echo $logoSrc; ?>',
                     fev_icon: '<?php echo $fev_icon; ?>',
-                    recent_photo: '<?php echo $recent_photo; ?>',
+                    profile_photo: '<?php echo $profile_photo; ?>',
 
                 },
                 pages:{

@@ -70,7 +70,7 @@ if (!empty($_POST['csrf_token1'])) {
 				$sql = 'select @result as st'; 
 				$result = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($result);
-				if (file_exists($target_dir.$row['st']) && $purpose_type!='group_photo') {
+				if (file_exists($target_dir.$row['st']) && $purpose_type!='group_photo' && $row['st']!='not_set') {
 					unlink($target_dir.$row['st']);
 				}
 				$conn->close();

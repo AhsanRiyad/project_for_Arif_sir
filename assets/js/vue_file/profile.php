@@ -297,7 +297,7 @@
 	<div class="row bg-white mx-1">
 
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -321,7 +321,6 @@
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
 	<small id='idSmallEmailChangeDashboard'  class=""  > <span>recent Photo</span></small>
 
-	
 	<div class="custom-file">
 	<input type="file" ref="recent_photo" v-on:change="handleFileUpload_recent()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 	<label class="custom-file-label" for="inputGroupFile01">{{ recent_photo_name }}</label>
@@ -488,7 +487,7 @@
 					this.recent_photo_name = this.recent_photo.name.slice(0,15);
 					this.recent_photo = this.$refs.recent_photo.files[0];
 				}
-
+				
 
 
 			},
@@ -654,7 +653,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <div class="row bg-white mx-1">
 
 <div class="col-3 mr-0 pr-0 my-2">
-<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
+<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
 <div class="w-100"></div>
 </div>
 <div class="col-9  ml-0">
@@ -869,7 +868,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <div class="row bg-white mx-1">
 
 <div class="col-3 mr-0 pr-0 my-2">
-<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
+<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
 <div class="w-100"></div>
 </div>
 <div class="col-9  ml-0">

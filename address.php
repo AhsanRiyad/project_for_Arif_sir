@@ -21,7 +21,7 @@ $style = $rootAdress."assets/css/style.php" ;
 // images
 $logoSrc = $rootAdress."assets/img/logo.jpg";
 $fev_icon = $rootAdress."assets/img/fev_icon.jpg";
-$recent_photo = $rootAdress."assets/img/uploads/default.jpg";
+$profile_photo = $rootAdress."assets/img/uploads/default.jpg";
 
 
 // pages

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2019 at 08:10 AM
+-- Generation Time: Nov 13, 2019 at 12:40 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -239,7 +239,8 @@ INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institu
 
 CREATE TABLE `user_photos` (
   `group_photo` varchar(400) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `id_user_photos` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -249,6 +250,7 @@ CREATE TABLE `user_photos` (
 --
 
 CREATE TABLE `user_uploads` (
+  `id_user_uploads` int(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `recent_photo` varchar(400) DEFAULT NULL,
   `old_photo` varchar(400) DEFAULT NULL
@@ -258,10 +260,8 @@ CREATE TABLE `user_uploads` (
 -- Dumping data for table `user_uploads`
 --
 
-INSERT INTO `user_uploads` (`email`, `recent_photo`, `old_photo`) VALUES
-('riyad298@gmail.com', 'riyad298@gmail.com.jpg', 'riyad298@gmail.com.jpg'),
-('', NULL, NULL),
-('riyad298@yahoo.com', NULL, NULL);
+INSERT INTO `user_uploads` (`id_user_uploads`, `email`, `recent_photo`, `old_photo`) VALUES
+(67, 'riyad298@gmail.com', NULL, 'riyad298@gmail.com.jpg');
 
 -- --------------------------------------------------------
 
@@ -306,6 +306,18 @@ ALTER TABLE `users_registration`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_photos`
+--
+ALTER TABLE `user_photos`
+  ADD PRIMARY KEY (`id_user_photos`);
+
+--
+-- Indexes for table `user_uploads`
+--
+ALTER TABLE `user_uploads`
+  ADD PRIMARY KEY (`id_user_uploads`);
+
+--
 -- Indexes for table `verification_info`
 --
 ALTER TABLE `verification_info`
@@ -326,6 +338,18 @@ ALTER TABLE `users_address`
 --
 ALTER TABLE `users_registration`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- AUTO_INCREMENT for table `user_photos`
+--
+ALTER TABLE `user_photos`
+  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+--
+-- AUTO_INCREMENT for table `user_uploads`
+--
+ALTER TABLE `user_uploads`
+  MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `verification_info`
