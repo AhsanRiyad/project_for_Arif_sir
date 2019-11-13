@@ -37,14 +37,17 @@ CREATE TABLE `verification_info`(
 
 
 CREATE TABLE `user_uploads`(
- `email` varchar(100) DEFAULT NULL,
+`id_user_uploads` int(100) DEFAULT NULL,
+`email` varchar(100) DEFAULT NULL,
  `recent_photo` varchar(400) DEFAULT NULL,
  `old_photo` varchar(400) DEFAULT NULL
 );
 
 CREATE TABLE `user_photos`(
+
  `group_photo` varchar(400) DEFAULT NULL,
- `email` varchar(100) DEFAULT NULL
+ `email` varchar(100) DEFAULT NULL,
+ `id_user_photos` int(100) DEFAULT NULL
 
 );
 
@@ -82,6 +85,19 @@ ALTER TABLE `users_registration`
 MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 
+ALTER TABLE `user_uploads`
+ADD PRIMARY KEY (`id_user_uploads`);
+
+ALTER TABLE `user_uploads`
+MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+
+
+ALTER TABLE `user_photos`
+ADD PRIMARY KEY (`id_user_photos`);
+
+ALTER TABLE `user_photos`
+MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 
 

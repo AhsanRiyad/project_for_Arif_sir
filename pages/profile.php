@@ -27,7 +27,7 @@ include $dashboard_head;
 
 	<!-- <component v-bind:is="componet_name"> -->
 		<keep-alive>
-			<component  :recent_photo='recent_photo' v-bind:is="componet_name"></component>
+			<component  :profile_photo='profile_photo' v-bind:is="componet_name"></component>
 		</keep-alive>
 		<buttons ></buttons>
 	</v-app>
