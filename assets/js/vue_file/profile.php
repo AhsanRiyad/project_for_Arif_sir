@@ -95,62 +95,123 @@
 	</div>
 
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.full_name.smallText ' > <span>Name</span> <span @click="enable_input('full_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.full_name.smallButton" class="small_button">Change</span></small>
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.full_name.smallText ' > <span>Name 
 
-	<input :disabled='full_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
+
+	<span v-show="full_name_validty == 'valid'" class="text-success"> {{ full_name_validty }} </span>
+	<span v-show="full_name_validty == 'invalid'" class="text-danger"> {{ full_name_validty }} </span>
+	
+	
+
+
+	</span> <span @click="enable_input('full_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.full_name.smallButton" class="small_button">Change</span></small>
+
+	<input @keyup="validityCheckInput('full_name')" v-model="full_name" :disabled='full_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
 
 	</div>
 
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mobile.smallText ' > <span>Mobile</span> <span @click="enable_input('mobile')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mobile.smallButton" class="small_button">Change</span></small>
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mobile.smallText ' > <span>Mobile
 
-	<input :disabled='mobile_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
+	
+	<span v-show="mobile_validty == 'valid'" class="text-success"> {{ mobile_validty }} </span>
+	<span v-show="mobile_validty == 'invalid'" class="text-danger"> {{ mobile_validty }} </span>
+	
+	
 
-	</div>
+	</span> <span @click="enable_input('mobile')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mobile.smallButton" class="small_button">Change</span></small>
 
-
-	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.institution_id.smallText ' > <span>institution_id</span> <span @click="enable_input('institution_id')" id="idSpanEmailChangeDashboard" v-bind:style="changes.institution_id.smallButton" class="small_button">Change</span></small>
-
-	<input :disabled='institution_id_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
-
-	</div>
-
-
-	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.nid_or_passport.smallText ' > <span>nid_or_passport</span> <span @click="enable_input('nid_or_passport')" id="idSpanEmailChangeDashboard" v-bind:style="changes.nid_or_passport.smallButton" class="small_button">Change</span></small>
-
-	<input :disabled='nid_or_passport_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
+	<input @keyup="validityCheckInput('mobile')" v-model="mobile" :disabled='mobile_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
 
 	</div>
 
 
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.blood_group.smallText ' > <span>blood_group</span> <span @click="enable_input('blood_group')" id="idSpanEmailChangeDashboard" v-bind:style="changes.blood_group.smallButton" class="small_button">Change</span></small>
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.institution_id.smallText ' > <span>institution_id
 
-	<select :disabled='blood_group_input == true' class="form-control border-0" id="exampleFormControlSelect1">
-	<option>1</option>
-	<option>2</option>
-	<option>3</option>
-	<option>4</option>
-	<option>5</option>
+
+
+	<span v-show="institution_id_validty == 'valid'" class="text-success"> {{ institution_id_validty }} </span>
+	<span v-show="institution_id_validty == 'invalid'" class="text-danger"> {{ institution_id_validty }} </span>
+
+
+
+
+	</span> <span @click="enable_input('institution_id')" id="idSpanEmailChangeDashboard" v-bind:style="changes.institution_id.smallButton" class="small_button">Change</span></small>
+
+	<input  @keyup="validityCheckInput('institution_id')" v-model="institution_id" :disabled='institution_id_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
+
+	</div>
+
+
+	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.nid_or_passport.smallText ' > <span>nid_or_passport
+
+	
+	
+	<span v-show="nid_or_passport_validty == 'valid'" class="text-success"> {{ nid_or_passport_validty }} </span>
+	<span v-show="nid_or_passport_validty == 'invalid'" class="text-danger"> {{ nid_or_passport_validty }} </span>
+
+
+
+
+	</span> <span @click="enable_input('nid_or_passport')" id="idSpanEmailChangeDashboard" v-bind:style="changes.nid_or_passport.smallButton" class="small_button">Change</span></small>
+
+	<input @keyup="validityCheckInput('nid_or_passport')"  v-model="nid_or_passport" :disabled='nid_or_passport_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="text" value="" >
+
+	</div>
+
+
+	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.blood_group.smallText ' > <span>blood_group
+
+
+	<span v-show="blood_group_validty == 'valid'" class="text-success"> {{ blood_group_validty }} </span>
+	<span v-show="blood_group_validty == 'invalid'" class="text-danger"> {{ blood_group_validty }} </span>
+
+
+
+	
+
+
+	</span> <span @click="enable_input('blood_group')" id="idSpanEmailChangeDashboard" v-bind:style="changes.blood_group.smallButton" class="small_button">Change</span></small>
+
+	<select @change="onChangeValidity('blood_group')" v-model="blood_group" :disabled='blood_group_input == true' class="form-control border-0" id="exampleFormControlSelect1">
+	<option >blood_group</option>
+	<option >A+</option>
+	<option >B+</option>
+	<option ">AB+</option>
+	<option >O+</option>
+	<option >A-</option>
+	<option >B-</option>
+	<option >AB-</option>
+	<option >O-</option>
+	
+
 	</select>
 
 	</div>
 
 
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.dob.smallText ' > <span>Date of Birth</span> <span @click="enable_input('dob')" id="idSpanEmailChangeDashboard" v-bind:style="changes.dob.smallButton" class="small_button">Change</span></small>
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.dob.smallText ' > <span>Date of Birth
 
-	<input :disabled='dob_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="date" value="" >
+	
+	<span v-show="dob_validty == 'valid'" class="text-success"> {{ dob_validty }} </span>
+	<span v-show="dob_validty == 'invalid'" class="text-danger"> {{ dob_validty }} </span>
+
+
+	</span> <span @click="enable_input('dob')" id="idSpanEmailChangeDashboard" v-bind:style="changes.dob.smallButton" class="small_button">Change</span></small>
+
+	<input @change="onChangeValidity('dob')"  v-model="dob" :disabled='dob_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="date" value="" >
 
 	</div>
 
 
 	<div class="col-10 mx-0 px-0 ">
-	<button id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
+	<v-btn color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
 	Update Info
-	</button>
+	</v-btn>
 	</div>
 
 	<!-- update field part ends -->
@@ -172,7 +233,19 @@
 				institution_id_input: true,
 				nid_or_passport_input: true,
 				blood_group_input: true,
-				dob_input: true,
+				dob_input: '',
+				full_name: '',
+				mobile: '',
+				institution_id: '',
+				nid_or_passport: '',
+				blood_group: '',
+				dob: '',
+				full_name_validty: '',
+				mobile_validty: '',
+				institution_id_validty: '',
+				nid_or_passport_validty: '',
+				blood_group_validty: '',
+				dob_validty: '',
 				changes:{
 					full_name:{
 						smallText: {
@@ -273,6 +346,77 @@
 					this.changes.dob.smallButton.backgroundColor = 'red';
 					//alert(this.mobile_input);
 				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'full_name'){
+					console.log(this.full_name);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.full_name);
+
+					result == false ? this.full_name_validty = 'invalid' : this.full_name_validty = 'valid';
+
+
+				}else if(inputName == 'mobile'){
+					console.log(this.mobile);
+					var patt= /[\+]{0,1}[\d]{11,}/g;
+					var result = patt.test(this.mobile);
+
+					result == false ? this.mobile_validty = 'invalid' : this.mobile_validty = 'valid';
+
+
+				}else if(inputName == 'institution_id'){
+					console.log(this.institution_id);
+					var patt= /[\S]{5,}/g;
+					var result = patt.test(this.institution_id);
+
+					result == false ? this.institution_id_validty = 'invalid' : this.institution_id_validty = 'valid';
+
+
+				}else if(inputName == 'nid_or_passport'){
+					console.log(this.nid_or_passport);
+					var patt= /[\S]{10,}/g;
+					var result = patt.test(this.nid_or_passport);
+
+					result == false ? this.nid_or_passport_validty = 'invalid' : this.nid_or_passport_validty = 'valid';
+
+
+				}
+			},
+			onChangeValidity(inputName){
+				if(inputName == 'blood_group'){
+					console.log(this.blood_group);
+					var patt= /[\+-A-O]{1,3}/g;
+					var result = patt.test(this.blood_group);
+
+					result == false ? this.blood_group_validty = 'invalid' : this.blood_group_validty = 'valid';
+
+
+				}else if(inputName == 'dob'){
+					console.log(this.dob);
+					var patt= /^([0-9]{4})([-]{1}[0-9]{2}[-]{1}[0-9]{2}$)/igm;
+					var result = patt.test(this.dob);
+					console.log(result);
+					var patt = /^([0-9]{4})/g;
+					const matches = this.dob.match(patt);
+					console.log(matches[0]);
+
+
+					if(result == true && matches[0]>1950 && matches[0] <2000){
+						this.dob_validty = 'valid';
+					}else{
+						this.dob_validty = 'invalid';
+					}
+
+					//result == false ? this.dob_validty = 'invalid' : this.dob_validty = 'valid';
+					
+
+
+
+
+				}
+			},
+			submit(){
+				alert(this.blood_group);
 			}
 
 		},
@@ -305,147 +449,147 @@
 
 
 
-	var code = `<div class="container-fluid bg-light mt-5 ">
-	<div class="row justify-content-center align-items-center">
+var code = `<div class="container-fluid bg-light mt-5 ">
+<div class="row justify-content-center align-items-center">
 
-	<!-- update top part starts-->
+<!-- update top part starts-->
 
-	<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
-
-
-	<div class="row bg-white mx-1">
-
-	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
-	<div class="w-100"></div>
-	</div>
-	<div class="col-9  ml-0">
-	<p class="h3 ">
-
-	</p>
-	<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
-	</div>
-
-	</div>
-
-	<!-- update top part ends-->
+<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
-	<!-- update field part starts -->
-	<div class="row bg-white mt-4 justify-content-center mx-1">
-	<div class="w-100 bg-info">
-	<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Upload Photos</p>
-	</div>
+<div class="row bg-white mx-1">
 
-	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class=""  > <span>recent Photo</span></small>
+<div class="col-3 mr-0 pr-0 my-2">
+<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+<div class="w-100"></div>
+</div>
+<div class="col-9  ml-0">
+<p class="h3 ">
 
-	<div class="custom-file">
-	<input type="file" ref="recent_photo" v-on:change="handleFileUpload_recent()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-	<label class="custom-file-label" for="inputGroupFile01">{{ recent_photo_name }}</label>
-	</div>
+</p>
+<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+</div>
 
-	</div>
-	
-	<div class="col-10 mx-0 px-0 ">
-	<v-btn :loading='loading_recent_photo' @click="uploadPhoto_recent()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
-	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
-	</v-btn>
-	</div>
+</div>
 
-	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class=""  > <span>old Photo</span></small>
-
-	
-	<div class="custom-file">
-	<input type="file" ref="old_photo" v-on:change="handleFileUpload_old()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-	<label class="custom-file-label" for="inputGroupFile01">{{ old_photo_name }}</label>
-	</div>
-
-	</div>
-	
-	<div class="col-10 mx-0 px-0 ">
-	<v-btn :loading='loading_old_photo' @click="uploadPhoto_old()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
-	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
-	</v-btn>
-	</div>
-
-	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class=""  > <span>group Photo</span></small>
-
-	
-	<div class="custom-file">
-	<input type="file" ref="group_photo" v-on:change="handleFileUpload_group()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-	<label class="custom-file-label" for="inputGroupFile01">{{ group_photo_name }}</label>
-	</div>
-
-	</div>
-	
-	<div class="col-10 mx-0 px-0 ">
-	<v-btn :loading='loading_group_photo' @click="uploadPhoto_group()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
-	Upload <v-icon right dark>mdi-cloud-upload</v-icon>
-	</v-btn>
-	</div>
+<!-- update top part ends-->
 
 
-	<!-- update field part ends -->
+<!-- update field part starts -->
+<div class="row bg-white mt-4 justify-content-center mx-1">
+<div class="w-100 bg-info">
+<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Upload Photos</p>
+</div>
 
-	</div>
-	</div>
-	</div>
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class=""  > <span>recent Photo</span></small>
+
+<div class="custom-file">
+<input type="file" ref="recent_photo" v-on:change="handleFileUpload_recent()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+<label class="custom-file-label" for="inputGroupFile01">{{ recent_photo_name }}</label>
+</div>
+
+</div>
+
+<div class="col-10 mx-0 px-0 ">
+<v-btn :loading='loading_recent_photo' @click="uploadPhoto_recent()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+Upload <v-icon right dark>mdi-cloud-upload</v-icon>
+</v-btn>
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class=""  > <span>old Photo</span></small>
 
 
-	
-	<v-dialog
-	v-model="dialog"
-	max-width="290"
-	>
-	<v-card>
-	<v-card-title class="headline">Photo Upload Status</v-card-title>
+<div class="custom-file">
+<input type="file" ref="old_photo" v-on:change="handleFileUpload_old()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+<label class="custom-file-label" for="inputGroupFile01">{{ old_photo_name }}</label>
+</div>
 
-	<v-card-text class="black--text">
-	{{ status }}
-	</v-card-text>
+</div>
 
-	<v-card-actions>
-	<v-spacer></v-spacer>
+<div class="col-10 mx-0 px-0 ">
+<v-btn :loading='loading_old_photo' @click="uploadPhoto_old()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+Upload <v-icon right dark>mdi-cloud-upload</v-icon>
+</v-btn>
+</div>
 
-	<v-btn
-	color="green darken-1"
-	text
-	@click="dialog = false"
-	>
-	OK
-	</v-btn>
-	</v-card-actions>
-	</v-card>
-	</v-dialog>
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class=""  > <span>group Photo</span></small>
 
-	</div>	`;
 
-	Vue.component('photos' , {
-		props: ['profile_photo'],
-		template: code,
-		data(){
-			return {
-				name: 'riyad---vue',
-				dialog: false,
-				status: '',
-				recent_photo: '',
-				recent_photo_name: 'choose file',
-				old_photo: '',
-				old_photo_name: 'choose file',
-				group_photo: '',
-				group_photo_name: 'choose file',
-				loading_recent_photo:false,
-				loading_old_photo:false,
-				loading_group_photo:false,
-				file_type: false,
-				
-			}
-		},
-		methods: {
-			uploadPhoto_recent: function(){
+<div class="custom-file">
+<input type="file" ref="group_photo" v-on:change="handleFileUpload_group()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+<label class="custom-file-label" for="inputGroupFile01">{{ group_photo_name }}</label>
+</div>
+
+</div>
+
+<div class="col-10 mx-0 px-0 ">
+<v-btn :loading='loading_group_photo' @click="uploadPhoto_group()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+Upload <v-icon right dark>mdi-cloud-upload</v-icon>
+</v-btn>
+</div>
+
+
+<!-- update field part ends -->
+
+</div>
+</div>
+</div>
+
+
+
+<v-dialog
+v-model="dialog"
+max-width="290"
+>
+<v-card>
+<v-card-title class="headline">Photo Upload Status</v-card-title>
+
+<v-card-text class="black--text">
+{{ status }}
+</v-card-text>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+
+<v-btn
+color="green darken-1"
+text
+@click="dialog = false"
+>
+OK
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+
+</div>	`;
+
+Vue.component('photos' , {
+	props: ['profile_photo'],
+	template: code,
+	data(){
+		return {
+			name: 'riyad---vue',
+			dialog: false,
+			status: '',
+			recent_photo: '',
+			recent_photo_name: 'choose file',
+			old_photo: '',
+			old_photo_name: 'choose file',
+			group_photo: '',
+			group_photo_name: 'choose file',
+			loading_recent_photo:false,
+			loading_old_photo:false,
+			loading_group_photo:false,
+			file_type: false,
+
+		}
+	},
+	methods: {
+		uploadPhoto_recent: function(){
 
 				//alert(this.csrf_token1);
 				if(this.file_type == true){

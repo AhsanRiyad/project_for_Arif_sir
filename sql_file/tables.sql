@@ -266,7 +266,35 @@ SELECT max(membership_number) into count from users_registration;
 
 
 
-UPDATE verification_info SET status ='approved' , membership_number = count  WHERE email = email1 ;
+UPDATE verification_info SET status ='approved'   WHERE email = email1 ;
+
+
+UPDATE users_registration SET membership_number = count+1   WHERE email = email1 ;
+
+
+
+
+END$$
+DELIMITER ;
+
+
+
+
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_basic(IN email1 VARCHAR(100), in full_name1 varchar(100) , in mobile1 varchar(100) , in institution_id varchar(100) , in blood_group1 varchar(100) ,  in dob varchar(200) , OUT result VARCHAR(100))
+BEGIN
+
+DECLARE count int(5);
+
+SELECT max(membership_number) into count from users_registration;
+-- SELECT COUNT(*) int count FROM verification_info WHERE status = 'approved' ; 
+
+
+
+UPDATE verification_info SET status ='approved'   WHERE email = email1 ;
+
+
+UPDATE users_registration SET membership_number = count+1   WHERE email = email1 ;
 
 
 
