@@ -4,8 +4,7 @@ include "../address.php";
 include $APP_ROOT.'assets/linker/db.php' ; 
 
 
-if (!empty($_POST['csrf_token1'])) {
-	if (hash_equals($_SESSION['csrf_token1'], $_POST['csrf_token1'])) {
+
 
 		$purpose_type =  $_POST['purpose'];
 
@@ -80,14 +79,7 @@ if (!empty($_POST['csrf_token1'])) {
 			}
 		}	
 		
-	}else {
-		trigger_error('You are not authorized');
-	}
-
-
-
-}
-
+	
 
 
 

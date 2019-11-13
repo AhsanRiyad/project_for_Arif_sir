@@ -29,7 +29,7 @@
 
   <v-col cols="12"  align="center" justify="center">
 
-  <v-img
+  <v-img v-if="recent_photo != 'not_set'"
   :src="rootAdress+recent_photos+recent_photo"
   lazy-src=""
   aspect-ratio="1"
@@ -37,6 +37,19 @@
   max-width="400"
   max-height="300"
   ></v-img>
+
+
+  <v-img v-if="recent_photo == 'not_set'"
+  :src="images.default_photo"
+  lazy-src=""
+  aspect-ratio="1"
+  class="grey lighten-2"
+  max-width="400"
+  max-height="300"
+  ></v-img>
+
+
+
   </v-col>
   </v-row>
 
@@ -50,8 +63,18 @@
 
   <v-row >
   <v-col cols="12"  align="center" justify="center">
-  <v-img
+  
+  <v-img v-if="old_photo != 'not_set'"
   :src="rootAdress+old_photos+old_photo"
+  lazy-src=""
+  aspect-ratio="1"
+  class="grey lighten-2"
+  max-width="400"
+  max-height="300"
+  ></v-img>
+
+  <v-img v-if="old_photo == 'not_set'"
+  :src="images.default_photo"
   lazy-src=""
   aspect-ratio="1"
   class="grey lighten-2"
@@ -146,6 +169,7 @@
       recent_photos: 'assets/img/uploads/recent_photos/',
       old_photos: 'assets/img/uploads/old_photos/',
       group_photos:  'assets/img/uploads/group_photos/',
+      uploads:  'assets/img/uploads/',
       loading:false,
       photo_delete_status: '',
       button_disabled: false,
