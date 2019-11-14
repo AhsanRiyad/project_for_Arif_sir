@@ -98,8 +98,8 @@
 	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.full_name.smallText ' > <span>Name 
 
 
-	<span v-show="full_name_validty == 'valid'" class="text-success"> {{ full_name_validty }} </span>
-	<span v-show="full_name_validty == 'invalid'" class="text-danger"> {{ full_name_validty }} </span>
+	<span v-show="full_name_validity == 'valid'" class="text-success"> {{ full_name_validity }} </span>
+	<span v-show="full_name_validity == 'invalid'" class="text-danger"> {{ full_name_validity }} </span>
 	
 	
 
@@ -114,8 +114,8 @@
 	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mobile.smallText ' > <span>Mobile
 
 	
-	<span v-show="mobile_validty == 'valid'" class="text-success"> {{ mobile_validty }} </span>
-	<span v-show="mobile_validty == 'invalid'" class="text-danger"> {{ mobile_validty }} </span>
+	<span v-show="mobile_validity == 'valid'" class="text-success"> {{ mobile_validity }} </span>
+	<span v-show="mobile_validity == 'invalid'" class="text-danger"> {{ mobile_validity }} </span>
 	
 	
 
@@ -131,8 +131,8 @@
 
 
 
-	<span v-show="institution_id_validty == 'valid'" class="text-success"> {{ institution_id_validty }} </span>
-	<span v-show="institution_id_validty == 'invalid'" class="text-danger"> {{ institution_id_validty }} </span>
+	<span v-show="institution_id_validity == 'valid'" class="text-success"> {{ institution_id_validity }} </span>
+	<span v-show="institution_id_validity == 'invalid'" class="text-danger"> {{ institution_id_validity }} </span>
 
 
 
@@ -149,8 +149,8 @@
 
 	
 	
-	<span v-show="nid_or_passport_validty == 'valid'" class="text-success"> {{ nid_or_passport_validty }} </span>
-	<span v-show="nid_or_passport_validty == 'invalid'" class="text-danger"> {{ nid_or_passport_validty }} </span>
+	<span v-show="nid_or_passport_validity == 'valid'" class="text-success"> {{ nid_or_passport_validity }} </span>
+	<span v-show="nid_or_passport_validity == 'invalid'" class="text-danger"> {{ nid_or_passport_validity }} </span>
 
 
 
@@ -166,8 +166,8 @@
 	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.blood_group.smallText ' > <span>blood_group
 
 
-	<span v-show="blood_group_validty == 'valid'" class="text-success"> {{ blood_group_validty }} </span>
-	<span v-show="blood_group_validty == 'invalid'" class="text-danger"> {{ blood_group_validty }} </span>
+	<span v-show="blood_group_validity == 'valid'" class="text-success"> {{ blood_group_validity }} </span>
+	<span v-show="blood_group_validity == 'invalid'" class="text-danger"> {{ blood_group_validity }} </span>
 
 
 
@@ -197,8 +197,8 @@
 	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.dob.smallText ' > <span>Date of Birth
 
 	
-	<span v-show="dob_validty == 'valid'" class="text-success"> {{ dob_validty }} </span>
-	<span v-show="dob_validty == 'invalid'" class="text-danger"> {{ dob_validty }} </span>
+	<span v-show="dob_validity == 'valid'" class="text-success"> {{ dob_validity }} </span>
+	<span v-show="dob_validity == 'invalid'" class="text-danger"> {{ dob_validity }} </span>
 
 
 	</span> <span @click="enable_input('dob')" id="idSpanEmailChangeDashboard" v-bind:style="changes.dob.smallButton" class="small_button">Change</span></small>
@@ -219,6 +219,39 @@
 	</div>
 	</div>
 	</div>
+	
+	<v-row justify="center">
+
+
+	<v-dialog
+	v-model="dialog"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline">Status</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ status_text }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog = false"
+	>
+	Okay
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+
+
 
 	</div>`;
 
@@ -228,6 +261,8 @@
 		data(){
 			return {
 				name: 'riyad---vue',
+				dialog: false,
+				status_text: '',
 				full_name_input: true,
 				mobile_input: true,
 				institution_id_input: true,
@@ -240,12 +275,12 @@
 				nid_or_passport: '',
 				blood_group: '',
 				dob: '',
-				full_name_validty: '',
-				mobile_validty: '',
-				institution_id_validty: '',
-				nid_or_passport_validty: '',
-				blood_group_validty: '',
-				dob_validty: '',
+				full_name_validity: '',
+				mobile_validity: '',
+				institution_id_validity: '',
+				nid_or_passport_validity: '',
+				blood_group_validity: '',
+				dob_validity: '',
 				changes:{
 					full_name:{
 						smallText: {
@@ -353,7 +388,7 @@
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.full_name);
 
-					result == false ? this.full_name_validty = 'invalid' : this.full_name_validty = 'valid';
+					result == false ? this.full_name_validity = 'invalid' : this.full_name_validity = 'valid';
 
 
 				}else if(inputName == 'mobile'){
@@ -361,7 +396,7 @@
 					var patt= /[\+]{0,1}[\d]{11,}/g;
 					var result = patt.test(this.mobile);
 
-					result == false ? this.mobile_validty = 'invalid' : this.mobile_validty = 'valid';
+					result == false ? this.mobile_validity = 'invalid' : this.mobile_validity = 'valid';
 
 
 				}else if(inputName == 'institution_id'){
@@ -369,7 +404,7 @@
 					var patt= /[\S]{5,}/g;
 					var result = patt.test(this.institution_id);
 
-					result == false ? this.institution_id_validty = 'invalid' : this.institution_id_validty = 'valid';
+					result == false ? this.institution_id_validity = 'invalid' : this.institution_id_validity = 'valid';
 
 
 				}else if(inputName == 'nid_or_passport'){
@@ -377,7 +412,7 @@
 					var patt= /[\S]{10,}/g;
 					var result = patt.test(this.nid_or_passport);
 
-					result == false ? this.nid_or_passport_validty = 'invalid' : this.nid_or_passport_validty = 'valid';
+					result == false ? this.nid_or_passport_validity = 'invalid' : this.nid_or_passport_validity = 'valid';
 
 
 				}
@@ -388,7 +423,7 @@
 					var patt= /[\+-A-O]{1,3}/g;
 					var result = patt.test(this.blood_group);
 
-					result == false ? this.blood_group_validty = 'invalid' : this.blood_group_validty = 'valid';
+					result == false ? this.blood_group_validity = 'invalid' : this.blood_group_validity = 'valid';
 
 
 				}else if(inputName == 'dob'){
@@ -402,12 +437,12 @@
 
 
 					if(result == true && matches[0]>1950 && matches[0] <2000){
-						this.dob_validty = 'valid';
+						this.dob_validity = 'valid';
 					}else{
-						this.dob_validty = 'invalid';
+						this.dob_validity = 'invalid';
 					}
 
-					//result == false ? this.dob_validty = 'invalid' : this.dob_validty = 'valid';
+					//result == false ? this.dob_validity = 'invalid' : this.dob_validity = 'valid';
 					
 
 
@@ -416,7 +451,32 @@
 				}
 			},
 			submit(){
-				alert(this.blood_group);
+				//alert(this.blood_group);
+
+				if(this.full_name_validity == 'valid' && this.mobile_validity == 'valid' && this.institution_id_validity == 'valid' && this.nid_or_passport_validity == 'valid' && this.blood_group_validity == 'valid' && this.dob_validity == 'valid' ){
+
+
+
+
+
+
+
+
+
+
+
+
+					this.status_text = 'Update requested successfully! wait for admin approval';
+					this.dialog = true;
+
+				}else{
+					this.status_text = 'all field are not valid';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
 			}
 
 		},
@@ -840,50 +900,123 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>fathers_name</span> <span @click="enable_input('fathers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.fathers_name.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>fathers_name
 
-<input :disabled='fathers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your fathers_name Here" type="text" value="" >
+
+
+
+<span v-show="fathers_name_validity == 'valid'" class="text-success"> {{ fathers_name_validity }} </span>
+<span v-show="fathers_name_validity == 'invalid'" class="text-danger"> {{ fathers_name_validity }} </span>
+
+
+
+
+
+
+
+</span> <span @click="enable_input('fathers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.fathers_name.smallButton" class="small_button">Change</span></small>
+
+<input v-model="fathers_name" @keyup="onChangeValidity('fathers_name')" :disabled='fathers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your fathers_name Here" type="text" value="" >
 
 </div>
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>mothers_name</span> <span @click="enable_input('mothers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mothers_name.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>mothers_name
 
-<input :disabled='mothers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your mothers_name Here" type="text" value="" >
+
+
+<span v-show="mothers_name_validity == 'valid'" class="text-success"> {{ mothers_name_validity }} </span>
+<span v-show="mothers_name_validity == 'invalid'" class="text-danger"> {{ mothers_name_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('mothers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mothers_name.smallButton" class="small_button">Change</span></small>
+
+<input v-model="mothers_name" @keyup="onChangeValidity('mothers_name')"  :disabled='mothers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your mothers_name Here" type="text" value="" >
 
 </div>
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>spouse_name</span> <span @click="enable_input('spouse_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.spouse_name.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>spouse_name
 
-<input :disabled='spouse_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your spouse_name Here" type="text" value="" >
+
+
+
+<span v-show="spouse_name_validity == 'valid'" class="text-success"> {{ spouse_name_validity }} </span>
+<span v-show="spouse_name_validity == 'invalid'" class="text-danger"> {{ spouse_name_validity }} </span>
+
+
+
+
+
+
+
+</span> <span @click="enable_input('spouse_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.spouse_name.smallButton" class="small_button">Change</span></small>
+
+<input v-model="spouse_name" @keyup="onChangeValidity('spouse_name')" :disabled='spouse_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your spouse_name Here" type="text" value="" >
 
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.number_of_children.smallText ' > <span>number_of_children</span> <span @click="enable_input('number_of_children')" id="idSpanEmailChangeDashboard" v-bind:style="changes.number_of_children.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.number_of_children.smallText ' > <span>number_of_children
 
-<input :disabled='number_of_children_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your number_of_children Here" type="text" value="" >
+
+
+
+<span v-show="number_of_children_validity == 'valid'" class="text-success"> {{ number_of_children_validity }} </span>
+<span v-show="number_of_children_validity == 'invalid'" class="text-danger"> {{ number_of_children_validity }} </span>
+
+
+
+
+
+
+
+</span> <span @click="enable_input('number_of_children')" id="idSpanEmailChangeDashboard" v-bind:style="changes.number_of_children.smallButton" class="small_button">Change</span></small>
+
+<input v-model="number_of_children" @keyup="onChangeValidity('number_of_children')"  :disabled='number_of_children_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your number_of_children Here" type="text" value="" >
 
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.workplace_or_institution.smallText ' > <span>workplace_or_institution</span> <span @click="enable_input('workplace_or_institution')" id="idSpanEmailChangeDashboard" v-bind:style="changes.workplace_or_institution.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.workplace_or_institution.smallText ' > <span>workplace_or_institution
 
-<input :disabled='workplace_or_institution_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your workplace_or_institution Here" type="text" value="" >
+
+<span v-show="workplace_or_institution_validity == 'valid'" class="text-success"> {{ workplace_or_institution_validity }} </span>
+<span v-show="workplace_or_institution_validity == 'invalid'" class="text-danger"> {{ workplace_or_institution_validity }} </span>
+
+
+
+</span> <span @click="enable_input('workplace_or_institution')" id="idSpanEmailChangeDashboard" v-bind:style="changes.workplace_or_institution.smallButton" class="small_button">Change</span></small>
+
+<input v-model="workplace_or_institution" @keyup="onChangeValidity('workplace_or_institution')" 
+:disabled='workplace_or_institution_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your workplace_or_institution Here" type="text" value="" >
 
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.designation.smallText ' > <span>designation</span> <span @click="enable_input('designation')" id="idSpanEmailChangeDashboard" v-bind:style="changes.designation.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.designation.smallText ' > <span>designation
 
-<input :disabled='designation_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your designation Here" type="text" value="" >
+
+
+<span v-show="designation_validity == 'valid'" class="text-success"> {{ designation_validity }} </span>
+<span v-show="designation_validity == 'invalid'" class="text-danger"> {{ designation_validity }} </span>
+
+
+
+
+
+
+</span> <span @click="enable_input('designation')" id="idSpanEmailChangeDashboard" v-bind:style="changes.designation.smallButton" class="small_button">Change</span></small>
+
+<input v-model="designation" @keyup="onChangeValidity('designation')"  :disabled='designation_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your designation Here" type="text" value="" >
 
 </div>
 
 
 <div class="col-10 mx-0 px-0 ">
-<button id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
+<button @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
 Update Info
 </button>
 </div>
@@ -894,6 +1027,43 @@ Update Info
 </div>
 </div>
 
+
+
+<v-row justify="center">
+
+
+<v-dialog
+v-model="dialog"
+max-width="290"
+>
+<v-card>
+<v-card-title class="headline">Status</v-card-title>
+
+<v-card-text class="black--text">
+{{ status_text }}
+</v-card-text>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+
+
+
+<v-btn
+color="green darken-1"
+text
+@click="dialog = false"
+>
+Okay
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+</v-row>
+
+
+
+
+
 </div>`;
 
 Vue.component('personal' , {
@@ -902,6 +1072,8 @@ Vue.component('personal' , {
 	data(){
 		return {
 			name: 'riyad---vue',
+			dialog: '' , 
+			status_text: '',
 			fathers_name_input: true,
 			mothers_name_input: true,
 			spouse_name_input: true,
@@ -909,6 +1081,21 @@ Vue.component('personal' , {
 			dob_input: true,
 			workplace_or_institution_input: true,
 			designation_input: true,
+			fathers_name: '',
+			mothers_name: '',
+			spouse_name: '',
+			number_of_children: '',
+			dob: '',
+			workplace_or_institution: '',
+			designation: '',
+			designation_validity: false,
+			fathers_name_validity: false,
+			mothers_name_validity: false,
+			spouse_name_validity: false,
+			number_of_children_validity: false,
+			dob_validity: false,
+			workplace_or_institution_validity: false,
+			designation_validity: false,
 			changes:{
 				fathers_name:{
 					smallText: {
@@ -969,8 +1156,6 @@ Vue.component('personal' , {
 	},
 	methods: {
 
-
-
 		enable_input: function(name){
 			if(name=='fathers_name'){
 				this.fathers_name_input = false;
@@ -1009,6 +1194,64 @@ Vue.component('personal' , {
 					this.changes.designation.smallButton.backgroundColor = 'red';
 					//alert(this.mobile_input);
 				}
+			},
+			onChangeValidity(inputName){
+				console.log(this.fathers_name);
+				if(inputName == 'fathers_name'){
+					console.log(this.fathers_name);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.fathers_name);
+
+					result == false ? this.fathers_name_validity = 'invalid' : this.fathers_name_validity = 'valid';
+
+
+				}else if(inputName == 'mothers_name'){
+					console.log(this.mothers_name);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.mothers_name);
+
+					result == false ? this.mothers_name_validity = 'invalid' : this.mothers_name_validity = 'valid';
+				}else if(inputName == 'spouse_name'){
+					console.log(this.spouse_name);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.spouse_name);
+
+					result == false ? this.spouse_name_validity = 'invalid' : this.spouse_name_validity = 'valid';
+				}else if(inputName == 'number_of_children'){
+					console.log(this.number_of_children);
+					var patt= /^[\d]{1,2}$/g;
+					var result = patt.test(this.number_of_children);
+
+					result == false ? this.number_of_children_validity = 'invalid' : this.number_of_children_validity = 'valid';
+				}else if(inputName == 'workplace_or_institution'){
+					console.log(this.workplace_or_institution);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.workplace_or_institution);
+
+					result == false ? this.workplace_or_institution_validity = 'invalid' : this.workplace_or_institution_validity = 'valid';
+				}else if(inputName == 'designation'){
+					console.log(this.designation);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.designation);
+
+					result == false ? this.designation_validity = 'invalid' : this.designation_validity = 'valid';
+				}
+
+			},
+			submit(){
+				
+
+				if( this.fathers_name_validity == 'valid' &&  this.mothers_name_validity == 'valid' && this.spouse_name_validity == 'valid' && this.number_of_children_validity == 'valid' && this.workplace_or_institution_validity == 'valid' && this.designation_validity == 'valid' ){
+
+					this.status_text = 'All fields are valid';
+					this.dialog = true ;
+
+				}else{
+					this.status_text = 'invalid fields detected';
+					this.dialog = true ;
+				}
+
+
 			}
 
 		}
