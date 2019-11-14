@@ -1298,9 +1298,19 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_line1.smallText ' > <span>present_line1</span> <span @click="enable_input('present_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_line1.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_line1.smallText ' > <span>present_line1
 
-<input :disabled='present_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_line1 Here" type="text" value="" >
+
+
+
+<span v-show="present_line1_validity == 'valid'" class="text-success"> {{ present_line1_validity }} </span>
+<span v-show="present_line1_validity == 'invalid'" class="text-danger"> {{ present_line1_validity }} </span>
+
+
+
+</span> <span @click="enable_input('present_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_line1.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="present_line1" @keyup="onChangeValidity('present_line1')" :disabled='present_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_line1 Here" type="text" value="" >
 
 </div>
 
@@ -1317,9 +1327,19 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_post_code.smallText ' > <span>present_post_code</span> <span @click="enable_input('present_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_post_code.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_post_code.smallText ' > <span>present_post_code
 
-<input :disabled='present_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_post_code Here" type="text" value="" >
+
+
+<span v-show="present_post_code_validity == 'valid'" class="text-success"> {{ present_post_code_validity }} </span>
+<span v-show="present_post_code_validity == 'invalid'" class="text-danger"> {{ present_post_code_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('present_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_post_code.smallButton" class="small_button">Change</span></small>
+
+<input v-model="present_post_code" @keyup="onChangeValidity('present_post_code')"  :disabled='present_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_post_code Here" type="text" value="" >
 
 </div>
 
@@ -1327,9 +1347,23 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_district.smallText ' > <span>present_district</span> <span @click="enable_input('present_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_district.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_district.smallText ' > <span>present_district
 
-<input :disabled='present_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_district Here" type="text" value="" >
+
+
+
+<span v-show="present_district_validity == 'valid'" class="text-success"> {{ present_district_validity }} </span>
+<span v-show="present_district_validity == 'invalid'" class="text-danger"> {{ present_district_validity }} </span>
+
+
+
+
+
+
+</span> <span @click="enable_input('present_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_district.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="present_district" @keyup="onChangeValidity('present_district')" 
+ :disabled='present_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_district Here" type="text" value="" >
 
 </div>
 
@@ -1337,18 +1371,45 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_country.smallText ' > <span>present_country</span> <span @click="enable_input('present_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_country.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_country.smallText ' > <span>present_country
 
-<input :disabled='present_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_country Here" type="text" value="" >
+
+
+
+
+	
+<span v-show="present_country_validity == 'valid'" class="text-success"> {{ present_country_validity }} </span>
+<span v-show="present_country_validity == 'invalid'" class="text-danger"> {{ present_country_validity }} </span>
+
+
+
+
+
+</span> <span @click="enable_input('present_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_country.smallButton" class="small_button">Change</span></small>
+
+
+<input  v-model="present_country" @keyup="onChangeValidity('present_country')"   :disabled='present_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_country Here" type="text" value="" >
 
 </div>
 
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_line1.smallText ' > <span>permanent_line1</span> <span @click="enable_input('permanent_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_line1.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_line1.smallText ' > <span>permanent_line1
 
-<input :disabled='permanent_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_line1 Here" type="text" value="" >
+
+
+	
+<span v-show="permanent_line1_validity == 'valid'" class="text-success"> {{ permanent_line1_validity }} </span>
+<span v-show="permanent_line1_validity == 'invalid'" class="text-danger"> {{ permanent_line1_validity }} </span>
+
+
+
+
+
+</span> <span @click="enable_input('permanent_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_line1.smallButton" class="small_button">Change</span></small>
+
+<input v-model="permanent_line1" @keyup="onChangeValidity('permanent_line1')" :disabled='permanent_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_line1 Here" type="text" value="" >
 
 </div>
 
@@ -1365,9 +1426,22 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_post_code.smallText ' > <span>permanent_post_code</span> <span @click="enable_input('permanent_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_post_code.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_post_code.smallText ' > <span>permanent_post_code
 
-<input :disabled='permanent_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_post_code Here" type="text" value="" >
+
+
+	
+<span v-show="permanent_post_code_validity == 'valid'" class="text-success"> {{ permanent_post_code_validity }} </span>
+<span v-show="permanent_post_code_validity == 'invalid'" class="text-danger"> {{ permanent_post_code_validity }} </span>
+
+
+
+
+
+</span> <span @click="enable_input('permanent_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_post_code.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="permanent_post_code" @keyup="onChangeValidity('permanent_post_code')" 
+ :disabled='permanent_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_post_code Here" type="text" value="" >
 
 </div>
 
@@ -1375,19 +1449,38 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_district.smallText ' > <span>permanent_district</span> <span @click="enable_input('permanent_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_district.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_district.smallText ' > <span>permanent_district
 
-<input :disabled='permanent_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_district Here" type="text" value="" >
+
+	
+<span v-show="permanent_district_validity == 'valid'" class="text-success"> {{ permanent_district_validity }} </span>
+<span v-show="permanent_district_validity == 'invalid'" class="text-danger"> {{ permanent_district_validity }} </span>
+
+
+
+</span> <span @click="enable_input('permanent_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_district.smallButton" class="small_button">Change</span></small>
+
+<input v-model="permanent_district" @keyup="onChangeValidity('permanent_district')" 
+ :disabled='permanent_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_district Here" type="text" value="" >
 
 </div>
 
 
 
-
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_country.smallText ' > <span>permanent_country</span> <span @click="enable_input('permanent_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_country.smallButton" class="small_button">Change</span></small>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_country.smallText ' > <span>permanent_country
 
-<input :disabled='permanent_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_country Here" type="text" value="" >
+
+	
+<span v-show="permanent_country_validity == 'valid'" class="text-success"> {{ permanent_country_validity }} </span>
+<span v-show="permanent_country_validity == 'invalid'" class="text-danger"> {{ permanent_country_validity }} </span>
+
+
+
+</span> <span @click="enable_input('permanent_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_country.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="permanent_country" @keyup="onChangeValidity('permanent_country')" 
+ :disabled='permanent_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_country Here" type="text" value="" >
 
 </div>
 
@@ -1423,6 +1516,26 @@ Vue.component('address1' , {
 			permanent_district_input: true,
 			permanent_post_code_input: true,
 			permanent_country_input: true,
+			present_line1_validity: false,
+			present_line2_validity: false,
+			present_district_validity: false,
+			present_post_code_validity: false,
+			present_country_validity: false,
+			permanent_line1_validity: false,
+			permanent_line2_validity: false,
+			permanent_district_validity: false,
+			permanent_post_code_validity: false,
+			permanent_country_validity: false,
+			present_line1: '',
+			present_line2: '',
+			present_district: '',
+			present_post_code: '',
+			present_country: '',
+			permanent_line1: '',
+			permanent_line2: '',
+			permanent_district: '',
+			permanent_post_code: '',
+			permanent_country: '',
 			changes:{
 				present_line1:{
 					smallText: {
@@ -1581,6 +1694,19 @@ Vue.component('address1' , {
 					this.changes.permanent_country.smallButton.backgroundColor = 'red';
 					//alert(this.mobile_input);
 				}
+			},
+			onChangeValidity(inputName){
+				console.log(this.present_line1);
+				console.log(this.present_district);
+				console.log(this.present_country);
+				console.log(this.present_post_code);
+				console.log(this.permanent_line1);
+				console.log(this.permanent_district);
+				console.log(this.permanent_country);
+				console.log(this.permanent_post_code);
+
+
+
 			}
 
 		},
