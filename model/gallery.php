@@ -33,7 +33,7 @@ function getPhotos(){
 	//print_r($row);
 
 
-//echo json_encode($row);
+	//echo json_encode($row);
 	$array2d ;
 
 	$result = $stmt->get_result();

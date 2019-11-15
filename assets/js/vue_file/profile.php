@@ -455,19 +455,36 @@
 
 				if(this.full_name_validity == 'valid' && this.mobile_validity == 'valid' && this.institution_id_validity == 'valid' && this.nid_or_passport_validity == 'valid' && this.blood_group_validity == 'valid' && this.dob_validity == 'valid' ){
 
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'basic',
+						full_name: this.full_name,
+						mobile: this.mobile,
+						institution_id: this.institution_id,
+						nid_or_passport: this.nid_or_passport,
+						blood_group: this.blood_group,
+						dob: this.dob,
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.status_text = 'Update requested successfully! wait for admin approval';
+						this.dialog = true;
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
 
 
 
 
 
-
-
-
-
-
-
-					this.status_text = 'Update requested successfully! wait for admin approval';
-					this.dialog = true;
 
 				}else{
 					this.status_text = 'all field are not valid';
@@ -1243,6 +1260,41 @@ Vue.component('personal' , {
 
 				if( this.fathers_name_validity == 'valid' &&  this.mothers_name_validity == 'valid' && this.spouse_name_validity == 'valid' && this.number_of_children_validity == 'valid' && this.workplace_or_institution_validity == 'valid' && this.designation_validity == 'valid' ){
 
+
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'personal',
+						fathers_name: this.fathers_name,
+						mothers_name: this.mothers_name,
+						spouse_name: this.spouse_name,
+						number_of_children: this.number_of_children,
+						workplace_or_institution: this.workplace_or_institution,
+						designation: this.designation,
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.status_text = 'Update requested successfully! wait for admin approval';
+						this.dialog = true;
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+
+
+
+
+
+
+
 					this.status_text = 'All fields are valid';
 					this.dialog = true ;
 
@@ -1316,15 +1368,6 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_line2.smallText ' > <span>present_line2</span> <span @click="enable_input('present_line2')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_line2.smallButton" class="small_button">Change</span></small>
-
-<input :disabled='present_line2_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_line2 Here" type="text" value="" >
-
-</div>
-
-
-
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
 <small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_post_code.smallText ' > <span>present_post_code
@@ -1363,7 +1406,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </span> <span @click="enable_input('present_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_district.smallButton" class="small_button">Change</span></small>
 
 <input  v-model="present_district" @keyup="onChangeValidity('present_district')" 
- :disabled='present_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_district Here" type="text" value="" >
+:disabled='present_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_district Here" type="text" value="" >
 
 </div>
 
@@ -1377,7 +1420,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 
-	
+
 <span v-show="present_country_validity == 'valid'" class="text-success"> {{ present_country_validity }} </span>
 <span v-show="present_country_validity == 'invalid'" class="text-danger"> {{ present_country_validity }} </span>
 
@@ -1399,7 +1442,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 
-	
+
 <span v-show="permanent_line1_validity == 'valid'" class="text-success"> {{ permanent_line1_validity }} </span>
 <span v-show="permanent_line1_validity == 'invalid'" class="text-danger"> {{ permanent_line1_validity }} </span>
 
@@ -1415,22 +1458,13 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_line2.smallText ' > <span>permanent_line2</span> <span @click="enable_input('permanent_line2')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_line2.smallButton" class="small_button">Change</span></small>
-
-<input :disabled='permanent_line2_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_line2 Here" type="text" value="" >
-
-</div>
-
-
-
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
 <small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_post_code.smallText ' > <span>permanent_post_code
 
 
 
-	
+
 <span v-show="permanent_post_code_validity == 'valid'" class="text-success"> {{ permanent_post_code_validity }} </span>
 <span v-show="permanent_post_code_validity == 'invalid'" class="text-danger"> {{ permanent_post_code_validity }} </span>
 
@@ -1441,7 +1475,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </span> <span @click="enable_input('permanent_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_post_code.smallButton" class="small_button">Change</span></small>
 
 <input  v-model="permanent_post_code" @keyup="onChangeValidity('permanent_post_code')" 
- :disabled='permanent_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_post_code Here" type="text" value="" >
+:disabled='permanent_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_post_code Here" type="text" value="" >
 
 </div>
 
@@ -1452,7 +1486,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_district.smallText ' > <span>permanent_district
 
 
-	
+
 <span v-show="permanent_district_validity == 'valid'" class="text-success"> {{ permanent_district_validity }} </span>
 <span v-show="permanent_district_validity == 'invalid'" class="text-danger"> {{ permanent_district_validity }} </span>
 
@@ -1461,7 +1495,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </span> <span @click="enable_input('permanent_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_district.smallButton" class="small_button">Change</span></small>
 
 <input v-model="permanent_district" @keyup="onChangeValidity('permanent_district')" 
- :disabled='permanent_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_district Here" type="text" value="" >
+:disabled='permanent_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_district Here" type="text" value="" >
 
 </div>
 
@@ -1471,7 +1505,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_country.smallText ' > <span>permanent_country
 
 
-	
+
 <span v-show="permanent_country_validity == 'valid'" class="text-success"> {{ permanent_country_validity }} </span>
 <span v-show="permanent_country_validity == 'invalid'" class="text-danger"> {{ permanent_country_validity }} </span>
 
@@ -1480,7 +1514,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </span> <span @click="enable_input('permanent_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_country.smallButton" class="small_button">Change</span></small>
 
 <input  v-model="permanent_country" @keyup="onChangeValidity('permanent_country')" 
- :disabled='permanent_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_country Here" type="text" value="" >
+:disabled='permanent_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_country Here" type="text" value="" >
 
 </div>
 
@@ -1804,10 +1838,38 @@ Vue.component('address1' , {
 			},
 			submit(){
 
-				if(this.present_district_validity == 'valid' && this.present_country_validity == 'valid' && this.present_post_code_validity == 'valid' &&  this.permanent_line1_validity == 'valid' &&  this.permanent_district_validity == 'valid' &&  this.permanent_country_validity == 'valid' &&  this.permanent_post_code_validity == 'valid' ){
+				if(this.present_line1_validity == 'valid' && this.present_district_validity == 'valid' && this.present_country_validity == 'valid' && this.present_post_code_validity == 'valid' &&  this.permanent_line1_validity == 'valid' &&  this.permanent_district_validity == 'valid' &&  this.permanent_country_validity == 'valid' &&  this.permanent_post_code_validity == 'valid' ){
 
 					
 					
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'address1',
+						present_line1: this.present_line1,
+						present_district: this.present_district,
+						present_post_code: this.present_post_code,
+						present_country: this.present_country,
+						permanent_line1: this.permanent_line1,
+						permanent_district: this.permanent_district,
+						permanent_post_code: this.permanent_post_code,
+						permanent_country: this.permanent_country,
+						
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.status_text = 'Update requested successfully! wait for admin approval';
+						this.dialog = true;
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
 
 
 					this.status_text = 'all fields are valid';

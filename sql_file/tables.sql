@@ -281,23 +281,17 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_basic(IN email1 VARCHAR(100), in full_name1 varchar(100) , in mobile1 varchar(100) , in institution_id varchar(100) , in blood_group1 varchar(100) ,  in dob varchar(200) , OUT result VARCHAR(100))
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_address(IN email1 VARCHAR(100), in present_line11 varchar(100) , in present_district1 varchar(100) , in present_post_code1 int(100) ,  in present_country1 varchar(200) , in permanent_line11 varchar(100) , in permanent_district1 varchar(100) , in permanent_post_code1 int(100) ,  in permanent_country1 varchar(200)  , out result VARCHAR(100))
+
 BEGIN
 
 DECLARE count int(5);
 
-SELECT max(membership_number) into count from users_registration;
--- SELECT COUNT(*) int count FROM verification_info WHERE status = 'approved' ; 
+
+update users_address set  present_line1 = present_line11, present_district = present_district1, present_post_code = present_post_code1 , present_country = present_country1 , parmanent_line1 = permanent_line11 , parmanent_district = permanent_district1, parmanent_post_code = permanent_post_code1 , parmanent_country = permanent_country1 where email = email1 ;
 
 
-
-UPDATE verification_info SET status ='approved'   WHERE email = email1 ;
-
-
-UPDATE users_registration SET membership_number = count+1   WHERE email = email1 ;
-
-
-
+set result = 'success' ;
 
 END$$
 DELIMITER ;
