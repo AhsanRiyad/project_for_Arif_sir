@@ -57,7 +57,7 @@ CREATE TABLE `users_registration` (
   `full_name` varchar(100) DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL,
   `institution_id` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
+  `password` varchar(500) DEFAULT NULL,
   `registration_date` datetime(6) DEFAULT NULL,
   `membership_number` int(255) DEFAULT NULL
   );

@@ -16,7 +16,7 @@ $email = $d1->email;
 $full_name = $d1->full_name;
 $mobile = $d1->mobile;
 $institution_id = $d1->institution_id;
-$password1 = $d1->password;
+$password1 = md5($d1->password);
 $otp = rand(1000,9999);
 
 // echo $password;

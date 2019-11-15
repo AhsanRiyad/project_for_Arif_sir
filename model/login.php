@@ -16,7 +16,7 @@ if (hash_equals($_SESSION['csrf_token1'], $email = $d1->csrf_token1)) {
 
 
 
-    $email = $d1->email;
+    $email = md5($d1->email);
     $password1 = $d1->password;
 
 
