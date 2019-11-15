@@ -1487,7 +1487,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mx-0 px-0 ">
-<button id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
+<button @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
 Update Info
 </button>
 </div>
@@ -1498,6 +1498,40 @@ Update Info
 </div>
 </div>
 
+
+
+<v-row justify="center">
+
+
+<v-dialog
+v-model="dialog"
+max-width="290"
+>
+<v-card>
+<v-card-title class="headline">Status</v-card-title>
+
+<v-card-text class="black--text">
+{{ status_text }}
+</v-card-text>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+
+
+
+<v-btn
+color="green darken-1"
+text
+@click="dialog = false"
+>
+Okay
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+</v-row>
+
+
 </div>`;
 
 Vue.component('address1' , {
@@ -1506,6 +1540,8 @@ Vue.component('address1' , {
 	data(){
 		return {
 			name: 'riyad---vue',
+			dialog: false,
+			status_text: '' ,
 			present_line1_input: true,
 			present_line2_input: true,
 			present_district_input: true,
@@ -1705,9 +1741,90 @@ Vue.component('address1' , {
 				console.log(this.permanent_country);
 				console.log(this.permanent_post_code);
 
+				if(inputName == 'present_line1'){
+					console.log(this.present_line1);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.present_line1);
+
+					result == false ? this.present_line1_validity = 'invalid' : this.present_line1_validity = 'valid';
+
+				}else if(inputName == 'present_district'){
+					console.log(this.present_district);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.present_district);
+
+					result == false ? this.present_district_validity = 'invalid' : this.present_district_validity = 'valid';
+
+				}else if(inputName == 'present_country'){
+					console.log(this.present_country);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.present_country);
+
+					result == false ? this.present_country_validity = 'invalid' : this.present_country_validity = 'valid';
+
+				}else if(inputName == 'present_post_code'){
+					console.log(this.present_post_code);
+					var patt= /[\+]{0,1}[\d]{4,}/g;
+					var result = patt.test(this.present_post_code);
+
+					result == false ? this.present_post_code_validity = 'invalid' : this.present_post_code_validity = 'valid';
+
+				}else if(inputName == 'permanent_line1'){
+					console.log(this.permanent_line1);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.permanent_line1);
+
+					result == false ? this.permanent_line1_validity = 'invalid' : this.permanent_line1_validity = 'valid';
+
+				}else if(inputName == 'permanent_district'){
+					console.log(this.permanent_district);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.permanent_district);
+
+					result == false ? this.permanent_district_validity = 'invalid' : this.permanent_district_validity = 'valid';
+
+				}else if(inputName == 'permanent_country'){
+					console.log(this.permanent_country);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.permanent_country);
+
+					result == false ? this.permanent_country_validity = 'invalid' : this.permanent_country_validity = 'valid';
+
+				}else if(inputName == 'permanent_post_code'){
+					console.log(this.permanent_post_code);
+					var patt= /[\+]{0,1}[\d]{4,}/g;
+					var result = patt.test(this.permanent_post_code);
+
+					result == false ? this.permanent_post_code_validity = 'invalid' : this.permanent_post_code_validity = 'valid';
+
+				}
 
 
-			}
+
+			},
+			submit(){
+
+				if(this.present_district_validity == 'valid' && this.present_country_validity == 'valid' && this.present_post_code_validity == 'valid' &&  this.permanent_line1_validity == 'valid' &&  this.permanent_district_validity == 'valid' &&  this.permanent_country_validity == 'valid' &&  this.permanent_post_code_validity == 'valid' ){
+
+					
+					
+
+
+					this.status_text = 'all fields are valid';
+					this.dialog = true;
+
+
+
+
+				}else {
+
+					this.status_text = 'all fields are not valid';
+					this.dialog = true;
+
+				}
+
+
+			},
 
 		},
 		created(){
