@@ -38,13 +38,14 @@ if($d1->purpose == 'basic'){
 	$mothers_name= $d1->mothers_name;
 	$spouse_name= $d1->spouse_name;
 	$number_of_children= $d1->number_of_children;
+	$profession = $d1->profession;
 	$workplace_or_institution= $d1->workplace_or_institution;
 	$designation= $d1->designation;
 
 	$conn = get_mysqli_connection();
-	$sql = "call update_profile_personal(?,?,?,?,?,?,?,@result)";
+	$sql = "call update_profile_personal(?,?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ssssiss' , $email , $fathers_name , $mothers_name, $spouse_name , $number_of_children , $workplace_or_institution , $designation  );
+	$stmt->bind_param('ssssisss' , $email , $fathers_name , $mothers_name, $spouse_name , $number_of_children , $profession , $workplace_or_institution , $designation  );
 	$stmt->execute();
 	$stmt->close();
 
@@ -82,4 +83,21 @@ if($d1->purpose == 'basic'){
 
 
 
+}else if($d1->purpose == 'getProfileBasicInfo'){
+
+	$conn = get_mysqli_connection();
+	$sql = "select * from users_registration ur , users_info ui , users_address ua where ui.email = ur.email and  ua.email = ur.email and ur.email = (?)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('s' , $email);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$row = $result->fetch_assoc();
+	$stmt->close();
+	$conn->close();
+
+	echo json_encode($row);
+
+
+	// $i = 0;
+// echo json_encode(var_dump($row));
 }

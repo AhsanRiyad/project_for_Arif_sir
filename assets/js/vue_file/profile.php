@@ -500,12 +500,22 @@
 		created(){
 			axios.post( this.model.modelProfile_update ,
 			{
-				purpose: 'Profile_update',
+				purpose: 'getProfileBasicInfo',
 				
 			}
 			).then(function(response){
 				
 				console.log(response);
+				this.full_name = response.data.full_name;
+
+
+				this.full_name = response.data.full_name;
+				this.mobile = response.data.mobile;
+				this.institution_id = response.data.institution_id;
+				this.nid_or_passport = response.data.nid_or_passport;
+				this.blood_group = response.data.blood_group;
+				this.dob = response.data.date_of_birth;
+
 
 
 			}.bind(this))
@@ -997,6 +1007,23 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.profession.smallText ' > <span>profession
+
+
+<span v-show="profession_validity == 'valid'" class="text-success"> {{ profession_validity }} </span>
+<span v-show="profession_validity == 'invalid'" class="text-danger"> {{ profession_validity }} </span>
+
+
+
+</span> <span @click="enable_input('profession')" id="idSpanEmailChangeDashboard" v-bind:style="changes.profession.smallButton" class="small_button">Change</span></small>
+
+<input v-model="profession" @keyup="onChangeValidity('profession')" 
+:disabled='profession_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your profession Here" type="text" value="" >
+
+</div>
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
 <small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.workplace_or_institution.smallText ' > <span>workplace_or_institution
 
 
@@ -1096,6 +1123,7 @@ Vue.component('personal' , {
 			spouse_name_input: true,
 			number_of_children_input: true,
 			dob_input: true,
+			profession_input: true,
 			workplace_or_institution_input: true,
 			designation_input: true,
 			fathers_name: '',
@@ -1103,6 +1131,7 @@ Vue.component('personal' , {
 			spouse_name: '',
 			number_of_children: '',
 			dob: '',
+			profession: '',
 			workplace_or_institution: '',
 			designation: '',
 			designation_validity: false,
@@ -1111,6 +1140,7 @@ Vue.component('personal' , {
 			spouse_name_validity: false,
 			number_of_children_validity: false,
 			dob_validity: false,
+			profession_validity: false,
 			workplace_or_institution_validity: false,
 			designation_validity: false,
 			changes:{
@@ -1142,6 +1172,15 @@ Vue.component('personal' , {
 					}
 				},
 				number_of_children:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+				profession:{
 					smallText: {
 						color: '#2196f3'					
 					},
@@ -1198,6 +1237,12 @@ Vue.component('personal' , {
 					this.changes.number_of_children.smallButton.color = 'white';
 					this.changes.number_of_children.smallButton.backgroundColor = 'red';
 					//alert(this.mobile_input);
+				}else if(name=='profession'){
+					this.profession_input = false;
+					this.changes.profession.smallText.color = 'red';
+					this.changes.profession.smallButton.color = 'white';
+					this.changes.profession.smallButton.backgroundColor = 'red';
+					//alert(this.mobile_input);
 				}else if(name=='workplace_or_institution'){
 					this.workplace_or_institution_input = false;
 					this.changes.workplace_or_institution.smallText.color = 'red';
@@ -1240,6 +1285,12 @@ Vue.component('personal' , {
 					var result = patt.test(this.number_of_children);
 
 					result == false ? this.number_of_children_validity = 'invalid' : this.number_of_children_validity = 'valid';
+				}else if(inputName == 'profession'){
+					console.log(this.profession);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(this.profession);
+
+					result == false ? this.profession_validity = 'invalid' : this.profession_validity = 'valid';
 				}else if(inputName == 'workplace_or_institution'){
 					console.log(this.workplace_or_institution);
 					var patt= /[A-Za-z.\s]{5,}/g;
@@ -1258,7 +1309,7 @@ Vue.component('personal' , {
 			submit(){
 				
 
-				if( this.fathers_name_validity == 'valid' &&  this.mothers_name_validity == 'valid' && this.spouse_name_validity == 'valid' && this.number_of_children_validity == 'valid' && this.workplace_or_institution_validity == 'valid' && this.designation_validity == 'valid' ){
+				if( this.fathers_name_validity == 'valid' &&  this.mothers_name_validity == 'valid' && this.spouse_name_validity == 'valid' && this.number_of_children_validity == 'valid' &&  this.profession_validity == 'valid' && this.workplace_or_institution_validity == 'valid' && this.designation_validity == 'valid' ){
 
 
 
@@ -1269,6 +1320,7 @@ Vue.component('personal' , {
 						mothers_name: this.mothers_name,
 						spouse_name: this.spouse_name,
 						number_of_children: this.number_of_children,
+						profession: this.profession,
 						workplace_or_institution: this.workplace_or_institution,
 						designation: this.designation,
 					}
@@ -1288,13 +1340,6 @@ Vue.component('personal' , {
         //console.log(error);
     }.bind(this));
 
-
-
-
-
-
-
-
 					this.status_text = 'All fields are valid';
 					this.dialog = true ;
 
@@ -1305,6 +1350,43 @@ Vue.component('personal' , {
 
 
 			}
+
+
+		},
+		created(){
+
+
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				console.log(response);
+				this.full_name = response.data.full_name;
+
+
+				this.fathers_name = response.data.fathers_name;
+				this.mothers_name = response.data.mother_name;
+				this.spouse_name = response.data.spouse_name;
+				this.number_of_children = response.data.number_of_children;
+				this.number_of_children = response.data.number_of_children;
+				this.profession = response.data.profession;
+				this.workplace_or_institution = response.data.institution;
+				this.designation = response.data.designation;
+
+
+			}.bind(this))
+			.catch(function(error){
+
+				
+
+        //console.log(error);
+    }.bind(this));
+
+
+
 
 		}
 	})
@@ -1890,6 +1972,47 @@ Vue.component('address1' , {
 
 		},
 		created(){
+
+
+
+
+
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				console.log(response);
+				
+				this.present_line1 = response.data.present_line1;
+				this.present_district = response.data.present_district;
+				this.present_post_code = response.data.present_post_code;
+				this.present_district = response.data.present_district;
+				
+				this.permanent_line1 = response.data.parmanent_line1;
+				this.permanent_district = response.data.parmanent_district;
+				this.permanent_post_code = response.data.parmanent_post_code;
+				this.permanent_district = response.data.parmanent_district;
+				
+
+
+			}.bind(this))
+			.catch(function(error){
+
+				
+
+        //console.log(error);
+    }.bind(this));
+
+
+
+
+		
+
+
+
 			
 		}
 	})
