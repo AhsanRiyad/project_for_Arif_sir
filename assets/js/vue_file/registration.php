@@ -48,20 +48,36 @@ Welcome, Create your Account
 
 <!-- full name input -->
 <div class="form-group mt-3">
-<label for="exampleInputEmail1"><small id="lnLabel">full Name*</small>
-<small v-bind:style="{ color : full_name_color }" >
-{{ name_result }}
+<label for="exampleInputEmail1"><small id="lnLabel">full Name*
+
+
+
+<span v-show="full_name_validity == 'valid'" class="text-success"> {{ full_name_validity }} </span>
+<span v-show="full_name_validity == 'invalid'" class="text-danger"> {{ full_name_validity }}  </span>
+
+
+
 </small>
+
 <br>
 
 
 </label>
-<input name="full_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter full name" value="" ref='full_name' v-on:change='full_name_change()'>
+<input @keyup="onChangeValidity('full_name')" name="full_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="full_nameHelp" placeholder="Enter full name"  ref='full_name' >
 </div>
 
 <!-- institution_id input -->
 <div class="form-group mt-3">
-<label for="exampleInputEmail1"><small id="lnLabel">institution_id*</small>
+<label for="exampleInputEmail1"><small id="lnLabel">institution_id*
+
+
+
+<span v-show="institution_id_validity == 'valid'" class="text-success"> {{ institution_id_validity }} </span>
+<span v-show="institution_id_validity == 'invalid'" class="text-danger"> {{ institution_id_validity }}  </span>
+
+
+
+</small>
 <small class="text-danger">
 
 </small>
@@ -69,7 +85,8 @@ Welcome, Create your Account
 
 
 </label>
-<input name="institution_id" v-model='institution_id'  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter institution_id" value="">
+
+<input @keyup="onChangeValidity('institution_id')"  name="institution_id" v-model='institution_id'  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter institution_id" value="">
 </div>
 
 
@@ -77,7 +94,13 @@ Welcome, Create your Account
 
 <!-- mobile number input -->
 <div class="form-group mb-xl-3">
-<label for="exampleInputEmail1"><small id="exampleLabelMobile">Mobile Number*</small>
+<label for="exampleInputEmail1"><small id="exampleLabelMobile">Mobile Number*
+
+<span v-show="mobile_validity == 'valid'" class="text-success"> {{ mobile_validity }} </span>
+<span v-show="mobile_validity == 'invalid'" class="text-danger"> {{ mobile_validity }}  </span>
+
+
+</small>
 
 <small class="text-danger">
 
@@ -87,7 +110,7 @@ Welcome, Create your Account
 
 </label>
 
-<input v-model='mobile' name="mobile" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
+<input @keyup="onChangeValidity('mobile')" v-model='mobile' name="mobile" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
 value="">
 </div>
 
@@ -112,6 +135,12 @@ value="">
 <div class="form-group mb-xl-3 mt-3">
 <label for="exampleInputEmail1"><small id="exampleLabelMobile">Email*
 
+
+<span v-show="email_validity == 'valid'" class="text-success"> {{ email_validity }} </span>
+<span v-show="email_validity == 'invalid'" class="text-danger"> {{ email_validity }}  </span>
+
+
+
 <span class="text-danger">
 
 </span>
@@ -126,16 +155,27 @@ value="">
 
 </label>
 
-<input name="email" v-model='email' type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter email address"
+<input @keyup="onChangeValidity('email')" name="email" v-model='email' type="text" class="form-control rounded-0" id="exampleInputemail" aria-describedby="emailHelp" placeholder="Enter email address"
 value="">
 </div>
 
 
 <div class="form-group mb-xl-3">
-<label for="exampleInputPassword1"><small id='idexampleInputPassword1'>Password* </small>
+<label for="exampleInputPassword1"><small id='idexampleInputPassword1'>Password*
+
+
+
+<span v-show="password_validity == 'valid'"  class="text-success"> {{ password_validity }} </span>
+<span v-show="password_validity == 'invalid'" class="text-danger"> {{ password_validity }}  </span>
+
+
+
+
+
+</small>
 <br>
 </label>
-<input v-model='password' name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password" value="">
+<input @keyup="onChangeValidity('password')"  v-model='password' name="password" type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password" value="">
 </div>
 <!-- toc terms and condition input -->
 
@@ -156,6 +196,48 @@ value="">
 </div>
 </div>
 </div>
+
+
+
+
+
+	<v-row justify="center">
+
+
+	<v-dialog
+	v-model="dialog"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline">Status</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ status_text }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog = false"
+	>
+	Okay
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+
+
+
+
+
+
+
 </div>
 
 
@@ -168,12 +250,18 @@ Vue.component('registration' , {
 	data(){
 		return {
 			name: 'riyad---vue',
-			name_result: '' , 
-			full_name_color : 'green',
+			dialog: false,
+			status_text: '',
+			full_name : 'green',
 			email: '',
 			mobile: '',
 			institution_id: '',
 			password: '',
+			full_name_validity : 'green',
+			email_validity: '',
+			mobile_validity: '',
+			institution_id_validity: '',
+			password_validity: '',
 			registratrion_status: 'default',
 			loading: false
 		}
@@ -206,29 +294,81 @@ Vue.component('registration' , {
 		submit: function(){
 			// alert('on click');
 			this.loading = true;
-			axios.post('<?php echo $modelRegirstration; ?>', {
-				full_name: this.$refs.full_name.value,
-				institution_id: this.institution_id,
-				email: this.email,
-				mobile: this.mobile,
-				password: this.password
-			})
-			.then( function(response){
-				this.registratrion_status = response.data ; 
-				this.loading = false;
 
-			}.bind(this))
-			.catch(function (error) {
-				console.log(error);
-				this.loading = false;
+			if(this.full_name_validity == 'valid' && this.institution_id_validity == 'valid' && this.mobile_validity == 'valid' && this.email_validity == 'valid' && this.password_validity == 'valid'){
+
+
+				axios.post('<?php echo $modelRegirstration; ?>', {
+					full_name: this.$refs.full_name.value,
+					institution_id: this.institution_id,
+					email: this.email,
+					mobile: this.mobile,
+					password: this.password
+				})
+				.then( function(response){
+					this.registratrion_status = response.data ; 
+					this.loading = false;
+
+				}.bind(this))
+				.catch(function (error) {
+					console.log(error);
+					this.loading = false;
 				//return 'hi';
 			});
+			}else{
+
+				this.loading = false;
+				this.status_text = 'invalid field detected';
+				this.dialog = true;
+
+			}
+
+
 
 			
 
 			//alert(this.registratrion_status+ 'outside');
 
 			//window.location.href = '';
+		},
+		onChangeValidity(inputName){
+			if(inputName == 'full_name'){
+				console.log(this.$refs.full_name.value);
+				var patt= /[A-Za-z.\s]{5,}/g;
+				var result = patt.test(this.$refs.full_name.value);
+
+				result == false ? this.full_name_validity = 'invalid' : this.full_name_validity = 'valid';
+
+			}else if(inputName == 'institution_id'){
+				console.log(this.institution_id);
+				var patt= /[A-Za-z.\s]{5,}/g;
+				var result = patt.test(this.institution_id);
+
+				result == false ? this.institution_id_validity = 'invalid' : this.institution_id_validity = 'valid';
+
+			}else if(inputName == 'mobile'){
+				console.log(this.mobile);
+				var patt= /[\+]{0,1}[\d]{11,}/g;
+				var result = patt.test(this.mobile);
+
+				result == false ? this.mobile_validity = 'invalid' : this.mobile_validity = 'valid';
+
+			}else if(inputName == 'email'){
+				console.log(this.email);
+				var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
+				var result = patt.test(this.email);
+
+				result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
+
+			}else if(inputName == 'password'){
+				console.log(this.password);
+				var patt= /[\S]{6,}/g;
+				var result = patt.test(this.password);
+
+				result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
+
+			}
+
 		}
 	},
 	beforeCreate(){
