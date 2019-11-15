@@ -105,6 +105,28 @@ if($d1->purpose == 'basic'){
 
 
 
+}else if($d1->purpose == 'email'){
+	
+
+	$email1 = $d1->email;
+
+	//echo $email1;
+
+	$conn = get_mysqli_connection();
+	$sql = "call update_profile_email( ? , ? , @result)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('ss' , $email , $email1 );
+
+	$stmt->execute();
+	$stmt->close();
+	$sql = 'select @result as st'; 
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+
+	echo $row['st'];
+
+
+
 }else if($d1->purpose == 'getProfileBasicInfo'){
 
 	$conn = get_mysqli_connection();

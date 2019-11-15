@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2019 at 08:50 PM
+-- Generation Time: Nov 15, 2019 at 09:08 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -139,6 +139,25 @@ update users_info set  nid_or_passport = nid_or_passport1, date_of_birth = dob1 
 
 
 update users_registration set full_name = full_name1 , mobile = mobile1 , institution_id = institution_id1  where email = email1 ;
+
+
+
+set result = 'success' ;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_email` (IN `email1` VARCHAR(100), IN `email2` VARCHAR(100), OUT `result` VARCHAR(100))  BEGIN
+
+DECLARE count int(5);
+
+
+update users_registration set  email = email2 where email = email1 ;
+update users_info set  email = email2 where email = email1 ;
+update users_address set  email = email2 where email = email1 ;
+update user_uploads set  email = email2 where email = email1 ;
+update user_photos set  email = email2 where email = email1 ;
+update verification_info set email_verification_status = 'not_verified' where email = email1;
+update verification_info set  email = email2 where email = email1 ;
 
 
 
@@ -369,7 +388,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `otp_time`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(67, 'riyad298@gmail.com', '3138', NULL, 'rejected', NULL, 'not_requested', 'user', 'fathers_name,spouse_name,designation,date_of_birth,institution_id', 20),
+(67, 'riyad298@gmail.com', '3138', NULL, 'rejected', 'not_verified', 'not_requested', 'user', 'fathers_name,spouse_name,designation,date_of_birth,institution_id', 20),
 (68, '', '4297', NULL, 'rejected', NULL, 'not_requested', 'user', 'email', 20),
 (69, 'riyad298@yahoo.com', '7087', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),
 (70, 'riyad298@hotmail.com', '9376', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),

@@ -67,8 +67,8 @@
 	<v-btn :disabled="componet_name == 'address1'" @click="changeComponent('address1')" large class="ml-1" color="success">address</v-btn>
 	<v-btn :disabled="componet_name == 'photos'" @click="changeComponent('photos')" large class="ml-1" color="success">photo</v-btn>
 	<div class="w-100"></div>
-	<v-btn :disabled="componet_name == 'password'" @click="changeComponent('photos')" large class="ml-1 mt-2" color="success">change Password</v-btn>
-	<v-btn :disabled="componet_name == 'email'" @click="changeComponent('photos')" large class="ml-1 mt-2" color="success">change Email</v-btn>
+	<v-btn :disabled="componet_name == 'password'" @click="changeComponent('password')" large class="ml-1 mt-2" color="success">change Password</v-btn>
+	<v-btn :disabled="componet_name == 'email'" @click="changeComponent('email')" large class="ml-1 mt-2" color="success">change Email</v-btn>
 
 	</div>
 
@@ -97,6 +97,211 @@
 		}
 	})
 
+
+
+
+
+
+
+	var code = `<div class="container-fluid bg-light mt-5 ">
+	<div class="row justify-content-center align-items-center">
+
+	<!-- update top part starts-->
+
+	<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+
+
+	<div class="row bg-white mx-1">
+
+	<div class="col-3 mr-0 pr-0 my-2">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+	<div class="w-100"></div>
+	</div>
+	<div class="col-9  ml-0">
+	<p class="h3 ">
+
+	</p>
+	<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+	</div>
+
+	</div>
+
+	<!-- update top part ends-->
+
+
+	<!-- update field part starts -->
+	<div class="row bg-white mt-4 justify-content-center mx-1">
+	<div class="w-100 bg-info">
+	<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Change email</p>
+	</div>
+
+	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.email.smallText ' > <span>New email 
+
+
+	<span v-show="email_validity == 'valid'" class="text-success"> {{ email_validity }} </span>
+	<span v-show="email_validity == 'invalid'" class="text-danger"> {{ email_validity }} </span>
+	
+	
+
+
+	</span> <span @click="enable_input('email')" id="idSpanEmailChangeDashboard" v-bind:style="changes.email.smallButton" class="small_button">Change</span></small>
+
+	<input @keyup="validityCheckInput('email')" v-model="email" :disabled='email_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="email" value="" >
+
+	</div>
+
+	
+
+
+	<div class="col-10 mx-0 px-0 ">
+	<v-btn color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+	Update Info
+	</v-btn>
+	</div>
+
+	<!-- update field part ends -->
+
+	</div>
+	</div>
+	</div>
+	
+	<v-row justify="center">
+
+
+	<v-dialog
+	v-model="dialog"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline">Status</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ status_text }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog = false"
+	>
+	Okay
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+
+
+
+	</div>`;
+
+	Vue.component('email' , {
+		props: ['profile_photo' , 'CSRF_TOKEN'],
+		template: code,
+		data(){
+			return {
+				name: 'riyad---vue',
+				dialog: false,
+				status_text: '',
+				email_input: true,
+				email: '',
+				email_validity: '',
+				changes:{
+					email:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
+					},
+					
+				} 
+			}
+		},
+		methods: {
+			enable_input: function(name){
+				if(name=='email'){
+					this.email_input = false;
+					this.changes.email.smallText.color = 'red';
+					this.changes.email.smallButton.color = 'white';
+					this.changes.email.smallButton.backgroundColor = 'red';
+					//alert(this.email_input);
+				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'email'){
+					console.log(this.email);
+					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
+					var result = patt.test(this.email);
+
+					result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
+				}
+			},
+			submit(){
+				//alert(this.blood_group);
+				this.validityCheckInput('email');
+				
+
+				if(this.email_validity == 'valid' ){
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'email',
+						email: this.email,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.status_text = 'email Updated successfully';
+						this.dialog = true;
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+				}else{
+					this.status_text = 'email is not valid';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
+			}
+
+		},
+		created(){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				//this.email = response.data.full_name;
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+		}
+	})
 
 
 

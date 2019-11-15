@@ -281,14 +281,21 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_password(IN email1 VARCHAR(100), in password1 varchar(100)  , out result VARCHAR(100))
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_email(IN email1 VARCHAR(100), in email2 varchar(100)  , out result VARCHAR(100))
 
 BEGIN
 
 DECLARE count int(5);
 
 
-update users_registration set  password = password1 where email = email1 ;
+update users_registration set  email = email2 where email = email1 ;
+update users_info set  email = email2 where email = email1 ;
+update users_address set  email = email2 where email = email1 ;
+update user_uploads set  email = email2 where email = email1 ;
+update user_photos set  email = email2 where email = email1 ;
+update verification_info set email_verification_status = 'not_verified' where email = email1;
+update verification_info set  email = email2 where email = email1 ;
+
 
 
 set result = 'success' ;
