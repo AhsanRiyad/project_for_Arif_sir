@@ -6,7 +6,10 @@
 	Vue.mixin({
 		data: function() {
 			return {
-				componet_name: '<?php echo $_GET['pn']; ?>',
+				componet_name: '<?php  
+				if($_GET['pn'] == "verify_email_otp")
+					{echo 'basic';}
+				else{echo $_GET['pn'];}; ?>',
 				csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
 
 			}
@@ -22,11 +25,12 @@
 	const bus = new Vue();
 
 
+
 	var code = `	
 	<div class="container ">
 	<div class="row justify-content-center no-gutters">
 	<div class="col col-md-4">
-	<a>
+	<a @click="verify_email_otp()">
 	<v-alert type="error" v-if="email_verification_status == 'not_verified'">
 	Your email is not verified , click to solve
 	</v-alert></a>
@@ -40,7 +44,8 @@
 	`;
 
 	Vue.component('alert' , {
-		template: code , 
+		template: code ,
+
 		data(){
 			return {
 				email_verification_status: true,
@@ -51,7 +56,10 @@
 			}
 		},
 		methods: {
-
+			verify_email_otp(){
+				//alert('veriy');
+				bus.$emit('changeComponent' , 'verify_email_otp' );
+			}
 		},
 		created(){
 
@@ -120,6 +128,233 @@
 
 		}
 	})
+
+
+
+
+
+
+
+	var code = `<div class="container-fluid bg-light mt-5 ">
+	<div class="row justify-content-center align-items-center">
+
+	<!-- update top part starts-->
+
+	<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+
+
+	<div class="row bg-white mx-1">
+
+	<div class="col-3 mr-0 pr-0 my-2">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+	<div class="w-100"></div>
+	</div>
+	<div class="col-9  ml-0">
+	<p class="h3 ">
+
+	</p>
+	<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+	</div>
+
+	</div>
+
+	<!-- update top part ends-->
+
+
+	<!-- update field part starts -->
+	<div class="row bg-white mt-4 justify-content-center mx-1">
+	<div class="w-100 bg-info">
+	<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Verify Email</p>
+	</div>
+
+	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+	<small id='idSmallverify_email_otpChangeDashboard'  class="" v-bind:style=' changes.verify_email_otp.smallText ' > <span>Enter OTP
+
+
+	<span v-show="verify_email_otp_validity == 'valid'" class="text-success"> {{ verify_email_otp_validity }} </span>
+	<span v-show="verify_email_otp_validity == 'invalid'" class="text-danger"> {{ verify_email_otp_validity }} </span>
+	
+	
+
+
+	</span> <span @click="enable_input('verify_email_otp')" id="idSpanverify_email_otpChangeDashboard" v-bind:style="changes.verify_email_otp.smallButton" class="small_button">Change</span></small>
+
+	<input @keyup="validityCheckInput('verify_email_otp')" v-model="verify_email_otp" :disabled='verify_email_otp_input == true' id="idInputverify_email_otpUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="verify_email_otp" value="" >
+
+	</div>
+
+	
+
+
+	<div class="col-10 mx-0 px-0 ">
+	<v-btn color="success" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+	Verify
+	</v-btn>
+
+	<v-btn color="primary" @click="sendOtpAgain()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+	Send OTP again
+	</v-btn>
+	</div>
+
+	<!-- update field part ends -->
+
+	</div>
+	</div>
+	</div>
+	
+	<v-row justify="center">
+
+
+	<v-dialog
+	v-model="dialog"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline">Status</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ status_text }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog = false"
+	>
+	Okay
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+
+
+
+	</div>`;
+
+	Vue.component('verify_email_otp' , {
+		props: ['profile_photo' , 'CSRF_TOKEN'],
+		template: code,
+		data(){
+			return {
+				name: 'riyad---vue',
+				dialog: false,
+				status_text: '',
+				verify_email_otp_input: true,
+				verify_email_otp: '',
+				verify_email_otp_validity: '',
+				changes:{
+					verify_email_otp:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
+					},
+					
+				} 
+			}
+		},
+		methods: {
+			enable_input: function(name){
+				if(name=='verify_email_otp'){
+					this.verify_email_otp_input = false;
+					this.changes.verify_email_otp.smallText.color = 'red';
+					this.changes.verify_email_otp.smallButton.color = 'white';
+					this.changes.verify_email_otp.smallButton.backgroundColor = 'red';
+					//alert(this.verify_email_otp_input);
+				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'verify_email_otp'){
+					console.log(this.verify_email_otp);
+					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
+					var result = patt.test(this.verify_email_otp);
+
+					result == false ? this.verify_email_otp_validity = 'invalid' : this.verify_email_otp_validity = 'valid';
+				}
+			},
+			submit(){
+				//alert(this.blood_group);
+				this.validityCheckInput('verify_email_otp');
+				
+
+				if(this.verify_email_otp_validity == 'valid' ){
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'verify_email_otp',
+						verify_email_otp: this.verify_email_otp,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.status_text = 'verify_email_otp Updated successfully';
+						this.dialog = true;
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+				}else{
+					this.status_text = 'verify_email_otp is not valid';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
+			},
+			sendOtpAgain(){
+
+			}
+
+		},
+		created(){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				//this.verify_email_otp = response.data.full_name;
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+		}
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
