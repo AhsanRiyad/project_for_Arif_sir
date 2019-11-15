@@ -127,6 +127,35 @@ if($d1->purpose == 'basic'){
 
 
 
+}else if($d1->purpose == 'forgot_password'){
+	
+
+	$email1 = $d1->email;
+
+	//echo $email1;
+
+	$randomNumber = md5(rand(10,1000));
+
+
+	$conn = get_mysqli_connection();
+	$sql = "call update_profile_forgot_password( ? , ? , @result)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('ss' , $email1 , $randomNumber );
+
+	$stmt->execute();
+	$stmt->close();
+	$sql = 'select @result as st'; 
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+
+	if($row['st']=='no_email_found'){
+		return $row['st'];
+	}else if($row['st']=='crypto_added'){
+		
+	}
+
+
+
 }else if($d1->purpose == 'getProfileBasicInfo'){
 
 	$conn = get_mysqli_connection();

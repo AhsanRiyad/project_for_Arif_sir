@@ -129,6 +129,10 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
         include $APP_ROOT."assets/js/vue_file/gallery.php";
     }
 
+    else if($pageName == 'forgot_password'){
+        include $APP_ROOT."assets/js/vue_file/forgot.php";
+    }
+
 
 
 

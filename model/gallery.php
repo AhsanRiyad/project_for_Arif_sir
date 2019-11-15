@@ -23,8 +23,6 @@ $email = 'riyad298@gmail.com';
 function getPhotos(){
 
 
-
-
 	$conn = get_mysqli_connection();
 	$sql = "select * from user_uploads uu where  uu.email = (?)";
 	$stmt = $conn->prepare($sql);

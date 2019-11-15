@@ -307,6 +307,31 @@ DELIMITER ;
 
 
 
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_forgot_password(IN email1 VARCHAR(100), in forgot_password_crypto1 varchar(500)  , out result VARCHAR(100))
+
+BEGIN
+
+DECLARE count int(5);
+
+select count(*) into count from verification_info where email = email1 ; 
+
+if count >0 
+then
+update verification_info set forgot_password_crypto = forgot_password_crypto1 where email = email1 ; 
+set result = 'crypto_added' ; 
+else
+set result = 'no_email_found';
+end if ;
+
+
+END$$
+DELIMITER ;
+
+
+
+
+
 
 
 
