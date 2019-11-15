@@ -453,6 +453,14 @@
 			submit(){
 				//alert(this.blood_group);
 
+				this.validityCheckInput('full_name');
+				this.validityCheckInput('mobile');
+				this.validityCheckInput('institution_id');
+				this.validityCheckInput('nid_or_passport');
+
+				this.onChangeValidity('blood_group');
+				this.onChangeValidity('dob');
+
 				if(this.full_name_validity == 'valid' && this.mobile_validity == 'valid' && this.institution_id_validity == 'valid' && this.nid_or_passport_validity == 'valid' && this.blood_group_validity == 'valid' && this.dob_validity == 'valid' ){
 
 					axios.post( this.model.modelProfile_update ,
@@ -1308,6 +1316,14 @@ Vue.component('personal' , {
 			},
 			submit(){
 				
+				this.onChangeValidity('fathers_name');
+				this.onChangeValidity('mothers_name');
+				this.onChangeValidity('spouse_name');
+				this.onChangeValidity('number_of_children');
+				this.onChangeValidity('profession');
+				this.onChangeValidity('workplace_or_institution');
+				this.onChangeValidity('designation');
+
 
 				if( this.fathers_name_validity == 'valid' &&  this.mothers_name_validity == 'valid' && this.spouse_name_validity == 'valid' && this.number_of_children_validity == 'valid' &&  this.profession_validity == 'valid' && this.workplace_or_institution_validity == 'valid' && this.designation_validity == 'valid' ){
 
@@ -1848,14 +1864,14 @@ Vue.component('address1' , {
 				}
 			},
 			onChangeValidity(inputName){
-				console.log(this.present_line1);
-				console.log(this.present_district);
-				console.log(this.present_country);
-				console.log(this.present_post_code);
-				console.log(this.permanent_line1);
-				console.log(this.permanent_district);
-				console.log(this.permanent_country);
-				console.log(this.permanent_post_code);
+				// console.log(this.present_line1);
+				// console.log(this.present_district);
+				// console.log(this.present_country);
+				// console.log(this.present_post_code);
+				// console.log(this.permanent_line1);
+				// console.log(this.permanent_district);
+				// console.log(this.permanent_country);
+				// console.log(this.permanent_post_code);
 
 				if(inputName == 'present_line1'){
 					console.log(this.present_line1);
@@ -1920,9 +1936,18 @@ Vue.component('address1' , {
 			},
 			submit(){
 
+				this.onChangeValidity('present_line1');
+				this.onChangeValidity('present_district');
+				this.onChangeValidity('present_post_code');
+				this.onChangeValidity('present_country');
+				this.onChangeValidity('permanent_line1');
+				this.onChangeValidity('permanent_district');
+				this.onChangeValidity('permanent_post_code');
+				this.onChangeValidity('permanent_country');
+
+
 				if(this.present_line1_validity == 'valid' && this.present_district_validity == 'valid' && this.present_country_validity == 'valid' && this.present_post_code_validity == 'valid' &&  this.permanent_line1_validity == 'valid' &&  this.permanent_district_validity == 'valid' &&  this.permanent_country_validity == 'valid' &&  this.permanent_post_code_validity == 'valid' ){
 
-					
 					
 					axios.post( this.model.modelProfile_update ,
 					{
@@ -1995,8 +2020,6 @@ Vue.component('address1' , {
 				this.permanent_district = response.data.parmanent_district;
 				this.permanent_post_code = response.data.parmanent_post_code;
 				this.permanent_district = response.data.parmanent_district;
-				
-
 
 			}.bind(this))
 			.catch(function(error){
