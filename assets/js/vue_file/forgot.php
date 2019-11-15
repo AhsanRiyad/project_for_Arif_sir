@@ -36,7 +36,9 @@
 	<br>
 	<span v-show="login_status=='no_email_found'" class="red--text"> Account not found </span>
 	<span v-show="login_status=='invalid_email'" class="red--text"> {{ login_status }} </span>
-	<span v-show="login_status=='password_sent'" class="green--text"> password has been sent to your email </span>
+	<span v-show="login_status=='crypto_added'" class="green--text"> recovery link sent to your email </span>
+	</p>
+	<span v-show="login_status=='server_problem'" class="red--text"> Email server problem , try later. </span>
 	</p>
 
 	</div>
@@ -62,7 +64,7 @@
 	>
 	</div>
 
-	<button @click="submit" type="submit" name="submit" value="submit" class="btn btn-success rounded-0 mb-1 w-100 py-2">Recover Password</button>
+	<v-btn color="success" :loading = 'loading' @click="submit" type="submit" name="submit" value="submit" class="btn btn-success rounded-0 mb-1 w-100 py-2">Recover Password</v-btn >
 
 	<!-- <button type="submit" name="submit" value="submit" class="btn btn-info rounded-0 mb-1 w-100 py-2">Back to Login</button> -->
 

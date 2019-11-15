@@ -149,10 +149,38 @@ if($d1->purpose == 'basic'){
 	$row = mysqli_fetch_assoc($result);
 
 	if($row['st']=='no_email_found'){
-		return $row['st'];
+		echo $row['st'];
 	}else if($row['st']=='crypto_added'){
-		
-	}
+
+		$mailto = 'riyad298@gmail.com';
+		$mailSub = 'Password recovery , friends Forever';
+		$mailMsg = 'Click to recover your password <br>'. $rootAdress.'pages/forgot.php?e='.$email.'&c='.$randomNumber;
+		require 'PHPMailer-master/PHPMailerAutoload.php';
+		$mail = new PHPMailer();
+		$mail ->IsSmtp();
+		$mail ->SMTPDebug = 0;
+		$mail ->SMTPAuth = true;
+		$mail ->SMTPSecure = 'ssl';
+		$mail ->Host = "smtp.gmail.com";
+   $mail ->Port = 465; // or 587
+   $mail ->IsHTML(true);
+   $mail ->Username = "riyad.for.test@gmail.com";
+   $mail ->Password = "01919448787";
+   $mail ->SetFrom("riyad.for.test@gmail.com");
+   $mail ->Subject = $mailSub;
+   $mail ->Body = $mailMsg;
+   $mail ->AddAddress($mailto);
+
+   if(!$mail->Send())
+   {
+   	echo 'server_problem';
+   }
+   else
+   {
+   	echo $row['st'];
+   }
+
+}
 
 
 
