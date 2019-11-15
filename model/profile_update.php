@@ -46,9 +46,9 @@ if($d1->purpose == 'basic'){
 	$sql = "call update_profile_personal(?,?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('ssssisss' , $email , $fathers_name , $mothers_name, $spouse_name , $number_of_children , $profession , $workplace_or_institution , $designation  );
+
 	$stmt->execute();
 	$stmt->close();
-
 	$sql = 'select @result as st'; 
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
@@ -83,10 +83,32 @@ if($d1->purpose == 'basic'){
 
 
 
+}else if($d1->purpose == 'password'){
+	
+
+	$password1= md5($d1->password);
+
+	//echo $password1;
+
+	$conn = get_mysqli_connection();
+	$sql = "call update_profile_password( ? , ? , @result)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('ss' , $email , $password1 );
+
+	$stmt->execute();
+	$stmt->close();
+	$sql = 'select @result as st'; 
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+
+	echo $row['st'];
+
+
+
 }else if($d1->purpose == 'getProfileBasicInfo'){
 
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration ur , users_info ui , users_address ua where ui.email = ur.email and  ua.email = ur.email and ur.email = (?)";
+	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info vi where ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email = (?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('s' , $email);
 	$stmt->execute();

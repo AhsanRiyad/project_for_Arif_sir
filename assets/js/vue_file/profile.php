@@ -1,3 +1,6 @@
+
+
+
 <script type="text/javascript">
 	
 	Vue.mixin({
@@ -19,6 +22,41 @@
 	const bus = new Vue();
 
 
+	var code = `	
+	<div class="container ">
+	<div class="row justify-content-center no-gutters">
+	<div class="col col-md-4">
+	<a>
+	<v-alert type="error">
+	Your email is not verified , click to solve
+	</v-alert></a>
+	<a>
+	<v-alert type="warning">
+	Your account is not complete, click to solve 
+	</v-alert></a>
+	</div>
+	</div>
+	</div>
+	`;
+
+	Vue.component('alert' , {
+		template: code , 
+		data(){
+			return {
+
+			}
+		},
+		methods: {
+
+		},
+		created(){
+
+		}
+	})
+
+
+
+
 	var code = `
 	<div class="container-fluid bg-light mt-1 mb-5">
 	<div class="row justify-content-center align-items-center">
@@ -28,6 +66,9 @@
 	<v-btn :disabled="componet_name == 'personal'" @click="changeComponent('personal')" large class="ml-1" color="success">Personal</v-btn>
 	<v-btn :disabled="componet_name == 'address1'" @click="changeComponent('address1')" large class="ml-1" color="success">address</v-btn>
 	<v-btn :disabled="componet_name == 'photos'" @click="changeComponent('photos')" large class="ml-1" color="success">photo</v-btn>
+	<div class="w-100"></div>
+	<v-btn :disabled="componet_name == 'password'" @click="changeComponent('photos')" large class="ml-1 mt-2" color="success">change Password</v-btn>
+	<v-btn :disabled="componet_name == 'email'" @click="changeComponent('photos')" large class="ml-1 mt-2" color="success">change Email</v-btn>
 
 	</div>
 
@@ -55,6 +96,255 @@
 
 		}
 	})
+
+
+
+
+
+	var code = `<div class="container-fluid bg-light mt-5 ">
+	<div class="row justify-content-center align-items-center">
+
+	<!-- update top part starts-->
+
+	<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+
+
+	<div class="row bg-white mx-1">
+
+	<div class="col-3 mr-0 pr-0 my-2">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+	<div class="w-100"></div>
+	</div>
+	<div class="col-9  ml-0">
+	<p class="h3 ">
+
+	</p>
+	<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+	</div>
+
+	</div>
+
+	<!-- update top part ends-->
+
+
+	<!-- update field part starts -->
+	<div class="row bg-white mt-4 justify-content-center mx-1">
+	<div class="w-100 bg-info">
+	<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Change Password</p>
+	</div>
+
+	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.password.smallText ' > <span>New Password 
+
+
+	<span v-show="password_validity == 'valid'" class="text-success"> {{ password_validity }} </span>
+	<span v-show="password_validity == 'invalid'" class="text-danger"> {{ password_validity }} </span>
+	
+	
+
+
+	</span> <span @click="enable_input('password')" id="idSpanEmailChangeDashboard" v-bind:style="changes.password.smallButton" class="small_button">Change</span></small>
+
+	<input @keyup="validityCheckInput('password')" v-model="password" :disabled='password_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="password" value="" >
+
+	</div>
+
+	
+
+	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.repassword.smallText ' > <span>Re-enter repassword 
+
+
+	<span v-show="repassword_validity == 'valid'" class="text-success"> {{ repassword_validity }} </span>
+	<span v-show="repassword_validity == 'invalid'" class="text-danger"> {{ repassword_validity }} </span>
+	
+	
+
+
+	</span> <span @click="enable_input('repassword')" id="idSpanEmailChangeDashboard" v-bind:style="changes.repassword.smallButton" class="small_button">Change</span></small>
+
+	<input @keyup="validityCheckInput('repassword')" v-model="repassword" :disabled='repassword_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="password" value="" >
+
+	</div>
+
+	
+
+
+	<div class="col-10 mx-0 px-0 ">
+	<v-btn color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+	Update Info
+	</v-btn>
+	</div>
+
+	<!-- update field part ends -->
+
+	</div>
+	</div>
+	</div>
+	
+	<v-row justify="center">
+
+
+	<v-dialog
+	v-model="dialog"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline">Status</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ status_text }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog = false"
+	>
+	Okay
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+
+
+
+	</div>`;
+
+	Vue.component('password' , {
+		props: ['profile_photo' , 'CSRF_TOKEN'],
+		template: code,
+		data(){
+			return {
+				name: 'riyad---vue',
+				dialog: false,
+				status_text: '',
+				password_input: true,
+				password: '',
+				password_validity: '',
+				repassword_input: true,
+				repassword: '',
+				repassword_validity: '',
+				changes:{
+					password:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
+					},
+					repassword:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
+					},
+					
+				} 
+			}
+		},
+		methods: {
+			enable_input: function(name){
+				if(name=='password'){
+					this.password_input = false;
+					this.changes.password.smallText.color = 'red';
+					this.changes.password.smallButton.color = 'white';
+					this.changes.password.smallButton.backgroundColor = 'red';
+					//alert(this.password_input);
+				}
+				if(name=='repassword'){
+					this.repassword_input = false;
+					this.changes.repassword.smallText.color = 'red';
+					this.changes.repassword.smallButton.color = 'white';
+					this.changes.repassword.smallButton.backgroundColor = 'red';
+					//alert(this.password_input);
+				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'password'){
+					console.log(this.password);
+					var patt= /[\S]{6,}/g;
+					var result = patt.test(this.password);
+
+					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
+				}else if(inputName == 'repassword'){
+					console.log(this.repassword);
+					var patt= /[\S]{6,}/g;
+					var result = patt.test(this.repassword);
+
+					result == false ? this.repassword_validity = 'invalid' : this.repassword_validity = 'valid';
+				}
+			},
+			submit(){
+				//alert(this.blood_group);
+				this.validityCheckInput('password');
+				this.validityCheckInput('repassword');
+
+				if(this.password_validity == 'valid' && this.password == this.repassword){
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'password',
+						password: this.password,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.status_text = 'Password Updated successfully';
+						this.dialog = true;
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+				}else{
+					this.status_text = 'password doesnt match';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
+			}
+
+		},
+		created(){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				//this.password = response.data.full_name;
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+		}
+	})
+
+
 
 
 
@@ -2032,7 +2322,7 @@ Vue.component('address1' , {
 
 
 
-		
+
 
 
 

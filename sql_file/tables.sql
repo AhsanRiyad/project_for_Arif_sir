@@ -281,14 +281,14 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_address(IN email1 VARCHAR(100), in present_line11 varchar(100) , in present_district1 varchar(100) , in present_post_code1 int(100) ,  in present_country1 varchar(200) , in permanent_line11 varchar(100) , in permanent_district1 varchar(100) , in permanent_post_code1 int(100) ,  in permanent_country1 varchar(200)  , out result VARCHAR(100))
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_password(IN email1 VARCHAR(100), in password1 varchar(100)  , out result VARCHAR(100))
 
 BEGIN
 
 DECLARE count int(5);
 
 
-update users_address set  present_line1 = present_line11, present_district = present_district1, present_post_code = present_post_code1 , present_country = present_country1 , parmanent_line1 = permanent_line11 , parmanent_district = permanent_district1, parmanent_post_code = permanent_post_code1 , parmanent_country = permanent_country1 where email = email1 ;
+update users_registration set  password = password1 where email = email1 ;
 
 
 set result = 'success' ;
