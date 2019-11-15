@@ -27,11 +27,11 @@
 	<div class="row justify-content-center no-gutters">
 	<div class="col col-md-4">
 	<a>
-	<v-alert type="error">
+	<v-alert type="error" v-if="email_verification_status == 'not_verified'">
 	Your email is not verified , click to solve
 	</v-alert></a>
 	<a>
-	<v-alert type="warning">
+	<v-alert type="warning" v-if="completeness !=100">
 	Your account is not complete, click to solve 
 	</v-alert></a>
 	</div>
@@ -43,6 +43,10 @@
 		template: code , 
 		data(){
 			return {
+				email_verification_status: true,
+				status: true,
+				completeness: '',
+				change_request: '',
 
 			}
 		},
@@ -50,6 +54,25 @@
 
 		},
 		created(){
+
+
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				console.log(response);
+				//this.email = response.data.full_name;
+				this.email_verification_status = response.data.email_verification_status;
+				this.completeness = response.data.completeness;
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+
 
 		}
 	})
@@ -90,6 +113,7 @@
 			changeComponent: function(comp_type){
 				//this.input_disabled = comp_type;
 				this.componet_name = comp_type;
+				
 				bus.$emit('changeComponent' , comp_type );
 				
 			}
