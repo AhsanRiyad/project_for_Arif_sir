@@ -1,14 +1,14 @@
 <script>
 	// This is a global mixin, it is applied to every vue instance
 	
-	   Vue.mixin({
-        data: function() {
-            return {
-                csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
+	Vue.mixin({
+		data: function() {
+			return {
+				csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
 
-            }
-        }
-    })
+			}
+		}
+	})
 
 
 
@@ -42,24 +42,36 @@
 	<div class="col-12 col-xl-6 ">
 
 	<div class="form-group">
-	<label for="exampleInputEmail1" ><small id="idExampleInputEmail1Small">Email address*</small>
+	<label for="exampleInputEmail1" ><small id="idExampleInputEmail1Small">Email address*
+
+	<span v-show="email_validity == 'valid'" class="text-success"> {{ email_validity }} </span>
+	<span v-show="email_validity == 'invalid'" class="text-danger"> {{ email_validity }}  </span>
+
+	</small>
 	<br>
 
 
 
 	</label>
-	<input name='email' v-model='email' type="text" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+	<input @keyup="onChangeValidity('email')" v-model='email' type="text" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
 	value=""
 	>
 	</div>
 	<div class="form-group">
-	<label for="exampleInputPassword1"><small>Password*</small>
+	<label for="exampleInputPassword1"><small>Password*
+
+	<span v-show="password_validity == 'valid'" class="text-success"> {{ password_validity }} </span>
+	<span v-show="password_validity == 'invalid'" class="text-danger"> {{ password_validity }}, min 6 chars </span>
+	
+
+
+	</small>
 	<br>
 
 
 
 	</label>
-	<input @keyup.enter="submit()" name="password" v-model='password' type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password"
+	<input  @keyup="onChangeValidity('password')"  @keyup.enter="submit()" name="password" v-model='password' type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password"
 	value=""
 
 	>
@@ -83,6 +95,44 @@
 	</div>
 	</div>
 	</div>
+
+	
+
+	<v-row justify="center">
+
+
+	<v-dialog
+	v-model="dialog"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline">Status</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ status_text }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog = false"
+	>
+	Okay
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+
+
+
+
+
 	</div>`;
 	
 
@@ -91,34 +141,75 @@
 		data(){
 			return{
 				loading: false,
+				dialog: false,
+				status_text: '',
 				email: '',
 				password: '',
+				email_validity: '',
+				password_validity: '',
 				login_status: '',
 			}
 		},
 		methods: {
 			submit: function(){
 				//alert('submit clicked');
-				this.loading = true;
-				axios.post( this.model.modelLogin , {
-					email: this.email,  
-					password: this.password,
-					csrf_token1: this.csrf_token1,
 
-				})
-				.then( function(response){
-					this.loading = false;
+				this.loading = true;
+				if(this.email_validity == 'valid' && this.password_validity == 'valid'){
+
+					axios.post( this.model.modelLogin , {
+						email: this.email,  
+						password: this.password,
+						csrf_token1: this.csrf_token1,
+
+					})
+					.then( function(response){
+						this.loading = false;
 					//window.location.href = 'http://google.com';
 					response.data == 'YES' ? window.location.href = this.address.profilePage : this.login_status = 'email/password doesnt match';  
 
 					console.log(response);	
 				}.bind(this))
-				.catch(function (error) {
-					console.log(error);
-					this.loading = false;
+					.catch(function (error) {
+						console.log(error);
+						this.loading = false;
                 //return 'hi';
             }.bind(this)); 
-			}
+
+				}else{
+					this.loading = false;
+					this.status_text = 'invalid field detected'; 
+					this.dialog = true;
+
+				}
+
+				
+			},
+			onChangeValidity(inputName){
+
+				console.log(this.password);
+
+				if(inputName == 'email'){
+					console.log(this.email);
+					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
+					var result = patt.test(this.email);
+
+					result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
+
+				}else if(inputName == 'password'){
+					console.log(this.password);
+					var patt= /[\S]{6,}/g;
+					var result = patt.test(this.password);
+
+					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
+
+				}
+
+
+
+
+
+			},
 
 		},
 		created(){
