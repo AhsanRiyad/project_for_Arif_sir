@@ -135,12 +135,12 @@ if($d1->purpose == 'basic'){
 	//echo $email1;
 
 	$randomNumber = md5(rand(10,1000));
-
+	$purpose = 'generate_crypto';
 
 	$conn = get_mysqli_connection();
-	$sql = "call update_profile_forgot_password( ? , ? , @result)";
+	$sql = "call update_profile_forgot_password( ? , ? , ? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ss' , $email1 , $randomNumber );
+	$stmt->bind_param('sss' , $email1 , $randomNumber , $purpose );
 
 	$stmt->execute();
 	$stmt->close();
@@ -198,6 +198,29 @@ if($d1->purpose == 'basic'){
 
 	echo json_encode($row);
 
+
+	// $i = 0;
+// echo json_encode(var_dump($row));
+}else if($d1->purpose == 'forgot_password_recovery'){
+
+	$email1 = $d1->email;
+	$forgot_password_crypto = $d1->forgot_password_crypto;
+	$purpose = 'crypto_check';
+
+	//echo $email1;
+
+	$conn = get_mysqli_connection();
+	$sql = "call update_profile_forgot_password( ? , ? , ? , @result)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('sss' , $email1 , $forgot_password_crypto , $purpose );
+
+	$stmt->execute();
+	$stmt->close();
+	$sql = 'select @result as st'; 
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+
+	echo $row['st'];
 
 	// $i = 0;
 // echo json_encode(var_dump($row));

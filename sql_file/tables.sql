@@ -308,12 +308,14 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_forgot_password(IN email1 VARCHAR(100), in forgot_password_crypto1 varchar(500)  , out result VARCHAR(100))
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE update_profile_forgot_password(IN email1 VARCHAR(100), in forgot_password_crypto1 varchar(500)  , in purpose varchar(100) ,  out result VARCHAR(100))
 
 BEGIN
 
 DECLARE count int(5);
 
+if purpose = 'generate_crypto'
+then
 select count(*) into count from verification_info where email = email1 ; 
 
 if count >0 
@@ -323,6 +325,21 @@ set result = 'crypto_added' ;
 else
 set result = 'no_email_found';
 end if ;
+
+elseif purpose = 'crypto_check'
+then
+select count(*) into count from verification_info where email = email1 and forgot_password_crypto = forgot_password_crypto1 ;
+if count > 0
+then
+set result = 'allow';
+else
+set result = 'invalid_link'
+end if;
+
+end if;
+
+
+
 
 
 END$$
