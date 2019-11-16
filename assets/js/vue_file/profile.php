@@ -70,9 +70,61 @@
 				this.email_verification_status = data;
 			});
 
+			
 			bus.$on('users_info' , (data)=>{
+				
 				console.log(data);
 				this.users_info = data;
+
+
+				if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
+					this.profile_completeness_msg = 'full_name is not set';
+				}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
+					this.profile_completeness_msg = 'mobile is not set';	
+				}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
+					this.profile_completeness_msg = 'institution_id is not set';	
+				}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
+					this.profile_completeness_msg = 'nid_or_passport is not set';	
+				}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
+					this.profile_completeness_msg = 'blood_group is not set';	
+				}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
+					this.profile_completeness_msg = 'date_of_birth is not set';	
+				}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
+					this.profile_completeness_msg = 'fathers_name is not set';	
+				}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
+					this.profile_completeness_msg = 'mother_name is not set';	
+				}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
+					this.profile_completeness_msg = 'spouse_name is not set';	
+				}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
+					this.profile_completeness_msg = 'number_of_children is not set';	
+				}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
+					this.profile_completeness_msg = 'profession is not set';	
+				}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
+					this.profile_completeness_msg = 'institution is not set';	
+				}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
+					this.profile_completeness_msg = 'designation is not set';	
+				}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
+					this.profile_completeness_msg = 'present_line1 is not set';	
+				}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
+					this.profile_completeness_msg = 'present_district is not set';	
+				}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
+					this.profile_completeness_msg = 'present_post_code is not set';	
+				}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
+					this.profile_completeness_msg = 'present_country is not set';	
+				}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
+					this.profile_completeness_msg = 'parmanent_line1 is not set';	
+				}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
+					this.profile_completeness_msg = 'parmanent_district is not set';	
+				}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
+					this.profile_completeness_msg = 'parmanent_post_code is not set';	
+				}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
+					this.profile_completeness_msg = 'parmanent_country is not set';	
+				}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
+					this.profile_completeness_msg = 'recent_photo is not set';	
+				}else{
+					this.profile_completeness_msg = 'profile completed';	
+				}
+				
 
 			});
 
@@ -2816,6 +2868,9 @@ Vue.component('address1' , {
 			},
 			submit(){
 
+
+
+
 				this.onChangeValidity('present_line1');
 				this.onChangeValidity('present_district');
 				this.onChangeValidity('present_post_code');
@@ -2848,6 +2903,7 @@ Vue.component('address1' , {
 
 						this.status_text = 'Update requested successfully! wait for admin approval';
 						this.dialog = true;
+						this.get_users_data();
 						
 
 
@@ -2858,12 +2914,6 @@ Vue.component('address1' , {
 
         //console.log(error);
     }.bind(this));
-
-
-
-
-
-
 
 
 					this.status_text = 'all fields are valid';
@@ -2879,6 +2929,46 @@ Vue.component('address1' , {
 
 				}
 			},
+
+			get_users_data(){
+
+
+				axios.post( this.model.modelProfile_update ,
+				{
+					purpose: 'getProfileBasicInfo',
+
+				}
+				).then(function(response){
+
+					console.log(response);
+
+					this.present_line1 = response.data.present_line1;
+					this.present_district = response.data.present_district;
+					this.present_post_code = response.data.present_post_code;
+					this.present_country = response.data.present_country;
+
+					this.permanent_line1 = response.data.parmanent_line1;
+					this.permanent_district = response.data.parmanent_district;
+					this.permanent_post_code = response.data.parmanent_post_code;
+					this.permanent_country = response.data.parmanent_country;
+
+					bus.$emit('users_info' , response.data);
+
+
+				}.bind(this))
+				.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+
+
+
+			}
+
+
 
 		},
 		created(){
