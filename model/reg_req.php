@@ -19,7 +19,7 @@ if($d2->purpose=='get_data'){
 
 	//echo 'get data';
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration , verification_info where users_registration.email = verification_info.email and verification_info.status = 'not_verified' limit 0 , 10";
+	$sql = "select * from users_registration ur , verification_info vi where ur.email = vi.email and  vi.status = 'not_verified' limit 0 , 10";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);
@@ -107,7 +107,7 @@ else if($d2->purpose=='get_user_details'){
 	//echo 'hi';
 	//echo $email;
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration , verification_info where users_registration.email = verification_info.email and verification_info.status = 'not_verified' and verification_info.email = (?)";
+	$sql = "select * from users_registration ur , verification_info vi , users_info ui , users_address ua where ur.email = vi.email and ur.email = ui.email and ur.email = ua.email and vi.email = (?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('s' , $email);
 	$stmt->execute();

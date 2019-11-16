@@ -187,7 +187,7 @@ if($d1->purpose == 'basic'){
 }else if($d1->purpose == 'getProfileBasicInfo'){
 
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info vi where ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email = (?)";
+	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email = (?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('s' , $email);
 	$stmt->execute();

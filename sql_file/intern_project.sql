@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2019 at 06:53 AM
+-- Generation Time: Nov 16, 2019 at 09:12 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -452,7 +452,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(67, 'riyad298@gmail.com', '3138', 'b53b3a3d6ab90ce0268229151c9bde11', 'rejected', 'verified', 'not_requested', 'user', 'fathers_name,spouse_name,designation,date_of_birth,institution_id', 20),
+(67, 'riyad298@gmail.com', '2868', 'b53b3a3d6ab90ce0268229151c9bde11', 'not_verfied', 'not_verified', 'not_requested', 'user', 'fathers_name,spouse_name,designation,date_of_birth,institution_id', 20),
 (68, '', '4297', NULL, 'rejected', NULL, 'not_requested', 'user', 'email', 20),
 (69, 'riyad298@yahoo.com', '7087', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),
 (70, 'riyad298@hotmail.com', '9376', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),

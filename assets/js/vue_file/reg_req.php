@@ -19,8 +19,7 @@
 	<v-col cols="12">
 	<v-row align="center" justify="center">
 	<v-img
-	src="https://picsum.photos/id/11/500/300"
-	lazy-src="https://picsum.photos/id/11/10/6"
+	:src="user_details.recent_photo"
 	aspect-ratio="1"
 	class="grey lighten-2"
 	max-width="200"
@@ -61,6 +60,159 @@
 	</v-col>
 
 
+	<v-col cols="6">
+	<p>nid_or_passport</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.nid_or_passport }} </p>
+	</v-col>
+
+	<v-col cols="6">
+	<p>fathers_name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.fathers_name }} </p>
+	</v-col>
+
+	<v-col cols="6">
+	<p>mother_name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.mother_name }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>spouse_name</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.spouse_name }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>number_of_children</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.number_of_children }} </p>
+	</v-col>
+
+	<v-col cols="6">
+	<p>profession</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.profession }} </p>
+	</v-col>
+
+	<v-col cols="6">
+	<p>institution</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.institution }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>designation</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.designation }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>blood_group</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.blood_group }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>date_of_birth</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.date_of_birth }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>present_line1</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.present_line1 }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>present_district</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.present_district }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>present_post_code</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.present_post_code }} </p>
+	</v-col>
+
+
+		
+	<v-col cols="6">
+	<p>present_country</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.present_country }} </p>
+	</v-col>
+
+
+		
+	<v-col cols="6">
+	<p>parmanent_line1</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.parmanent_line1 }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>parmanent_district</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.parmanent_district }} </p>
+	</v-col>
+
+
+	
+	<v-col cols="6">
+	<p>parmanent_post_code</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.parmanent_post_code }} </p>
+	</v-col>
+
+
+		
+	<v-col cols="6">
+	<p>parmanent_country</p>
+	</v-col>
+	<v-col  cols="6" >
+	<p> {{ user_details.parmanent_country }} </p>
+	</v-col>
+
+
 	
 	
 	</v-row>
@@ -90,33 +242,38 @@
 			return {
 				dialogm1: '',
 				dialog: false,
-				user_details: []
+				user_details: {},
 			}
 		},
 		mounted(){
 
-			console.log('user details');
-			this.$http.post('<?php echo $modelReg_req; ?>', {
-				purpose : 'get_user_details',
-				email : this.email ,
-			} ).then(function(data){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				this.user_details = response.data;
 
-				console.log('inside fff');
-				//var obj = JSON.parse(data);
-				// console.log(obj);
-				//this.user_details = JSON.parse(data.bodyText);
-				//alert(data);
-				//console.log(obj[0].status);
-				//console.log(this.user_details);
-				//console.log(obj.length);
-				//console.log(Object.keys(this.user_details[0]));
-				//console.log(Object.values(this.user_details));
-				//this.user_details = this.user_details[0];
-				this.user_details = JSON.parse(data.bodyText)[0];
-				console.log(JSON.parse(data.bodyText)[0]);
-				//console.log(this.user_details.status);
+				if(response.data.recent_photo == 'not_set'){
+					this.user_details.recent_photo = rootAdress+'assets/img/uploads/default.jpg';
+				}else{
+					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
+					//alert(this.user_details.recent_photo);
+				}
 
-			})
+				console.log(this.user_details);
+
+
+			}.bind(this))
+			.catch(function(error){
+
+				
+
+        //console.log(error);
+    }.bind(this));
 		}
 	}
 	);
