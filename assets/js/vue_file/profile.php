@@ -3161,33 +3161,6 @@ var reg_req = new Vue({
 			this.componet_name = data;
 		})
 
-
-		axios.post( this.model.modelProfile_update ,
-		{
-			purpose: 'getProfileBasicInfo',
-
-		}
-		).then(function(response){
-
-			if(response.data.recent_photo != 'not_set'){
-
-			console.log(  response.data.recent_photo );
-
-				this.profile_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
-			}else{
-
-				this.profile_photo = this.images.profile_photo;
-			}
-
-
-
-		}.bind(this))
-		.catch(function(error){
-
-      //console.log(error);
-  }.bind(this));
-
-		
 		this.profile_photo = this.images.profile_photo;
 		bus.$on('recent_photo' , (data)=>{
 			this.profile_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+data;
