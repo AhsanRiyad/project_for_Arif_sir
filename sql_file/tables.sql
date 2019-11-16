@@ -387,11 +387,17 @@ DELIMITER ;
 
 
 
+CREATE or REPLACE view verification_info_users_registration
+AS
+SELECT ur.email , ur.full_name , ur.mobile , ur.institution_id , ur.registration_date , ur.membership_number, vi.status as verification_status , vi.email_verification_status, vi.change_request , vi.completeness , vi.visibility , vi.type  from users_registration as ur , verification_info as vi  WHERE ur.email = vi.email;
 
 
 
 
+SELECT vi.email as em FROM verification_info vi LEFT JOIN users_registration ur ON vi.email = ur.email WHERE vi.completeness = 100
+SELECT vi.email as em FROM verification_info vi JOIN users_registration ur ON vi.email = ur.email WHERE vi.completeness = 100
 
+SELECT * FROM verification_info vi JOIN users_registration ur ON vi.email = ur.email WHERE vi.completeness = 100 and vi.status = 'not_verified'
 
 
 -- ideal code
