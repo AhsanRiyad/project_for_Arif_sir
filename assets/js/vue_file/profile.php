@@ -194,7 +194,7 @@
 	Verify
 	</v-btn>
 
-	<v-btn color="primary" @click="sendOtpAgain()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+	<v-btn :loading='loading' color="primary" @click="sendOtpAgain()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
 	Send OTP again
 	</v-btn>
 	</div>
@@ -251,6 +251,7 @@
 				verify_email_otp_input: true,
 				verify_email_otp: '',
 				verify_email_otp_validity: '',
+				loading: false,
 				changes:{
 					verify_email_otp:{
 						smallText: {
@@ -342,6 +343,43 @@
 
 			},
 			sendOtpAgain(){
+				this.loading = true;
+				axios.post( this.model.modelProfile_update ,
+				{
+					purpose: 'send_otp',
+
+				}
+				).then(function(response){
+
+					console.log(response);
+
+
+
+					if(response.data == 'otp_sent'){
+						this.status_text = 'OTP sent, check your email';
+
+
+						this.dialog = true;
+
+
+					}if(response.data == 'server_problem'){
+						this.status_text = 'email server problem, try again later';
+
+
+						this.dialog = true;
+
+
+					}
+
+				this.loading = false;
+
+				}.bind(this))
+				.catch(function(error){
+				this.loading = false;
+
+
+        //console.log(error);
+    }.bind(this));
 
 			}
 

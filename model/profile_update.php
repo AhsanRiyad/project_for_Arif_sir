@@ -249,4 +249,57 @@ if($d1->purpose == 'basic'){
 
 	// $i = 0;
 // echo json_encode(var_dump($row));
+}else if($d1->purpose == 'send_otp'){
+
+	
+	//$verify_email_otp = $d1->verify_email_otp;
+	$purpose = $d1->purpose;
+	// $otp = $d1->verify_email_otp;
+	$otp = rand(1000,9999);
+
+	//echo $email1;
+	$conn = get_mysqli_connection();
+	$sql = "call email_verification_otp( ? , ? , ? , @result)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('sss' , $email , $otp , $purpose );
+
+	$stmt->execute();
+	$stmt->close();
+	$sql = 'select @result as st'; 
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	
+
+	if($row['st']=='otp_sent'){
+		$mailto = $email;
+		$mailSub = 'OTP for email verification';
+		$mailMsg = 'OTP '. $otp;
+		require 'PHPMailer-master/PHPMailerAutoload.php';
+		$mail = new PHPMailer();
+		$mail ->IsSmtp();
+		$mail ->SMTPDebug = 0;
+		$mail ->SMTPAuth = true;
+		$mail ->SMTPSecure = 'ssl';
+		$mail ->Host = "smtp.gmail.com";
+   $mail ->Port = 465; // or 587
+   $mail ->IsHTML(true);
+   $mail ->Username = "riyad.for.test@gmail.com";
+   $mail ->Password = "01919448787";
+   $mail ->SetFrom("riyad.for.test@gmail.com");
+   $mail ->Subject = $mailSub;
+   $mail ->Body = $mailMsg;
+   $mail ->AddAddress($mailto);
+
+   if(!$mail->Send())
+   {
+   	echo 'server_problem';
+   }
+   else
+   {
+   	echo $row['st'];
+   }
+};
+
+	// $i = 0;
+// echo json_encode(var_dump($row));
 }
