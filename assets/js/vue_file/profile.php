@@ -124,7 +124,7 @@
 				}else{
 					this.profile_completeness_msg = 'profile completed';	
 				}
-				
+
 
 			});
 
@@ -1193,6 +1193,7 @@ Vue.component('basic' , {
 	data(){
 		return {
 			name: 'riyad---vue',
+			recent_photo: '',
 			dialog: false,
 			status_text: '',
 			full_name_input: true,
@@ -1412,6 +1413,8 @@ Vue.component('basic' , {
 						this.status_text = 'Update requested successfully! wait for admin approval';
 						this.dialog = true;
 
+						this.get_users_data();
+
 
 					}.bind(this))
 					.catch(function(error){
@@ -1434,10 +1437,53 @@ Vue.component('basic' , {
 
 
 
+			},
+
+			get_users_data(){
+
+
+				axios.post( this.model.modelProfile_update ,
+				{
+					purpose: 'getProfileBasicInfo',
+
+				}
+				).then(function(response){
+
+					console.log(response);
+
+					this.present_line1 = response.data.present_line1;
+					this.present_district = response.data.present_district;
+					this.present_post_code = response.data.present_post_code;
+					this.present_country = response.data.present_country;
+
+					this.permanent_line1 = response.data.parmanent_line1;
+					this.permanent_district = response.data.parmanent_district;
+					this.permanent_post_code = response.data.parmanent_post_code;
+					this.permanent_country = response.data.parmanent_country;
+
+					bus.$emit('users_info' , response.data);
+
+
+				}.bind(this))
+				.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+
+
+
 			}
+
 
 		},
 		created(){
+
+			
+
+
 			axios.post( this.model.modelProfile_update ,
 			{
 				purpose: 'getProfileBasicInfo',
@@ -1455,6 +1501,7 @@ Vue.component('basic' , {
 				this.nid_or_passport = response.data.nid_or_passport;
 				this.blood_group = response.data.blood_group;
 				this.dob = response.data.date_of_birth;
+				this.recent_photo = response.data.recent_photo;
 
 
 
@@ -1641,6 +1688,7 @@ Vue.component('photos' , {
 							this.dialog = true;
 							this.recent_photo_name = 'choose file';
 							console.log(response);
+							this.get_users_data();
 						}.bind(this))
 						.catch(function(error){
 							this.loading_recent_photo = false;
@@ -1682,6 +1730,41 @@ Vue.component('photos' , {
 				
 
 
+			},
+
+			get_users_data(){
+
+
+				axios.post( this.model.modelProfile_update ,
+				{
+					purpose: 'getProfileBasicInfo',
+
+				}
+				).then(function(response){
+
+					console.log(response);
+
+					this.present_line1 = response.data.present_line1;
+					this.present_district = response.data.present_district;
+					this.present_post_code = response.data.present_post_code;
+					this.present_country = response.data.present_country;
+
+					this.permanent_line1 = response.data.parmanent_line1;
+					this.permanent_district = response.data.parmanent_district;
+					this.permanent_post_code = response.data.parmanent_post_code;
+					this.permanent_country = response.data.parmanent_country;
+
+					bus.$emit('users_info' , response.data);
+					bus.$emit('recent_photo' , response.data.recent_photo);
+
+
+				}.bind(this))
+				.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
 			},
 			uploadPhoto_old: function(){
 
@@ -2279,6 +2362,8 @@ Vue.component('personal' , {
 						this.status_text = 'Update requested successfully! wait for admin approval';
 						this.dialog = true;
 
+						this.get_users_data();
+
 
 					}.bind(this))
 					.catch(function(error){
@@ -2297,7 +2382,48 @@ Vue.component('personal' , {
 				}
 
 
+			},
+
+			get_users_data(){
+
+
+				axios.post( this.model.modelProfile_update ,
+				{
+					purpose: 'getProfileBasicInfo',
+
+				}
+				).then(function(response){
+
+					console.log(response);
+
+					this.present_line1 = response.data.present_line1;
+					this.present_district = response.data.present_district;
+					this.present_post_code = response.data.present_post_code;
+					this.present_country = response.data.present_country;
+
+					this.permanent_line1 = response.data.parmanent_line1;
+					this.permanent_district = response.data.parmanent_district;
+					this.permanent_post_code = response.data.parmanent_post_code;
+					this.permanent_country = response.data.parmanent_country;
+
+					bus.$emit('users_info' , response.data);
+
+
+				}.bind(this))
+				.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+
+
+
 			}
+
+
+
 
 
 		},
@@ -2915,12 +3041,8 @@ Vue.component('address1' , {
         //console.log(error);
     }.bind(this));
 
-
 					this.status_text = 'all fields are valid';
 					this.dialog = true;
-
-
-
 
 				}else {
 
@@ -2929,7 +3051,6 @@ Vue.component('address1' , {
 
 				}
 			},
-
 			get_users_data(){
 
 
@@ -3040,7 +3161,12 @@ var reg_req = new Vue({
 			this.componet_name = data;
 		})
 
+
+		
 		this.profile_photo = this.images.profile_photo;
+		bus.$on('recent_photo' , (data)=>{
+			this.profile_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+data;
+		});
 
 	},
 	beforeMount(){
