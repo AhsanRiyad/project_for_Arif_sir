@@ -333,11 +333,49 @@ if count > 0
 then
 set result = 'allow';
 else
-set result = 'invalid_link'
+set result = 'invalid_link';
 end if;
 
 end if;
 
+
+
+
+
+END$$
+DELIMITER ;
+
+
+
+
+
+DELIMITER $$
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE email_verification_otp(IN email1 VARCHAR(100), in otp1 varchar(100)  , in purpose varchar(100) ,  out result VARCHAR(100))
+
+BEGIN
+
+DECLARE count int(5);
+
+if purpose = 'verify_email_otp'
+then
+select count(*) into count from verification_info where email = email1 and otp = otp1  ; 
+
+if count >0 
+then
+update verification_info set email_verification_status = 'verified' where email = email1 ; 
+set result = 'email_verified' ; 
+else
+set result = 'invalid_otp';
+end if ;
+
+elseif purpose = 'send_otp'
+then
+
+update verification_info set otp = otp1 where email = email1 ;
+
+set result = 'otp_sent';
+
+end if;
 
 
 

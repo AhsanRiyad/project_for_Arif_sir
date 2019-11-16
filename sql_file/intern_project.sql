@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2019 at 09:08 PM
+-- Generation Time: Nov 16, 2019 at 06:53 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -41,6 +41,36 @@ end if;
 
 
 update user_uploads set recent_photo = upload_link where email = email1 ; 
+
+
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `email_verification_otp` (IN `email1` VARCHAR(100), IN `otp1` VARCHAR(100), IN `purpose` VARCHAR(100), OUT `result` VARCHAR(100))  BEGIN
+
+DECLARE count int(5);
+
+if purpose = 'verify_email_otp'
+then
+select count(*) into count from verification_info where email = email1 and otp = otp1  ; 
+
+if count >0 
+then
+update verification_info set email_verification_status = 'verified' where email = email1 ; 
+set result = 'email_verified' ; 
+else
+set result = 'invalid_otp';
+end if ;
+
+elseif purpose = 'send_otp'
+then
+
+update verification_info set otp = otp1 where email = email1 ;
+
+set result = 'otp_sent';
+
+end if;
+
 
 
 
@@ -162,6 +192,40 @@ update verification_info set  email = email2 where email = email1 ;
 
 
 set result = 'success' ;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_forgot_password` (IN `email1` VARCHAR(100), IN `forgot_password_crypto1` VARCHAR(500), IN `purpose` VARCHAR(100), OUT `result` VARCHAR(100))  BEGIN
+
+DECLARE count int(5);
+
+if purpose = 'generate_crypto'
+then
+select count(*) into count from verification_info where email = email1 ; 
+
+if count >0 
+then
+update verification_info set forgot_password_crypto = forgot_password_crypto1 where email = email1 ; 
+set result = 'crypto_added' ; 
+else
+set result = 'no_email_found';
+end if ;
+
+elseif purpose = 'crypto_check'
+then
+select count(*) into count from verification_info where email = email1 and forgot_password_crypto = forgot_password_crypto1 ;
+if count > 0
+then
+set result = 'allow';
+else
+set result = 'invalid_link';
+end if;
+
+end if;
+
+
+
+
 
 END$$
 
@@ -374,7 +438,7 @@ CREATE TABLE `verification_info` (
   `id_v_info` int(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `otp` varchar(100) DEFAULT NULL,
-  `otp_time` datetime(6) DEFAULT NULL,
+  `forgot_password_crypto` varchar(500) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
   `email_verification_status` varchar(100) DEFAULT 'not_verified',
   `change_request` varchar(100) NOT NULL DEFAULT 'not_requested',
@@ -387,12 +451,12 @@ CREATE TABLE `verification_info` (
 -- Dumping data for table `verification_info`
 --
 
-INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `otp_time`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(67, 'riyad298@gmail.com', '3138', NULL, 'rejected', 'not_verified', 'not_requested', 'user', 'fathers_name,spouse_name,designation,date_of_birth,institution_id', 20),
+INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
+(67, 'riyad298@gmail.com', '3138', 'b53b3a3d6ab90ce0268229151c9bde11', 'rejected', 'verified', 'not_requested', 'user', 'fathers_name,spouse_name,designation,date_of_birth,institution_id', 20),
 (68, '', '4297', NULL, 'rejected', NULL, 'not_requested', 'user', 'email', 20),
 (69, 'riyad298@yahoo.com', '7087', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),
 (70, 'riyad298@hotmail.com', '9376', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),
-(71, 'riyad298@gffmail.com', '3265', NULL, 'not_verified', NULL, 'not_requested', 'user', 'name,email', 20);
+(71, 'riyad298@gffmail.com', '3265', '', 'not_verified', NULL, 'not_requested', 'user', 'name,email', 20);
 
 --
 -- Indexes for dumped tables

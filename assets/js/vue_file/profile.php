@@ -23,6 +23,7 @@
 
 
 	const bus = new Vue();
+	const bus_email_verification_otp = new Vue();
 
 
 
@@ -63,7 +64,9 @@
 		},
 		created(){
 
-
+			bus.$on('email_verification_status' , (data)=>{
+				this.email_verification_status = data;
+			});
 			axios.post( this.model.modelProfile_update ,
 			{
 				purpose: 'getProfileBasicInfo',
@@ -275,7 +278,7 @@
 			validityCheckInput( inputName  ){
 				if(inputName == 'verify_email_otp'){
 					console.log(this.verify_email_otp);
-					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
+					var patt= /^[\d]{4}$/g;
 					var result = patt.test(this.verify_email_otp);
 
 					result == false ? this.verify_email_otp_validity = 'invalid' : this.verify_email_otp_validity = 'valid';
@@ -288,18 +291,37 @@
 
 				if(this.verify_email_otp_validity == 'valid' ){
 
+					//alert(this.verify_email_otp);
+
 					axios.post( this.model.modelProfile_update ,
 					{
 						purpose: 'verify_email_otp',
 						verify_email_otp: this.verify_email_otp,
+						
 
 					}
 					).then(function(response){
 
 						console.log(response);
 
-						this.status_text = 'verify_email_otp Updated successfully';
-						this.dialog = true;
+						
+
+						if(response.data == 'email_verified'){
+							this.status_text = 'email verified successfully';
+
+							bus.$emit('email_verification_status' , 'verified' );
+
+
+							this.dialog = true;
+
+
+						}else{
+							this.status_text = 'invalid otp, try again' ;
+							this.dialog = true;
+						}
+
+
+
 
 
 					}.bind(this))
@@ -311,7 +333,7 @@
     }.bind(this));
 
 				}else{
-					this.status_text = 'verify_email_otp is not valid';
+					this.status_text = 'OTP is not valid ';
 					this.dialog = true;
 					//alert('all filed are not valid');
 				}
