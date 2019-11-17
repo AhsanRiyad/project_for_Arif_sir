@@ -97,7 +97,7 @@ echo $row['st'];
 					// select ua.parmanent_district , ua.parmanent_country , ua.present_district , ua.present_country ,  ui.email , ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth , ur.mobile , ur.institution_id , ur.registration_date from users_info ui , users_registration ur , users_address ua WHERE ui.email  = ur.email = ua.email and ur.email = "riyad298@gmail.com"
 
 
-					$sql ='select ui.email , ur.mobile , ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth ,  ur.institution_id , ur.registration_date from users_info ui , users_registration ur WHERE ui.email  = ur.email and ur.email = "riyad298@gmail.com"';
+					$sql ='select ui.email , ur.mobile , ur.institution_id, ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth  , ua.present_line1 , ua.present_post_code , present_district, present_post_code, parmanent_line1, parmanent_post_code, parmanent_district, parmanent_country, ur.membership_number ,ur.registration_date from users_info ui , users_registration ur , users_address ua WHERE ua.email = ur.email and ui.email  = ur.email and ur.email = "riyad298@gmail.com"';
 					$result = mysqli_query($conn , $sql);
 					$row_users_registration = mysqli_fetch_assoc($result);
 

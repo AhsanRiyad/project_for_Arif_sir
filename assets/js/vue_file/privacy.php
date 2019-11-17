@@ -26,7 +26,7 @@
   <td>
 
 
-  <v-radio-group @change="updatePrivacy(index)" v-model="item[2] "   >
+  <v-radio-group :disabled='item[0] == "institution_id" || item[0]=="membership_number"' @change="updatePrivacy(index)" v-model="item[2] "   >
   <v-radio
   label="private"
   value="private"
@@ -53,6 +53,7 @@
      return{
       users_info: [],
       radioGroup: [],
+      disabled: false,
     }
   },
   methods: {
@@ -101,6 +102,10 @@
 
       console.log(error);
     }.bind(this));
+
+
+
+
   },
   updated(){
     console.log('updated');
