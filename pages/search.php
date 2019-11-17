@@ -17,12 +17,12 @@ include $dashboard_head;
 				<div class="col-md-5">	
 					<div>
 						<p>Search</p>
-						<v-combobox
-						search-input="search_value"
-						:items="components"
-						label="Select a favorite activity or create a new one"
-						@keyup="putData()"
-						></v-combobox>
+						<v-text-field
+						v-model="search_text"
+						label="search"
+						@keyup="search()"
+						required
+						></v-text-field>
 					</div>
 				</div>
 
@@ -30,13 +30,13 @@ include $dashboard_head;
 				<div class="col-md-2">	
 
 					<p>Categories</p>
-					<v-overflow-btn
-					class="my-2"
-					:items="dropdown_font"
-					label="Select Category"
-					target="#dropdown-example"
-					value=""
-					></v-overflow-btn>
+					<v-select
+					v-model="category"
+					:items="category_items"
+					label="Select"
+					value="true"
+					required
+					></v-select>
 					
 				</div>
 
