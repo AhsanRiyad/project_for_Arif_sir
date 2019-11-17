@@ -26,7 +26,7 @@
   <td>
 
 
-  <v-radio-group :disabled='item[0] == "institution_id" || item[0]=="membership_number"' @change="updatePrivacy(index)" v-model="item[2] "   >
+  <v-radio-group :disabled='item[0] == "institution_id" || item[0]=="membership_number" || item[0]=="full_name"' @change="updatePrivacy(index)" v-model="item[2] ">
   <v-radio
   label="private"
   value="private"

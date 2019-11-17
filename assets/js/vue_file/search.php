@@ -1,5 +1,125 @@
 <script>
 	
+	
+	var code = `
+	<v-row justify="center">
+	<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+	<template v-slot:activator="{ on }">
+	<v-btn color="primary" dark v-on="on">Profile</v-btn>
+	</template>
+	<v-card>
+	<v-toolbar dark color="primary">
+	<v-btn icon dark @click="dialog = false">
+	<v-icon>mdi-close</v-icon>
+	</v-btn>
+	<v-toolbar-title>Profile</v-toolbar-title>
+	<v-spacer></v-spacer>
+	<v-toolbar-items>
+	<v-btn dark text @click="dialog = false">Close</v-btn>
+	</v-toolbar-items>
+	</v-toolbar>
+
+
+	
+	<v-container>
+	<v-row  justify="center">
+	<v-col lg="8" class="text-center success white--text" >
+	<h1>
+	Profile
+	</h1>
+	</v-col>
+	</v-row>
+
+
+	<v-row justify="center" >
+	<v-col lg="8" >
+	<v-simple-table>
+	<template v-slot:default>
+	<thead>
+	<tr>
+	<th class="text-left title">Index</th>
+	<th class="text-left title">Details</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr  v-for="(item , index) in users_info" v-show="item[2]=='public'">
+	<td class="body-1">{{ item[0] }} </td>
+	<td>
+
+	{{ item[1] }} 
+	
+
+	</td>
+	</tr>
+	</tbody>
+	</template>
+	</v-simple-table>
+	</v-col >
+	</v-row>
+	</v-container>
+
+
+
+
+	</v-card>
+	</v-dialog>
+	</v-row>
+	`;
+
+
+	Vue.component('get_details' , {
+		template: code,
+		props: ['email'],
+		data(){
+			return {
+				dialog: false,
+				notifications: false,
+				sound: true,
+				widgets: false,
+
+				users_info: [],
+				radioGroup: [],
+				disabled: false,
+
+
+
+			}
+		},
+		methods : {
+  },
+created(){
+    axios.post( this.model.modelPrivacy ,
+    {
+      purpose: 'get_profile_details_for_all',
+      email: this.email,
+    },
+    { 
+
+
+    }
+    ).then(function(response){
+      this.users_info = response.data;
+      console.log(response);
+    }.bind(this))
+    .catch(function(error){
+
+      console.log(error);
+    }.bind(this));
+
+
+
+
+  }
+})
+
+
+
+
+	
+
+
+
+
 
 
 
@@ -176,7 +296,7 @@ created(){
 	<div class="col-md-2">	
 
 	<p>Categories</p>
-	<v-select
+	<v-select @change="search()"
 	v-model="category"
 	:items="category_items"
 	label="Select"
@@ -215,11 +335,11 @@ created(){
 	<td> {{ user.membership_number }} </td>
 	<td> {{ user.institution_id }} </td>
 	<td>
-
 	<gallery :email='user.email'></gallery>
-
 	</td>
-	<td><button @click="reject_id(user.email)" class="btn btn-danger">Reject</button></td>
+	<td>
+	<get_details :email='user.email'></get_details>
+	</td>
 	</tr>
 	</tbody>
 	</table>
@@ -301,7 +421,7 @@ created(){
 
 
 			}
-		
+
 
 		},
 		created(){
