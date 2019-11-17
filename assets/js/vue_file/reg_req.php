@@ -168,7 +168,7 @@
 	</v-col>
 
 
-		
+	
 	<v-col cols="6">
 	<p>present_country</p>
 	</v-col>
@@ -177,7 +177,7 @@
 	</v-col>
 
 
-		
+	
 	<v-col cols="6">
 	<p>parmanent_line1</p>
 	</v-col>
@@ -204,7 +204,7 @@
 	</v-col>
 
 
-		
+	
 	<v-col cols="6">
 	<p>parmanent_country</p>
 	</v-col>
@@ -370,14 +370,16 @@
 	Vue.component('reg_req', {
 		template: code , 
 		data(){
-			return { user_list : [] , dialog: false, admin_approval_status: '',
-			array_size: true  }
-		}, 
-		methods: {
-			changeName: function(){
+			return { user_list : [] , 
+				dialog: false,
+				admin_approval_status: '',
+				array_size: true  }
+			}, 
+			methods: {
+				changeName: function(){
 
-			},
-			get_users : function(){
+				},
+				get_users : function(){
 				//alert('get_data_method');
 
 				this.$http.post('<?php echo $modelReg_req; ?>', {

@@ -42,6 +42,8 @@
 			'permanent_district',
 			],
 			search_text: '',
+			user_list : [] , 
+			array_size: true 
 
 
 
@@ -53,12 +55,24 @@
 
 				axios.post( this.model.modelSearch ,
 				{
-					purpose: 'search_by_full_name',
+					purpose: this.category ,
 					search_text: this.search_text,
+
 				}
 				).then(function(response){
     
         		console.log(response);
+
+        		if(response.data.length == 1){
+					this.user_list = []; 
+					this.user_list[0] =  JSON.parse(response.data);
+					console.log(this.user_list[0]);
+				}else if(response.data.length > 1){
+					this.user_list =  response.data;
+					console.log(this.user_list[0].email);
+				}else if(response.data == 0){
+					this.user_list =  [];
+				}
         
     			}.bind(this))
 				.catch(function(error){
