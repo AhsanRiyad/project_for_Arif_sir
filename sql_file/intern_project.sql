@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2019 at 10:29 AM
+-- Generation Time: Nov 17, 2019 at 09:40 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -131,7 +131,7 @@ ELSE
 
 INSERT INTO users_registration (email,full_name,mobile,institution_id,password,registration_date,membership_number) VALUES (email1,full_name1, mobile1,institution_id1,password1,NOW(), 1000);
 
-INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'name,email' , 20);
+INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VALUES (email1, otp1,'not_verified', 'user', 'full_name,institution_id,membership_number' , 60);
 
 INSERT INTO users_info (email) VALUES (email1);
 INSERT INTO users_address (email) VALUES (email1);
@@ -155,6 +155,8 @@ DECLARE count int(5);
 update users_address set  present_line1 = present_line11, present_district = present_district1, present_post_code = present_post_code1 , present_country = present_country1 , parmanent_line1 = permanent_line11 , parmanent_district = permanent_district1, parmanent_post_code = permanent_post_code1 , parmanent_country = permanent_country1 where email = email1 ;
 
 
+
+
 set result = 'success' ;
 
 
@@ -169,6 +171,7 @@ update users_info set  nid_or_passport = nid_or_passport1, date_of_birth = dob1 
 
 
 update users_registration set full_name = full_name1 , mobile = mobile1 , institution_id = institution_id1  where email = email1 ;
+
 
 
 
@@ -249,6 +252,7 @@ DECLARE count int(5);
 update users_info set  fathers_name = fathers_name1, mother_name = mothers_name1 , spouse_name = spouse_name1, number_of_children = number_of_children1 , profession = profession1 , institution = workplace_or_institution1 , designation = designation1 where email = email1 ;
 
 
+
 set result = 'success' ;
 
 END$$
@@ -259,7 +263,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `upload_photo` (IN `purpose` VARCHAR
 if purpose = 'recent_photo'
 then
 Select recent_photo into existing_link from user_uploads where email = email1 ;
-update user_uploads set recent_photo = upload_link where email = email1 ; 
+update user_uploads set recent_photo = upload_link where email = email1 ;
+UPDATE verification_info SET verification_info.completeness = verification_info.completeness + 10 WHERE verification_info.email = email1;
+
 ELSEIF purpose = 'old_photo'
 then
 select old_photo into existing_link from user_uploads where email = email1;
@@ -323,7 +329,7 @@ CREATE TABLE `users_address` (
 INSERT INTO `users_address` (`email`, `users_address_id`, `present_line1`, `present_line2`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`, `parmanent_line2`, `parmanent_district`, `parmanent_post_code`, `parmanent_country`) VALUES
 ('riyad298@yahoo.com', 67, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('riyad298@hotmail.com', 68, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@gmail.com', 69, 'reafeaf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('riyad298@gmail.com', 69, 'riyad298@gmail.com', NULL, 'riyad298@gmail.com', '4555', 'riyad298@gmail.com', 'riyad298@gmail.com', NULL, 'riyad298@gmail.com', '4566', 'riyad298@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -380,7 +386,7 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 67, 'riyad298@gmail.com', '333333333333333', 'riyad298@gmail.com', '96e79218965eb72c92a549dd5a330112', '2019-11-07 01:55:49.000000', 1000),
+('riyad298@gmail.com', 67, 'riyad298@gmail.com', '44444444444444444', 'riyad298@gmail.com', '96e79218965eb72c92a549dd5a330112', '2019-11-07 01:55:49.000000', 1000),
 ('', 68, '', '', 'riyad', '448787', '2019-11-08 02:17:40.000000', 1000),
 ('riyad298@yahoo.com', 69, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '1', '2019-11-12 08:16:43.000000', 1000),
 ('riyad298@hotmail.com', 70, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '1', '2019-11-13 18:23:17.000000', 1001),
@@ -424,7 +430,7 @@ CREATE TABLE `user_uploads` (
 --
 
 INSERT INTO `user_uploads` (`id_user_uploads`, `email`, `recent_photo`, `old_photo`) VALUES
-(67, 'riyad298@gmail.com', 'riyad298@gmail.com.jpg', 'riyad298@gmail.com.jpg'),
+(67, 'riyad298@gmail.com', 'riyad298@gmail.com.png', 'riyad298@gmail.com.png'),
 (68, 'riyad298@hotmail.com', 'not_set', 'not_set'),
 (69, 'riyad298@gffmail.com', 'not_set', 'not_set');
 
@@ -444,7 +450,7 @@ CREATE TABLE `verification_info` (
   `change_request` varchar(100) NOT NULL DEFAULT 'not_requested',
   `type` varchar(20) DEFAULT NULL,
   `visibility` varchar(1000) DEFAULT NULL,
-  `completeness` int(5) DEFAULT NULL
+  `completeness` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -452,11 +458,11 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(67, 'riyad298@gmail.com', '2868', 'b53b3a3d6ab90ce0268229151c9bde11', 'not_verified', 'verified', 'not_requested', 'user', 'fathers_name,spouse_name,designation,date_of_birth,institution_id', 100),
-(68, '', '4297', NULL, 'rejected', NULL, 'not_requested', 'user', 'email', 20),
-(69, 'riyad298@yahoo.com', '7087', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),
-(70, 'riyad298@hotmail.com', '9376', NULL, 'approved', NULL, 'not_requested', 'user', 'name,email', 20),
-(71, 'riyad298@gffmail.com', '3265', '', 'not_verified', NULL, 'not_requested', 'user', 'name,email', 20);
+(67, 'riyad298@gmail.com', '2868', 'b53b3a3d6ab90ce0268229151c9bde11', 'not_verified', 'verified', 'not_requested', 'user', 'email,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,designation,present_district,parmanent_line1,parmanent_post_code,parmanent_district,parmanent_country,membership_number,registration_date', 100),
+(68, '', '4297', NULL, 'rejected', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20),
+(69, 'riyad298@yahoo.com', '7087', NULL, 'approved', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20),
+(70, 'riyad298@hotmail.com', '9376', NULL, 'approved', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20),
+(71, 'riyad298@gffmail.com', '3265', '', 'not_verified', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20);
 
 --
 -- Indexes for dumped tables
