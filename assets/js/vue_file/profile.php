@@ -1159,7 +1159,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mx-0 px-0 ">
-<v-btn color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+<v-btn :disabled = "submit_disabled" color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
 Update Info
 </v-btn>
 </div>
@@ -1232,6 +1232,8 @@ Vue.component('basic' , {
 			nid_or_passport_validity: '',
 			blood_group_validity: '',
 			dob_validity: '',
+			users_info: '',
+			submit_disabled: false,
 			changes:{
 				full_name:{
 					smallText: {
@@ -1521,6 +1523,11 @@ Vue.component('basic' , {
 				this.dob = response.data.date_of_birth;
 				this.recent_photo = response.data.recent_photo;
 
+				this.users_info = response.data;
+
+				if(this.users_info.completeness == 100 & this.users_info.status == 'not_verified'){
+					this.submit_disabled = true;
+				}
 
 
 			}.bind(this))
@@ -2101,7 +2108,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mx-0 px-0 ">
-<button @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
+<button :disabled = "submit_disabled" @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
 Update Info
 </button>
 </div>
@@ -2184,6 +2191,8 @@ Vue.component('personal' , {
 			profession_validity: false,
 			workplace_or_institution_validity: false,
 			designation_validity: false,
+			users_info: '',
+			submit_disabled: false,
 			changes:{
 				fathers_name:{
 					smallText: {
@@ -2468,6 +2477,13 @@ Vue.component('personal' , {
 				this.workplace_or_institution = response.data.institution;
 				this.designation = response.data.designation;
 
+				this.users_info = response.data;
+
+
+				if(this.users_info.completeness == 100 & this.users_info.status == 'not_verified'){
+					this.submit_disabled = true;
+				}
+
 
 			}.bind(this))
 			.catch(function(error){
@@ -2695,7 +2711,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mx-0 px-0 ">
-<button @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
+<button :disabled='submit_disabled' @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
 Update Info
 </button>
 </div>
@@ -2780,6 +2796,8 @@ Vue.component('address1' , {
 			permanent_district: '',
 			permanent_post_code: '',
 			permanent_country: '',
+			users_info: '',
+			submit_disabled: false,
 			changes:{
 				present_line1:{
 					smallText: {
@@ -3013,8 +3031,6 @@ Vue.component('address1' , {
 			submit(){
 
 
-
-
 				this.onChangeValidity('present_line1');
 				this.onChangeValidity('present_district');
 				this.onChangeValidity('present_post_code');
@@ -3129,6 +3145,15 @@ Vue.component('address1' , {
 				this.permanent_district = response.data.parmanent_district;
 				this.permanent_post_code = response.data.parmanent_post_code;
 				this.permanent_country = response.data.parmanent_country;
+
+
+				this.users_info = response.data;
+
+				
+				if(this.users_info.completeness == 100 & this.users_info.status == 'not_verified'){
+					this.submit_disabled = true;
+				}
+
 
 			}.bind(this))
 			.catch(function(error){
