@@ -249,6 +249,17 @@ if($d1->purpose == 'basic'){
 
 	// $i = 0;
 // echo json_encode(var_dump($row));
+}else if($d1->purpose == 'profile_completeness_100'){
+
+	$conn = get_mysqli_connection();
+	$sql = "update verification_info set completeness = 100 where email = (?)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('s' , $email );
+
+	$stmt->execute();
+	$stmt->close();
+	$conn->close();
+
 }else if($d1->purpose == 'send_otp'){
 
 	
