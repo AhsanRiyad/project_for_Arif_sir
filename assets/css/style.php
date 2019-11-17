@@ -15,6 +15,7 @@ label {
 .dashboard_vertical_menu_height{
 	
 	background-color: #343a40;
+    min-height: 100vh;
 }
 
 

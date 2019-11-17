@@ -44,6 +44,7 @@ $reg_req = $rootAdress.'pages/reg_req.php';
 $profilePage = $rootAdress.'pages/profile.php?pn=basic';
 $privacyPage = $rootAdress.'pages/privacy.php';
 $galleryPage = $rootAdress.'pages/gallery.php';
+$searchPage = $rootAdress.'pages/search.php';
 
 
 
@@ -61,6 +62,7 @@ $modelUploadPhotos = $rootAdress."model/upload_photos.php";
 $modelPrivacy = $rootAdress."model/privacy.php";
 $modelGallery = $rootAdress."model/gallery.php";
 $modelProfile_update = $rootAdress."model/profile_update.php";
+$modelSearch = $rootAdress."model/search.php";
 
 
 

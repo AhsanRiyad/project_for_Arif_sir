@@ -71,6 +71,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     add_user: '<?php echo $add_user; ?>',
                     reg_req: '<?php echo $reg_req; ?>',
                     profilePage: '<?php echo $profilePage; ?>',
+                    searchPage: '<?php echo $searchPage; ?>',
 
                 },
                 model:{
@@ -82,6 +83,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelPrivacy: '<?php echo $modelPrivacy; ?>',
                     modelGallery: '<?php echo $modelGallery; ?>',
                     modelProfile_update: '<?php echo $modelProfile_update; ?>',
+                    modelSearch: '<?php echo $modelSearch; ?>',
 
                 },
 
@@ -128,9 +130,11 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
     else if($pageName == 'gallery'){
         include $APP_ROOT."assets/js/vue_file/gallery.php";
     }
-
     else if($pageName == 'forgot_password'){
         include $APP_ROOT."assets/js/vue_file/forgot.php";
+    }
+    else if($pageName == 'search'){
+        include $APP_ROOT."assets/js/vue_file/search.php";
     }
 
 

@@ -56,6 +56,24 @@
 
 					</div></a>
 
+					<a class="text-light" href="<?php echo $searchPage; ?>">
+						<div class="  
+						<?php 
+
+						if($pageName=='dashboardProfile' || $pageName=='dashboardProfileUpdate')
+						{
+							echo 'bg-info';
+						}
+						else{
+							echo 'bg-secondary';
+						}
+						?> 
+						py-2 text-center my-4">
+
+						<i class="fas w_f fa-user"></i> Search
+
+					</div></a>
+
 
 					<a class="text-light" href="<?php echo $reg_req; ?>">
 						<div class="  
