@@ -60,21 +60,24 @@ include $dashboard_head;
 						<table class="table" >
 							<thead  class="thead-dark" >
 								<tr >
-									<th>id</th>
-									<th>Req Date</th>
-									<th>Req From</th>
+									<th>Name</th>
+									<th>membership_number</th>
+									<th>institution_id</th>
+									<th>Gallery</th>
 									<th>Details</th>
-									<th>Accept</th>
-									<th>Reject</th>
+									
 								</tr>
 							</thead>
 							<tbody v-if="array_size" id="tbody" v-for="user in user_list">
 								<tr>
-									<td> {{ user.id }} </td>
-									<td> {{ user.registration_date }} </td>
 									<td> {{ user.full_name }} </td>
-									<td></td>
-									<td><button @click="approve_id(user.email)" class="btn btn-success">Accept</button></td>
+									<td> {{ user.membership_number }} </td>
+									<td> {{ user.institution_id }} </td>
+									<td>
+
+										<gallery></gallery>
+
+									</td>
 									<td><button @click="reject_id(user.email)" class="btn btn-danger">Reject</button></td>
 								</tr>
 							</tbody>
@@ -101,12 +104,14 @@ include $dashboard_head;
 
 			</div>
 
-
+		
 
 		</div>
 
+		
 
 
+		
 	</v-app>
 </div>
 
