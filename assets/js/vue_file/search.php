@@ -7,7 +7,7 @@
 	<v-row justify="center">
 	<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 	<template v-slot:activator="{ on }">
-	<v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+	<v-btn color="primary" dark v-on="on">Gallery</v-btn>
 	</template>
 	<v-card>
 	<v-toolbar dark color="primary">
@@ -78,6 +78,7 @@
 
 	Vue.component('gallery' , {
 		template: code,
+		props: ['email'],
 		data(){
 			return {
 				dialog: false,
@@ -96,16 +97,13 @@
 				old_photos: 'assets/img/uploads/old_photos/',
 				group_photos:  'assets/img/uploads/group_photos/',
 				uploads:  'assets/img/uploads/',
-				loading:false,
-				photo_delete_status: '',
-				button_disabled: false,
 
 
 
 			}
 		},
-  methods : {
-    zoom_in(photo , baseName){
+		methods : {
+			zoom_in(photo , baseName){
       //alert(photo);
       this.button_disabled = false;
       this.photo_delete_status = '';
@@ -113,47 +111,18 @@
       this.dialog_photo = photo;
       this.dialog = true;
       // alert('zooming in photo');
-    },
-    deletePhoto(){
-      this.loading = true;
-
-      //alert('deleting photo');
-      axios.post( this.model.modelGallery ,
-      {
-        purpose: 'deletePhoto',
-        basename: this.dialog_photo_baseName
-      }
-      ).then(function(response){
-        this.loading = false;
-        this.recent_photo = response.data.recent_photo;
-        this.old_photo = response.data.old_photo;
-        this.group_photo = response.data.group_photo;
-        this.photo_delete_status = "Your photo has been deleted";
-        this.button_disabled = true ;
-        console.log(response);
-
-
-      }.bind(this))
-      .catch(function(error){
-
-        this.loading = false;
-
-
-        //console.log(error);
-      }.bind(this));
-
-
-    },
   },
-		created(){
+},
+created(){
 
 
-			axios.post( this.model.modelGallery ,
-			{
+	axios.post( this.model.modelGallery ,
+	{
 
-				purpose: 'getPhotos',
-			}
-			).then(function(response){
+		purpose: 'getPhotos_for_all_users',
+		email: this.email ,
+	}
+	).then(function(response){
         //this.users_info = response.data;
         // alert(rootAdress+'/assets/img/uploads/recent_photo/'+recent_photo);
 
@@ -166,15 +135,15 @@
         //alert(this.rootAdress+'assets/img/uploads/group_photos/'+this.group_photo[0]);
 
     }.bind(this))
-			.catch(function(error){
+	.catch(function(error){
 
         //console.log(error);
     }.bind(this));
 
 
 
-		}
-	})
+}
+})
 
 
 
@@ -183,11 +152,101 @@
 
 
 	var code = `
+	<div class="container">
+	<div class="row justify-content-center">
+
+	<div class="col-md-7 text-center bg-info ">
+	<h2 class="text-white py-2 ">Search</h2>
+	</div>
+
+	<div class="w-100"></div>
+	<div class="col-md-5">	
 	<div>
-	<v-autocomplete
-	label="Components"
-	:items="components"
-	></v-autocomplete>
+	<p>Search</p>
+	<v-text-field
+	v-model="search_text"
+	label="search"
+	@keyup="search()"
+	required
+	></v-text-field>
+	</div>
+	</div>
+
+
+	<div class="col-md-2">	
+
+	<p>Categories</p>
+	<v-select
+	v-model="category"
+	:items="category_items"
+	label="Select"
+	value="true"
+	required
+	></v-select>
+
+	</div>
+
+	</div>
+
+
+
+	<div class="row justify-content-center">
+	<div class="col-md-7   mt-4">
+	<div class="row  text-center bg-info">
+	<div class="col text-center bg-success">
+	<h2 class="text-white py-2 ">Search Results</h2>
+	</div>
+	</div>
+	<div class="row">
+	<table class="table" >
+	<thead  class="thead-dark" >
+	<tr >
+	<th>Name</th>
+	<th>membership_number</th>
+	<th>institution_id</th>
+	<th>Gallery</th>
+	<th>Details</th>
+
+	</tr>
+	</thead>
+	<tbody v-if="array_size" id="tbody" v-for="user in user_list">
+	<tr>
+	<td> {{ user.full_name }} </td>
+	<td> {{ user.membership_number }} </td>
+	<td> {{ user.institution_id }} </td>
+	<td>
+
+	<gallery :email='user.email'></gallery>
+
+	</td>
+	<td><button @click="reject_id(user.email)" class="btn btn-danger">Reject</button></td>
+	</tr>
+	</tbody>
+	</table>
+
+
+	<div hidden>
+
+	<v-btn class="ma-2" color="orange darken-2" dark>
+	<v-icon dark left>mdi-arrow-left</v-icon>Back
+	</v-btn>
+
+	<v-btn class="ma-2" color="orange darken-2" dark> Next  &nbsp
+	<v-icon dark left>mdi-arrow-right </v-icon>
+	</v-btn>
+
+	</div>
+
+
+
+	</div>
+	</div>
+
+
+	</div>
+
+
+
 	</div>
 	`;
 	
@@ -196,12 +255,53 @@
 		template: code,
 		data(){
 			return {
-				components: [
-				'Autocompletes', 'Comboboxes', 'Forms', 'Inputs', 'Overflow Buttons', 'Selects', 'Selection Controls', 'Sliders', 'Textareas', 'Text Fields',
+				category: 'full_name',
+				category_items: [
+				'full_name',
+				'institution_id',
+				'membership_number',
 				],
+				search_text: '',
+				user_list : [] , 
+				array_size: true ,
 			}
 		},
 		methods: {
+
+			search(){
+				//console.log(this.search_text);
+				//console.log(this.category);
+
+				axios.post( this.model.modelSearch ,
+				{
+					purpose: this.category ,
+					search_text: this.search_text,
+
+				}
+				).then(function(response){
+
+					console.log(response);
+
+					if(response.data.length == 1){
+						this.user_list = []; 
+						this.user_list[0] =  JSON.parse(response.data);
+						console.log(this.user_list[0]);
+					}else if(response.data.length > 1){
+						this.user_list =  response.data;
+						console.log(this.user_list[0].email);
+					}else if(response.data == 0){
+						this.user_list =  [];
+					}
+
+				}.bind(this))
+				.catch(function(error){
+
+					console.log(error);
+				}.bind(this));
+
+
+			}
+		
 
 		},
 		created(){
