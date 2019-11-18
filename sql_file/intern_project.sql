@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2019 at 03:26 PM
+-- Generation Time: Nov 18, 2019 at 08:10 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -299,10 +299,11 @@ SELECT max(membership_number) into count from users_registration;
 
 
 
-UPDATE verification_info SET status ='approved'   WHERE email = email1 ;
+UPDATE verification_info SET status ='approved' , verification_info.completeness = 100   WHERE email = email1 ;
 
 
 UPDATE users_registration SET membership_number = count+1   WHERE email = email1 ;
+
 
 
 
@@ -441,7 +442,7 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1001),
+('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1003),
 ('riyad298@yahoo.com', 2, 'Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1000);
 
 -- --------------------------------------------------------
@@ -508,8 +509,8 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(1, 'riyad298@gmail.com', '7724', NULL, 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100),
-(2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'verified', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100);
+(1, 'riyad298@gmail.com', '7724', NULL, 'approved', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100),
+(2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100);
 
 -- --------------------------------------------------------
 

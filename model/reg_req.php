@@ -98,6 +98,19 @@ else if($d2->purpose=='approve_user'){
 
 	$stmt->close();
 	$conn->close();
+}else if($d2->purpose == 'make_admin'){
+
+	$email = $d2->email;
+	$conn = get_mysqli_connection();
+	$sql = "update verification_info set type = 'admin' where email = (?)";
+
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('s' , $email);
+
+	$stmt->execute();
+	$stmt->close();
+	$conn->close();
+
 }
 else if($d2->purpose=='get_user_details'){
 	//echo 'hi';

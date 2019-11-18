@@ -255,7 +255,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = '';
 	if($user_type == 'admin'){
-		$sql = "update verification_info set completeness = 100 , status = 'verified' where email = (?)";
+		$sql = "call user_request(? , @result)";
 	}else if($user_type == 'user'){
 		$sql = "update verification_info set completeness = 100 where email = (?)";
 	}

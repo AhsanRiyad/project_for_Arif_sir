@@ -454,10 +454,10 @@
 
 			}
 		},
-		beforeCreate(){
+		created(){
 			
 
-			axios.post('<?php echo $modelReg_req; ?>', {
+			axios.post(this.model.modelReg_req , {
 				purpose : 'get_data'
 			})
 			.then(function (response) {

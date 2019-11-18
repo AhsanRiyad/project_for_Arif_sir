@@ -19,9 +19,49 @@
 	</v-toolbar-items>
 	</v-toolbar>
 
-
+	
 	
 	<v-container>
+
+	<v-row v-if="profile_user_status == 'approved'" justify="center" class="mb-5">
+	<v-col lg="8" class="text-center success white--text" >
+
+
+	<v-alert type="success">
+	<h1> Verified User  </h1>
+	<v-btn @click.stop="dialog2 = true" color="error" v-if="users_info_as_props.type == 'admin'" >Reject User</v-btn>
+	<div class="w-100 mb-2"></div>
+
+	<v-btn v-if="users_info_as_props.type == 'admin' && profile_user_type != 'admin'" @click.stop="dialog3 = true" color="primary" >Make Admin</v-btn>
+	</v-alert>
+
+
+
+
+	</v-col>
+	</v-row>
+
+
+	<v-row v-if="profile_user_status == 'rejected'" justify="center" class="mb-5">
+	<v-col lg="8" class="text-center danger white--text" >
+
+
+	<v-alert type="error">
+	<h1> Rejected User  </h1>
+	<v-btn @click.stop="dialog4 = true" color="success" v-if="users_info_as_props.type == 'admin'" >Aprrove User</v-btn>
+	<div class="w-100 mb-2"></div>
+
+	
+	</v-alert>
+
+
+
+	</v-col>
+	</v-row>
+
+
+
+
 	<v-row  justify="center">
 	<v-col lg="8" class="text-center success white--text" >
 	<h1>
@@ -29,7 +69,7 @@
 	</h1>
 	</v-col>
 	</v-row>
-
+	
 
 	<v-row justify="center" >
 	<v-col lg="8" >
@@ -43,9 +83,9 @@
 	</thead>
 	<tbody>
 	<tr  v-for="(item , index) in users_info" v-show="item[2]=='public' || users_info_as_props.type == 'admin' ">
-	<td class="body-1">{{ item[0] }} </td>
+	<td  class="body-1">{{ item[0] }} </td>
 	<td>
-
+	
 	{{ item[1] }} 
 	
 
@@ -59,10 +99,144 @@
 	</v-container>
 
 
-
-
 	</v-card>
 	</v-dialog>
+
+
+
+
+
+	
+	<template>
+	<v-row justify="center">
+	
+
+	<v-dialog
+	v-model="dialog2"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline red--text">{{ dialog2_title }}</v-card-title>
+
+	<v-card-text class="red--text">
+	{{ dialog2_body }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog2_reject_user_no()"
+	>
+	No
+	</v-btn>
+
+	<v-btn
+	color="green darken-1"
+	text :disabled="dialog2_btn_disabled"
+	@click="reject_user()"
+	>
+	Yes
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+	</template>
+
+	
+
+	
+	<template>
+	<v-row justify="center">
+	
+
+	<v-dialog
+	v-model="dialog3"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline green--text">{{ dialog3_title }}</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ dialog3_body }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog3_make_admin_no()"
+	>
+	No
+	</v-btn>
+
+	<v-btn
+	color="green darken-1"
+	text :disabled="dialog3_btn_disabled"
+	@click="make_admin()"
+	>
+	Yes
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+	</template>
+
+	
+
+
+	<template>
+	<v-row justify="center">
+	
+
+	<v-dialog
+	v-model="dialog4"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline green--text">{{ dialog4_title }}</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ dialog4_body }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
+
+	<v-btn
+	color="green darken-1"
+	text
+	@click="dialog4_approve_user_no()"
+	>
+	No
+	</v-btn>
+
+	<v-btn
+	color="green darken-1"
+	text :disabled="dialog4_btn_disabled"
+	@click="approve_user()"
+	>
+	Yes
+	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+	</template>
+
+	
+
+
+
+
+
+
 	</v-row>
 	`;
 
@@ -73,33 +247,134 @@
 		data(){
 			return {
 				dialog: false,
+				dialog2: false,
+				dialog3: false,
+				dialog4: false,
 				notifications: false,
 				sound: true,
 				widgets: false,
-
+				dialog2_body: 'Are you sure that you want to block this user?',
+				dialog2_title: 'Block User?',
+				dialog3_body: 'Are you sure that you want make this user an Admin?',
+				dialog4_body: 'Are you sure that you want to approve this user?',
+				dialog3_title: 'Make admin?',
+				dialog4_title: 'Aprrove User?',
 				users_info: [],
 				radioGroup: [],
 				disabled: false,
-
-
-
+				profile_user_status:'',
+				profile_user_type:'',
+				dialog2_btn_disabled: false,
+				dialog3_btn_disabled: false,
+				dialog4_btn_disabled: false,
 			}
 		},
 		methods : {
+			reject_user(){
+
+				axios.post(this.model.modelReg_req , {
+					purpose : 'reject_user',
+					email: this.email,
+				})
+				.then(function (response) {
+
+				}.bind(this))
+				.catch(function (error) {
+					console.log(error);
+				});
+
+
+
+
+				this.dialog2_body = 'User blocked Successfully';
+				this.dialog2_title = 'Success';
+				this.dialog2_btn_disabled = true;
+				this.get_updated_data();
+			},
+			dialog2_reject_user_no(){
+				this.dialog2 = false;
+				this.dialog2_btn_disabled = false
+			},
+			make_admin(){
+
+
+				axios.post(this.model.modelReg_req , {
+					purpose : 'make_admin',
+					email: this.email,
+				})
+				.then(function (response) {
+
+				}.bind(this))
+				.catch(function (error) {
+					console.log(error);
+				});
+
+
+				this.dialog3_body = 'Made admin successfully';
+				this.dialog3_title = 'Success';
+				this.dialog3_btn_disabled = true;
+				this.get_updated_data();
+			},
+			dialog3_make_admin_no(){
+
+				this.dialog3 = false;
+				this.dialog3_btn_disabled = false
+			},
+			approve_user(){
+
+
+				axios.post(this.model.modelReg_req , {
+					purpose : 'approve_user',
+					email: this.email,
+				})
+				.then(function (response) {
+
+				}.bind(this))
+				.catch(function (error) {
+					console.log(error);
+				});
+
+
+				this.dialog4_body = 'User approved successfully';
+				this.dialog4_title = 'Success';
+				this.dialog4_btn_disabled = true;
+				this.get_updated_data();
+			},
+			dialog4_approve_user_no(){
+
+				this.dialog4 = false;
+				this.dialog4_btn_disabled = false
+			},
+			get_updated_data(){
+				axios.post( this.model.modelPrivacy ,
+				{
+					purpose: 'get_profile_details_for_all',
+					email: this.email,
+				}).then(function(response){
+					this.users_info = response.data;
+					console.log(response);
+					this.profile_user_status = this.users_info[22][1];
+					this.profile_user_type = this.users_info[23][1];
+				}.bind(this))
+				.catch(function(error){
+
+					console.log(error);
+				}.bind(this));
+			}
 		},
 		created(){
+
+
 			axios.post( this.model.modelPrivacy ,
 			{
 				purpose: 'get_profile_details_for_all',
 				email: this.email,
-			},
-			{ 
-
-
-			}
-			).then(function(response){
+			}).then(function(response){
 				this.users_info = response.data;
 				console.log(response);
+				this.profile_user_status = this.users_info[22][1];
+				this.profile_user_type = this.users_info[23][1];
+				console.log(this.users_info[22][0]);
 			}.bind(this))
 			.catch(function(error){
 
