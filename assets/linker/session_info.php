@@ -24,23 +24,69 @@ if(isset($_SESSION['users_info'])){
 
 	$login__ = true;
 
-	if($_SESSION['users_info']['type'] !='admin' ){
-		if($pageName == 'add_user' || $pageName == 'reg_req' ){
+	if($_SESSION['users_info']['type'] =='user' ){
+		/*if($pageName == 'add_user' || $pageName == 'reg_req' ){
 		header('location:'.$not_authorisedPage);
 			
-		}
+	}*/
 
-	}else{
-		$admin__ = true;
+	$user__ = true;
+
+
+	if($_SESSION['users_info']['status'] =='verified' ){
+
+		$verified__ = true;
 	}
+
+
+
+}else if($_SESSION['users_info']['type'] =='admin'){
+	$admin__ = true;
+}
 
 }else{
 
-	if($pageName == 'profile' ){
+	$login__ = false;
+	$admin__ = false;
+	$user__ = false;
+	$verified__ = false;
+
+	/*if($pageName != 'login' || $pageName != 'registration' || $pageName != 'forgot_password' ){
 		header('location:'.$not_authorisedPage);
+	}*/
+
+}
+
+
+
+if($login__ == true){
+
+	if($user__ == true){
+
+		if($verified__ == true ){
+
+		}else{
+
+			if($pageName != 'profile'){	
+				header('location:'.$profilePage);
+			}
+
+		}
+
+	}else if($admin__ == true){
+
+	}
+
+
+}else if($login__ == false){
+
+	if($pageName == 'profile' || $pageName == 'add_user' || $pageName == 'gallery' || $pageName == 'search' || $pageName == 'privacy' || $pageName == 'gallery'  || $pageName == 'reg_req' ){
+
+		header('location:'.$loginPage);
 	}
 
 }
+
 
 
 ?>
