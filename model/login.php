@@ -32,12 +32,9 @@ $d1 = json_decode($data);
 
     
 
-    if($row['st'] == 'YES_USER'){
+    if($row['st'] == 'YES_USER' || $row['st'] == 'YES_ADMIN'){
         $_SESSION['email'] =  $email;
-        $_SESSION['type'] = 'user';
-
-       
-
+        
 
         $sql = 'select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email ='.'"'.$email.'"';  
         $result = mysqli_query($conn, $sql);
@@ -47,11 +44,6 @@ $d1 = json_decode($data);
         // format
         // echo $_SESSION['users_info']['email'];
 
-
-
-    }else if($row['st'] == 'YES_ADMIN'){
-        $_SESSION['email'] =  $email;
-        $_SESSION['type'] = 'admin';
     }
 
 //print_r($row);

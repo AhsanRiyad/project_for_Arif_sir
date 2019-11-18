@@ -251,8 +251,15 @@ if($d1->purpose == 'basic'){
 // echo json_encode(var_dump($row));
 }else if($d1->purpose == 'profile_completeness_100'){
 
+	$user_type = $d1->user_type;
 	$conn = get_mysqli_connection();
-	$sql = "update verification_info set completeness = 100 where email = (?)";
+	$sql = '';
+	if($user_type == 'admin'){
+		$sql = "update verification_info set completeness = 100 , status = 'verified' where email = (?)";
+	}else if($user_type == 'user'){
+		$sql = "update verification_info set completeness = 100 where email = (?)";
+	}
+
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('s' , $email__ );
 

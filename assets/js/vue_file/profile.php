@@ -130,13 +130,16 @@
 					axios.post( this.model.modelProfile_update ,
 					{
 						purpose: 'profile_completeness_100',
+						user_type: this.users_info.type ,
 
 					}
 					).then(function(response){
 
 						console.log(response);
 
-						this.profile_completeness_msg = 'profile completed , wait for verification';	
+						this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
+
+
 					}.bind(this))
 					.catch(function(error){
         //console.log(error);
@@ -217,7 +220,9 @@ updated(){
 	}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
 		this.profile_completeness_msg = 'recent_photo is not set';	
 	}else{
-		this.profile_completeness_msg = 'profile completed , wait for verification';	
+		
+		this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
+	
 	}
 
 	console.log(this.profile_completeness_msg);
@@ -1241,6 +1246,7 @@ Vue.component('basic' , {
 			dob_validity: '',
 			users_info: '',
 			submit_disabled: false,
+			type: '',
 			changes:{
 				full_name:{
 					smallText: {
@@ -1437,7 +1443,10 @@ Vue.component('basic' , {
 
 						console.log(response);
 
-						this.status_text = 'Update requested successfully! wait for admin approval';
+
+						this.type == 'admin' ? this.status_text = 'Updated, Thank You' : this.status_text = 'Update requested successfully! wait for admin approval';
+
+
 						this.dialog = true;
 
 						this.get_users_data();
@@ -1487,6 +1496,7 @@ Vue.component('basic' , {
 					this.permanent_district = response.data.parmanent_district;
 					this.permanent_post_code = response.data.parmanent_post_code;
 					this.permanent_country = response.data.parmanent_country;
+					this.type = response.data.type;
 
 					bus.$emit('users_info' , response.data);
 
@@ -1529,7 +1539,7 @@ Vue.component('basic' , {
 				this.blood_group = response.data.blood_group;
 				this.dob = response.data.date_of_birth;
 				this.recent_photo = response.data.recent_photo;
-
+				this.type = response.data.type;
 				this.users_info = response.data;
 
 				if(this.users_info.completeness == 100 & this.users_info.status == 'not_verified'){
@@ -2201,6 +2211,7 @@ Vue.component('personal' , {
 			designation_validity: false,
 			users_info: '',
 			submit_disabled: false,
+			type: '',
 			changes:{
 				fathers_name:{
 					smallText: {
@@ -2394,7 +2405,7 @@ Vue.component('personal' , {
 
 						console.log(response);
 
-						this.status_text = 'Update requested successfully! wait for admin approval';
+						this.type == 'admin' ? this.status_text = 'Updated, Thank You' : this.status_text = 'Update requested successfully! wait for admin approval';
 						this.dialog = true;
 
 						this.get_users_data();
@@ -2440,6 +2451,7 @@ Vue.component('personal' , {
 					this.permanent_district = response.data.parmanent_district;
 					this.permanent_post_code = response.data.parmanent_post_code;
 					this.permanent_country = response.data.parmanent_country;
+					this.type = response.data.type;
 
 					bus.$emit('users_info' , response.data);
 
@@ -2806,6 +2818,7 @@ Vue.component('address1' , {
 			permanent_country: '',
 			users_info: '',
 			submit_disabled: false,
+			type: '',
 			changes:{
 				present_line1:{
 					smallText: {
@@ -3069,7 +3082,7 @@ Vue.component('address1' , {
 
 						console.log(response);
 
-						this.status_text = 'Update requested successfully! wait for admin approval';
+						this.type == 'admin' ? this.status_text = 'Updated, Thank You' : this.status_text = 'Update requested successfully! wait for admin approval';
 						this.dialog = true;
 						this.get_users_data();
 						
@@ -3153,7 +3166,7 @@ Vue.component('address1' , {
 				this.permanent_district = response.data.parmanent_district;
 				this.permanent_post_code = response.data.parmanent_post_code;
 				this.permanent_country = response.data.parmanent_country;
-
+				this.type = response.data.type;
 
 				this.users_info = response.data;
 
