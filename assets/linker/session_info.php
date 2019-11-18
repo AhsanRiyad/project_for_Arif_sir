@@ -24,6 +24,9 @@ if(isset($_SESSION['users_info'])){
 
 	$login__ = true;
 
+
+	$profile_photo = $rootAdress."assets/img/uploads/recent_photos/".$_SESSION['users_info']['recent_photo'];
+
 	if($_SESSION['users_info']['type'] =='user' ){
 		/*if($pageName == 'add_user' || $pageName == 'reg_req' ){
 		header('location:'.$not_authorisedPage);
