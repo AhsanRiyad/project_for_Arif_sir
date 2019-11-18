@@ -36,7 +36,7 @@ if(isset($_SESSION['users_info'])){
 	$user__ = true;
 
 
-	if($_SESSION['users_info']['status'] =='verified' ){
+	if($_SESSION['users_info']['status'] =='approved' ){
 
 		$verified__ = true;
 	}

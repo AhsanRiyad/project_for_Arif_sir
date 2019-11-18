@@ -42,7 +42,7 @@
 	</tr>
 	</thead>
 	<tbody>
-	<tr  v-for="(item , index) in users_info" v-show="item[2]=='public'">
+	<tr  v-for="(item , index) in users_info" v-show="item[2]=='public' || users_info_as_props.type == 'admin' ">
 	<td class="body-1">{{ item[0] }} </td>
 	<td>
 
@@ -69,7 +69,7 @@
 
 	Vue.component('get_details' , {
 		template: code,
-		props: ['email'],
+		props: ['email' , 'users_info_as_props'],
 		data(){
 			return {
 				dialog: false,
@@ -86,31 +86,31 @@
 			}
 		},
 		methods : {
-  },
-created(){
-    axios.post( this.model.modelPrivacy ,
-    {
-      purpose: 'get_profile_details_for_all',
-      email: this.email,
-    },
-    { 
+		},
+		created(){
+			axios.post( this.model.modelPrivacy ,
+			{
+				purpose: 'get_profile_details_for_all',
+				email: this.email,
+			},
+			{ 
 
 
-    }
-    ).then(function(response){
-      this.users_info = response.data;
-      console.log(response);
-    }.bind(this))
-    .catch(function(error){
+			}
+			).then(function(response){
+				this.users_info = response.data;
+				console.log(response);
+			}.bind(this))
+			.catch(function(error){
 
-      console.log(error);
-    }.bind(this));
-
-
+				console.log(error);
+			}.bind(this));
 
 
-  }
-})
+
+
+		}
+	})
 
 
 
@@ -335,10 +335,10 @@ created(){
 	<td> {{ user.membership_number }} </td>
 	<td> {{ user.institution_id }} </td>
 	<td>
-	<gallery :email='user.email'></gallery>
+	<gallery :email='user.email' ></gallery>
 	</td>
 	<td>
-	<get_details :email='user.email'></get_details>
+	<get_details :email='user.email' :users_info_as_props='users_info_as_props'></get_details>
 	</td>
 	</tr>
 	</tbody>
@@ -384,6 +384,7 @@ created(){
 				search_text: '',
 				user_list : [] , 
 				array_size: true ,
+				users_info_as_props: {},
 			}
 		},
 		methods: {
@@ -425,7 +426,22 @@ created(){
 
 		},
 		created(){
+			this.users_info__.admin__ == true ? this.category_items.push("rejected_user") : '';
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				this.users_info_as_props = response.data ;
+				
+			}.bind(this))
+			.catch(function(error){
 
+				
+
+        //console.log(error);
+    }.bind(this));
 		}
 	})
 
@@ -435,58 +451,5 @@ created(){
 	var search = new Vue({
 		el:'#search',
 		vuetify:new Vuetify(),
-		data:{
-			category: 'full_name',
-			category_items: [
-			'full_name',
-			'institution_id',
-			'membership_number',
-			],
-			search_text: '',
-			user_list : [] , 
-			array_size: true ,
-			dialog: false,
-			notifications: false,
-			sound: true,
-			widgets: false,
-
-
-
-		},
-		methods:{
-			search(){
-				//console.log(this.search_text);
-				//console.log(this.category);
-
-				axios.post( this.model.modelSearch ,
-				{
-					purpose: this.category ,
-					search_text: this.search_text,
-
-				}
-				).then(function(response){
-
-					console.log(response);
-
-					if(response.data.length == 1){
-						this.user_list = []; 
-						this.user_list[0] =  JSON.parse(response.data);
-						console.log(this.user_list[0]);
-					}else if(response.data.length > 1){
-						this.user_list =  response.data;
-						console.log(this.user_list[0].email);
-					}else if(response.data == 0){
-						this.user_list =  [];
-					}
-
-				}.bind(this))
-				.catch(function(error){
-
-					console.log(error);
-				}.bind(this));
-
-
-			}
-		}
 	})
 </script>

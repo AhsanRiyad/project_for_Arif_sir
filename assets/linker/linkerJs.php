@@ -88,6 +88,10 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                 },
                 users_info__:{
                     email__: '<?= $email__ ?>',
+                    login__: '<?= $login__ ?>',
+                    user__: '<?= $user__ ?>',
+                    admin__: '<?= $admin__ ?>',
+                    verified__: '<?= $verified__ ?>',
                 }
 
             }

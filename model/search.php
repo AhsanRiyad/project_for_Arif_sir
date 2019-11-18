@@ -11,7 +11,7 @@ if($d2->purpose == 'full_name'){
 	$name = $d2->search_text;
 	$conn = get_mysqli_connection();
 	$name1 =  mysqli_real_escape_string($conn , $name);
-	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.full_name  REGEXP '$name' limit 20 ";
+	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and  ur.full_name  REGEXP '$name'  limit 20 ";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);
@@ -53,7 +53,7 @@ if($d2->purpose == 'full_name'){
 	$name = $d2->search_text;
 	$conn = get_mysqli_connection();
 	$name1 =  mysqli_real_escape_string($conn , $name);
-	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.membership_number  REGEXP '$name' limit 20 ";
+	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and   ur.membership_number  REGEXP '$name' limit 20 ";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);
@@ -95,7 +95,7 @@ if($d2->purpose == 'full_name'){
 	$name = $d2->search_text;
 	$conn = get_mysqli_connection();
 	$name1 =  mysqli_real_escape_string($conn , $name);
-	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ua.parmanent_district  REGEXP '$name' limit 20 ";
+	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and  ua.parmanent_district  REGEXP '$name' limit 20 ";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);
