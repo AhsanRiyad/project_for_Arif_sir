@@ -13,7 +13,7 @@ $d2 = json_decode($data);
 
 // echo $d2->purpose;
 
-$email = 'riyad298@gmail.com';
+$email = $email__;
 
 
 
