@@ -5,24 +5,30 @@ include $db;
 include $session_info;
 include $linkerCss;
 ?>
+
+
+
+<div  id="gallery">
+
 <?php 
 include $dashboard_head;
 ?>
 
 
-
-<div  id="gallery">
 <v-app>
 <gallery></gallery>
+
+
 </v-app>
+<?php 
+include $dashboard_foot ;
+?>
+
 </div>
 
 
 
 
-<?php 
-include $dashboard_foot ;
-?>
 <?php 
 include $linkerJs;
 ?>

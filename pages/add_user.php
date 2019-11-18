@@ -6,24 +6,26 @@ include $session_info;
 
 include $linkerCss;
 ?>
-<?php 
-include $dashboard_head;
-?>
 
 
 <div id="add_user">
+		<?php 
+		include $dashboard_head;
+		?>
 	<v-app>
-	
-		<add_user></add_user>
+		
 
+		<add_user></add_user>
+		
 	</v-app>
+		<?php 
+		include $dashboard_foot ;
+		?>
+		
 </div>
 
 
 
-<?php 
-include $dashboard_foot ;
-?>
 <?php 
 include $linkerJs;
 ?>

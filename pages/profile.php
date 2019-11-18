@@ -6,12 +6,15 @@ include $session_info;
 
 include $linkerCss;
 ?>
-<?php 
-include $dashboard_head;
-?>
 
 
 <div  id="app">	
+
+
+		<?php 
+		include $dashboard_head;
+		?>
+
 	<v-app>
 		
 		<!-- <template v-if="componet_name == 'basic'">
@@ -36,13 +39,19 @@ include $dashboard_head;
 			<component   :profile_photo='profile_photo' v-bind:is="componet_name"></component>
 		</keep-alive>
 		<buttons ></buttons>
+		
+
+
+
 	</v-app>
+		<?php 
+		include $dashboard_foot ;
+		?>
+
+
 </div>
 
 
-<?php 
-include $dashboard_foot ;
-?>
 <?php 
 include $linkerJs;
 ?>

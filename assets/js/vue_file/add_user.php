@@ -6,6 +6,7 @@
 
 
 
+
 var code = `<!-- registration page starts now -->
 
 <div class="container-fluid">
