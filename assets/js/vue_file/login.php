@@ -166,7 +166,7 @@
 					.then( function(response){
 						this.loading = false;
 					//window.location.href = 'http://google.com';
-					response.data == 'YES' ? window.location.href = this.address.profilePage : this.login_status = 'email/password doesnt match';  
+					response.data == 'YES_USER' ? window.location.href = this.address.profilePage : this.login_status = 'email/password doesnt match';  
 
 					console.log(response);	
 				}.bind(this))

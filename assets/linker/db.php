@@ -1,18 +1,24 @@
 <?php 
 
-
 function get_mysqli_connection(){
-	// Create connection
-$conn = new mysqli( $GLOBALS['hostName'],  $GLOBALS['userName'],  $GLOBALS['password'],  $GLOBALS['databaseName']);
+    // Create connection
+    $conn = new mysqli( $GLOBALS['hostName'],  $GLOBALS['userName'],  $GLOBALS['password'],  $GLOBALS['databaseName']);
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    if ($conn->connect_error) {
+
+        //var_dump($conn->connect_error);
+        die("Connection failed: " . $conn->connect_error);
+        //header('location:'.$rootAdress.'not_authorised.php');
+    }
+
+
+    return $conn; 
+
 }
 
 
-return $conn; 
 
-}
+
 
 function get_mysqli_connect(){
 
@@ -57,6 +63,14 @@ catch(PDOException $e)
     echo $e->getMessage();
     }
 */
+
+
+
+//session
+
+
+
+
 
 
 

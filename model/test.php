@@ -84,7 +84,7 @@ echo $row['st'];
 
 
 
-
+/*
 				//echo $_GET['hellow'];
 
 
@@ -132,7 +132,7 @@ echo $row['st'];
 				$conn->close();
 
 
-
+*/
 
 
 
@@ -147,3 +147,26 @@ $cars = array
 
 
   echo json_encode($cars);*/
+
+
+
+
+  $conn = get_mysqli_connection();
+  //var_dump($conn) ;
+
+    //$sql = "select * from users_registration where email = 'riyad209@gmail.com'";
+    //$stmt = $conn->prepare($sql);
+    //$stmt->bind_param('ss' , $email, $password1);
+    //$stmt->execute();   
+  $conn = get_mysqli_connection();
+  $email = 'riyad298@gmail.com';
+  $email1 = mysqli_real_escape_string($conn, $email);
+  $sql = 'select * from users_registration where email= '.'"'.$email1.'"'; 
+  
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+
+  $_SESSION['users_info'] = $row;
+
+echo $_SESSION['users_info']['email'];
+$conn->close();

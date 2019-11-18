@@ -337,7 +337,7 @@ Vue.component('registration' , {
 
 			}else if(inputName == 'institution_id'){
 				console.log(this.institution_id);
-				var patt= /[A-Za-z.\s]{5,}/g;
+				var patt= /[A-Za-z\S]{5,}/g;
 				var result = patt.test(this.institution_id);
 
 				result == false ? this.institution_id_validity = 'invalid' : this.institution_id_validity = 'valid';

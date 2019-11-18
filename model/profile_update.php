@@ -5,7 +5,7 @@ include $APP_ROOT.'assets/linker/db.php' ;
 
 $data =  file_get_contents('php://input');
 $d1 = json_decode($data);
-$email = 'riyad298@gmail.com';
+// $email = 'riyad298@gmail.com';
 
 //echo $d1->purpose;
 

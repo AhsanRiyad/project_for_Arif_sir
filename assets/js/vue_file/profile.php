@@ -63,6 +63,7 @@
 			verify_email_otp(){
 				//alert('veriy');
 				bus.$emit('changeComponent' , 'verify_email_otp' );
+				bus.$emit('buttonRelease' , 'verify_email_otp' );
 			},
 			profile_completeness_bus(){
 			}
@@ -264,6 +265,12 @@ Vue.component('buttons' , {
 				bus.$emit('changeComponent' , comp_type );
 				
 			}
+
+		},
+		created(){
+			bus.$on('buttonRelease' , (data)=>{
+			this.componet_name = data;
+		})
 
 		}
 	})
@@ -2969,21 +2976,21 @@ Vue.component('address1' , {
 
 				if(inputName == 'present_line1'){
 					console.log(this.present_line1);
-					var patt= /[A-Za-z.\s]{5,}/g;
+					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.present_line1);
 
 					result == false ? this.present_line1_validity = 'invalid' : this.present_line1_validity = 'valid';
 
 				}else if(inputName == 'present_district'){
 					console.log(this.present_district);
-					var patt= /[A-Za-z.\s]{5,}/g;
+					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.present_district);
 
 					result == false ? this.present_district_validity = 'invalid' : this.present_district_validity = 'valid';
 
 				}else if(inputName == 'present_country'){
 					console.log(this.present_country);
-					var patt= /[A-Za-z.\s]{5,}/g;
+					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.present_country);
 
 					result == false ? this.present_country_validity = 'invalid' : this.present_country_validity = 'valid';
@@ -2997,21 +3004,21 @@ Vue.component('address1' , {
 
 				}else if(inputName == 'permanent_line1'){
 					console.log(this.permanent_line1);
-					var patt= /[A-Za-z.\s]{5,}/g;
+					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.permanent_line1);
 
 					result == false ? this.permanent_line1_validity = 'invalid' : this.permanent_line1_validity = 'valid';
 
 				}else if(inputName == 'permanent_district'){
 					console.log(this.permanent_district);
-					var patt= /[A-Za-z.\s]{5,}/g;
+					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.permanent_district);
 
 					result == false ? this.permanent_district_validity = 'invalid' : this.permanent_district_validity = 'valid';
 
 				}else if(inputName == 'permanent_country'){
 					console.log(this.permanent_country);
-					var patt= /[A-Za-z.\s]{5,}/g;
+					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.permanent_country);
 
 					result == false ? this.permanent_country_validity = 'invalid' : this.permanent_country_validity = 'valid';

@@ -500,7 +500,8 @@
 		data : {
 			name: 'riyad---vue',
 			name_result: '' , 
-			first_name_color : 'green'
+			first_name_color : 'green',
+			users_info: {},
 		} , 
 		methods : {
 			

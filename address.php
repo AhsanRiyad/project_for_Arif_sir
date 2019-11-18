@@ -31,6 +31,7 @@ $dashboard_head = $APP_ROOT.'pages/dashboard_head.php';
 $dashboard_foot = $APP_ROOT.'pages/dashboard_foot.php';
 $linkerCss = $APP_ROOT.'assets/linker/linkerCss.php';
 $linkerJs = $APP_ROOT.'assets/linker/linkerJs.php';
+$db = $APP_ROOT.'assets/linker/db.php' ; 
 
 
 
@@ -45,6 +46,7 @@ $profilePage = $rootAdress.'pages/profile.php?pn=basic';
 $privacyPage = $rootAdress.'pages/privacy.php';
 $galleryPage = $rootAdress.'pages/gallery.php';
 $searchPage = $rootAdress.'pages/search.php';
+$not_authorisedPage = $rootAdress.'pages/not_authorised.php';
 
 
 
@@ -74,9 +76,26 @@ $password = '';
 $databaseName = 'intern_project';
 
 
-
 //CSRF_TOKEN token securty session
 //$_SESSION['csrf_token1'] = bin2hex(random_bytes(32));
+
+
+
+//session email
+$session_info = $APP_ROOT.'assets/linker/session_info.php';
+$admin__ = false;
+$user__ = false;
+$verified__ = false;
+$login__ = false;
+
+
+$email='';
+if(isset($_SESSION['users_info'])){
+	$email = $_SESSION['users_info']['email'];
+}
+
+
+
 
 
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2019 at 09:40 PM
+-- Generation Time: Nov 18, 2019 at 03:16 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -79,7 +79,7 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `email1` VARCHAR(500), IN `password1` VARCHAR(100), OUT `result` VARCHAR(500))  BEGIN
 
 DECLARE i int(3);
-
+DECLARE type1 varchar(100);
 
 select count(*) into i from users_registration where email = email1 and password = password1;
 
@@ -88,7 +88,16 @@ if i < 1
 then
 set result = 'NO' ; 
 else
-set result = 'YES' ; 
+SELECT type into type1 FROM verification_info vi WHERE vi.email = email1;
+
+IF type1 = 'user'
+THEN
+set result = 'YES_USER' ;
+ELSEIF type1 = 'admin'
+THEN
+SET result = 'YES_ADMIN';
+END IF;
+
 end if;
 
 
@@ -136,7 +145,7 @@ INSERT INTO verification_info (email,otp,status,type,visibility,completeness) VA
 INSERT INTO users_info (email) VALUES (email1);
 INSERT INTO users_address (email) VALUES (email1);
 INSERT INTO user_uploads (email , recent_photo , old_photo) VALUES (email1 , 'not_set' , 'not_set');
-INSERT INTO user_photos (email) VALUES (email1);
+
 
 
 SET result="YES";
@@ -327,9 +336,7 @@ CREATE TABLE `users_address` (
 --
 
 INSERT INTO `users_address` (`email`, `users_address_id`, `present_line1`, `present_line2`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`, `parmanent_line2`, `parmanent_district`, `parmanent_post_code`, `parmanent_country`) VALUES
-('riyad298@yahoo.com', 67, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@hotmail.com', 68, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@gmail.com', 69, 'riyad298@gmail.com', NULL, 'riyad298@gmail.com', '4555', 'riyad298@gmail.com', 'riyad298@gmail.com', NULL, 'riyad298@gmail.com', '4566', 'riyad298@gmail.com');
+('riyad298@gmail.com', 1, 'kaa-153/3', NULL, 'dhaka north', '3900', 'bangladesh', 'house 4 , protap', NULL, 'kurigram', '5600', 'bangladesh');
 
 -- --------------------------------------------------------
 
@@ -358,11 +365,7 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`email`, `gender`, `id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
-('riyad298@gmail.com', NULL, 0, 'riyad298@gmail.com', 'arfeaf1', 'arefaef1', 'arefaerf1', 11, 'arferfafarffffffffffa', 'afearf1', 'aerfaerf', 'B+', '1991-03-26'),
-('', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@yahoo.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@hotmail.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@gffmail.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('riyad298@gmail.com', NULL, 0, '111111111111111111111111', 'Barkat Alam', 'Urmee', 'Maliha', 0, 'student', 'student', 'aiuba', 'A-', '1992-08-02');
 
 -- --------------------------------------------------------
 
@@ -386,11 +389,7 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 67, 'riyad298@gmail.com', '44444444444444444', 'riyad298@gmail.com', '96e79218965eb72c92a549dd5a330112', '2019-11-07 01:55:49.000000', 1000),
-('', 68, '', '', 'riyad', '448787', '2019-11-08 02:17:40.000000', 1000),
-('riyad298@yahoo.com', 69, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '1', '2019-11-12 08:16:43.000000', 1000),
-('riyad298@hotmail.com', 70, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '1', '2019-11-13 18:23:17.000000', 1001),
-('riyad298@gffmail.com', 71, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-15 18:04:32.000000', 1000);
+('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 03:08:20.000000', 1000);
 
 -- --------------------------------------------------------
 
@@ -403,14 +402,6 @@ CREATE TABLE `user_photos` (
   `email` varchar(100) DEFAULT NULL,
   `id_user_photos` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_photos`
---
-
-INSERT INTO `user_photos` (`group_photo`, `email`, `id_user_photos`) VALUES
-('riyad298@gmail.com.jpg', 'riyad298@gmail.com', 72),
-(NULL, 'riyad298@gffmail.com', 73);
 
 -- --------------------------------------------------------
 
@@ -430,9 +421,7 @@ CREATE TABLE `user_uploads` (
 --
 
 INSERT INTO `user_uploads` (`id_user_uploads`, `email`, `recent_photo`, `old_photo`) VALUES
-(67, 'riyad298@gmail.com', 'riyad298@gmail.com.png', 'riyad298@gmail.com.png'),
-(68, 'riyad298@hotmail.com', 'not_set', 'not_set'),
-(69, 'riyad298@gffmail.com', 'not_set', 'not_set');
+(1, 'riyad298@gmail.com', 'riyad298@gmail.com.jpg', 'not_set');
 
 -- --------------------------------------------------------
 
@@ -458,11 +447,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(67, 'riyad298@gmail.com', '2868', 'b53b3a3d6ab90ce0268229151c9bde11', 'not_verified', 'verified', 'not_requested', 'user', 'email,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,designation,present_district,parmanent_line1,parmanent_post_code,parmanent_district,parmanent_country,membership_number,registration_date', 100),
-(68, '', '4297', NULL, 'rejected', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20),
-(69, 'riyad298@yahoo.com', '7087', NULL, 'approved', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20),
-(70, 'riyad298@hotmail.com', '9376', NULL, 'approved', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20),
-(71, 'riyad298@gffmail.com', '3265', '', 'not_verified', NULL, 'not_requested', 'user', 'full_name,institution_id,membership_number', 20);
+(1, 'riyad298@gmail.com', '8060', NULL, 'not_verified', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100);
 
 --
 -- Indexes for dumped tables
@@ -506,31 +491,31 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `users_address`
 --
 ALTER TABLE `users_address`
-  MODIFY `users_address_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `users_address_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users_registration`
 --
 ALTER TABLE `users_registration`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_photos`
 --
 ALTER TABLE `user_photos`
-  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_uploads`
 --
 ALTER TABLE `user_uploads`
-  MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `verification_info`
 --
 ALTER TABLE `verification_info`
-  MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

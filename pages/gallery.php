@@ -1,6 +1,8 @@
 <?php 
 $pageName = 'gallery';
 include "../address.php"; 
+include $db; 
+include $session_info;
 include $linkerCss;
 ?>
 <?php 

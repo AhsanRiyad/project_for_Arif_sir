@@ -1,6 +1,8 @@
 <?php 
 $pageName = 'search';
 include "../address.php"; 
+include $db; 
+include $session_info;
 include $linkerCss;
 ?>
 <?php 

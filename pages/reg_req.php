@@ -1,9 +1,12 @@
 <?php 
 $pageName = 'reg_req';
 include "../address.php"; 
-include $linkerCss;
+include $db; 
+include $session_info;
 ?>
+
 <?php 
+include $linkerCss;
 include $dashboard_head;
 ?>
 
