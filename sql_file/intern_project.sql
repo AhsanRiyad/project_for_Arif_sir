@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2019 at 03:16 AM
+-- Generation Time: Nov 18, 2019 at 08:58 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -266,7 +266,7 @@ set result = 'success' ;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `upload_photo` (IN `purpose` VARCHAR(100), IN `upload_link` VARCHAR(500), IN `email1` VARCHAR(100), OUT `existing_link` VARCHAR(500))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `upload_photo` (IN `purpose` VARCHAR(100), IN `upload_link` VARCHAR(500), IN `email1` VARCHAR(100), OUT `existing_link` VARCHAR(500), OUT `result` VARCHAR(100))  BEGIN
 
 
 if purpose = 'recent_photo'
@@ -284,6 +284,7 @@ then
 insert into user_photos (email , group_photo) values (email1 , upload_link); 
 end if;
 
+SET result = 'success';
 
 
 END$$

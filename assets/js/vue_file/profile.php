@@ -269,8 +269,8 @@ Vue.component('buttons' , {
 		},
 		created(){
 			bus.$on('buttonRelease' , (data)=>{
-			this.componet_name = data;
-		})
+				this.componet_name = data;
+			})
 
 		}
 	})
@@ -1716,7 +1716,8 @@ Vue.component('photos' , {
 						}
 						).then(function(response){
 							this.loading_recent_photo = false;
-							this.status = 'upload successful';
+							response.data == 'success' ? this.status = 'upload successful' : this.status = 'problem uploading your photo, try again';
+							
 							this.dialog = true;
 							this.recent_photo_name = 'choose file';
 							console.log(response);
@@ -1819,7 +1820,7 @@ Vue.component('photos' , {
 						}
 						).then(function(response){
 							this.loading_old_photo = false;
-							this.status = 'upload successful';
+							response.data == 'success' ? this.status = 'upload successful' : this.status = 'problem uploading your photo, try again';
 							this.dialog = true;
 							this.old_photo_name = 'choose file';
 
@@ -1888,7 +1889,7 @@ Vue.component('photos' , {
 						}
 						).then(function(response){
 							this.loading_group_photo = false;
-							this.status = 'upload successful';
+							response.data == 'success' ? this.status = 'upload successful' : this.status = 'problem uploading your photo, try again';
 							this.dialog = true;
 							this.group_photo_name = 'choose file';
 

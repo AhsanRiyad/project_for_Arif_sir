@@ -7,7 +7,7 @@ include $APP_ROOT.'assets/linker/db.php' ;
 
 
 		$purpose_type =  $_POST['purpose'];
-
+		$conn = get_mysqli_connection();
 
 		$target_dir = $APP_ROOT."assets/img/uploads/".$purpose_type."s/";
 		$target_file1 = $target_dir . basename($_FILES[$purpose_type]["name"]);
@@ -34,7 +34,7 @@ include $APP_ROOT.'assets/linker/db.php' ;
 				$stmt->bind_param('s' , $email);
 				$stmt->execute();
 				$result = $stmt->get_result();
-				$row = $result->fetch_assoc();
+				$row = $result>fetch_assoc();
 				// print_r($row['count']);
 				$count = $row['count'];
 				$stmt->close();
@@ -60,20 +60,20 @@ include $APP_ROOT.'assets/linker/db.php' ;
 		} else {
 			if (move_uploaded_file($_FILES[$purpose_type]["tmp_name"], $target_file)) {
 
-				$conn = get_mysqli_connection();
-				$sql = "call upload_photo( ? , ? , ? , @result )";
+				
+				$sql = "call upload_photo( ? , ? , ? , @existing_file_name , @result )";
 				$stmt = $conn->prepare($sql);
 				$stmt->bind_param('sss' , $purpose_type ,  $base_name , $email );
 				$stmt->execute();
 				$stmt->close();
-				$sql = 'select @result as st'; 
+				$sql = 'select @existing_file_name as st , @result as rs'; 
 				$result = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_assoc($result);
 				if (file_exists($target_dir.$row['st']) && $purpose_type!='group_photo' && $row['st']!='not_set') {
 					unlink($target_dir.$row['st']);
 				}
 				$conn->close();
-				echo $row['st'];
+				echo $row['rs'];
 			} else {
 				echo "Sorry, there was an error uploading your file.";
 			}
