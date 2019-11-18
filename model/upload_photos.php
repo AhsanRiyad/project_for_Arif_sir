@@ -27,7 +27,7 @@ include $APP_ROOT.'assets/linker/db.php' ;
 
 
 
-				$email = 'riyad298@gmail.com';
+				//$email = $email__;
 				$conn = get_mysqli_connection();
 				$sql = "select count(*) as count from user_photos where  email = (?)";
 				$stmt = $conn->prepare($sql);
