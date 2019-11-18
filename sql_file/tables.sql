@@ -408,6 +408,29 @@ SELECT vi.email as em FROM verification_info vi JOIN users_registration ur ON vi
 SELECT * FROM verification_info vi JOIN users_registration ur ON vi.email = ur.email WHERE vi.completeness = 100 and vi.status = 'not_verified'
 
 
+
+CREATE or REPLACE VIEW all_info_together AS
+select  ur.full_name,ur.mobile,ur.institution_id,ur.password,ur.registration_date, ur.membership_number, ui.gender,ui.nid_or_passport,ui.fathers_name,ui.mother_name,ui.spouse_name,ui.number_of_children,ui.profession,ui.designation,ui.institution,ui.blood_group,ui.date_of_birth ,
+
+vi.id_v_info,vi.otp,vi.forgot_password_crypto,vi.status,vi.email_verification_status,vi.change_request,vi.type,vi.visibility,vi.completeness , 
+
+up.recent_photo , up.old_photo ,
+
+
+  ua.*  from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu  where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email ;
+
+
+
+ur.id,ur.full_name,ur.mobile,ur.institution_id,ur.password,ur.registration_date, ur.membership_number
+ui.email,ui.gender,ui.id,ui.nid_or_passport,ui.fathers_name,ui.mother_name,ui.spouse_name,ui.number_of_children,ui.profession,ui.designation,ui.institution,ui.blood_group,ui.date_of_birth
+
+
+
+vi.id_v_info,vi.otp,vi.forgot_password_crypto,vi.status,vi.email_verification_status,vi.change_request,vi.type,vi.visibility,vi.completeness
+
+
+
+
 -- ideal code
 $conn = get_mysqli_connection();
 $sql = "call current_photo( ? , ? , @result )";
