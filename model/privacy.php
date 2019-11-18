@@ -81,10 +81,13 @@ echo $row['st'];
 				echo $row['st'];*/
 
 
-				$email = 'riyad298@gmail.com';
+				$email = $email__;
 				function getPrivacyData($email){
 					$conn = get_mysqli_connection();
-					$sql = 'select * from verification_info where email ='.'"'.$email.'"';
+
+					$email_fresh = mysqli_real_escape_string($conn, $email);
+
+					$sql = 'select * from verification_info where email ='.'"'.$email_fresh.'"';
 					$result = mysqli_query($conn , $sql);
 					$row_verification_info = mysqli_fetch_assoc($result);
 				//echo $row_verification_info['visibility'];
@@ -97,7 +100,7 @@ echo $row['st'];
 					// select ua.parmanent_district , ua.parmanent_country , ua.present_district , ua.present_country ,  ui.email , ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth , ur.mobile , ur.institution_id , ur.registration_date from users_info ui , users_registration ur , users_address ua WHERE ui.email  = ur.email = ua.email and ur.email = "riyad298@gmail.com"
 
 
-					$sql ='select ur.full_name, ui.email , ur.mobile , ur.institution_id, ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth  , ua.present_line1 , ua.present_post_code , present_district, present_post_code, parmanent_line1, parmanent_post_code, parmanent_district, parmanent_country, ur.membership_number , vi.status ,  ur.registration_date from users_info ui , users_registration ur , users_address ua , verification_info vi WHERE vi.email = ur.email and  ua.email = ur.email and ui.email  = ur.email and ur.email = "riyad298@gmail.com"';
+					$sql ='select ur.full_name, ui.email , ur.mobile , ur.institution_id, ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth  , ua.present_line1 , ua.present_post_code , present_district, present_post_code, parmanent_line1, parmanent_post_code, parmanent_district, parmanent_country, ur.membership_number , vi.status ,  ur.registration_date from users_info ui , users_registration ur , users_address ua , verification_info vi WHERE vi.email = ur.email and  ua.email = ur.email and ui.email  = ur.email and ur.email = '.'"'.$email_fresh.'"';
 					$result = mysqli_query($conn , $sql);
 					$row_users_registration = mysqli_fetch_assoc($result);
 
@@ -157,7 +160,7 @@ echo $row['st'];
 					}
 					$privacyArrayInString =  implode(',', $arrayTobeUpdated);
 					//print_r($arrayTobeUpdated);
-					$email = 'riyad298@gmail.com';
+					//$email = 'riyad298@gmail.com';
 					$conn = get_mysqli_connection();
 					$sql = "UPDATE `verification_info` SET visibility = (?) WHERE email = (?)";
 					$stmt = $conn->prepare($sql);
