@@ -11,33 +11,7 @@
 			<a href="#"><img class=" py-1" src="<?php echo $logoSrc; ?>" alt=""></a>
 
 		</div>
-
-		<?php 
-
-		if($admin__ == true){
-			?>
-			<a class="text-white" href="">
-				<div class=" 
-				<?php 
-
-				if($pageName=='dashboardHome')
-				{
-					echo 'bg-info';
-				}
-				else{
-					echo 'bg-secondary';
-				}
-				?> 
-
-				py-2 text-center my-4">
-
-				<i class="fas w_f fa-tachometer-alt"></i> View Users
-
-			</div></a>
-			<?php 
-		}
-		?>
-		
+	
 
 		<?php 
 
@@ -119,7 +93,7 @@
 				<div class="  
 				<?php 
 
-				if($pageName=='addProductBySeller')
+				if($pageName=='reg_req')
 				{
 					echo 'bg-info';
 				}

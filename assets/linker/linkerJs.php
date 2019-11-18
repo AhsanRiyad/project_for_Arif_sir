@@ -43,8 +43,8 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
 
     
-<script>
-   
+    <script>
+     
 
 
       Vue.mixin({
@@ -110,44 +110,47 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
 
 
-    
 
-    <?php 
-    include $APP_ROOT."assets/js/main.php";
+
+<?php 
+include $APP_ROOT."assets/js/main.php";
 
     // vue_file
-    if($pageName == 'registration'){
-        include $APP_ROOT."assets/js/vue_file/registration.php";
-    }
-    else if($pageName == 'login'){
-        include $APP_ROOT."assets/js/vue_file/login.php";
-    }
-    else if($pageName == 'reg_req'){
-        include $APP_ROOT."assets/js/vue_file/reg_req.php";
-    }
-    else if($pageName == 'add_user'){
-        include $APP_ROOT."assets/js/vue_file/add_user.php";
-    }
-    else if($pageName == 'profile'){
-        include $APP_ROOT."assets/js/vue_file/profile.php";
-    }
-    else if($pageName == 'privacy'){
-        include $APP_ROOT."assets/js/vue_file/privacy.php";
-    }
-    else if($pageName == 'gallery'){
-        include $APP_ROOT."assets/js/vue_file/gallery.php";
-    }
-    else if($pageName == 'forgot_password'){
-        include $APP_ROOT."assets/js/vue_file/forgot.php";
-    }
-    else if($pageName == 'search'){
-        include $APP_ROOT."assets/js/vue_file/search.php";
-    }
+if($pageName == 'registration'){
+    include $APP_ROOT."assets/js/vue_file/registration.php";
+}
+else if($pageName == 'login'){
+    include $APP_ROOT."assets/js/vue_file/login.php";
+}
+else if($pageName == 'reg_req'){
+    include $APP_ROOT."assets/js/vue_file/reg_req.php";
+}
+else if($pageName == 'add_user'){
+    include $APP_ROOT."assets/js/vue_file/add_user.php";
+}
+else if($pageName == 'profile'){
+    include $APP_ROOT."assets/js/vue_file/profile.php";
+}
+else if($pageName == 'privacy'){
+    include $APP_ROOT."assets/js/vue_file/privacy.php";
+}
+else if($pageName == 'gallery'){
+    include $APP_ROOT."assets/js/vue_file/gallery.php";
+}
+else if($pageName == 'forgot_password'){
+    include $APP_ROOT."assets/js/vue_file/forgot.php";
+}
+else if($pageName == 'search'){
+    include $APP_ROOT."assets/js/vue_file/search.php";
+}
+else if($pageName == 'add_user'){
+    include $APP_ROOT."assets/js/vue_file/add_user.php";
+}
 
 
 
 
-    ?>
+?>
 
 </body>
 </html>

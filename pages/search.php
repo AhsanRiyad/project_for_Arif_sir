@@ -9,7 +9,6 @@ include $linkerCss;
 include $dashboard_head;
 ?>
 
-
 <div id="search">
 	<v-app>
 		<!-- <search></search> -->
