@@ -65,6 +65,10 @@ if($login__ == true){
 
 		if($verified__ == true ){
 
+			if($pageName == 'reg_req' || $pageName == 'add_user'){	
+				header('location:'.$profilePage);
+			}
+
 		}else{
 
 			if($pageName != 'profile'){	
