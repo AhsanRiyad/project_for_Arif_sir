@@ -86,8 +86,8 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelSearch: '<?php echo $modelSearch; ?>',
 
                 },
-                users_info:{
-                    email: '<?= $email ?>',
+                users_info__:{
+                    email__: '<?= $email__ ?>',
                 }
 
             }

@@ -89,9 +89,9 @@ $verified__ = false;
 $login__ = false;
 
 
-$email='';
+$email__='';
 if(isset($_SESSION['users_info'])){
-	$email = $_SESSION['users_info']['email'];
+	$email__ = $_SESSION['users_info']['email'];
 }
 
 

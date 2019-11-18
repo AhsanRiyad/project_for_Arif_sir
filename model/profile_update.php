@@ -21,7 +21,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_basic(?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sssssss' , $email , $full_name, $mobile , $institution_id , $blood_group , $nid_or_passport , $dob );
+	$stmt->bind_param('sssssss' , $email__ , $full_name, $mobile , $institution_id , $blood_group , $nid_or_passport , $dob );
 	$stmt->execute();
 	$stmt->close();
 
@@ -45,7 +45,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_personal(?,?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ssssisss' , $email , $fathers_name , $mothers_name, $spouse_name , $number_of_children , $profession , $workplace_or_institution , $designation  );
+	$stmt->bind_param('ssssisss' , $email__ , $fathers_name , $mothers_name, $spouse_name , $number_of_children , $profession , $workplace_or_institution , $designation  );
 
 	$stmt->execute();
 	$stmt->close();
@@ -71,7 +71,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_address(?,?,?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sssssssss' , $email , $present_line1 , $present_district , $present_post_code , $present_country , $permanent_line1 , $permanent_district , $permanent_post_code , $permanent_country );
+	$stmt->bind_param('sssssssss' , $email__ , $present_line1 , $present_district , $present_post_code , $present_country , $permanent_line1 , $permanent_district , $permanent_post_code , $permanent_country );
 	$stmt->execute();
 	$stmt->close();
 
@@ -93,7 +93,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_password( ? , ? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ss' , $email , $password1 );
+	$stmt->bind_param('ss' , $email__ , $password1 );
 
 	$stmt->execute();
 	$stmt->close();
@@ -115,7 +115,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_email( ? , ? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ss' , $email , $email1 );
+	$stmt->bind_param('ss' , $email__ , $email1 );
 
 	$stmt->execute();
 	$stmt->close();
@@ -152,9 +152,9 @@ if($d1->purpose == 'basic'){
 		echo $row['st'];
 	}else if($row['st']=='crypto_added'){
 
-		$mailto = 'riyad298@gmail.com';
+		$mailto = $email1;
 		$mailSub = 'Password recovery , friends Forever';
-		$mailMsg = 'Click to recover your password <br>'. $rootAdress.'pages/forgot.php?e='.$email.'&c='.$randomNumber;
+		$mailMsg = 'Click to recover your password <br>'. $rootAdress.'pages/forgot.php?e='.$email1.'&c='.$randomNumber;
 		require 'PHPMailer-master/PHPMailerAutoload.php';
 		$mail = new PHPMailer();
 		$mail ->IsSmtp();
@@ -189,7 +189,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email = (?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
+	$stmt->bind_param('s' , $email__);
 	$stmt->execute();
 	$result = $stmt->get_result();
 	$row = $result->fetch_assoc();
@@ -236,7 +236,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call email_verification_otp( ? , ? , ? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sss' , $email , $verify_email_otp , $purpose );
+	$stmt->bind_param('sss' , $email__ , $verify_email_otp , $purpose );
 
 	$stmt->execute();
 	$stmt->close();
@@ -254,7 +254,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "update verification_info set completeness = 100 where email = (?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email );
+	$stmt->bind_param('s' , $email__ );
 
 	$stmt->execute();
 	$stmt->close();
@@ -272,7 +272,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call email_verification_otp( ? , ? , ? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sss' , $email , $otp , $purpose );
+	$stmt->bind_param('sss' , $email__ , $otp , $purpose );
 
 	$stmt->execute();
 	$stmt->close();
@@ -282,7 +282,7 @@ if($d1->purpose == 'basic'){
 	
 
 	if($row['st']=='otp_sent'){
-		$mailto = $email;
+		$mailto = $email__;
 		$mailSub = 'OTP for email verification';
 		$mailMsg = 'OTP '. $otp;
 		require 'PHPMailer-master/PHPMailerAutoload.php';

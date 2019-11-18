@@ -8,6 +8,14 @@ drop table `user_photos`;
 drop table `users_address`;
 
 
+truncate table `users_registration`;
+truncate table `users_info`;
+truncate table `verification_info`;
+truncate table `user_uploads`;
+truncate table `user_photos`;
+truncate table `users_address`;
+
+
 CREATE TABLE `users_info` (
  `email` varchar(100) DEFAULT NULL,
  `gender` varchar(100) DEFAULT NULL,
