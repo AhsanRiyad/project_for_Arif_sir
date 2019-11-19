@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2019 at 08:41 AM
+-- Generation Time: Nov 19, 2019 at 10:47 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -350,8 +350,13 @@ CREATE TABLE `all_info_together` (
 ,`type` varchar(20)
 ,`visibility` varchar(1000)
 ,`completeness` int(10)
+,`id` int(100)
 ,`recent_photo` varchar(400)
 ,`old_photo` varchar(400)
+,`ur_email` varchar(100)
+,`vi_email` varchar(100)
+,`uu_email` varchar(100)
+,`ui_email` varchar(100)
 ,`email` varchar(100)
 ,`users_address_id` int(100)
 ,`present_line1` varchar(300)
@@ -388,7 +393,28 @@ INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
 (3, NULL, 'riyad298@yahoo.com'),
 (4, NULL, 'riyada'),
 (5, NULL, 'riyad298@gmail.com'),
-(6, NULL, 'riyad298@gmail.com');
+(6, NULL, 'riyad298@gmail.com'),
+(7, NULL, 'riyad298@gmail.com'),
+(8, NULL, 'riyad298@gmail.com'),
+(9, NULL, 'riyad298@gmail.com'),
+(10, NULL, 'riyad298@gmail.com'),
+(11, NULL, 'riyad298@gmail.com'),
+(12, NULL, 'riyad298@gmail.com'),
+(13, NULL, 'riyad298@gmail.com'),
+(14, NULL, 'riyad298@gmail.com'),
+(15, NULL, 'riyad298@gmail.com'),
+(16, NULL, 'riyad298@gmail.com'),
+(17, NULL, 'riyad298@gmail.com'),
+(18, NULL, 'riyad298@gmail.com'),
+(19, NULL, 'riyad298@gmail.com'),
+(20, NULL, 'riyad298@gmail.com'),
+(21, NULL, 'riyad298@gmail.com'),
+(22, NULL, 'riyad298@gmail.com'),
+(23, NULL, 'riyad298@gmail.com'),
+(24, NULL, 'riyad298@gmail.com'),
+(25, NULL, 'riyad298@gmail.com'),
+(26, NULL, 'riyad298@gmail.com'),
+(27, NULL, 'riyad298@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -428,7 +454,7 @@ INSERT INTO `users_address` (`email`, `users_address_id`, `present_line1`, `pres
 CREATE TABLE `users_info` (
   `email` varchar(100) DEFAULT NULL,
   `gender` varchar(100) DEFAULT NULL,
-  `id` int(100) NOT NULL,
+  `ui_id` int(100) NOT NULL,
   `nid_or_passport` varchar(100) DEFAULT NULL,
   `fathers_name` varchar(100) DEFAULT NULL,
   `mother_name` varchar(100) DEFAULT NULL,
@@ -445,7 +471,7 @@ CREATE TABLE `users_info` (
 -- Dumping data for table `users_info`
 --
 
-INSERT INTO `users_info` (`email`, `gender`, `id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
+INSERT INTO `users_info` (`email`, `gender`, `ui_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
 ('riyad298@gmail.com', NULL, 0, '111111111111111111111111', 'Barkat Alam', 'Urmee', 'Maliha', 0, 'student', 'student', 'aiuba', 'O+', '1992-08-02'),
 ('riyad298@yahoo.com', NULL, 0, '11555511144', 'Barkat Alam', 'Sultana', 'Tahera', 0, 'student', 'student', 'aiub dhaka', 'O+', '1992-11-12');
 
@@ -471,7 +497,7 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1006),
+('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1007),
 ('riyad298@yahoo.com', 2, 'Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1004);
 
 -- --------------------------------------------------------
@@ -485,13 +511,6 @@ CREATE TABLE `user_photos` (
   `email` varchar(100) DEFAULT NULL,
   `id_user_photos` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_photos`
---
-
-INSERT INTO `user_photos` (`group_photo`, `email`, `id_user_photos`) VALUES
-('riyad298@gmail.com.jpg', 'riyad298@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -538,7 +557,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(1, 'riyad298@gmail.com', '7724', NULL, 'approved', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100),
+(1, 'riyad298@gmail.com', '7724', NULL, 'approved', 'verified', 'not_requested', 'admin', 'full_name,mobile,institution_id,present_line1,parmanent_country,membership_number', 100),
 (2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100);
 
 --
@@ -558,7 +577,7 @@ DELIMITER ;
 --
 DROP TABLE IF EXISTS `all_info_together`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_info_together`  AS  select `ur`.`full_name` AS `full_name`,`ur`.`mobile` AS `mobile`,`ur`.`institution_id` AS `institution_id`,`ur`.`password` AS `password`,`ur`.`registration_date` AS `registration_date`,`ur`.`membership_number` AS `membership_number`,`ui`.`gender` AS `gender`,`ui`.`nid_or_passport` AS `nid_or_passport`,`ui`.`fathers_name` AS `fathers_name`,`ui`.`mother_name` AS `mother_name`,`ui`.`spouse_name` AS `spouse_name`,`ui`.`number_of_children` AS `number_of_children`,`ui`.`profession` AS `profession`,`ui`.`designation` AS `designation`,`ui`.`institution` AS `institution`,`ui`.`blood_group` AS `blood_group`,`ui`.`date_of_birth` AS `date_of_birth`,`vi`.`id_v_info` AS `id_v_info`,`vi`.`otp` AS `otp`,`vi`.`forgot_password_crypto` AS `forgot_password_crypto`,`vi`.`status` AS `status`,`vi`.`email_verification_status` AS `email_verification_status`,`vi`.`change_request` AS `change_request`,`vi`.`type` AS `type`,`vi`.`visibility` AS `visibility`,`vi`.`completeness` AS `completeness`,`uu`.`recent_photo` AS `recent_photo`,`uu`.`old_photo` AS `old_photo`,`ua`.`email` AS `email`,`ua`.`users_address_id` AS `users_address_id`,`ua`.`present_line1` AS `present_line1`,`ua`.`present_line2` AS `present_line2`,`ua`.`present_district` AS `present_district`,`ua`.`present_post_code` AS `present_post_code`,`ua`.`present_country` AS `present_country`,`ua`.`parmanent_line1` AS `parmanent_line1`,`ua`.`parmanent_line2` AS `parmanent_line2`,`ua`.`parmanent_district` AS `parmanent_district`,`ua`.`parmanent_post_code` AS `parmanent_post_code`,`ua`.`parmanent_country` AS `parmanent_country` from ((((`users_registration` `ur` join `users_info` `ui`) join `users_address` `ua`) join `verification_info` `vi`) join `user_uploads` `uu`) where `uu`.`email` = `ur`.`email` and `ui`.`email` = `ur`.`email` and `ua`.`email` = `ur`.`email` and `vi`.`email` = `ur`.`email` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_info_together`  AS  select `ur`.`full_name` AS `full_name`,`ur`.`mobile` AS `mobile`,`ur`.`institution_id` AS `institution_id`,`ur`.`password` AS `password`,`ur`.`registration_date` AS `registration_date`,`ur`.`membership_number` AS `membership_number`,`ui`.`gender` AS `gender`,`ui`.`nid_or_passport` AS `nid_or_passport`,`ui`.`fathers_name` AS `fathers_name`,`ui`.`mother_name` AS `mother_name`,`ui`.`spouse_name` AS `spouse_name`,`ui`.`number_of_children` AS `number_of_children`,`ui`.`profession` AS `profession`,`ui`.`designation` AS `designation`,`ui`.`institution` AS `institution`,`ui`.`blood_group` AS `blood_group`,`ui`.`date_of_birth` AS `date_of_birth`,`vi`.`id_v_info` AS `id_v_info`,`vi`.`otp` AS `otp`,`vi`.`forgot_password_crypto` AS `forgot_password_crypto`,`vi`.`status` AS `status`,`vi`.`email_verification_status` AS `email_verification_status`,`vi`.`change_request` AS `change_request`,`vi`.`type` AS `type`,`vi`.`visibility` AS `visibility`,`vi`.`completeness` AS `completeness`,`ur`.`id` AS `id`,`uu`.`recent_photo` AS `recent_photo`,`uu`.`old_photo` AS `old_photo`,`ur`.`email` AS `ur_email`,`vi`.`email` AS `vi_email`,`uu`.`email` AS `uu_email`,`ui`.`email` AS `ui_email`,`ua`.`email` AS `email`,`ua`.`users_address_id` AS `users_address_id`,`ua`.`present_line1` AS `present_line1`,`ua`.`present_line2` AS `present_line2`,`ua`.`present_district` AS `present_district`,`ua`.`present_post_code` AS `present_post_code`,`ua`.`present_country` AS `present_country`,`ua`.`parmanent_line1` AS `parmanent_line1`,`ua`.`parmanent_line2` AS `parmanent_line2`,`ua`.`parmanent_district` AS `parmanent_district`,`ua`.`parmanent_post_code` AS `parmanent_post_code`,`ua`.`parmanent_country` AS `parmanent_country` from ((((`users_registration` `ur` join `users_info` `ui`) join `users_address` `ua`) join `verification_info` `vi`) join `user_uploads` `uu`) where `uu`.`email` = `ur`.`email` and `ui`.`email` = `ur`.`email` and `ua`.`email` = `ur`.`email` and `vi`.`email` = `ur`.`email` ;
 
 --
 -- Indexes for dumped tables
@@ -608,7 +627,7 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users_address`

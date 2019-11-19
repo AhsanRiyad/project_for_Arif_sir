@@ -243,7 +243,7 @@
 
 	Vue.component('get_details' , {
 		template: code,
-		props: ['email' , 'users_info_as_props'],
+		props: ['email' , 'user_id' ,  'users_info_as_props'],
 		data(){
 			return {
 				dialog: false,
@@ -350,6 +350,7 @@
 				{
 					purpose: 'get_profile_details_for_all',
 					email: this.email,
+					user_id: this.user_id, 
 				}).then(function(response){
 					this.users_info = response.data;
 					console.log(response);
@@ -473,7 +474,7 @@
 
 	Vue.component('gallery' , {
 		template: code,
-		props: ['email'],
+		props: ['email' , 'user_id'],
 		data(){
 			return {
 				dialog: false,
@@ -604,16 +605,16 @@ created(){
 
 	</tr>
 	</thead>
-	<tbody v-if="array_size" id="tbody" v-for="user in user_list">
+	<tbody v-if="array_size" id="tbody" v-for="user in user_list"  :key='user.id'>
 	<tr>
 	<td> {{ user.full_name }} </td>
 	<td> {{ user.membership_number }} </td>
 	<td> {{ user.institution_id }} </td>
 	<td>
-	<gallery :email='user.email' ></gallery>
+	<gallery :email='user.email' :user_id='user.id' ></gallery>
 	</td>
 	<td>
-	<get_details :email='user.email' :users_info_as_props='users_info_as_props'></get_details>
+	<get_details :email='user.email' :user_id='user.id' :users_info_as_props='users_info_as_props'></get_details>
 	</td>
 	</tr>
 	</tbody>

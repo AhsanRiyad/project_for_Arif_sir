@@ -36,7 +36,7 @@ $d1 = json_decode($data);
         $_SESSION['email'] =  $email;
         
 
-        $sql = 'select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email ='.'"'.$email.'"';  
+        $sql = 'select * from all_info_together where email ='.'"'.$email.'"';  
         $result = mysqli_query($conn, $sql);
         $row1 = mysqli_fetch_assoc($result);
         $_SESSION['users_info'] = $row1;
