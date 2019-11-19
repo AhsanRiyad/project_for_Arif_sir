@@ -178,8 +178,7 @@
       axios.post( this.model.modelGallery ,
       {
         purpose: 'deletePhoto',
-        basename: this.dialog_photo_baseName,
-        
+        basename: this.dialog_photo_baseName
       }
       ).then(function(response){
         this.loading = false;

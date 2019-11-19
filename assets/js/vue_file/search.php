@@ -1,8 +1,6 @@
 <script>
 	
-	var bus = new Vue();
-
-
+	
 	var code = `
 	<v-row justify="center">
 	<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
@@ -11,13 +9,13 @@
 	</template>
 	<v-card>
 	<v-toolbar dark color="primary">
-	<v-btn icon dark @click="close_dialog()">
+	<v-btn icon dark @click="dialog = false">
 	<v-icon>mdi-close</v-icon>
 	</v-btn>
 	<v-toolbar-title>Profile</v-toolbar-title>
 	<v-spacer></v-spacer>
 	<v-toolbar-items>
-	<v-btn dark text @click="close_dialog()">Close</v-btn>
+	<v-btn dark text @click="dialog = false">Close</v-btn>
 	</v-toolbar-items>
 	</v-toolbar>
 
@@ -31,16 +29,11 @@
 
 	<v-alert type="success">
 	<h1> Verified User  </h1>
-	<v-btn @click.stop="reject_user_button()" color="error" v-if="users_info_as_props.type == 'admin'" >Reject User</v-btn>
+	<v-btn @click.stop="dialog2 = true" color="error" v-if="users_info_as_props.type == 'admin'" >Reject User</v-btn>
 	<div class="w-100 mb-2"></div>
 
-	<v-btn v-if="users_info_as_props.type == 'admin' && profile_user_type != 'admin'" @click.stop="make_admin_button()" color="primary" >Make Admin</v-btn>
-
-	<v-btn v-else-if="users_info_as_props.type == 'admin' && profile_user_type != 'user'" @click.stop="make_user_button()" color="primary" >Make user</v-btn>
+	<v-btn v-if="users_info_as_props.type == 'admin' && profile_user_type != 'admin'" @click.stop="dialog3 = true" color="primary" >Make Admin</v-btn>
 	</v-alert>
-	
-
-	
 
 
 
@@ -55,7 +48,7 @@
 
 	<v-alert type="error">
 	<h1> Rejected User  </h1>
-	<v-btn @click.stop="approve_user_button()" color="success" v-if="users_info_as_props.type == 'admin'" >Aprrove User</v-btn>
+	<v-btn @click.stop="dialog4 = true" color="success" v-if="users_info_as_props.type == 'admin'" >Aprrove User</v-btn>
 	<div class="w-100 mb-2"></div>
 
 	
@@ -109,9 +102,15 @@
 	</v-card>
 	</v-dialog>
 
+
+
+
+
 	
 	<template>
 	<v-row justify="center">
+	
+
 	<v-dialog
 	v-model="dialog2"
 	max-width="290"
@@ -233,47 +232,6 @@
 
 	
 
-	<template>
-	<v-row justify="center">
-	
-
-	<v-dialog
-	v-model="dialog5"
-	max-width="290"
-	>
-	<v-card>
-	<v-card-title class="headline green--text">{{ dialog5_title }}</v-card-title>
-
-	<v-card-text class="black--text">
-	{{ dialog5_body }}
-	</v-card-text>
-
-	<v-card-actions>
-	<v-spacer></v-spacer>
-
-	<v-btn
-	color="green darken-1"
-	text
-	@click="dialog5_make_user_no()"
-	>
-	No
-	</v-btn>
-
-	<v-btn
-	color="green darken-1"
-	text :disabled="dialog5_btn_disabled"
-	@click="make_user()"
-	>
-	Yes
-	</v-btn>
-	</v-card-actions>
-	</v-card>
-	</v-dialog>
-	</v-row>
-	</template>
-
-	
-
 
 
 
@@ -285,14 +243,13 @@
 
 	Vue.component('get_details' , {
 		template: code,
-		props: ['email' , 'user_id' ,  'users_info_as_props' , 'category'],
+		props: ['email' , 'users_info_as_props'],
 		data(){
 			return {
 				dialog: false,
 				dialog2: false,
 				dialog3: false,
 				dialog4: false,
-				dialog5: false,
 				notifications: false,
 				sound: true,
 				widgets: false,
@@ -300,10 +257,8 @@
 				dialog2_title: 'Block User?',
 				dialog3_body: 'Are you sure that you want make this user an Admin?',
 				dialog4_body: 'Are you sure that you want to approve this user?',
-				dialog5_body: 'Are you sure that you want to change the user roll?',
 				dialog3_title: 'Make admin?',
-				dialog4_title: 'Approve User?',
-				dialog5_title: 'Make User?',
+				dialog4_title: 'Aprrove User?',
 				users_info: [],
 				radioGroup: [],
 				disabled: false,
@@ -312,39 +267,14 @@
 				dialog2_btn_disabled: false,
 				dialog3_btn_disabled: false,
 				dialog4_btn_disabled: false,
-				dialog5_btn_disabled: false,
 			}
 		},
 		methods : {
-			close_dialog(){
-
-				bus.$emit('categroy_from_get_details' , this.category);
-				this.dialog = false;
-				this.get_updated_data();
-			},
-			reject_user_button(){
-
-				this.dialog2 = true
-				this.dialog2_body = 'Are you sure you want to block the user?';
-				this.dialog2_title = 'Block user?';
-				this.dialog2_btn_disabled = false;
-
-			},
-			approve_user_button(){
-
-				this.dialog4 = true
-				this.dialog4_body = 'Are you sure you want to block the user?';
-				this.dialog4_title = 'Block user?';
-				this.dialog4_btn_disabled = false;
-
-			}
-			,
 			reject_user(){
 
 				axios.post(this.model.modelReg_req , {
 					purpose : 'reject_user',
 					email: this.email,
-					user_id : this.user_id,
 				})
 				.then(function (response) {
 
@@ -367,10 +297,10 @@
 			},
 			make_admin(){
 
+
 				axios.post(this.model.modelReg_req , {
 					purpose : 'make_admin',
 					email: this.email,
-					user_id: this.user_id,
 				})
 				.then(function (response) {
 
@@ -385,47 +315,10 @@
 				this.dialog3_btn_disabled = true;
 				this.get_updated_data();
 			},
-			make_admin_button(){
-
-
-				this.dialog3 = true;
-				this.dialog3_btn_disabled = false;
-
-							},
 			dialog3_make_admin_no(){
 
 				this.dialog3 = false;
 				this.dialog3_btn_disabled = false
-			},
-			make_user(){
-
-				axios.post(this.model.modelReg_req , {
-					purpose : 'make_user',
-					email: this.email,
-					user_id: this.user_id,
-				})
-				.then(function (response) {
-
-				}.bind(this))
-				.catch(function (error) {
-					console.log(error);
-				});
-
-
-				this.dialog5_body = 'Made user successfully';
-				this.dialog5_title = 'Success';
-				this.dialog5_btn_disabled = true;
-				this.get_updated_data();
-			},
-			make_user_button(){
-
-				this.dialog5 = true;
-				this.dialog5_btn_disabled = false;
-			},
-			make_user_no(){
-
-				this.dialog5 = false;
-				this.dialog5_btn_disabled = false
 			},
 			approve_user(){
 
@@ -433,7 +326,6 @@
 				axios.post(this.model.modelReg_req , {
 					purpose : 'approve_user',
 					email: this.email,
-					user_id: this.user_id,
 				})
 				.then(function (response) {
 
@@ -454,13 +346,10 @@
 				this.dialog4_btn_disabled = false
 			},
 			get_updated_data(){
-				// alert(this.user_id);
-				//alert('this.user_id');
 				axios.post( this.model.modelPrivacy ,
 				{
 					purpose: 'get_profile_details_for_all',
 					email: this.email,
-					user_id: this.user_id, 
 				}).then(function(response){
 					this.users_info = response.data;
 					console.log(response);
@@ -480,7 +369,6 @@
 			{
 				purpose: 'get_profile_details_for_all',
 				email: this.email,
-				user_id: this.user_id,
 			}).then(function(response){
 				this.users_info = response.data;
 				console.log(response);
@@ -585,7 +473,7 @@
 
 	Vue.component('gallery' , {
 		template: code,
-		props: ['email' , 'user_id'],
+		props: ['email'],
 		data(){
 			return {
 				dialog: false,
@@ -628,7 +516,6 @@ created(){
 
 		purpose: 'getPhotos_for_all_users',
 		email: this.email ,
-		user_id: this.user_id ,
 	}
 	).then(function(response){
         //this.users_info = response.data;
@@ -647,6 +534,9 @@ created(){
 
         //console.log(error);
     }.bind(this));
+
+
+
 }
 })
 
@@ -714,16 +604,16 @@ created(){
 
 	</tr>
 	</thead>
-	<tbody v-if="array_size && users_info_as_props.id != user.id" id="tbody" v-for="user in user_list"  :key='user.id'>
+	<tbody v-if="array_size" id="tbody" v-for="user in user_list">
 	<tr>
 	<td> {{ user.full_name }} </td>
 	<td> {{ user.membership_number }} </td>
 	<td> {{ user.institution_id }} </td>
 	<td>
-	<gallery :email='user.email' :user_id='user.id' ></gallery>
+	<gallery :email='user.email' ></gallery>
 	</td>
 	<td>
-	<get_details :email='user.email' :user_id='user.id' :users_info_as_props='users_info_as_props' :category="category"></get_details>
+	<get_details :email='user.email' :users_info_as_props='users_info_as_props'></get_details>
 	</td>
 	</tr>
 	</tbody>
@@ -811,12 +701,6 @@ created(){
 
 		},
 		created(){
-			bus.$on('categroy_from_get_details' , (data)=>{
-				this.category = data ; 
-				this.search();
-				
-			})
-
 			this.users_info__.admin__ == true ? this.category_items.push("rejected_user") : '';
 			axios.post( this.model.modelProfile_update ,
 			{

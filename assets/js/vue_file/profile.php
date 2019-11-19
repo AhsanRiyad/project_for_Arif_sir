@@ -266,6 +266,7 @@ Vue.component('buttons' , {
 			changeComponent: function(comp_type){
 				//this.input_disabled = comp_type;
 				this.componet_name = comp_type;
+				
 				bus.$emit('changeComponent' , comp_type );
 				
 			}
@@ -1305,6 +1306,9 @@ Vue.component('basic' , {
 		}
 	},
 	methods: {
+
+
+
 		enable_input: function(name){
 			if(name=='full_name'){
 				this.full_name_input = false;
@@ -1405,6 +1409,11 @@ Vue.component('basic' , {
 					}
 
 					//result == false ? this.dob_validity = 'invalid' : this.dob_validity = 'valid';
+					
+
+
+
+
 				}
 			},
 			submit(){
@@ -2489,7 +2498,7 @@ Vue.component('personal' , {
 				this.designation = response.data.designation;
 
 				this.users_info = response.data;
-				this.type = response.data.type;
+
 
 				if(this.users_info.completeness == 100 & this.users_info.status == 'not_verified'){
 					this.submit_disabled = true;

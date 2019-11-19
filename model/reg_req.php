@@ -19,7 +19,7 @@ if($d2->purpose=='get_data'){
 
 	//echo 'get data';
 	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together where status = 'not_verified' and completeness = 100 and email_verification_status = 'verified' limit 0 , 20";
+	$sql = "select * from users_registration ur , verification_info vi where ur.email = vi.email and vi.status = 'not_verified' and completeness = 100 and vi.email_verification_status = 'verified' limit 0 , 10";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);
@@ -66,15 +66,14 @@ else if($d2->purpose=='reject_user'){
 	//echo 'hi';
 
 	$email = $d2->email;
-	$user_id = $d2->user_id;
-	//echo $email;
+	echo $email;
 	// mysqli_close($conn);
 	$conn = get_mysqli_connection();
 	//mysqli_close($conn);
 
-	$sql = "UPDATE all_info_together SET status ='rejected' WHERE id=(?)";
+	$sql = "UPDATE verification_info SET status ='rejected' WHERE email=(?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
+	$stmt->bind_param('s' , $email);
 	$stmt->execute();
 	//mysqli_close($conn);
 
@@ -86,15 +85,14 @@ else if($d2->purpose=='approve_user'){
 	//echo 'hi';
 
 	$email = $d2->email;
-	$user_id = $d2->user_id;
-	//echo $email;
+	echo $email;
 	// mysqli_close($conn);
 	$conn = get_mysqli_connection();
 	//mysqli_close($conn);
 
 	$sql = "call user_request(? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
+	$stmt->bind_param('s' , $email);
 	$stmt->execute();
 	//mysqli_close($conn);
 
@@ -103,26 +101,11 @@ else if($d2->purpose=='approve_user'){
 }else if($d2->purpose == 'make_admin'){
 
 	$email = $d2->email;
-	$user_id = $d2->user_id;
 	$conn = get_mysqli_connection();
-	$sql = "update all_info_together set type = 'admin' where id = (?)";
+	$sql = "update verification_info set type = 'admin' where email = (?)";
 
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-
-	$stmt->execute();
-	$stmt->close();
-	$conn->close();
-
-}else if($d2->purpose == 'make_user'){
-
-	$email = $d2->email;
-	$user_id = $d2->user_id;
-	$conn = get_mysqli_connection();
-	$sql = "update all_info_together set type = 'user' where id = (?)";
-
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
+	$stmt->bind_param('s' , $email);
 
 	$stmt->execute();
 	$stmt->close();
@@ -159,24 +142,7 @@ else if($d2->purpose=='get_user_details'){
 
 	echo json_encode($array2d);
 }
-else if($d2->purpose == 'getProfileBasicInfo'){
-	$user_id = $d2->user_id;
-	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together where id = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$row = $result->fetch_assoc();
-	$stmt->close();
-	$conn->close();
 
-	echo json_encode($row);
-
-
-	// $i = 0;
-// echo json_encode(var_dump($row));
-}
 else{
 	echo $d2->purpose;
 	echo $d2->email;

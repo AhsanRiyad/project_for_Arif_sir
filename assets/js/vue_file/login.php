@@ -205,6 +205,11 @@
 					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
 
 				}
+
+
+
+
+
 			},
 
 		},

@@ -236,7 +236,7 @@
 
 
 	Vue.component('component_user_datails', {
-		props: ['email' , 'user_id'] , 
+		props: ['email'] , 
 		template: modal_user_details ,
 		data(){
 			return {
@@ -247,10 +247,9 @@
 		},
 		mounted(){
 
-			axios.post( this.model.modelReg_req ,
+			axios.post( this.model.modelProfile_update ,
 			{
 				purpose: 'getProfileBasicInfo',
-				user_id: this.user_id,
 				
 			}
 			).then(function(response){
@@ -306,9 +305,9 @@
 	<td> {{ user.id }} </td>
 	<td> {{ user.registration_date }} </td>
 	<td> {{ user.full_name }} </td>
-	<td><component_user_datails v-bind:email="user.email" :user_id="user.id"></component_user_datails></td>
-	<td><button @click="approve_id(user.email , user.id)" class="btn btn-success">Accept</button></td>
-	<td><button @click="reject_id(user.email , user.id)" class="btn btn-danger">Reject</button></td>
+	<td><component_user_datails v-bind:email="user.email"></component_user_datails></td>
+	<td><button @click="approve_id(user.email)" class="btn btn-success">Accept</button></td>
+	<td><button @click="reject_id(user.email)" class="btn btn-danger">Reject</button></td>
 	</tr>
 	</tbody>
 	</table>
@@ -407,13 +406,12 @@
 
 			})
 			},
-			approve_id: function(email , user_id){
+			approve_id: function(email){
 				//console.log(email);
 
-				this.$http.post(this.model.modelReg_req, {
+				this.$http.post('<?php echo $modelReg_req; ?>', {
 					purpose : 'approve_user', 
-					email: email,
-					user_id: user_id,
+					email: email
 				} ).then(function(data){
 				//var obj = JSON.parse(data);
 				// console.log(obj);
@@ -431,13 +429,12 @@
 			})
 
 			},
-			reject_id: function(email , user_id){
+			reject_id: function(email){
 				//console.log(email);
 
-				this.$http.post(this.model.modelReg_req, {
+				this.$http.post('<?php echo $modelReg_req; ?>', {
 					purpose : 'reject_user', 
-					email: email,
-					user_id: user_id,
+					email: email
 				} ).then(function(data){
 				//var obj = JSON.parse(data);
 				// console.log(obj);
