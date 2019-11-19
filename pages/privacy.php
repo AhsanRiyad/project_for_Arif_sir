@@ -7,24 +7,24 @@ include $linkerCss;
 ?>
 
 
-<div  id="privacy">	
-	
-
 <?php 
 include $dashboard_head;
 ?>
+<div  id="privacy">	
+	
+
 	<v-app>
 	<!-- <component v-bind:is="componet_name"> -->
 		<privacy></privacy>
 	</v-app>
-<?php 
-include $dashboard_foot ;
-?>
 
 
 
 </div>
 
+<?php 
+include $dashboard_foot ;
+?>
 
 <?php 
 include $linkerJs;

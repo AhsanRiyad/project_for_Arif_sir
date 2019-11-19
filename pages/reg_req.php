@@ -8,24 +8,24 @@ include $linkerCss;
 
 
 
-
-<div  id="reg_req">
 <?php 
 include $dashboard_head;
 ?>
+
+<div  id="reg_req">
 <v-app>
 
 
 <reg_req></reg_req>
 
 </v-app>
-<?php 
-include $dashboard_foot ;
-?>
 
 
 </div>
 
+<?php 
+include $dashboard_foot ;
+?>
 
 
 

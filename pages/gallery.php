@@ -7,12 +7,12 @@ include $linkerCss;
 ?>
 
 
-
-<div  id="gallery">
-
 <?php 
 include $dashboard_head;
 ?>
+
+<div  id="gallery">
+
 
 
 <v-app>
@@ -20,12 +20,12 @@ include $dashboard_head;
 
 
 </v-app>
-<?php 
-include $dashboard_foot ;
-?>
 
 </div>
 
+<?php 
+include $dashboard_foot ;
+?>
 
 
 

@@ -8,22 +8,22 @@ include $linkerCss;
 ?>
 
 
-<div id="add_user">
 		<?php 
 		include $dashboard_head;
 		?>
+<div id="add_user">
 	<v-app>
 		
 
 		<add_user></add_user>
 		
 	</v-app>
-		<?php 
-		include $dashboard_foot ;
-		?>
 		
 </div>
 
+		<?php 
+		include $dashboard_foot ;
+		?>
 
 
 <?php 

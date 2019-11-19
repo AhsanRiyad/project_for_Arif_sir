@@ -8,12 +8,12 @@ include $linkerCss;
 ?>
 
 
-<div  id="app">	
-
-
 		<?php 
 		include $dashboard_head;
 		?>
+<div  id="app">	
+
+
 
 	<v-app>
 		
@@ -44,13 +44,13 @@ include $linkerCss;
 
 
 	</v-app>
-		<?php 
-		include $dashboard_foot ;
-		?>
 
 
 </div>
 
+<?php 
+include $dashboard_foot ;
+?>
 
 <?php 
 include $linkerJs;

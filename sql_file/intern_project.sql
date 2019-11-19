@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2019 at 08:10 PM
+-- Generation Time: Nov 19, 2019 at 08:41 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -192,7 +192,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_email` (IN `email1` 
 
 DECLARE count int(5);
 
+SELECT COUNT(*) into COUNT FROM users_registration where email = email1;
 
+if COUNT = 0
+THEN
 update users_registration set  email = email2 where email = email1 ;
 update users_info set  email = email2 where email = email1 ;
 update users_address set  email = email2 where email = email1 ;
@@ -201,9 +204,11 @@ update user_photos set  email = email2 where email = email1 ;
 update verification_info set email_verification_status = 'not_verified' where email = email1;
 update verification_info set  email = email2 where email = email1 ;
 
-
-
 set result = 'success' ;
+ELSE
+set result = 'email_exist';
+
+END IF;
 
 END$$
 
@@ -364,6 +369,30 @@ CREATE TABLE `all_info_together` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `log_table`
+--
+
+CREATE TABLE `log_table` (
+  `log_id` int(255) NOT NULL,
+  `user` varchar(100) DEFAULT NULL,
+  `log_info` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log_table`
+--
+
+INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
+(1, NULL, 'riyad298@gmail.com'),
+(2, NULL, 'riyad298@yahoo.com'),
+(3, NULL, 'riyad298@yahoo.com'),
+(4, NULL, 'riyada'),
+(5, NULL, 'riyad298@gmail.com'),
+(6, NULL, 'riyad298@gmail.com');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users_address`
 --
 
@@ -417,7 +446,7 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`email`, `gender`, `id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
-('riyad298@gmail.com', NULL, 0, '111111111111111111111111', 'Barkat Alam', 'Urmee', 'Maliha', 0, 'student', 'student', 'aiuba', 'AB+', '1992-08-02'),
+('riyad298@gmail.com', NULL, 0, '111111111111111111111111', 'Barkat Alam', 'Urmee', 'Maliha', 0, 'student', 'student', 'aiuba', 'O+', '1992-08-02'),
 ('riyad298@yahoo.com', NULL, 0, '11555511144', 'Barkat Alam', 'Sultana', 'Tahera', 0, 'student', 'student', 'aiub dhaka', 'O+', '1992-11-12');
 
 -- --------------------------------------------------------
@@ -442,8 +471,8 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1003),
-('riyad298@yahoo.com', 2, 'Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1000);
+('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1006),
+('riyad298@yahoo.com', 2, 'Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1004);
 
 -- --------------------------------------------------------
 
@@ -512,6 +541,16 @@ INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_c
 (1, 'riyad298@gmail.com', '7724', NULL, 'approved', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100),
 (2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100);
 
+--
+-- Triggers `verification_info`
+--
+DELIMITER $$
+CREATE TRIGGER `keep_log` AFTER UPDATE ON `verification_info` FOR EACH ROW BEGIN
+INSERT into log_table ( log_table.log_info ) VALUES ( OLD.email );
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -524,6 +563,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `log_table`
+--
+ALTER TABLE `log_table`
+  ADD PRIMARY KEY (`log_id`);
 
 --
 -- Indexes for table `users_address`
@@ -558,6 +603,12 @@ ALTER TABLE `verification_info`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `log_table`
+--
+ALTER TABLE `log_table`
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users_address`

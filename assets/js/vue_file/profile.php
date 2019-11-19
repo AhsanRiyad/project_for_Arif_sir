@@ -728,8 +728,8 @@ Vue.component('email' , {
 					).then(function(response){
 
 						console.log(response);
-
-						this.status_text = 'email Updated successfully';
+						response.data == 'success' ? this.status_text = 'email Updated successfully' : this.status_text = 'email already used';
+						
 						this.dialog = true;
 
 

@@ -6,23 +6,19 @@ include $session_info;
 include $linkerCss;
 ?>
 
-<div id="search">
 <?php 
 include $dashboard_head;
 ?>
+<div id="search">
 	<v-app>s
 		<!-- <search></search> -->
 		<search></search>
 	</v-app>
+</div>
+
 <?php 
 include $dashboard_foot ;
 ?>
-</div>
-
-
-
-
-
 
 <?php 
 include $linkerJs;

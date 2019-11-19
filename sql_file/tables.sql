@@ -446,3 +446,22 @@ $row = mysqli_fetch_assoc($result);
 $conn->close();
 echo $row['st'];
 -- ideal code
+
+
+
+
+DELIMITER 
+$$
+USE `intern_project`
+$$
+CREATE OR REPLACE TRIGGER `keep_log`
+AFTER UPDATE 
+ON intern_project.verification_info FOR EACH ROW
+-- Edit trigger body code below this line. Do not edit lines above this one
+BEGIN
+INSERT into log_table ( log_table.log_info ) VALUES ( OLD.email );
+END
+$$
+
+
+
