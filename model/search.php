@@ -15,10 +15,10 @@ $name1 =  mysqli_real_escape_string($conn , $name);
 
 
 if($d2->purpose == 'full_name'){
-	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and  ur.full_name  REGEXP '$name'  limit 20 ";
+	$sql = "select * from all_info_together where status = 'approved' and  full_name  REGEXP '$name'  limit 20 ";
 }else if($d2->purpose == 'membership_number'){
 
-	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and   ur.membership_number  REGEXP '$name' limit 20 ";
+	$sql = "select * from all_info_together where  status = 'approved' and membership_number  REGEXP '$name' limit 20 ";
 
 }else if($d2->purpose == 'permanent_district'){
 
@@ -27,10 +27,10 @@ if($d2->purpose == 'full_name'){
 
 
 }else if($d2->purpose == 'institution_id'){
-$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and  ur.institution_id  REGEXP '$name' limit 20 ";
+$sql = "select * from all_info_together where status = 'approved' and  institution_id  REGEXP '$name' limit 20 ";
 }
 else if($d2->purpose == 'rejected_user'){
-$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'rejected' and  ur.full_name  REGEXP '$name' limit 20 ";
+$sql = "select * from all_info_together where status = 'rejected' and  full_name  REGEXP '$name' limit 20 ";
 }
 
 

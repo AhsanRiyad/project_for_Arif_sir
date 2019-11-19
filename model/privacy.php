@@ -146,6 +146,7 @@ echo $row['st'];
 				}if($d2->purpose == 'get_profile_details_for_all'){
 					
 					$email = $d2->email;
+					$user_id = $d2->user_id;
 					echo getPrivacyData($email , $user_id);
 					
 

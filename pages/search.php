@@ -10,7 +10,7 @@ include $linkerCss;
 include $dashboard_head;
 ?>
 <div id="search">
-	<v-app>s
+	<v-app>
 		<!-- <search></search> -->
 		<search></search>
 	</v-app>

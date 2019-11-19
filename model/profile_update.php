@@ -21,7 +21,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_basic(?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sssssss' , $email__ , $full_name, $mobile , $institution_id , $blood_group , $nid_or_passport , $dob );
+	$stmt->bind_param('issssss' , $id__ , $full_name, $mobile , $institution_id , $blood_group , $nid_or_passport , $dob );
 	$stmt->execute();
 	$stmt->close();
 
@@ -45,7 +45,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_personal(?,?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ssssisss' , $email__ , $fathers_name , $mothers_name, $spouse_name , $number_of_children , $profession , $workplace_or_institution , $designation  );
+	$stmt->bind_param('isssisss' , $id__ , $fathers_name , $mothers_name, $spouse_name , $number_of_children , $profession , $workplace_or_institution , $designation  );
 
 	$stmt->execute();
 	$stmt->close();
@@ -71,7 +71,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_address(?,?,?,?,?,?,?,?,?,@result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sssssssss' , $email__ , $present_line1 , $present_district , $present_post_code , $present_country , $permanent_line1 , $permanent_district , $permanent_post_code , $permanent_country );
+	$stmt->bind_param('issssssss' , $id__ , $present_line1 , $present_district , $present_post_code , $present_country , $permanent_line1 , $permanent_district , $permanent_post_code , $permanent_country );
 	$stmt->execute();
 	$stmt->close();
 
@@ -93,7 +93,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 	$sql = "call update_profile_password( ? , ? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ss' , $email__ , $password1 );
+	$stmt->bind_param('is' , $id__ , $password1 );
 
 	$stmt->execute();
 	$stmt->close();
@@ -113,9 +113,9 @@ if($d1->purpose == 'basic'){
 	//echo $email1;
 
 	$conn = get_mysqli_connection();
-	$sql = "call update_profile_email( ? , ? , @result)";
+	$sql = "call update_profile_email( ? , ? , ? , @result)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('ss' , $email__ , $email1 );
+	$stmt->bind_param('iss' , $id__ , $email__ , $email1 );
 
 	$stmt->execute();
 	$stmt->close();
@@ -187,9 +187,9 @@ if($d1->purpose == 'basic'){
 }else if($d1->purpose == 'getProfileBasicInfo'){
 
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email = (?)";
+	$sql = "select * from all_info_together where id = (?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email__);
+	$stmt->bind_param('i' , $id__);
 	$stmt->execute();
 	$result = $stmt->get_result();
 	$row = $result->fetch_assoc();
@@ -257,11 +257,11 @@ if($d1->purpose == 'basic'){
 	if($user_type == 'admin'){
 		$sql = "call user_request(? , @result)";
 	}else if($user_type == 'user'){
-		$sql = "update verification_info set completeness = 100 where email = (?)";
+		$sql = "update all_info_together set completeness = 100 where id = (?)";
 	}
 
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email__ );
+	$stmt->bind_param('i' , $id__ );
 
 	$stmt->execute();
 	$stmt->close();
