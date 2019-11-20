@@ -408,7 +408,7 @@ SELECT vi.email as em FROM verification_info vi JOIN users_registration ur ON vi
 SELECT * FROM verification_info vi JOIN users_registration ur ON vi.email = ur.email WHERE vi.completeness = 100 and vi.status = 'not_verified'
 
 
-
+-- working_view starts all_info_together
 CREATE or REPLACE VIEW all_info_together AS
 select  ur.full_name,ur.mobile,ur.institution_id,ur.password,ur.registration_date, ur.membership_number, ui.gender,ui.nid_or_passport,ui.fathers_name,ui.mother_name,ui.spouse_name,ui.number_of_children,ui.profession,ui.designation,ui.institution,ui.blood_group,ui.date_of_birth ,
 
@@ -417,7 +417,7 @@ vi.id_v_info,vi.otp,vi.forgot_password_crypto,vi.status,vi.email_verification_st
 uu.recent_photo , uu.old_photo , ur.email as ur_email, vi.email as vi_email, uu.email as uu_email , ui.email as ui_email , 
 
 ua.*  from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu  where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email ;
-
+-- view ends
 
 
 ur.id,ur.full_name,ur.mobile,ur.institution_id,ur.password,ur.registration_date, ur.membership_number
@@ -479,7 +479,7 @@ update all_info_together set  present_line1 = present_line11, present_district =
 IF verification_status = 'verified' and change_req_status = 'not_requested'
 THEN
 
-UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
 
 end IF;
 
@@ -490,3 +490,88 @@ set result = 'success' ;
 
 
 END
+
+
+
+
+
+SELECT `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`, `gender`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` FROM `all_info_together`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DELIMITER $$
+CREATE or REPLACE DEFINER=`root`@`localhost` PROCEDURE `update_profile_address`(IN `id1` INT(100), IN last_verified_info1 varchar(1000) , IN `present_line11` VARCHAR(100), IN `present_district1` VARCHAR(100), IN `present_post_code1` INT(100), IN `present_country1` VARCHAR(200), IN `permanent_line11` VARCHAR(100), IN `permanent_district1` VARCHAR(100), IN `permanent_post_code1` INT(100), IN `permanent_country1` VARCHAR(200), OUT `result` VARCHAR(100))
+BEGIN
+DECLARE count int(5);
+
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
+
+
+update all_info_together set  present_line1 = present_line11, present_district = present_district1, present_post_code = present_post_code1 , present_country = present_country1 , parmanent_line1 = permanent_line11 , parmanent_district = permanent_district1, parmanent_post_code = permanent_post_code1 , parmanent_country = permanent_country1 where id = id1 ;
+
+IF verification_status = 'approved' and change_req_status = 'not_requested'
+THEN
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+end IF;
+
+
+
+
+set result = 'success' ;
+
+
+END$$
+DELIMITER ;
+
+
+
+
+
+
+
+DELIMITER $$
+CREATE or REPLACE DEFINER=`root`@`localhost` PROCEDURE `update_profile_personal`(IN `id1` VARCHAR(100), IN last_verified_info1 varchar(1000) ,  IN `fathers_name1` VARCHAR(100), IN `mothers_name1` VARCHAR(100), IN `spouse_name1` VARCHAR(100), IN `number_of_children1` INT(100), IN `profession1` VARCHAR(100), IN `workplace_or_institution1` VARCHAR(200), IN `designation1` VARCHAR(200), OUT `result` VARCHAR(100))
+BEGIN
+
+DECLARE count int(5);
+
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
+
+update all_info_together set  fathers_name = fathers_name1, mother_name = mothers_name1 , spouse_name = spouse_name1, number_of_children = number_of_children1 , profession = profession1 , institution = workplace_or_institution1 , designation = designation1 where id = id1 ;
+
+
+IF verification_status = 'approved' and change_req_status = 'not_requested'
+THEN
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+end IF;
+
+
+
+
+set result = 'success' ;
+END$$
+DELIMITER ;

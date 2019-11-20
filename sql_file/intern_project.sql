@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2019 at 12:42 PM
+-- Generation Time: Nov 20, 2019 at 04:03 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -157,11 +157,24 @@ END IF ;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_address` (IN `id1` INT(100), IN `present_line11` VARCHAR(100), IN `present_district1` VARCHAR(100), IN `present_post_code1` INT(100), IN `present_country1` VARCHAR(200), IN `permanent_line11` VARCHAR(100), IN `permanent_district1` VARCHAR(100), IN `permanent_post_code1` INT(100), IN `permanent_country1` VARCHAR(200), OUT `result` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_address` (IN `id1` INT(100), IN `last_verified_info1` VARCHAR(1000), IN `present_line11` VARCHAR(100), IN `present_district1` VARCHAR(100), IN `present_post_code1` INT(100), IN `present_country1` VARCHAR(200), IN `permanent_line11` VARCHAR(100), IN `permanent_district1` VARCHAR(100), IN `permanent_post_code1` INT(100), IN `permanent_country1` VARCHAR(200), OUT `result` VARCHAR(100))  BEGIN
 DECLARE count int(5);
+
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
 
 
 update all_info_together set  present_line1 = present_line11, present_district = present_district1, present_post_code = present_post_code1 , present_country = present_country1 , parmanent_line1 = permanent_line11 , parmanent_district = permanent_district1, parmanent_post_code = permanent_post_code1 , parmanent_country = permanent_country1 where id = id1 ;
+
+IF verification_status = 'approved' and change_req_status = 'not_requested'
+THEN
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+end IF;
 
 
 
@@ -252,12 +265,26 @@ set result = 'success' ;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_personal` (IN `id1` VARCHAR(100), IN `fathers_name1` VARCHAR(100), IN `mothers_name1` VARCHAR(100), IN `spouse_name1` VARCHAR(100), IN `number_of_children1` INT(100), IN `profession1` VARCHAR(100), IN `workplace_or_institution1` VARCHAR(200), IN `designation1` VARCHAR(200), OUT `result` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_personal` (IN `id1` VARCHAR(100), IN `last_verified_info1` VARCHAR(1000), IN `fathers_name1` VARCHAR(100), IN `mothers_name1` VARCHAR(100), IN `spouse_name1` VARCHAR(100), IN `number_of_children1` INT(100), IN `profession1` VARCHAR(100), IN `workplace_or_institution1` VARCHAR(200), IN `designation1` VARCHAR(200), OUT `result` VARCHAR(100))  BEGIN
 
 DECLARE count int(5);
 
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
 
 update all_info_together set  fathers_name = fathers_name1, mother_name = mothers_name1 , spouse_name = spouse_name1, number_of_children = number_of_children1 , profession = profession1 , institution = workplace_or_institution1 , designation = designation1 where id = id1 ;
+
+
+IF verification_status = 'approved' and change_req_status = 'not_requested'
+THEN
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+end IF;
+
 
 
 
@@ -343,6 +370,7 @@ CREATE TABLE `all_info_together` (
 ,`type` varchar(20)
 ,`visibility` varchar(1000)
 ,`completeness` int(10)
+,`last_verified_info` varchar(5000)
 ,`id` int(100)
 ,`recent_photo` varchar(400)
 ,`old_photo` varchar(400)
@@ -647,7 +675,35 @@ INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
 (264, NULL, 'riyad298@gmail.com'),
 (265, NULL, 'riyad298@gmail.com'),
 (266, NULL, 'riyad298@gmail.com'),
-(267, NULL, 'riyad298@gmail.com');
+(267, NULL, 'riyad298@gmail.com'),
+(268, NULL, 'riyad298@gmail.com'),
+(269, NULL, 'riyad298@gmail.com'),
+(270, NULL, 'riyad298@gmail.com'),
+(271, NULL, 'riyad298@gmail.com'),
+(272, NULL, 'riyad298@gmail.com'),
+(273, NULL, 'riyad298@gmail.com'),
+(274, NULL, 'riyad298@gmail.com'),
+(275, NULL, 'riyad298@gmail.com'),
+(276, NULL, 'riyad298@gmail.com'),
+(277, NULL, 'riyad298@gmail.com'),
+(278, NULL, 'riyad298@gmail.com'),
+(279, NULL, 'riyad298@gmail.com'),
+(280, NULL, 'riyad298@gmail.com'),
+(281, NULL, 'riyad298@gmail.com'),
+(282, NULL, 'riyad298@gmail.com'),
+(283, NULL, 'riyad298@gmail.com'),
+(284, NULL, 'riyad298@gmail.com'),
+(285, NULL, 'riyad298@gmail.com'),
+(286, NULL, 'riyad298@gmail.com'),
+(287, NULL, 'riyad298@gmail.com'),
+(288, NULL, 'riyad298@gmail.com'),
+(289, NULL, 'riyad298@gmail.com'),
+(290, NULL, 'riyad298@gmail.com'),
+(291, NULL, 'riyad298@gmail.com'),
+(292, NULL, 'riyad298@gmail.com'),
+(293, NULL, 'riyad298@gmail.com'),
+(294, NULL, 'riyad298@gmail.com'),
+(295, NULL, 'riyad298@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -675,7 +731,7 @@ CREATE TABLE `users_address` (
 --
 
 INSERT INTO `users_address` (`email`, `users_address_id`, `present_line1`, `present_line2`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`, `parmanent_line2`, `parmanent_district`, `parmanent_post_code`, `parmanent_country`) VALUES
-('riyad298@gmail.com', 1, 'kaa-153/3', NULL, 'dhaka north', '3900', 'bangladesh', 'house 4 , protap', NULL, 'kurigram', '5600', 'bangladesh'),
+('riyad298@gmail.com', 1, 'arefeaf', NULL, 'rfaerf', '4444', 'refaef', 'refaerf', NULL, 'rfarfae', '4444', 'refaef'),
 ('riyad298@yahoo.com', 2, 'kaa-153/3', NULL, 'dhaka', '3900', 'bangladesh', 'protap', NULL, 'kurigram', '5600', 'bangladesh'),
 ('riyad298@hotmail.com', 3, 'dhaka', NULL, 'dhaka', '5600', 'bangladesh', 'kurigram', NULL, 'kurigram', '5600', 'bangladesh');
 
@@ -706,7 +762,7 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`email`, `gender`, `ui_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
-('riyad298@gmail.com', NULL, 0, '111111111111', 'Barkat Alam', 'Urmee', 'Maliha', 0, 'student', 'student', 'aiuba', 'O+', '1992-08-02'),
+('riyad298@gmail.com', NULL, 0, '111111111111', 'riyad298@gmail.com', 'rfafferfa', 'arefaerf', 0, 'arefef', 'aerfaf', 'arfafa', 'O+', '1992-08-02'),
 ('riyad298@yahoo.com', NULL, 0, '11555511144', 'Barkat Alam', 'Sultana', 'Tahera', 0, 'student', 'student', 'aiub dhaka', 'O+', '1992-11-12'),
 ('riyad298@hotmail.com', NULL, 0, '1369845635', 'Rubel', 'Nihar', 'Borno', 0, 'student', 'student', 'kghs kurigram', 'O+', '1992-08-02');
 
@@ -798,17 +854,18 @@ CREATE TABLE `verification_info` (
   `change_request` varchar(100) NOT NULL DEFAULT 'not_requested',
   `type` varchar(20) DEFAULT NULL,
   `visibility` varchar(1000) DEFAULT NULL,
-  `completeness` int(10) DEFAULT NULL
+  `completeness` int(10) DEFAULT NULL,
+  `last_verified_info` varchar(5000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `verification_info`
 --
 
-INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
-(1, 'riyad298@gmail.com', '7724', '335f5352088d7d9bf74191e006d8e24c', 'approved', 'verified', 'not_requested', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100),
-(2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100),
-(3, 'riyad298@hotmail.com', '9964', NULL, 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100);
+INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
+(1, 'riyad298@gmail.com', '7724', '335f5352088d7d9bf74191e006d8e24c', 'approved', 'verified', 'requested', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100, 'full_name,mobile,institution_id,password,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Md Ahsan Ferdous Riyad,01919448787,15-29804-2,e10adc3949ba59abbe56e057f20f883e,111111111111,,,,0,,,,O+,1992-08-02,arefeaf,rfaerf,4444,refaef,refaerf,rfarfae,4444,refaef'),
+(2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100, NULL),
+(3, 'riyad298@hotmail.com', '9964', NULL, 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100, NULL);
 
 --
 -- Triggers `verification_info`
@@ -827,7 +884,7 @@ DELIMITER ;
 --
 DROP TABLE IF EXISTS `all_info_together`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_info_together`  AS  select `ur`.`full_name` AS `full_name`,`ur`.`mobile` AS `mobile`,`ur`.`institution_id` AS `institution_id`,`ur`.`password` AS `password`,`ur`.`registration_date` AS `registration_date`,`ur`.`membership_number` AS `membership_number`,`ui`.`gender` AS `gender`,`ui`.`nid_or_passport` AS `nid_or_passport`,`ui`.`fathers_name` AS `fathers_name`,`ui`.`mother_name` AS `mother_name`,`ui`.`spouse_name` AS `spouse_name`,`ui`.`number_of_children` AS `number_of_children`,`ui`.`profession` AS `profession`,`ui`.`designation` AS `designation`,`ui`.`institution` AS `institution`,`ui`.`blood_group` AS `blood_group`,`ui`.`date_of_birth` AS `date_of_birth`,`vi`.`id_v_info` AS `id_v_info`,`vi`.`otp` AS `otp`,`vi`.`forgot_password_crypto` AS `forgot_password_crypto`,`vi`.`status` AS `status`,`vi`.`email_verification_status` AS `email_verification_status`,`vi`.`change_request` AS `change_request`,`vi`.`type` AS `type`,`vi`.`visibility` AS `visibility`,`vi`.`completeness` AS `completeness`,`ur`.`id` AS `id`,`uu`.`recent_photo` AS `recent_photo`,`uu`.`old_photo` AS `old_photo`,`ur`.`email` AS `ur_email`,`vi`.`email` AS `vi_email`,`uu`.`email` AS `uu_email`,`ui`.`email` AS `ui_email`,`ua`.`email` AS `email`,`ua`.`users_address_id` AS `users_address_id`,`ua`.`present_line1` AS `present_line1`,`ua`.`present_line2` AS `present_line2`,`ua`.`present_district` AS `present_district`,`ua`.`present_post_code` AS `present_post_code`,`ua`.`present_country` AS `present_country`,`ua`.`parmanent_line1` AS `parmanent_line1`,`ua`.`parmanent_line2` AS `parmanent_line2`,`ua`.`parmanent_district` AS `parmanent_district`,`ua`.`parmanent_post_code` AS `parmanent_post_code`,`ua`.`parmanent_country` AS `parmanent_country` from ((((`users_registration` `ur` join `users_info` `ui`) join `users_address` `ua`) join `verification_info` `vi`) join `user_uploads` `uu`) where `uu`.`email` = `ur`.`email` and `ui`.`email` = `ur`.`email` and `ua`.`email` = `ur`.`email` and `vi`.`email` = `ur`.`email` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `all_info_together`  AS  select `ur`.`full_name` AS `full_name`,`ur`.`mobile` AS `mobile`,`ur`.`institution_id` AS `institution_id`,`ur`.`password` AS `password`,`ur`.`registration_date` AS `registration_date`,`ur`.`membership_number` AS `membership_number`,`ui`.`gender` AS `gender`,`ui`.`nid_or_passport` AS `nid_or_passport`,`ui`.`fathers_name` AS `fathers_name`,`ui`.`mother_name` AS `mother_name`,`ui`.`spouse_name` AS `spouse_name`,`ui`.`number_of_children` AS `number_of_children`,`ui`.`profession` AS `profession`,`ui`.`designation` AS `designation`,`ui`.`institution` AS `institution`,`ui`.`blood_group` AS `blood_group`,`ui`.`date_of_birth` AS `date_of_birth`,`vi`.`id_v_info` AS `id_v_info`,`vi`.`otp` AS `otp`,`vi`.`forgot_password_crypto` AS `forgot_password_crypto`,`vi`.`status` AS `status`,`vi`.`email_verification_status` AS `email_verification_status`,`vi`.`change_request` AS `change_request`,`vi`.`type` AS `type`,`vi`.`visibility` AS `visibility`,`vi`.`completeness` AS `completeness`,`vi`.`last_verified_info` AS `last_verified_info`,`ur`.`id` AS `id`,`uu`.`recent_photo` AS `recent_photo`,`uu`.`old_photo` AS `old_photo`,`ur`.`email` AS `ur_email`,`vi`.`email` AS `vi_email`,`uu`.`email` AS `uu_email`,`ui`.`email` AS `ui_email`,`ua`.`email` AS `email`,`ua`.`users_address_id` AS `users_address_id`,`ua`.`present_line1` AS `present_line1`,`ua`.`present_line2` AS `present_line2`,`ua`.`present_district` AS `present_district`,`ua`.`present_post_code` AS `present_post_code`,`ua`.`present_country` AS `present_country`,`ua`.`parmanent_line1` AS `parmanent_line1`,`ua`.`parmanent_line2` AS `parmanent_line2`,`ua`.`parmanent_district` AS `parmanent_district`,`ua`.`parmanent_post_code` AS `parmanent_post_code`,`ua`.`parmanent_country` AS `parmanent_country` from ((((`users_registration` `ur` join `users_info` `ui`) join `users_address` `ua`) join `verification_info` `vi`) join `user_uploads` `uu`) where `uu`.`email` = `ur`.`email` and `ui`.`email` = `ur`.`email` and `ua`.`email` = `ur`.`email` and `vi`.`email` = `ur`.`email` ;
 
 --
 -- Indexes for dumped tables
@@ -877,7 +934,7 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
 
 --
 -- AUTO_INCREMENT for table `users_address`
