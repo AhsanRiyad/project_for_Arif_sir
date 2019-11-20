@@ -87,13 +87,13 @@
 
 
 		<?php 
-		if($admin__ == true ){
+		if($admin__ == true  ){
 			?>
 			<a class="text-light" href="<?php echo $reg_req; ?>">
 				<div class="  
 				<?php 
 
-				if($pageName=='reg_req')
+				if($pageName=='reg_req' &&  !isset($_GET['pname']))
 				{
 					echo 'bg-info';
 				}
@@ -104,6 +104,28 @@
 				py-2 text-center my-4">
 
 				<i class="fas fa-shopping-cart"></i> User Request
+
+			</div></a>
+		<?php } ?>
+
+		<?php 
+		if($admin__ == true ){
+			?>
+			<a class="text-light" href="<?php echo $reg_req.'?pname=change_request'; ?>">
+				<div class="  
+				<?php 
+
+				if( isset($_GET['pname']) && $_GET['pname'] == 'change_request')
+				{
+					echo 'bg-info';
+				}
+				else{
+					echo 'bg-secondary';
+				}
+				?> 
+				py-2 text-center my-4">
+
+				<i class="fas fa-shopping-cart"></i> Change Request
 
 			</div></a>
 		<?php } ?>

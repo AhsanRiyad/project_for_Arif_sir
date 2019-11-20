@@ -172,8 +172,18 @@ echo $_SESSION['users_info']['email'];
 $conn->close();*/
 
 $email = 'riyad298@gmail.com';
+
+
 $conn = get_mysqli_connection();
-$sql = "select `full_name`, `mobile`, `institution_id`, `password`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  email = (?)";
+
+
+
+
+
+
+
+
+$sql = "select `full_name`, `mobile`, `institution_id`,`nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  email = (?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s' , $email);
 $stmt->execute();
@@ -209,6 +219,17 @@ echo '<br>';
 
 print_r(explode('@#$' , $newArrayString));
 
+
+
+
+
+
+
+
+
+
+
+
 $arrayTogether = explode('@#$' , $newArrayString);
 
 echo '<br>';
@@ -224,9 +245,9 @@ echo '<br>';
 $array2ValueString = $arrayTogether[1];
 echo $array2ValueString;
 
-
-$stringToArrayKey = explode(',' , $array1keyString);
-$stringToArrayValue = explode(',' , $array2ValueString);
+//final pair1
+$arrayKey_tobeUpdated =  $stringToArrayKey = explode(',' , $array1keyString);
+$arrayValue_tobeUpdated = $stringToArrayValue = explode(',' , $array2ValueString);
 
 
 $arrayAssoc;
@@ -272,4 +293,118 @@ echo json_encode($arrayAssoc);
 
 
 // echo $count = $row['count'];
+
+
+
+echo '<br>';
+echo '<br>';
+
+
+
+
+$sql = "select last_verified_info from all_info_together where  email = (?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s' , $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+
+// print_r($row['last']);
+echo $row['last_verified_info'];
+
+echo '<br>';
+echo '<br>';
+
+
+$array =  explode('@#$' , $row['last_verified_info']);
+
+//desired array
+$arrayKey_from_database =  $stringToArrayKey_from_verified_info = explode(',' , $array[0] );
+$arrayValue_from_database = $stringToArrayValue_from_verified_info = explode(',' , $array[1] );
+
+echo $array[0];
+
+// echo $stringToArrayKey_from_verified_info[0];
+
+echo '<br>';
+echo '<br>';
+
+
+print_r($stringToArrayKey_from_verified_info);
+// echo $stringToArrayKey_from_verified_info[1];
+
+echo '<br>';
+echo '<br>';
+
+
+print_r($stringToArrayValue_from_verified_info);
+
+
+
+echo '<br>';
+echo '<br>';
+
+
+$arrayNew = [];
+for($i=0; $i<count($arrayValue_from_database) ; $i++){
+
+	if($arrayValue_from_database[$i] != $arrayValue_tobeUpdated[$i]){
+
+
+		$arrayNew[$arrayKey_from_database[$i]] = [$arrayValue_tobeUpdated[$i], $arrayValue_from_database[$i]] ; 
+
+
+
+	}
+
+
+}
+
+
+print_r($arrayNew);
+
+echo '<br>';
+echo '<br>';
+
+
+echo json_encode($arrayNew);
+
+
+
 $stmt->close();
+echo '<br>';
+echo '<br>';
+
+
+//$update_sql = "update all_info_together set `full_name`=(?), `mobile`=(?), `institution_id`=(?),`nid_or_passport`=(?), `fathers_name`=(?), `mother_name`=(?), `spouse_name`=(?), `number_of_children`=(?), `profession`=(?), `designation`=(?), `institution`=(?), `blood_group`=(?), `date_of_birth`=(?), `present_line1`=(?), `present_district`=(?), `present_post_code`=(?), `present_country`=(?), `parmanent_line1`=(?),  `parmanent_district`=(?), `parmanent_post_code`=(?), `parmanent_country`=(?)  where  email = (?)";
+
+$update_sql1 = "update all_info_together set `full_name`='".$arrayValue_from_database[0]."', `mobile`='".$arrayValue_from_database[1]."', `institution_id`='".$arrayValue_from_database[2]."',`nid_or_passport`='".$arrayValue_from_database[3]."', `fathers_name`='".$arrayValue_from_database[4]."', `mother_name`='".$arrayValue_from_database[5]."', `spouse_name`='".$arrayValue_from_database[6]."', `number_of_children`=".$arrayValue_from_database[7].", `profession`='".$arrayValue_from_database[8]."', `designation`='".$arrayValue_from_database[9]."', `institution`='".$arrayValue_from_database[10]."', `blood_group`='".$arrayValue_from_database[11]."', `date_of_birth`='".$arrayValue_from_database[12]."', `present_line1`='".$arrayValue_from_database[13]."', `present_district`='".$arrayValue_from_database[14]."', `present_post_code`='".$arrayValue_from_database[15]."', `present_country`='".$arrayValue_from_database[16]."', `parmanent_line1`='".$arrayValue_from_database[17]."',  `parmanent_district`='".$arrayValue_from_database[18]."', `parmanent_post_code`='".$arrayValue_from_database[19]."', `parmanent_country`='".$arrayValue_from_database[20]."'  where  email = '".$email."'";
+
+
+$update_sql_users_registration = "update all_info_together set `full_name`='".$arrayValue_from_database[0]."', `mobile`='".$arrayValue_from_database[1]."', `institution_id`='".$arrayValue_from_database[2]."'  where  email = '".$email."'";
+mysqli_query($conn , $update_sql_users_registration);
+
+$update_sql_users_info = "update all_info_together set `nid_or_passport`='".$arrayValue_from_database[3]."', `fathers_name`='".$arrayValue_from_database[4]."', `mother_name`='".$arrayValue_from_database[5]."', `spouse_name`='".$arrayValue_from_database[6]."', `number_of_children`=".$arrayValue_from_database[7].", `profession`='".$arrayValue_from_database[8]."', `designation`='".$arrayValue_from_database[9]."', `institution`='".$arrayValue_from_database[10]."', `blood_group`='".$arrayValue_from_database[11]."', `date_of_birth`='".$arrayValue_from_database[12]."'  where  email = '".$email."'";
+mysqli_query($conn , $update_sql_users_info);
+
+
+$update_sql_users_address = "update all_info_together set `present_line1`='".$arrayValue_from_database[13]."', `present_district`='".$arrayValue_from_database[14]."', `present_post_code`='".$arrayValue_from_database[15]."', `present_country`='".$arrayValue_from_database[16]."', `parmanent_line1`='".$arrayValue_from_database[17]."',  `parmanent_district`='".$arrayValue_from_database[18]."', `parmanent_post_code`='".$arrayValue_from_database[19]."', `parmanent_country`='".$arrayValue_from_database[20]."'  where  email = '".$email."'";
+mysqli_query($conn , $update_sql_users_info);
+
+
+
+
+
+
+echo $update_sql1;
+
+echo '<br>';
+echo '<br>';
+
+// $stmt = $conn->prepare($update_sql);
+//$stmt->bind_param('ssssssssisssssssssssss' , $email, $arrayValue_from_database[0], $arrayValue_from_database[1] , $arrayValue_from_database[2], $arrayValue_from_database[3] , $arrayValue_from_database[4] , $arrayValue_from_database[5] , $arrayValue_from_database[6], $arrayValue_from_database[7] , $arrayValue_from_database[8], $arrayValue_from_database[9], $arrayValue_from_database[10], $arrayValue_from_database[11], $arrayValue_from_database[12] , $arrayValue_from_database[13], $arrayValue_from_database[14], $arrayValue_from_database[15], $arrayValue_from_database[16], $arrayValue_from_database[17], $arrayValue_from_database[18], $arrayValue_from_database[19], $arrayValue_from_database[20] );
+//$stmt->execute();
+//$result = $stmt->get_result();
+//$row = $result->fetch_assoc();
+

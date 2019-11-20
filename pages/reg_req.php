@@ -15,8 +15,22 @@ include $dashboard_head;
 <div  id="reg_req">
 <v-app>
 
+<?php 
+if(isset($_GET['pname']) && $_GET['pname'] == 'change_request'){
+?>
 
+<change_request></change_request>
+
+<?php 
+}else{
+?>
 <reg_req></reg_req>
+
+
+
+<?php 
+}
+?>
 
 </v-app>
 

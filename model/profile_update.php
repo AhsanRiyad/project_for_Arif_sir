@@ -21,7 +21,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 
 
-	$sql = "select `full_name`, `mobile`, `institution_id`, `password`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  id = (?)";
+	$sql = "select `full_name`, `mobile`, `institution_id`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  id = (?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('i' , $id__);
 	$stmt->execute();
@@ -58,7 +58,7 @@ if($d1->purpose == 'basic'){
 	$designation= $d1->designation;
 
 	$conn = get_mysqli_connection();
-	$sql = "select `full_name`, `mobile`, `institution_id`, `password`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  id = (?)";
+	$sql = "select `full_name`, `mobile`, `institution_id`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  id = (?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('i' , $id__);
 	$stmt->execute();
@@ -99,7 +99,7 @@ if($d1->purpose == 'basic'){
 	$conn = get_mysqli_connection();
 
 
-	$sql = "select `full_name`, `mobile`, `institution_id`, `password`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  id = (?)";
+	$sql = "select `full_name`, `mobile`, `institution_id`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  id = (?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('i' , $id__);
 	$stmt->execute();

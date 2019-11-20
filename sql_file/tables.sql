@@ -412,7 +412,7 @@ SELECT * FROM verification_info vi JOIN users_registration ur ON vi.email = ur.e
 CREATE or REPLACE VIEW all_info_together AS
 select  ur.full_name,ur.mobile,ur.institution_id,ur.password,ur.registration_date, ur.membership_number, ui.gender,ui.nid_or_passport,ui.fathers_name,ui.mother_name,ui.spouse_name,ui.number_of_children,ui.profession,ui.designation,ui.institution,ui.blood_group,ui.date_of_birth ,
 
-vi.id_v_info,vi.otp,vi.forgot_password_crypto,vi.status,vi.email_verification_status,vi.change_request,vi.type,vi.visibility,vi.completeness, vi.last_verified_info , ur.id , 
+vi.id_v_info,vi.otp,vi.forgot_password_crypto,vi.status,vi.email_verification_status,vi.change_request, vi.change_request_time ,vi.type,vi.visibility,vi.completeness, vi.last_verified_info , ur.id , 
 
 uu.recent_photo , uu.old_photo , ur.email as ur_email, vi.email as vi_email, uu.email as uu_email , ui.email as ui_email , 
 
