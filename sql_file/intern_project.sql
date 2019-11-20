@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2019 at 11:27 PM
+-- Generation Time: Nov 20, 2019 at 12:15 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -602,7 +602,35 @@ INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
 (219, NULL, 'riyad298@hotmail.com'),
 (220, NULL, 'riyad298@hotmail.com'),
 (221, NULL, 'riyad298@hotmail.com'),
-(222, NULL, 'riyad298@hotmail.com');
+(222, NULL, 'riyad298@hotmail.com'),
+(223, NULL, 'riyad298@yahoo.com'),
+(224, NULL, 'riyad298@gmail.com'),
+(225, NULL, 'riyad298@gmail.com'),
+(226, NULL, 'riyad298@gmail.com'),
+(227, NULL, 'riyad298@gmail.com'),
+(228, NULL, 'riyad298@gmail.com'),
+(229, NULL, 'riyad298@gmail.com'),
+(230, NULL, 'riyad298@gmail.com'),
+(231, NULL, 'riyad298@gmail.com'),
+(232, NULL, 'riyad298@gmail.com'),
+(233, NULL, 'riyad298@gmail.com'),
+(234, NULL, 'riyad298@gmail.com'),
+(235, NULL, 'riyad298@gmail.com'),
+(236, NULL, 'riyad298@gmail.com'),
+(237, NULL, 'riyad298@gmail.com'),
+(238, NULL, 'riyad298@gmail.com'),
+(239, NULL, 'riyad298@gmail.com'),
+(240, NULL, 'riyad298@gmail.com'),
+(241, NULL, 'riyad298@gmail.com'),
+(242, NULL, 'riyad298@gmail.com'),
+(243, NULL, 'riyad298@gmail.com'),
+(244, NULL, 'riyad298@gmail.com'),
+(245, NULL, 'riyad298@gmail.com'),
+(246, NULL, 'riyad298@gmail.com'),
+(247, NULL, 'riyad298@gmail.com'),
+(248, NULL, 'riyad298@gmail.com'),
+(249, NULL, 'riyad298@gmail.com'),
+(250, NULL, 'riyad298@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -708,8 +736,10 @@ CREATE TABLE `user_photos` (
 --
 
 INSERT INTO `user_photos` (`group_photo`, `email`, `id_user_photos`) VALUES
-('riyad298@gmail.com.png', 'riyad298@gmail.com', 3),
-('riyad298@hotmail.com.jpg', 'riyad298@hotmail.com', 11);
+('riyad298@hotmail.com.jpg', 'riyad298@hotmail.com', 11),
+('riyad298@gmail.com_1.jpg', 'riyad298@gmail.com', 27),
+('riyad298@gmail.com_2.jpg', 'riyad298@gmail.com', 28),
+('riyad298@gmail.com_4.jpg', 'riyad298@gmail.com', 30);
 
 -- --------------------------------------------------------
 
@@ -758,7 +788,7 @@ CREATE TABLE `verification_info` (
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`) VALUES
 (1, 'riyad298@gmail.com', '7724', '335f5352088d7d9bf74191e006d8e24c', 'approved', 'verified', 'not_requested', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100),
-(2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'admin', 'full_name,institution_id,membership_number', 100),
+(2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100),
 (3, 'riyad298@hotmail.com', '9964', NULL, 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100);
 
 --
@@ -828,7 +858,7 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT for table `users_address`
@@ -846,7 +876,7 @@ ALTER TABLE `users_registration`
 -- AUTO_INCREMENT for table `user_photos`
 --
 ALTER TABLE `user_photos`
-  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `user_uploads`
