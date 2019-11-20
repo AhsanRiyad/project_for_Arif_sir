@@ -13,9 +13,10 @@ $target_dir = $APP_ROOT."assets/img/uploads/".$purpose_type."s/";
 $target_file1 = $target_dir . basename($_FILES[$purpose_type]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file1,PATHINFO_EXTENSION));
-$target_file = $target_dir . basename($_POST["email"].'.'.$imageFileType);
-$base_name = basename($_POST["email"].'.'.$imageFileType);
+$target_file = $target_dir . basename($_POST["user_id"].'.'.$imageFileType);
+$base_name = basename($_POST["user_id"].'.'.$imageFileType);
 $email = $_POST['email'];
+$user_id = $_POST['user_id'];
 
 
 
@@ -31,7 +32,7 @@ if($purpose_type == 'group_photo'){
 				// print_r($row['count']);
 	$count = $row['count'];
 	$stmt->close();
-	$newName = basename($_POST["email"].'_'.++$count.'.');
+	$newName = basename($_POST["user_id"].'_'.++$count.'.');
 					// $base_name = basename($_POST["email"].'_1.'.$imageFileType);
 	$base_name = $newName.$imageFileType;
 	$target_file = $target_dir . $base_name;
@@ -70,7 +71,7 @@ if($purpose_type == 'group_photo'){
 	$row = mysqli_fetch_assoc($result);
 	$conn->close();
 	echo $row['rs'];
-	
+
 
 
 

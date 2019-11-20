@@ -1706,6 +1706,7 @@ Vue.component('photos' , {
 					formData.append('recent_photo', this.recent_photo);
 					formData.append('purpose', 'recent_photo');
 					formData.append('email', this.users_info__.email__);
+					formData.append('user_id', this.users_info__.id__);
 					formData.append('csrf_token1', this.csrf_token1);
 					axios.post( this.model.modelUploadPhotos ,
 						formData,
@@ -1810,6 +1811,7 @@ Vue.component('photos' , {
 					formData.append('old_photo', this.old_photo);
 					formData.append('purpose', 'old_photo');
 					formData.append('email', this.users_info__.email__ );
+					formData.append('user_id', this.users_info__.id__);
 					formData.append('csrf_token1', this.csrf_token1);
 					axios.post( this.model.modelUploadPhotos,
 						formData,
@@ -1879,6 +1881,7 @@ Vue.component('photos' , {
 					formData.append('group_photo', this.group_photo);
 					formData.append('purpose', 'group_photo');
 					formData.append('email', this.users_info__.email__);
+					formData.append('user_id', this.users_info__.id__);
 					formData.append('csrf_token1', this.csrf_token1);
 					axios.post( this.model.modelUploadPhotos,
 						formData,
