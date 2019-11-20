@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2019 at 12:15 PM
+-- Generation Time: Nov 20, 2019 at 12:42 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -265,19 +265,19 @@ set result = 'success' ;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `upload_photo` (IN `purpose` VARCHAR(100), IN `upload_link` VARCHAR(500), IN `email1` VARCHAR(100), OUT `existing_link` VARCHAR(500), OUT `result` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `upload_photo` (IN `purpose` VARCHAR(100), IN `upload_link` VARCHAR(500), IN `email1` VARCHAR(100), IN `id1` INT(100), OUT `existing_link` VARCHAR(500), OUT `result` VARCHAR(100))  BEGIN
 
 
 if purpose = 'recent_photo'
 then
-Select recent_photo into existing_link from user_uploads where email = email1 ;
-update user_uploads set recent_photo = upload_link where email = email1 ;
-UPDATE verification_info SET verification_info.completeness = verification_info.completeness + 10 WHERE verification_info.email = email1;
+Select recent_photo into existing_link from all_info_together where email = email1 ;
+update all_info_together set recent_photo = upload_link where id = id1 ;
+
 
 ELSEIF purpose = 'old_photo'
 then
-select old_photo into existing_link from user_uploads where email = email1;
-update user_uploads set old_photo = upload_link where email = email1;
+select old_photo into existing_link from all_info_together ai where ai.id = id1;
+update all_info_together set old_photo = upload_link where email = email1;
 elseif purpose = 'group_photo'
 then
 insert into user_photos (email , group_photo) values (email1 , upload_link); 
@@ -630,7 +630,24 @@ INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
 (247, NULL, 'riyad298@gmail.com'),
 (248, NULL, 'riyad298@gmail.com'),
 (249, NULL, 'riyad298@gmail.com'),
-(250, NULL, 'riyad298@gmail.com');
+(250, NULL, 'riyad298@gmail.com'),
+(251, NULL, 'riyad298@gmail.com'),
+(252, NULL, 'riyad298@gmail.com'),
+(253, NULL, 'riyad298@gmail.com'),
+(254, NULL, 'riyad298@gmail.com'),
+(255, NULL, 'riyad298@gmail.com'),
+(256, NULL, 'riyad298@gmail.com'),
+(257, NULL, 'riyad298@gmail.com'),
+(258, NULL, 'riyad298@gmail.com'),
+(259, NULL, 'riyad298@gmail.com'),
+(260, NULL, 'riyad298@gmail.com'),
+(261, NULL, 'riyad298@gmail.com'),
+(262, NULL, 'riyad298@gmail.com'),
+(263, NULL, 'riyad298@gmail.com'),
+(264, NULL, 'riyad298@gmail.com'),
+(265, NULL, 'riyad298@gmail.com'),
+(266, NULL, 'riyad298@gmail.com'),
+(267, NULL, 'riyad298@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -737,9 +754,11 @@ CREATE TABLE `user_photos` (
 
 INSERT INTO `user_photos` (`group_photo`, `email`, `id_user_photos`) VALUES
 ('riyad298@hotmail.com.jpg', 'riyad298@hotmail.com', 11),
-('riyad298@gmail.com_1.jpg', 'riyad298@gmail.com', 27),
-('riyad298@gmail.com_2.jpg', 'riyad298@gmail.com', 28),
-('riyad298@gmail.com_4.jpg', 'riyad298@gmail.com', 30);
+('1_1.jpg', 'riyad298@gmail.com', 34),
+('1_2.jpg', 'riyad298@gmail.com', 35),
+('1_3.jpg', 'riyad298@gmail.com', 36),
+('1_4.jpg', 'riyad298@gmail.com', 37),
+('1_5.jpg', 'riyad298@gmail.com', 38);
 
 -- --------------------------------------------------------
 
@@ -759,7 +778,7 @@ CREATE TABLE `user_uploads` (
 --
 
 INSERT INTO `user_uploads` (`id_user_uploads`, `email`, `recent_photo`, `old_photo`) VALUES
-(1, 'riyad298@gmail.com', 'riyad298@gmail.com.jpg', 'riyad298@gmail.com.jpg'),
+(1, 'riyad298@gmail.com', '1.jpg', '1.jpg'),
 (2, 'riyad298@yahoo.com', 'riyad298@yahoo.com.jpg', 'not_set'),
 (3, 'riyad298@hotmail.com', 'riyad298@hotmail.com.png', 'riyad298@hotmail.com.png');
 
@@ -858,7 +877,7 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
 
 --
 -- AUTO_INCREMENT for table `users_address`
@@ -876,7 +895,7 @@ ALTER TABLE `users_registration`
 -- AUTO_INCREMENT for table `user_photos`
 --
 ALTER TABLE `user_photos`
-  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `user_uploads`

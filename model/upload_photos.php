@@ -39,9 +39,9 @@ if($purpose_type == 'group_photo'){
 
 	move_uploaded_file($_FILES[$purpose_type]["tmp_name"], $target_file) ;
 
-	$sql = "call upload_photo( ? , ? , ? , @existing_file_name , @result )";
+	$sql = "call upload_photo( ? , ? , ? , ?, @existing_file_name , @result )";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sss' , $purpose_type ,  $base_name , $email );
+	$stmt->bind_param('sssi' , $purpose_type ,  $base_name , $email, $user_id );
 	$stmt->execute();
 	$stmt->close();
 	$sql = 'select @existing_file_name as st , @result as rs'; 
@@ -61,9 +61,9 @@ if($purpose_type == 'group_photo'){
 
 	move_uploaded_file($_FILES[$purpose_type]["tmp_name"], $target_file) ;
 
-	$sql = "call upload_photo( ? , ? , ? , @existing_file_name , @result )";
+	$sql = "call upload_photo( ? , ? , ? , ?, @existing_file_name , @result )";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('sss' , $purpose_type ,  $base_name , $email );
+	$stmt->bind_param('sssi' , $purpose_type ,  $base_name , $email, $user_id );
 	$stmt->execute();
 	$stmt->close();
 	$sql = 'select @existing_file_name as st , @result as rs'; 
@@ -77,14 +77,6 @@ if($purpose_type == 'group_photo'){
 
 
 }
-
-
-
-
-
-
-
-
 
 
 
