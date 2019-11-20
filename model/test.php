@@ -151,7 +151,7 @@ $cars = array
 
 
 
-  $conn = get_mysqli_connection();
+/*  $conn = get_mysqli_connection();
   //var_dump($conn) ;
 
     //$sql = "select * from users_registration where email = 'riyad209@gmail.com'";
@@ -169,4 +169,16 @@ $cars = array
   $_SESSION['users_info'] = $row;
 
 echo $_SESSION['users_info']['email'];
-$conn->close();
+$conn->close();*/
+
+$email = 'riyad298@gmail.com';
+$conn = get_mysqli_connection();
+$sql = "select count(*) as count from user_photos where  email = (?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s' , $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+				print_r($row);
+echo $count = $row['count'];
+$stmt->close();

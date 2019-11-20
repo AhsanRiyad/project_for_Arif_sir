@@ -4,14 +4,12 @@
 
 
 function dbGetUserDetails($email){
-
 	$conn = get_mysqli_connection();
-	$sql = 'select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and  ur.email ='.'"'.$email.'"';  
+	$sql = 'select * from all_info_together where email ='.'"'.$email.'"';  
 	$result = mysqli_query($conn, $sql);
 	$row1 = mysqli_fetch_assoc($result);
 	$_SESSION['users_info'] = $row1;	
 	$conn->close();
-
 
 }
 
@@ -20,13 +18,17 @@ function dbGetUserDetails($email){
 
 if(isset($_SESSION['users_info'])){
 
-	dbGetUserDetails($_SESSION['users_info']['email']);
+	
+	dbGetUserDetails($email__);
 
 	$login__ = true;
+	$photo__ = $_SESSION['users_info']['recent_photo'];
 
 
-	$profile_photo = $rootAdress."assets/img/uploads/recent_photos/".$_SESSION['users_info']['recent_photo'];
-
+	if($photo__ != 'not_set'){
+	$profile_photo = $rootAdress."assets/img/uploads/recent_photos/".$photo__;
+	}
+	
 	if($_SESSION['users_info']['type'] =='user' ){
 		/*if($pageName == 'add_user' || $pageName == 'reg_req' ){
 		header('location:'.$not_authorisedPage);

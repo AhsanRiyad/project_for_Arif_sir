@@ -14,7 +14,7 @@ $d2 = json_decode($data);
 // echo $d2->purpose;
 
 $email = $email__;
-
+$user_id = $id__;
 
 
 
@@ -24,9 +24,9 @@ function getPhotos(){
 
 
 	$conn = get_mysqli_connection();
-	$sql = "select * from user_uploads uu where  uu.email = (?)";
+	$sql = "select * from all_info_together where  id = (?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
+	$stmt->bind_param('i' , $user_id);
 	$stmt->execute();
 	//print_r($row);
 
@@ -75,23 +75,12 @@ function getPhotos(){
 
 
 
-
-
-
-
-
-
-
-
 if($d2->purpose == 'getPhotos'){
 
-
-
-
 	$conn = get_mysqli_connection();
-	$sql = "select * from user_uploads uu where  uu.email = (?)";
+	$sql = "select * from all_info_together  where id = (?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
+	$stmt->bind_param('i' , $user_id);
 	$stmt->execute();
 	//print_r($row);
 
@@ -137,19 +126,16 @@ if($d2->purpose == 'getPhotos'){
 
 }else if($d2->purpose == 'getPhotos_for_all_users'){
 
-
-
-
 	$conn = get_mysqli_connection();
-	$sql = "select * from user_uploads uu where  uu.email = (?)";
+	$sql = "select * from all_info_together  where  id = (?)";
 	$stmt = $conn->prepare($sql);
 	$email = $d2->email;
-	$stmt->bind_param('s' , $email);
+	$user_id = $d2->user_id;
+	$stmt->bind_param('i' , $user_id);
 	$stmt->execute();
 	//print_r($row);
 
-
-//echo json_encode($row);
+	//echo json_encode($row);
 	$array2d ;
 
 	$result = $stmt->get_result();
@@ -191,7 +177,8 @@ if($d2->purpose == 'getPhotos'){
 }else if($d2->purpose=='deletePhoto'){
 
 	// $basename = trim($d2->basename)
-
+	$email = $email__;
+	$user_id = $id__;
 
 	$bs = trim($d2->basename);
 	//echo 'inside delete photo';
@@ -216,13 +203,11 @@ if($d2->purpose == 'getPhotos'){
 	$stmt->close();
 	$conn->close();
 
-
-
 	
 	$conn = get_mysqli_connection();
-	$sql = "select * from user_uploads uu where  uu.email = (?)";
+	$sql = "select * from all_info_together where id = (?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
+	$stmt->bind_param('i' , $user_id);
 	$stmt->execute();
 	//print_r($row);
 
@@ -263,34 +248,7 @@ if($d2->purpose == 'getPhotos'){
 
 	echo json_encode($arrayPhoto);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
 
 
 

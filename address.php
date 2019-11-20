@@ -87,15 +87,13 @@ $admin__ = false;
 $user__ = false;
 $verified__ = false;
 $login__ = false;
-
-
+$id__ = '';
 $email__='';
+
 if(isset($_SESSION['users_info'])){
 	$email__ = $_SESSION['users_info']['email'];
+	$id__ = $_SESSION['users_info']['id'];
 }
-
-
-
 
 
 ?>

@@ -34,7 +34,7 @@ include $APP_ROOT.'assets/linker/db.php' ;
 				$stmt->bind_param('s' , $email);
 				$stmt->execute();
 				$result = $stmt->get_result();
-				$row = $result>fetch_assoc();
+				$row = $result->fetch_assoc();
 				// print_r($row['count']);
 				$count = $row['count'];
 				$stmt->close();
