@@ -173,12 +173,103 @@ $conn->close();*/
 
 $email = 'riyad298@gmail.com';
 $conn = get_mysqli_connection();
-$sql = "select count(*) as count from user_photos where  email = (?)";
+$sql = "select `full_name`, `mobile`, `institution_id`, `password`,  `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`, `present_line1`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`,  `parmanent_district`, `parmanent_post_code`, `parmanent_country` from all_info_together where  email = (?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s' , $email);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
-				print_r($row);
-echo $count = $row['count'];
+// print_r($row);
+
+echo '<br>';
+echo '<br>';
+
+echo implode(',' ,$row);
+$arrayValueString =  implode(',' ,$row);
+
+echo '<br>';
+echo '<br>';
+
+// print_r(array_keys($row));
+
+$arrayKeyString =  implode(',' , array_keys($row));
+echo   implode(',' , array_keys($row));
+
+echo '<br>';
+echo '<br>';
+
+echo 'desired string';
+echo '<br>';
+$newArrayString = $arrayKeyString .'@#$'.$arrayValueString;
+
+echo $newArrayString;
+
+echo '<br>';
+echo '<br>';
+
+print_r(explode('@#$' , $newArrayString));
+
+$arrayTogether = explode('@#$' , $newArrayString);
+
+echo '<br>';
+echo '<br>';
+
+
+$array1keyString = $arrayTogether[0];
+echo $array1keyString;
+
+echo '<br>';
+echo '<br>';
+
+$array2ValueString = $arrayTogether[1];
+echo $array2ValueString;
+
+
+$stringToArrayKey = explode(',' , $array1keyString);
+$stringToArrayValue = explode(',' , $array2ValueString);
+
+
+$arrayAssoc;
+$i = 0;
+
+for($i =0; $i<count($stringToArrayKey); $i++){
+	 // $arrayAssoc = array($stringToArrayKey[$i]=>$stringToArrayValue[$i]);
+	 $arrayAssoc[$stringToArrayKey[$i]] = $stringToArrayValue[$i];
+}
+
+
+echo '<br>';
+echo '<br>';
+
+// echo $stringToArrayKey[0];
+print_r($arrayAssoc);
+
+
+
+
+echo '<br>';
+echo '<br>';
+
+
+echo json_encode($arrayAssoc);
+// $last_verified_info = json_encode($row);
+
+// $sql = "update all_info_together set last_verified_info = (?) where email = (?)";
+// $stmt = $conn->prepare($sql);
+// $stmt->bind_param('ss' , $last_verified_info ,$email);
+// $stmt->execute();
+
+
+
+// $sql = "select last_verified_info from all_info_together where  email = (?)";
+// $stmt = $conn->prepare($sql);
+// $stmt->bind_param('s' , $email);
+// $stmt->execute();
+// $result = $stmt->get_result();
+// $row = $result->fetch_assoc(); 
+// echo  $row['last_verified_info'];
+// print_r($row);
+
+
+// echo $count = $row['count'];
 $stmt->close();
