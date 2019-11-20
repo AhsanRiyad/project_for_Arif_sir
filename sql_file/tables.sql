@@ -575,3 +575,84 @@ end IF;
 set result = 'success' ;
 END$$
 DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_personal`(IN `id1` VARCHAR(100), IN last_verified_info1 varchar(1000) ,  IN `fathers_name1` VARCHAR(100), IN `mothers_name1` VARCHAR(100), IN `spouse_name1` VARCHAR(100), IN `number_of_children1` INT(100), IN `profession1` VARCHAR(100), IN `workplace_or_institution1` VARCHAR(200), IN `designation1` VARCHAR(200), OUT `result` VARCHAR(100))
+BEGIN
+
+DECLARE count int(5);
+
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
+
+update all_info_together set  fathers_name = fathers_name1, mother_name = mothers_name1 , spouse_name = spouse_name1, number_of_children = number_of_children1 , profession = profession1 , institution = workplace_or_institution1 , designation = designation1 where id = id1 ;
+
+
+IF verification_status = 'approved' and change_req_status = 'not_requested'
+THEN
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+end IF;
+
+
+
+
+set result = 'success' ;
+
+END$$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+DELIMITER $$
+CREATE or REPLACE DEFINER=`root`@`localhost` PROCEDURE `update_profile_basic`(IN `id1` INT(100),  IN last_verified_info1 varchar(1000) , IN `full_name1` VARCHAR(100), IN `mobile1` VARCHAR(100), IN `institution_id1` VARCHAR(100), IN `blood_group1` VARCHAR(100), IN `nid_or_passport1` VARCHAR(200), IN `dob1` VARCHAR(200), OUT `result` VARCHAR(100))
+BEGIN
+
+DECLARE count int(5);
+
+
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
+
+
+
+update all_info_together set  nid_or_passport = nid_or_passport1, date_of_birth = dob1 , blood_group = blood_group1 where id = id1 ;
+
+update all_info_together set full_name = full_name1 , mobile = mobile1 , institution_id = institution_id1  where id = id1 ;
+
+
+
+IF verification_status = 'approved' and change_req_status = 'not_requested'
+THEN
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+end IF;
+
+
+set result = 'success' ;
+
+END$$
+DELIMITER ;

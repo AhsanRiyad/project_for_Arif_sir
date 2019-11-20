@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2019 at 04:03 PM
+-- Generation Time: Nov 20, 2019 at 04:12 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -184,13 +184,31 @@ set result = 'success' ;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_basic` (IN `id1` INT(100), IN `full_name1` VARCHAR(100), IN `mobile1` VARCHAR(100), IN `institution_id1` VARCHAR(100), IN `blood_group1` VARCHAR(100), IN `nid_or_passport1` VARCHAR(200), IN `dob1` VARCHAR(200), OUT `result` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_profile_basic` (IN `id1` INT(100), IN `last_verified_info1` VARCHAR(1000), IN `full_name1` VARCHAR(100), IN `mobile1` VARCHAR(100), IN `institution_id1` VARCHAR(100), IN `blood_group1` VARCHAR(100), IN `nid_or_passport1` VARCHAR(200), IN `dob1` VARCHAR(200), OUT `result` VARCHAR(100))  BEGIN
 
 DECLARE count int(5);
+
+
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
+
+
 
 update all_info_together set  nid_or_passport = nid_or_passport1, date_of_birth = dob1 , blood_group = blood_group1 where id = id1 ;
 
 update all_info_together set full_name = full_name1 , mobile = mobile1 , institution_id = institution_id1  where id = id1 ;
+
+
+
+IF verification_status = 'approved' and change_req_status = 'not_requested'
+THEN
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' WHERE id = id1;
+end IF;
 
 
 set result = 'success' ;
@@ -703,7 +721,14 @@ INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
 (292, NULL, 'riyad298@gmail.com'),
 (293, NULL, 'riyad298@gmail.com'),
 (294, NULL, 'riyad298@gmail.com'),
-(295, NULL, 'riyad298@gmail.com');
+(295, NULL, 'riyad298@gmail.com'),
+(296, NULL, 'riyad298@gmail.com'),
+(297, NULL, 'riyad298@gmail.com'),
+(298, NULL, 'riyad298@gmail.com'),
+(299, NULL, 'riyad298@gmail.com'),
+(300, NULL, 'riyad298@gmail.com'),
+(301, NULL, 'riyad298@gmail.com'),
+(302, NULL, 'riyad298@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -762,7 +787,7 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`email`, `gender`, `ui_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
-('riyad298@gmail.com', NULL, 0, '111111111111', 'riyad298@gmail.com', 'rfafferfa', 'arefaerf', 0, 'arefef', 'aerfaf', 'arfafa', 'O+', '1992-08-02'),
+('riyad298@gmail.com', NULL, 0, '22222222222', 'riyad298@gmail.com', 'rfafferfa', 'arefaerf', 0, 'arefef', 'aerfaf', 'arfafa', 'B+', '1992-08-02'),
 ('riyad298@yahoo.com', NULL, 0, '11555511144', 'Barkat Alam', 'Sultana', 'Tahera', 0, 'student', 'student', 'aiub dhaka', 'O+', '1992-11-12'),
 ('riyad298@hotmail.com', NULL, 0, '1369845635', 'Rubel', 'Nihar', 'Borno', 0, 'student', 'student', 'kghs kurigram', 'O+', '1992-08-02');
 
@@ -788,7 +813,7 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1037),
+('riyad298@gmail.com', 1, 'riyad298@gmail.com', '01919448787', 'arfefeaf', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1037),
 ('riyad298@yahoo.com', 2, 'Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1025),
 ('riyad298@hotmail.com', 3, 'Munem Rimo', '01919448787', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-20 03:03:27.000000', 1038);
 
@@ -863,7 +888,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
-(1, 'riyad298@gmail.com', '7724', '335f5352088d7d9bf74191e006d8e24c', 'approved', 'verified', 'requested', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100, 'full_name,mobile,institution_id,password,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Md Ahsan Ferdous Riyad,01919448787,15-29804-2,e10adc3949ba59abbe56e057f20f883e,111111111111,,,,0,,,,O+,1992-08-02,arefeaf,rfaerf,4444,refaef,refaerf,rfarfae,4444,refaef'),
+(1, 'riyad298@gmail.com', '7724', '335f5352088d7d9bf74191e006d8e24c', 'approved', 'verified', 'requested', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100, 'full_name,mobile,institution_id,password,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$,,,e10adc3949ba59abbe56e057f20f883e,,riyad298@gmail.com,rfafferfa,arefaerf,0,arefef,aerfaf,arfafa,,0000-00-00,arefeaf,rfaerf,4444,refaef,refaerf,rfarfae,4444,refaef'),
 (2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100, NULL),
 (3, 'riyad298@hotmail.com', '9964', NULL, 'approved', 'verified', 'not_requested', 'user', 'full_name,institution_id,membership_number', 100, NULL);
 
@@ -934,7 +959,7 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
 
 --
 -- AUTO_INCREMENT for table `users_address`
