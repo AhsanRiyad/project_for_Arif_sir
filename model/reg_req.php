@@ -134,13 +134,11 @@ else if($d2->purpose=='reject_user'){
 	// mysqli_close($conn);
 	$conn = get_mysqli_connection();
 	//mysqli_close($conn);
-	$sql = "UPDATE all_info_together SET status ='rejected' WHERE id=(?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
-	//mysqli_close($conn);
+	$sql = "UPDATE all_info_together SET status ='rejected' WHERE id = ".$user_id." ";
+	$result = mysqli_query($conn, $sql);
+	mysqli_close($conn);
 	
-	$conn->close();
+	// $conn->close();
 }
 else if($d2->purpose=='reject_user_user_request'){
 	$email = $d2->email;
@@ -197,20 +195,17 @@ else if($d2->purpose=='approve_user_change_request'){
 	$email = $d2->email;
 	$user_id = $d2->user_id;
 	$conn = get_mysqli_connection();
-	$sql = "update all_info_together set type = 'admin' where id = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
+	$sql = "update all_info_together set type = 'admin' where id = ".$user_id." ";
+	$result = mysqli_query($conn, $sql);
+
 	
 	$conn->close();
 }else if($d2->purpose == 'make_user'){
 	$email = $d2->email;
 	$user_id = $d2->user_id;
 	$conn = get_mysqli_connection();
-	$sql = "update all_info_together set type = 'user' where id = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
+	$sql = "update all_info_together set type = 'user' where id = ".$user_id." ";
+	$result = mysqli_query($conn, $sql);
 	
 	$conn->close();
 }

@@ -20,12 +20,10 @@ $d1 = json_decode($data);
     $password1 = md5($d1->password);
     $email = mysqli_real_escape_string($conn ,  $d1->email);
 
-    $sql = "CALL login( ?, ?, @result)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ss' , $email, $password1);
-    $stmt->execute();   
-
-    $stmt->close();
+    $sql = "CALL login( '".$email."', '".$password1."', @result)";
+    $result = mysqli_query($conn, $sql);
+    
+    
     $sql = 'select @result as st'; 
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);

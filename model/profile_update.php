@@ -3,6 +3,14 @@ include "../address.php";
 include $APP_ROOT.'assets/linker/db.php' ; 
 
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+require $APP_ROOT.'vendor/autoload.php';
+
+
 $data =  file_get_contents('php://input');
 $d1 = json_decode($data);
 // $email = 'riyad298@gmail.com';
@@ -192,10 +200,15 @@ if($d1->purpose == 'basic'){
 		echo $row['st'];
 	}else if($row['st']=='crypto_added'){
 
+		
+
 		$mailto = $email1;
 		$mailSub = 'Password recovery , friends Forever';
 		$mailMsg = 'Click to recover your password <br>'. $rootAdress.'pages/forgot.php?e='.$email1.'&c='.$randomNumber;
-		require 'PHPMailer-master/PHPMailerAutoload.php';
+		
+
+
+
 		$mail = new PHPMailer();
 		$mail ->IsSmtp();
 		$mail ->SMTPDebug = 0;
@@ -210,6 +223,10 @@ if($d1->purpose == 'basic'){
    $mail ->Subject = $mailSub;
    $mail ->Body = $mailMsg;
    $mail ->AddAddress($mailto);
+
+
+
+
 
    if(!$mail->Send())
    {
@@ -332,7 +349,7 @@ if($d1->purpose == 'basic'){
 		$mailto = $email__;
 		$mailSub = 'OTP for email verification';
 		$mailMsg = 'OTP '. $otp;
-		require 'PHPMailer-master/PHPMailerAutoload.php';
+		
 		$mail = new PHPMailer();
 		$mail ->IsSmtp();
 		$mail ->SMTPDebug = 0;
