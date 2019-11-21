@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 01:09 PM
+-- Generation Time: Nov 21, 2019 at 06:34 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -781,7 +781,14 @@ INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
 (351, NULL, 'riyad298@gmail.com'),
 (352, NULL, 'riyad298@gmail.com'),
 (353, NULL, 'riyad298@gmail.com'),
-(354, NULL, 'riyad298@gmail.com');
+(354, NULL, 'riyad298@gmail.com'),
+(355, NULL, 'riyad298@gmail.com'),
+(356, NULL, 'riyad298@gmail.com'),
+(357, NULL, 'riyad298@gmail.com'),
+(358, NULL, 'riyad298@gmail.com'),
+(359, NULL, 'riyad298@gmail.com'),
+(360, NULL, 'riyad298@gmail.com'),
+(361, NULL, 'riyad298@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -866,7 +873,7 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 1, 'Ahsan Riyad arf afrefff', '01919448787', '11111ff', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1037),
+('riyad298@gmail.com', 1, 'Ahsan Riyad arf afref', '01919448787', '11111ff', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1037),
 ('riyad298@yahoo.com', 2, 'Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1025),
 ('riyad298@hotmail.com', 3, 'Munem Rimo', '01919448787', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-20 03:03:27.000000', 1038);
 
@@ -940,7 +947,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `change_request_time`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
-(1, 'riyad298@gmail.com', '7724', '335f5352088d7d9bf74191e006d8e24c', 'approved', 'verified', 'requested', '2019-11-21 02:29:16.000000', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Riyad arf afref,01919448787,11111ff,22222222222,riyad298@gmail.com,rfafferfa,arefaerf,0,arefef,aerfaf,arfafa,AB-,1992-08-02,arefeaf,rfaerf,4444,refaef,refaerf,rfarfae,4444,refaef'),
+(1, 'riyad298@gmail.com', '7724', '335f5352088d7d9bf74191e006d8e24c', 'approved', 'verified', 'requested', '2019-11-21 19:20:51.000000', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Riyad arf afref,01919448787,11111ff,22222222222,riyad298@gmail.com,rfafferfa,arefaerf,0,arefef,aerfaf,arfafa,AB-,1992-08-02,arefeaf,rfaerf,4444,refaef,refaerf,rfarfae,4444,refaef'),
 (2, 'riyad298@yahoo.com', '7882', 'dc6a6489640ca02b0d42dabeb8e46bb7', 'approved', 'verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 100, NULL),
 (3, 'riyad298@hotmail.com', '9964', NULL, 'approved', 'verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 100, NULL);
 
@@ -1011,7 +1018,7 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=355;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=362;
 
 --
 -- AUTO_INCREMENT for table `users_address`
