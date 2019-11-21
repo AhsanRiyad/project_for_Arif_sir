@@ -30,7 +30,7 @@ if($purpose_type == 'group_photo'){
 	}
 				// print_r($row['count']);
 	$count = $row['count'];
-	$stmt->close();
+	
 	$newName = basename($_POST["user_id"].'_'.++$count.'.');
 					// $base_name = basename($_POST["email"].'_1.'.$imageFileType);
 	$base_name = $newName.$imageFileType;
