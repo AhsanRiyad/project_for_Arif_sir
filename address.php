@@ -1,12 +1,19 @@
 <?php 
 //define('$rootAdress', "$_SERVER[DOCUMENT_ROOT]/project_for_Arif_sir/");
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 session_start();
 
 $APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/project_for_Arif_sir/";
 
-
-
 $rootAdress = 'http://localhost/project_for_Arif_sir/';
+
+
+
 
 // assets
 $bootstrap_grid = $rootAdress."assets/css/bootstrap-grid.css" ; 
