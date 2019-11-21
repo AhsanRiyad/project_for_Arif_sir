@@ -24,20 +24,18 @@ function getPhotos(){
 
 
 	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together where  id = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
+	$sql = "select * from all_info_together where  id = ".$user_id." ";
+	
 	//print_r($row);
 
 
 	//echo json_encode($row);
 	$array2d ;
 
-	$result = $stmt->get_result();
-
-	if($result->num_rows === 0) exit('No rows');
-	$row = $result->fetch_assoc();
+	$result = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+	}
 
 	$recent_photo = $row['recent_photo'];
 	$old_photo = $row['old_photo'];
@@ -78,20 +76,18 @@ function getPhotos(){
 if($d2->purpose == 'getPhotos'){
 
 	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together  where id = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
+	$sql = "select * from all_info_together  where id = ".$user_id."  ";
+	
 	//print_r($row);
 
 
 //echo json_encode($row);
 	$array2d ;
 
-	$result = $stmt->get_result();
-
-	if($result->num_rows === 0) exit('No rows');
-	$row = $result->fetch_assoc();
+	$result = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+	}
 
 	$recent_photo = $row['recent_photo'];
 	$old_photo = $row['old_photo'];
@@ -126,22 +122,20 @@ if($d2->purpose == 'getPhotos'){
 
 }else if($d2->purpose == 'getPhotos_for_all_users'){
 
-	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together  where  id = (?)";
-	$stmt = $conn->prepare($sql);
 	$email = $d2->email;
 	$user_id = $d2->user_id;
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
+	$conn = get_mysqli_connection();
+	$sql = "select * from all_info_together  where  id = ".$user_id." ";
+	
 	//print_r($row);
 
 	//echo json_encode($row);
 	$array2d ;
 
-	$result = $stmt->get_result();
-
-	if($result->num_rows === 0) exit('No rows');
-	$row = $result->fetch_assoc();
+	$result = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+	}
 
 	$recent_photo = $row['recent_photo'];
 	$old_photo = $row['old_photo'];
@@ -205,20 +199,18 @@ if($d2->purpose == 'getPhotos'){
 
 	
 	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together where id = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('i' , $user_id);
-	$stmt->execute();
+	$sql = "select * from all_info_together where id = ".$user_id." ";
+	
 	//print_r($row);
 
 
 //echo json_encode($row);
 	$array2d ;
 
-	$result = $stmt->get_result();
-
-	if($result->num_rows === 0) exit('No rows');
-	$row = $result->fetch_assoc();
+	$result = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+	}
 
 	$recent_photo = $row['recent_photo'];
 	$old_photo = $row['old_photo'];

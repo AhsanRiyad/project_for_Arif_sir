@@ -23,12 +23,11 @@ $user_id = $_POST['user_id'];
 if($purpose_type == 'group_photo'){
 
 	$conn = get_mysqli_connection();
-	$sql = "select count(*) as count from user_photos where  email = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	$row = $result->fetch_assoc();
+	$sql = "select count(*) as count from user_photos where  email = '".$email."' ";
+	$result = mysqli_query($conn, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+	}
 				// print_r($row['count']);
 	$count = $row['count'];
 	$stmt->close();
