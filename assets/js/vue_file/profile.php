@@ -303,7 +303,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <p class="h3 ">
 
 </p>
-<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
 </div>
 
 </div>
@@ -587,7 +587,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <p class="h3 ">
 
 </p>
-<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
 </div>
 
 </div>
@@ -790,7 +790,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <p class="h3 ">
 
 </p>
-<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
 </div>
 
 </div>
@@ -1041,7 +1041,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <p class="h3 ">
 
 </p>
-<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
 </div>
 
 </div>
@@ -1574,7 +1574,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <p class="h3 ">
 
 </p>
-<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
 </div>
 
 </div>
@@ -1972,7 +1972,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <p class="h3 ">
 
 </p>
-<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
 </div>
 
 </div>
@@ -2539,7 +2539,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <p class="h3 ">
 
 </p>
-<p class="h4 ">System Adminstrator at <span class="font-weight-bold">Umart</span></p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
 </div>
 
 </div>
