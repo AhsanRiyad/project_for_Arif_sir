@@ -44,7 +44,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
     
     <script>
-     
+
 
 
       Vue.mixin({
@@ -93,11 +93,58 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     user__: '<?= $user__ ?>',
                     admin__: '<?= $admin__ ?>',
                     verified__: '<?= $verified__ ?>',
-                }
+                    name__: '<?= $name__ ?>',
+                },
+                greeting_text__: '',
 
             }
-        }
-    })
+        },
+        created(){
+
+            var date1 = new Date();
+            var hourMin =  date1.getHours();
+
+            var greeting_text__ =  document.getElementById('greeting_text__'); ;
+
+//alert(name);
+if (hourMin >=5  && hourMin < 12)  {
+    greeting_text__.innerHTML = 'Good Morning, '+this.users_info__.name__;
+}
+
+else if (hourMin >= 12 && hourMin < 17){
+    
+    greeting_text__.innerHTML = 'Good Afternoon, '+this.users_info__.name__;
+
+}
+
+else if (hourMin >= 17 && hourMin < 21){
+    greeting_text__.innerHTML = 'Good Evening, '+this.users_info__.name__;
+    
+}
+
+else if (hourMin >= 21 && hourMin < 24){
+    
+
+    greeting_text__.innerHTML = this.users_info__.name__+ ',its time to sleep ';
+}
+
+else if (hourMin >= 0 && hourMin < 5){
+    $('#greetings').html(name+ " " +/*country*/" ,it's mid night now,  you should sleep");
+
+    greeting_text__.innerHTML = this.users_info__.name__+ ",it's mid night now,  you should sleep"; 
+
+
+}
+else{
+    //alert(hourMin);
+    greeting_text__.innerHTML =  "Hellow , "+this.users_info__.name__; 
+
+}
+
+
+
+}
+})
 
 
 

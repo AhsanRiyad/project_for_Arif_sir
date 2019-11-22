@@ -117,7 +117,7 @@
 
 
   var login = new Vue({
-    el: '#privacy' ,
+    el: '#app' ,
     vuetify: new Vuetify(), 
   })
 

@@ -11,7 +11,7 @@ include $linkerCss;
 include $dashboard_head;
 ?>
 
-<div  id="gallery">
+<div  id="app">
 
 
 

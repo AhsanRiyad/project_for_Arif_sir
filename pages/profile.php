@@ -8,10 +8,11 @@ include $linkerCss;
 ?>
 
 
-		<?php 
-		include $dashboard_head;
-		?>
-<div  id="app">	
+<?php 
+include $dashboard_head;
+?>
+
+<div id="app">	
 
 
 

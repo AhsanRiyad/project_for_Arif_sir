@@ -10,7 +10,7 @@ include $linkerCss;
 <?php 
 include $dashboard_head;
 ?>
-<div  id="privacy">	
+<div id="app">	
 	
 
 	<v-app>

@@ -225,7 +225,7 @@
 
 
 	var login = new Vue({
-		el: '#login' ,
+		el: '#app' ,
 		vuetify: new Vuetify(), 
 		data : {
 			

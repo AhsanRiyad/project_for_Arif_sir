@@ -249,6 +249,23 @@ else if($d2->purpose == 'getProfileBasicInfo'){
 	// $i = 0;
 // echo json_encode(var_dump($row));
 }
+else if($d2->purpose == 'number_of_request'){
+	
+	$conn = get_mysqli_connection();
+	$sql = "call count_request(@verification_request, @change_request)";
+	$result = mysqli_query($conn , $sql);
+	// $stmt = $conn->prepare($sql);
+	// $stmt->execute();
+	$sql = "select @verification_request as vr , @change_request as cr";
+	$result = mysqli_query($conn , $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+	}
+	$conn->close();
+	echo json_encode($row);
+	// $i = 0;
+// echo json_encode(var_dump($row));
+}
 else{
 	echo $d2->purpose;
 	echo $d2->email;

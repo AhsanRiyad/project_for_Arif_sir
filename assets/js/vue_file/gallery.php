@@ -241,7 +241,7 @@
 
 
   var gallery = new Vue({
-    el: '#gallery' ,
+    el: '#app' ,
     vuetify: new Vuetify(), 
   })
 

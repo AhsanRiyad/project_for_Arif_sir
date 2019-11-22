@@ -840,7 +840,7 @@ created(){
 
 
 	var search = new Vue({
-		el:'#search',
+		el:'#app',
 		vuetify:new Vuetify(),
 	})
 </script>

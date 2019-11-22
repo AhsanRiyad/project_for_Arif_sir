@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 10:38 PM
+-- Generation Time: Nov 22, 2019 at 08:50 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -26,6 +26,16 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `count_request` (OUT `verification_request1` VARCHAR(100), OUT `change_request1` VARCHAR(100))  BEGIN
+       
+select count(*) into verification_request1 from all_info_together ai where  ai.completeness = 100 and email_verification_status = 'verified' and status = 'not_verified';
+           
+select count(*) into change_request1 from all_info_together ai where ai.completeness = 100 and status = 'approved' and change_request = 'requested' and type = 'user';
+
+  
+            
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `current_photo` (IN `upload_link` VARCHAR(500), IN `email1` VARCHAR(100), OUT `existing_link` VARCHAR(500))  BEGIN
 
 
@@ -812,7 +822,23 @@ INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
 (382, NULL, 'riyad298@gmail.com'),
 (383, NULL, 'riyad298@gmail.com'),
 (384, NULL, 'riyad298@gmail.com'),
-(385, NULL, 'riyad298@yahoo.com');
+(385, NULL, 'riyad298@yahoo.com'),
+(386, NULL, 'riyad298@gmail.com'),
+(387, NULL, 'riyad298@gmail.com'),
+(388, NULL, 'riyad298@gmail.com'),
+(389, NULL, 'riyad298@gmail.com'),
+(390, NULL, 'riyad298@gmail.com'),
+(391, NULL, 'riyad298@gmail.com'),
+(392, NULL, 'riyad298@gmail.com'),
+(393, NULL, 'riyad298@gmail.com'),
+(394, NULL, 'riyad298@gmail.com'),
+(395, NULL, 'riyad298@gmail.com'),
+(396, NULL, 'riyad298@gmail.com'),
+(397, NULL, 'riyad298@yahoo.com'),
+(398, NULL, 'riyad298@yahoo.com'),
+(399, NULL, 'riyad298@yahoo.com'),
+(400, NULL, 'riyad298@yahoo.com'),
+(401, NULL, 'riyad298@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -899,8 +925,8 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 1, 'Ahsan Riyad arf afref', '01919448787', '11111ff', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1037),
-('riyad298@yahoo.com', 2, 'Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1025),
+('riyad298@gmail.com', 1, 'Ahsan Riyad', '01919448787', '11111ff', 'e10adc3949ba59abbe56e057f20f883e', '2019-11-18 03:08:20.000000', 1037),
+('riyad298@yahoo.com', 2, 'Riyad', '01719246822', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-18 14:55:01.000000', 1025),
 ('riyad298@hotmail.com', 3, 'Munem Rimo', '01919448787', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-20 03:03:27.000000', 1038),
 ('riyad298@outlook.com', 4, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-22 01:41:36.000000', 1000);
 
@@ -973,8 +999,8 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `change_request_time`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
-(1, 'riyad298@gmail.com', '7724', 'e3796ae838835da0b6f6ea37bcf8bcb7', 'approved', 'verified', 'requested', '2019-11-21 19:20:51.000000', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,present_line1,parmanent_country,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Riyad arf afref,01919448787,11111ff,22222222222,riyad298@gmail.com,rfafferfa,arefaerf,0,arefef,aerfaf,arfafa,AB-,1992-08-02,arefeaf,rfaerf,4444,refaef,refaerf,rfarfae,4444,refaef'),
-(2, 'riyad298@yahoo.com', '7882', 'c52f1bd66cc19d05628bd8bf27af3ad6', 'approved', 'verified', 'approved', '2019-11-22 01:00:42.000000', 'user', 'full_name,institution_id,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Ferdous Riyad,01919448787,riyad,11555511144,Barkat Alam,Sultana,Tahera,0,student,student,aiub dhaka,AB-,1992-11-12,kaa-153/3,dhaka,3900,bangladesh,protap,kurigram,5600,bangladesh'),
+(1, 'riyad298@gmail.com', '7724', '30bb3825e8f631cc6075c0f87bb4978c', 'approved', 'verified', 'requested', '2019-11-22 23:35:01.000000', 'admin', 'full_name,mobile,institution_id,nid_or_passport,fathers_name,spouse_name,designation,parmanent_country,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Riyad arf afref,01919448787,11111ff,22222222222,riyad298@gmail.com,rfafferfa,arefaerf,0,arefef,aerfaf,arfafa,AB-,1992-08-02,arefeaf,rfaerf,4444,refaef,refaerf,rfarfae,4444,refaef'),
+(2, 'riyad298@yahoo.com', '7882', 'c52f1bd66cc19d05628bd8bf27af3ad6', 'approved', 'verified', 'requested', '2019-11-23 01:01:52.000000', 'user', 'full_name,institution_id,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Ferdous Riyad,01719246822,riyad,11555511144,Barkat Alam,Sultana,Tahera,0,student,student,aiub dhaka,B+,1992-11-12,kaa-153/3,dhaka,3900,bangladesh,protap,kurigram,5600,bangladesh'),
 (3, 'riyad298@hotmail.com', '9964', NULL, 'approved', 'verified', 'not_requested', NULL, 'admin', 'full_name,institution_id,membership_number', 100, NULL),
 (4, 'riyad298@outlook.com', '5002', NULL, 'not_verified', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 60, NULL);
 
@@ -1045,7 +1071,7 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=386;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=402;
 
 --
 -- AUTO_INCREMENT for table `users_address`

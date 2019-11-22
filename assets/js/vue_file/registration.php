@@ -395,7 +395,7 @@ Vue.component('registration' , {
 
 
 var registration_page = new Vue({
-	el: '#reg_vue' , 
+	el: '#app' , 
 	vuetify: new Vuetify(),
 	data : {
 		name: 'riyad---vue',

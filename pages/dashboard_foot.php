@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 </div>
 
 
@@ -103,7 +110,9 @@
 				?> 
 				py-2 text-center my-4">
 
-				<i class="fas fa-shopping-cart"></i> User Request
+				<i class="fas fa-shopping-cart"></i> User Request 
+
+				<span class="badge badge-primary" id="verification_request_badge">0</span>
 
 			</div></a>
 		<?php } ?>
@@ -127,6 +136,7 @@
 
 				<i class="fas fa-shopping-cart"></i> Change Request
 
+				<span class="badge badge-primary" id="change_request_badge">0</span>
 			</div></a>
 		<?php } ?>
 	

@@ -12,7 +12,9 @@ include $linkerCss;
 include $dashboard_head;
 ?>
 
-<div  id="reg_req">
+<div id="app">
+	
+
 <v-app>
 
 <?php 
@@ -36,6 +38,7 @@ if(isset($_GET['pname']) && $_GET['pname'] == 'change_request'){
 
 
 </div>
+
 
 <?php 
 include $dashboard_foot ;

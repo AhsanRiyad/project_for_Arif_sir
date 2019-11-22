@@ -397,7 +397,7 @@ Vue.component('add_user' , {
 
 
 var add_user = new Vue({
-	el: '#add_user' , 
+	el: '#app' , 
 	vuetify: new Vuetify(),
 	data : {
 		name: 'riyad---vue',

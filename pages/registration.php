@@ -9,7 +9,7 @@ include $linkerCss;
 ?>
 
 
-<div id="reg_vue">
+<div id="app">
 	<v-app>
 	<registration></registration>
 	</v-app>

@@ -9,7 +9,7 @@ include $linkerCss;
 
 
 <!-- login form starts -->
- <div id="forgot_password">
+ <div id="app">
     <v-app>
     <!-- <forgot_password></forgot_password> -->
     <!-- <password_recovery></password_recovery> -->

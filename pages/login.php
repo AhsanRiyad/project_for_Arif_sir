@@ -12,7 +12,7 @@ include $linkerCss;
 
 <!-- login form starts -->
 
-  <div id="login">
+  <div id="app">
     <v-app>
     <login></login>
     </v-app>

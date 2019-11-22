@@ -9,7 +9,7 @@ include $linkerCss;
 <?php 
 include $dashboard_head;
 ?>
-<div id="search">
+<div id="app">
 	<v-app>
 		<!-- <search></search> -->
 		<search></search>

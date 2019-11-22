@@ -428,7 +428,7 @@
 
 
 	var forgot = new Vue({
-		el: '#forgot_password' ,
+		el: '#app' ,
 		vuetify: new Vuetify(), 
 		data : {
 			componet_name: 'forgot_password',
