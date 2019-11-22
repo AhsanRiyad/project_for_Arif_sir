@@ -15,3 +15,60 @@ $databaseName = 'frieomkc_intern_project';
 
 $rootAddress
 http://riyad.friendsbd.website/project_for_Arif_sir/
+
+
+
+
+//mail code
+
+$mail_to_send_to = "riyad298@gmail.com";
+$from_email = "	riyad298@riyad.friendsbd.website";
+$sendflag = "send";                      
+if ( $sendflag == "send" )
+        {
+                $email = "riyad298@gmail.com";
+                $message = "test" ;
+                $headers = "From: $from_email" . "\r\n" . "Reply-To: $email" . "\r\n" ;
+                $a = mail( $mail_to_send_to, "Message from a contact form", $message, $headers );
+                if ($a)
+                {
+                     print("Message was sent, you can send another one");
+                } else {
+                     print("Message wasn't sent, please check that you have changed emails in the bottom");
+                }
+        }
+
+
+gmail client
+
+$mail = new PHPMailer();
+$mail ->IsSmtp();
+$mail ->SMTPDebug = 0;
+$mail ->SMTPAuth = true;
+$mail ->SMTPSecure = 'ssl';
+$mail ->Host = "smtp.gmail.com";
+   $mail ->Port = 465; // or 587
+   $mail ->IsHTML(true);
+   $mail ->Username = "riyad298@riyad.friendsbd.website";
+   $mail ->Password = "01919448787";
+   $mail ->SetFrom("riyad.for.test@gmail.com");
+
+
+
+
+   hosting client
+
+
+   
+
+$mail = new PHPMailer();
+$mail ->IsSmtp();
+$mail ->SMTPDebug = 0;
+$mail ->SMTPAuth = true;
+$mail ->SMTPSecure = 'ssl';
+$mail ->Host = "server165.web-hosting.com";
+$mail ->Port = 465; // or 587
+$mail ->IsHTML(true);
+$mail ->Username = "riyad298@riyad.friendsbd.website";
+$mail ->Password = "Ahsan111";
+$mail ->SetFrom("riyad298@riyad.friendsbd.website");
