@@ -143,6 +143,29 @@ else{
 
 
 
+var verification_request_badge =  document.getElementById('verification_request_badge'); ;
+            var change_request_badge =  document.getElementById('change_request_badge');
+            axios.post( this.model.modelReg_req ,
+            {
+                purpose: 'number_of_request',
+
+            }
+            ).then(function(response){
+                console.log(response.data.cr);
+
+                change_request_badge.innerHTML = response.data.cr;
+                verification_request_badge.innerHTML = response.data.vr;
+
+
+            }.bind(this))
+            .catch(function(error){
+
+            }.bind(this));
+
+
+
+
+
 }
 })
 

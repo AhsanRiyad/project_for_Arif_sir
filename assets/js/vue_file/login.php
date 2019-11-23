@@ -12,13 +12,9 @@
 
 
 
-	
-
-
 
 
 	var code = `
-
 
 	<div class="container-fluid">
 	<div class="row justify-content-xl-center justify-content-md-center _background ">

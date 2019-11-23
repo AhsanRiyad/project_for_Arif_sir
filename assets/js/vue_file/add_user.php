@@ -10,8 +10,8 @@
 var code = `<!-- registration page starts now -->
 
 <div class="container-fluid">
-<div style="height: 100vh;" class="row justify-content-xl-center align-items-center reg_background no-gutters">
-<div class="col-12 col-xl-5 ">
+<div style="height: 100vh;" class="row justify-content-xl-center align-items-center reg_background ">
+<div class="col-12 col-md-7 ">
 <div class="container">
 <div class="row pt-4 pb-1">
 

@@ -90,7 +90,7 @@
 	</thead>
 	<tbody>
 	<tr  v-for="(item , index) in users_info" v-show="item[2]=='public' || users_info_as_props.type == 'admin' ">
-	<td  class="body-1">{{ item[0] }} </td>
+	<td  class="body-1">{{ takeName(item[0]) }} </td>
 	<td>
 	
 	{{ item[1] }} 
@@ -316,6 +316,61 @@
 			}
 		},
 		methods : {
+			takeName(name){
+				if(name=='full_name'){ 
+					return 'Full Name';
+				}else if(name == 'email'){
+					return 'Email';
+				}else if(name == 'mobile'){
+					return 'Mobile';
+				}else if(name == 'institution_id'){
+					return 'Institution ID';
+				}else if(name == 'nid_or_passport'){
+					return 'NID/Passport';
+				}else if(name == 'fathers_name'){
+					return "Father's Name";
+				}else if(name == 'mother_name'){
+					return "Mother's Name";
+				}else if(name == 'spouse_name'){
+					return "Spouse's Name";
+				}else if(name == 'number_of_children'){
+					return "Number Of Children";
+				}else if(name == 'profession'){
+					return "Profession";
+				}else if(name == 'designation'){
+					return "Designation";
+				}else if(name == 'blood_group'){
+					return "Blood Group";
+				}else if(name == 'date_of_birth'){
+					return "Date Of Birth";
+				}else if(name == 'present_line1'){
+					return "Present Adress Line1";
+				}else if(name == 'present_post_code'){
+					return "Present Post Code";
+				}else if(name == 'present_district'){
+					return "Present District";
+				}else if(name == 'parmanent_country'){
+					return "Present Country";
+				}else if(name == 'parmanent_line1'){
+					return "Permanent Adress Line1";
+				}else if(name == 'parmanent_post_code'){
+					return "Permanent Post Code";
+				}else if(name == 'parmanent_district'){
+					return "Permanent District";
+				}else if(name == 'parmanent_country'){
+					return "Permanent Country";
+				}else if(name == 'membership_number'){
+					return "Member ship Number";
+				}else if(name == 'type'){
+					return "User Type";
+				}else if(name == 'status'){
+					return "Verfication Status";
+				}else if(name == 'registration_date'){
+					return "Account Created at";
+				}else if(name == 'institution'){
+					return "Workplace/Institution";
+				}
+			},
 			close_dialog(){
 
 				bus.$emit('categroy_from_get_details' , this.category);
@@ -391,7 +446,7 @@
 				this.dialog3 = true;
 				this.dialog3_btn_disabled = false;
 
-							},
+			},
 			dialog3_make_admin_no(){
 
 				this.dialog3 = false;
@@ -502,7 +557,6 @@
 
 
 
-	
 
 
 
@@ -510,107 +564,108 @@
 
 
 
-	var code = `
-	<v-row justify="center">
-	<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-	<template v-slot:activator="{ on }">
-	<v-btn color="primary" dark v-on="on">Gallery</v-btn>
-	</template>
-	<v-card>
-	<v-toolbar dark color="primary">
-	<v-btn icon dark @click="dialog = false">
-	<v-icon>mdi-close</v-icon>
-	</v-btn>
-	<v-toolbar-title>Gallery</v-toolbar-title>
-	<v-spacer></v-spacer>
-	<v-toolbar-items>
-	<v-btn dark text @click="dialog = false">Close</v-btn>
-	</v-toolbar-items>
-	</v-toolbar>
+
+var code = `
+<v-row justify="center">
+<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+<template v-slot:activator="{ on }">
+<v-btn color="primary" dark v-on="on">Gallery</v-btn>
+</template>
+<v-card>
+<v-toolbar dark color="primary">
+<v-btn icon dark @click="dialog = false">
+<v-icon>mdi-close</v-icon>
+</v-btn>
+<v-toolbar-title>Gallery</v-toolbar-title>
+<v-spacer></v-spacer>
+<v-toolbar-items>
+<v-btn dark text @click="dialog = false">Close</v-btn>
+</v-toolbar-items>
+</v-toolbar>
 
 
 
-	<div class="container">
-	<div class="row justify-content-md-center">
+<div class="container">
+<div class="row justify-content-md-center">
 
 
 
-	<div class="col col-md-5">
-	<h1 class="text-center">Recent Photo</h1>
+<div class="col col-md-5">
+<h1 class="text-center">Recent Photo</h1>
 
 
-	<img class="text-center img-fluid img-thumbnail" v-if="recent_photo != 'not_set'"
-	:src="rootAdress+recent_photos+recent_photo"
-	style="max-height: 400px; width: 600px;">
+<img class="text-center img-fluid img-thumbnail" v-if="recent_photo != 'not_set'"
+:src="rootAdress+recent_photos+recent_photo"
+style="max-height: 400px; width: 600px;">
 
 
-	<img class="text-center img-fluid img-thumbnail" v-if="recent_photo == 'not_set'"
-	:src="images.default_photo"
-	style="max-height: 400px; width: 600px;">
-	</div>
+<img class="text-center img-fluid img-thumbnail" v-if="recent_photo == 'not_set'"
+:src="images.default_photo"
+style="max-height: 400px; width: 600px;">
+</div>
 
-	<div class="w-100">
-	</div>
+<div class="w-100">
+</div>
 
-	<div class="col col-md-5">
-	<h1 class="text-center">old Photo</h1>
-	<img class="text-center img-fluid img-thumbnail" v-if="old_photo != 'not_set'"
-	:src="rootAdress+old_photos+old_photo"
-	style="max-height: 400px; width: 600px;">
-	<img class="text-center img-fluid img-thumbnail" v-if="old_photo == 'not_set'"
-	:src="images.default_photo"
-	style="max-height: 400px; width: 600px;">
-	</div>
-	</div>
+<div class="col col-md-5">
+<h1 class="text-center">old Photo</h1>
+<img class="text-center img-fluid img-thumbnail" v-if="old_photo != 'not_set'"
+:src="rootAdress+old_photos+old_photo"
+style="max-height: 400px; width: 600px;">
+<img class="text-center img-fluid img-thumbnail" v-if="old_photo == 'not_set'"
+:src="images.default_photo"
+style="max-height: 400px; width: 600px;">
+</div>
+</div>
 
-	<div class="row  justify-content-center">
-	<div class="row col-md-8">
+<div class="row  justify-content-center">
+<div class="row col-md-8">
 
-	<div class="col-md-12">
-	<h1 class="text-center" > Group Photos </h1>
-	</div> 
-	<div class="col-md-4" v-for="(photo , index) in group_photo">
-	<img @click="zoom_in(rootAdress+group_photos+photo , photo)" style="height: 250px; width: 250px;" 
-	aspect-ratio="1"
-	:src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">
-	</div>
-	</div>
-	</div>
-	</div>
-	</v-card>
-	</v-dialog>
-	</v-row>
-	`;
-
-
-	Vue.component('gallery' , {
-		template: code,
-		props: ['email' , 'user_id'],
-		data(){
-			return {
-				dialog: false,
-				notifications: false,
-				sound: true,
-				widgets: false,
-
-				dialogm1: '',
-				dialog: false,
-				dialog_photo: '',
-				dialog_photo_baseName: '',
-				recent_photo: '' ,
-				old_photo: '' ,
-				group_photo: [],
-				recent_photos: 'assets/img/uploads/recent_photos/',
-				old_photos: 'assets/img/uploads/old_photos/',
-				group_photos:  'assets/img/uploads/group_photos/',
-				uploads:  'assets/img/uploads/',
+<div class="col-md-12">
+<h1 class="text-center" > Group Photos </h1>
+</div> 
+<div class="col-md-4" v-for="(photo , index) in group_photo">
+<img @click="zoom_in(rootAdress+group_photos+photo , photo)" style="height: 250px; width: 250px;" 
+aspect-ratio="1"
+:src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">
+</div>
+</div>
+</div>
+</div>
+</v-card>
+</v-dialog>
+</v-row>
+`;
 
 
+Vue.component('gallery' , {
+	template: code,
+	props: ['email' , 'user_id'],
+	data(){
+		return {
+			dialog: false,
+			notifications: false,
+			sound: true,
+			widgets: false,
 
-			}
-		},
-		methods : {
-			zoom_in(photo , baseName){
+			dialogm1: '',
+			dialog: false,
+			dialog_photo: '',
+			dialog_photo_baseName: '',
+			recent_photo: '' ,
+			old_photo: '' ,
+			group_photo: [],
+			recent_photos: 'assets/img/uploads/recent_photos/',
+			old_photos: 'assets/img/uploads/old_photos/',
+			group_photos:  'assets/img/uploads/group_photos/',
+			uploads:  'assets/img/uploads/',
+
+
+
+		}
+	},
+	methods : {
+		zoom_in(photo , baseName){
       //alert(photo);
       this.button_disabled = false;
       this.photo_delete_status = '';
@@ -656,125 +711,125 @@ created(){
 
 
 
-	var code = `
-	<div class="container">
-	<div class="row justify-content-center">
+var code = `
+<div class="container">
+<div class="row justify-content-center">
 
-	<div class="col-md-7 text-center bg-info ">
-	<h2 class="text-white py-2 ">Search</h2>
-	</div>
+<div class="col-md-7 text-center bg-info ">
+<h2 class="text-white py-2 ">Search</h2>
+</div>
 
-	<div class="w-100"></div>
-	<div class="col-md-5">	
-	<div>
-	<p>Search</p>
-	<v-text-field
-	v-model="search_text"
-	label="search"
-	@keyup="search()"
-	required
-	></v-text-field>
-	</div>
-	</div>
-
-
-	<div class="col-md-2">	
-
-	<p>Categories</p>
-	<v-select @change="search()"
-	v-model="category"
-	:items="category_items"
-	label="Select"
-	value="true"
-	required
-	></v-select>
-
-	</div>
-
-	</div>
+<div class="w-100"></div>
+<div class="col-md-5">	
+<div>
+<p>Search</p>
+<v-text-field
+v-model="search_text"
+label="search"
+@keyup="search()"
+required
+></v-text-field>
+</div>
+</div>
 
 
+<div class="col-md-2">	
 
-	<div class="row justify-content-center">
-	<div class="col-md-7   mt-4">
-	<div class="row  text-center bg-info">
-	<div class="col text-center bg-success">
-	<h2 class="text-white py-2 ">Search Results</h2>
-	</div>
-	</div>
-	<div class="row">
-	<table class="table" >
-	<thead  class="thead-dark" >
-	<tr >
-	<th>Name</th>
-	<th>membership_number</th>
-	<th>institution_id</th>
-	<th>Gallery</th>
-	<th>Details</th>
+<p>Categories</p>
+<v-select @change="search()"
+v-model="category"
+:items="category_items"
+label="Select"
+value="true"
+required
+></v-select>
 
-	</tr>
-	</thead>
-	<tbody v-if="array_size && users_info_as_props.id != user.id" id="tbody" v-for="user in user_list"  :key='user.id'>
-	<tr>
-	<td> {{ user.full_name }} </td>
-	<td> {{ user.membership_number }} </td>
-	<td> {{ user.institution_id }} </td>
-	<td>
-	<gallery :email='user.email' :user_id='user.id' ></gallery>
-	</td>
-	<td>
-	<get_details :email='user.email' :user_id='user.id' :users_info_as_props='users_info_as_props' :category="category"></get_details>
-	</td>
-	</tr>
-	</tbody>
-	</table>
+</div>
 
-
-	<div hidden>
-
-	<v-btn class="ma-2" color="orange darken-2" dark>
-	<v-icon dark left>mdi-arrow-left</v-icon>Back
-	</v-btn>
-
-	<v-btn class="ma-2" color="orange darken-2" dark> Next  &nbsp
-	<v-icon dark left>mdi-arrow-right </v-icon>
-	</v-btn>
-
-	</div>
+</div>
 
 
 
-	</div>
-	</div>
+<div class="row justify-content-center">
+<div class="col-md-7   mt-4">
+<div class="row  text-center bg-info">
+<div class="col text-center bg-success">
+<h2 class="text-white py-2 ">Search Results</h2>
+</div>
+</div>
+<div class="row">
+<table class="table" >
+<thead  class="thead-dark" >
+<tr >
+<th>Name</th>
+<th>membership_number</th>
+<th>institution_id</th>
+<th>Gallery</th>
+<th>Details</th>
+
+</tr>
+</thead>
+<tbody v-if="array_size && users_info_as_props.id != user.id" id="tbody" v-for="user in user_list"  :key='user.id'>
+<tr>
+<td> {{ user.full_name }} </td>
+<td> {{ user.membership_number }} </td>
+<td> {{ user.institution_id }} </td>
+<td>
+<gallery :email='user.email' :user_id='user.id' ></gallery>
+</td>
+<td>
+<get_details :email='user.email' :user_id='user.id' :users_info_as_props='users_info_as_props' :category="category"></get_details>
+</td>
+</tr>
+</tbody>
+</table>
 
 
-	</div>
+<div hidden>
+
+<v-btn class="ma-2" color="orange darken-2" dark>
+<v-icon dark left>mdi-arrow-left</v-icon>Back
+</v-btn>
+
+<v-btn class="ma-2" color="orange darken-2" dark> Next  &nbsp
+<v-icon dark left>mdi-arrow-right </v-icon>
+</v-btn>
+
+</div>
 
 
 
-	</div>
-	`;
-	
+</div>
+</div>
 
-	Vue.component('search' , {
-		template: code,
-		data(){
-			return {
-				category: 'full_name',
-				category_items: [
-				'full_name',
-				'institution_id',
-				'membership_number',
-				],
-				search_text: '',
-				user_list : [] , 
-				array_size: true ,
-				users_info_as_props: {},
-			}
-		},
-		methods: {
 
-			search(){
+</div>
+
+
+
+</div>
+`;
+
+
+Vue.component('search' , {
+	template: code,
+	data(){
+		return {
+			category: 'full_name',
+			category_items: [
+			'full_name',
+			'institution_id',
+			'membership_number',
+			],
+			search_text: '',
+			user_list : [] , 
+			array_size: true ,
+			users_info_as_props: {},
+		}
+	},
+	methods: {
+
+		search(){
 				//console.log(this.search_text);
 				//console.log(this.category);
 
@@ -839,8 +894,8 @@ created(){
 
 
 
-	var search = new Vue({
-		el:'#app',
-		vuetify:new Vuetify(),
-	})
+var search = new Vue({
+	el:'#app',
+	vuetify:new Vuetify(),
+})
 </script>

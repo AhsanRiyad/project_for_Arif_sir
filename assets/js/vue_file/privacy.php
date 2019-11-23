@@ -22,7 +22,7 @@
   </thead>
   <tbody>
   <tr v-for="(item , index) in users_info">
-  <td class="body-1">{{ item[0] }} <br> {{ item[1] }}</td>
+  <td class="body-1"> {{ takeName(item[0])  }} <br> {{ item[1] }}</td>
   <td>
 
 
@@ -81,9 +81,67 @@
 
 
       //console.log();
+    },
+    takeName(name){
+      if(name=='full_name'){ 
+        return 'Full Name';
+      }else if(name == 'email'){
+        return 'Email';
+      }else if(name == 'mobile'){
+        return 'Mobile';
+      }else if(name == 'institution_id'){
+        return 'Institution ID';
+      }else if(name == 'nid_or_passport'){
+        return 'NID/Passport';
+      }else if(name == 'fathers_name'){
+        return "Father's Name";
+      }else if(name == 'mother_name'){
+        return "Mother's Name";
+      }else if(name == 'spouse_name'){
+        return "Spouse's Name";
+      }else if(name == 'number_of_children'){
+        return "Number Of Children";
+      }else if(name == 'profession'){
+        return "Profession";
+      }else if(name == 'designation'){
+        return "Designation";
+      }else if(name == 'blood_group'){
+        return "Blood Group";
+      }else if(name == 'date_of_birth'){
+        return "Date Of Birth";
+      }else if(name == 'present_line1'){
+        return "Present Adress Line1";
+      }else if(name == 'present_post_code'){
+        return "Present Post Code";
+      }else if(name == 'present_district'){
+        return "Present District";
+      }else if(name == 'parmanent_country'){
+        return "Present Country";
+      }else if(name == 'parmanent_line1'){
+        return "Permanent Adress Line1";
+      }else if(name == 'parmanent_post_code'){
+        return "Permanent Post Code";
+      }else if(name == 'parmanent_district'){
+        return "Permanent District";
+      }else if(name == 'parmanent_country'){
+        return "Permanent Country";
+      }else if(name == 'membership_number'){
+        return "Member ship Number";
+      }else if(name == 'type'){
+        return "User Type";
+      }else if(name == 'status'){
+        return "Verfication Status";
+      }else if(name == 'registration_date'){
+        return "Account Created at";
+      }else if(name == 'institution'){
+          return "Workplace/Institution";
+        }
     }
 
 
+  },
+  coumputed:{
+    
   },
   created(){
     axios.post( this.model.modelPrivacy ,

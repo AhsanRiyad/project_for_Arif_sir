@@ -244,7 +244,7 @@
 	</thead>
 	<tbody>
 	<tr v-for="(user, name) in user_change_details" >
-	<td>{{ name }}</td>
+	<td>{{ takeName(name)  }}</td>
 	<td>{{ user[0] }}</td>
 	<td>{{ user[1] }}</td>
 	</tr>
@@ -284,6 +284,65 @@
 				user_details: {},
 				user_change_details: {},
 
+			}
+		},
+		methods:{
+			takeName(name){
+
+				if(name=='full_name'){ 
+					return 'Full Name';
+				}else if(name == 'email'){
+					return 'Email';
+				}else if(name == 'mobile'){
+					return 'Mobile';
+				}else if(name == 'institution_id'){
+					return 'Institution ID';
+				}else if(name == 'nid_or_passport'){
+					return 'NID/Passport';
+				}else if(name == 'fathers_name'){
+					return "Father's Name";
+				}else if(name == 'mother_name'){
+					return "Mother's Name";
+				}else if(name == 'spouse_name'){
+					return "Spouse's Name";
+				}else if(name == 'number_of_children'){
+					return "Number Of Children";
+				}else if(name == 'profession'){
+					return "Profession";
+				}else if(name == 'designation'){
+					return "Designation";
+				}else if(name == 'blood_group'){
+					return "Blood Group";
+				}else if(name == 'date_of_birth'){
+					return "Date Of Birth";
+				}else if(name == 'present_line1'){
+					return "Present Adress Line1";
+				}else if(name == 'present_post_code'){
+					return "Present Post Code";
+				}else if(name == 'present_district'){
+					return "Present District";
+				}else if(name == 'parmanent_country'){
+					return "Present Country";
+				}else if(name == 'parmanent_line1'){
+					return "Permanent Adress Line1";
+				}else if(name == 'parmanent_post_code'){
+					return "Permanent Post Code";
+				}else if(name == 'parmanent_district'){
+					return "Permanent District";
+				}else if(name == 'parmanent_country'){
+					return "Permanent Country";
+				}else if(name == 'membership_number'){
+					return "Member ship Number";
+				}else if(name == 'type'){
+					return "User Type";
+				}else if(name == 'status'){
+					return "Verfication Status";
+				}else if(name == 'registration_date'){
+					return "Account Created at";
+				}else if(name == 'institution'){
+					return "Workplace/Institution";
+				}
+			
 			}
 		},
 		mounted(){
@@ -413,7 +472,7 @@
 
 	
 	<v-col cols="6">
-	<p>institution_id</p>
+	<p>Institution Id</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.institution_id }} </p>
@@ -428,14 +487,14 @@
 	</v-col>
 
 	<v-col cols="6">
-	<p>fathers_name</p>
+	<p>Fathers Name</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.fathers_name }} </p>
 	</v-col>
 
 	<v-col cols="6">
-	<p>mother_name</p>
+	<p>Mothers Name</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.mother_name }} </p>
@@ -444,7 +503,7 @@
 
 	
 	<v-col cols="6">
-	<p>spouse_name</p>
+	<p>Spouse Name</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.spouse_name }} </p>
@@ -453,21 +512,21 @@
 
 	
 	<v-col cols="6">
-	<p>number_of_children</p>
+	<p>Number Of Children</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.number_of_children }} </p>
 	</v-col>
 
 	<v-col cols="6">
-	<p>profession</p>
+	<p>Profession</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.profession }} </p>
 	</v-col>
 
 	<v-col cols="6">
-	<p>institution</p>
+	<p>Institution/Workplace</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.institution }} </p>
@@ -476,7 +535,7 @@
 
 	
 	<v-col cols="6">
-	<p>designation</p>
+	<p>Designation</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.designation }} </p>
@@ -485,7 +544,7 @@
 
 	
 	<v-col cols="6">
-	<p>blood_group</p>
+	<p>Blood Group</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.blood_group }} </p>
@@ -494,7 +553,7 @@
 
 	
 	<v-col cols="6">
-	<p>date_of_birth</p>
+	<p>Date Of Birth</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.date_of_birth }} </p>
@@ -503,7 +562,7 @@
 
 	
 	<v-col cols="6">
-	<p>present_line1</p>
+	<p>Present Adress Line1</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.present_line1 }} </p>
@@ -512,7 +571,7 @@
 
 	
 	<v-col cols="6">
-	<p>present_district</p>
+	<p>Present District</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.present_district }} </p>
@@ -521,7 +580,7 @@
 
 	
 	<v-col cols="6">
-	<p>present_post_code</p>
+	<p>Present Post Code</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.present_post_code }} </p>
@@ -530,7 +589,7 @@
 
 	
 	<v-col cols="6">
-	<p>present_country</p>
+	<p>Present Country</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.present_country }} </p>
@@ -539,7 +598,7 @@
 
 	
 	<v-col cols="6">
-	<p>parmanent_line1</p>
+	<p>Permanent Adress Line1</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.parmanent_line1 }} </p>
@@ -548,7 +607,7 @@
 
 	
 	<v-col cols="6">
-	<p>parmanent_district</p>
+	<p>Permanent District</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.parmanent_district }} </p>
@@ -557,7 +616,7 @@
 
 	
 	<v-col cols="6">
-	<p>parmanent_post_code</p>
+	<p>Permanent Post Code</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.parmanent_post_code }} </p>
@@ -566,7 +625,7 @@
 
 	
 	<v-col cols="6">
-	<p>parmanent_country</p>
+	<p>Permanent Country</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.parmanent_country }} </p>
@@ -876,24 +935,7 @@
 		},
 		created(){
 
-			var verification_request_badge =  document.getElementById('verification_request_badge'); ;
-			var change_request_badge =  document.getElementById('change_request_badge');
-			axios.post( this.model.modelReg_req ,
-			{
-				purpose: 'number_of_request',
-
-			}
-			).then(function(response){
-				console.log(response.data.cr);
-
-				change_request_badge.innerHTML = response.data.cr;
-				verification_request_badge.innerHTML = response.data.vr;
-
-
-			}.bind(this))
-			.catch(function(error){
-
-			}.bind(this));
+			
 
 
 		},

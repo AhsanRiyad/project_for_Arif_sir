@@ -17,17 +17,10 @@
 	})
 
 
-
-	
-
-
-
 	const bus = new Vue();
 	
-
-
 	var code = `	
-	<div class="container ">
+	<div class="container">
 	<div class="row justify-content-center no-gutters">
 	<div class="col col-md-4">
 	<a @click="verify_email_otp()">
@@ -222,7 +215,7 @@ updated(){
 	}else{
 		
 		this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
-	
+
 	}
 
 	console.log(this.profile_completeness_msg);
@@ -621,7 +614,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mx-0 px-0 ">
-<v-btn color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+<v-btn :loading='loading' color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
 Update Info
 </v-btn>
 </div>
@@ -645,6 +638,16 @@ max-width="290"
 <v-card-text class="black--text">
 {{ status_text }}
 </v-card-text>
+<v-col v-if="otp_text_box_show" col="12" class="mt-n8">
+<v-text-field
+label="OTP sent to your email" v-model="otp"
+></v-text-field>
+
+<v-btn @click="changeEmail()" :loading="loading" color="success">
+Validate
+</v-btn>
+
+</v-col>
 
 <v-card-actions>
 <v-spacer></v-spacer>
@@ -664,7 +667,6 @@ Okay
 </v-row>
 
 
-
 </div>`;
 
 Vue.component('email' , {
@@ -678,6 +680,10 @@ Vue.component('email' , {
 			email_input: true,
 			email: '',
 			email_validity: '',
+			status_text_show: false,
+			otp_text_box_show: false,
+			loading: false,
+			otp: '',
 			changes:{
 				email:{
 					smallText: {
@@ -711,10 +717,45 @@ Vue.component('email' , {
 					result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
 				}
 			},
+			changeEmail(){
+
+				axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'changeEmail',
+						email: this.email,
+						otp: this.otp,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+						if(response.data == 'success'){
+							this.otp_text_box_show = true;
+							this.status_text = 'email changed successfully';
+						}else{
+							this.otp_text_box_show = false;
+							this.status_text = 'invalid otp';
+						}
+
+						this.loading = false;
+
+						this.dialog = true;
+					}.bind(this))
+					.catch(function(error){
+						this.loading = false;
+
+
+        //console.log(error);
+    }.bind(this));
+
+
+
+
+			},
 			submit(){
 				//alert(this.blood_group);
 				this.validityCheckInput('email');
-				
+				this.loading = true;
 
 				if(this.email_validity == 'valid' ){
 
@@ -727,14 +768,20 @@ Vue.component('email' , {
 					).then(function(response){
 
 						console.log(response);
-						response.data == 'success' ? this.status_text = 'email Updated successfully' : this.status_text = 'email already used';
-						
+						if(response.data == 'success'){
+							this.otp_text_box_show = true;
+							this.status_text = '';
+						}else{
+							this.otp_text_box_show = false;
+							this.status_text = 'email already used';
+						}
+
+						this.loading = false;
+
 						this.dialog = true;
-
-
 					}.bind(this))
 					.catch(function(error){
-
+						this.loading = false;
 
 
         //console.log(error);
@@ -1088,7 +1135,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.institution_id.smallText ' > <span>institution_id
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.institution_id.smallText ' > <span>Institution Id
 
 
 
@@ -1106,7 +1153,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.nid_or_passport.smallText ' > <span>nid_or_passport
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.nid_or_passport.smallText ' > <span>NID/Passport
 
 
 
@@ -1124,7 +1171,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.blood_group.smallText ' > <span>blood_group
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.blood_group.smallText ' > <span>Blood Group
 
 
 <span v-show="blood_group_validity == 'valid'" class="text-success"> {{ blood_group_validity }} </span>
@@ -1987,7 +2034,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>fathers_name
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>Fathers Name
 
 
 
@@ -2003,11 +2050,11 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 </span> <span @click="enable_input('fathers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.fathers_name.smallButton" class="small_button">Change</span></small>
 
-<input v-model="fathers_name" @keyup="onChangeValidity('fathers_name')" :disabled='fathers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your fathers_name Here" type="text" value="" >
+<input v-model="fathers_name" @keyup="onChangeValidity('fathers_name')" :disabled='fathers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your fathers name Here" type="text" value="" >
 
 </div>
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>mothers_name
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>Mothers Name
 
 
 
@@ -2025,7 +2072,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>spouse_name
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>Spouse Name
 
 
 
@@ -2046,7 +2093,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.number_of_children.smallText ' > <span>number_of_children
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.number_of_children.smallText ' > <span>Number of children
 
 
 
@@ -2067,7 +2114,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.profession.smallText ' > <span>profession
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.profession.smallText ' > <span>Profession
 
 
 <span v-show="profession_validity == 'valid'" class="text-success"> {{ profession_validity }} </span>
@@ -2084,7 +2131,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.workplace_or_institution.smallText ' > <span>workplace_or_institution
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.workplace_or_institution.smallText ' > <span>Workplace/Institution
 
 
 <span v-show="workplace_or_institution_validity == 'valid'" class="text-success"> {{ workplace_or_institution_validity }} </span>
@@ -2100,7 +2147,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.designation.smallText ' > <span>designation
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.designation.smallText ' > <span>Designation
 
 
 
@@ -2554,7 +2601,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_line1.smallText ' > <span>present_line1
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_line1.smallText ' > <span>Present Address Line1
 
 
 
@@ -2574,7 +2621,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_post_code.smallText ' > <span>present_post_code
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_post_code.smallText ' > <span>Present Post Code
 
 
 
@@ -2594,7 +2641,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_district.smallText ' > <span>present_district
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_district.smallText ' > <span>Present District
 
 
 
@@ -2618,7 +2665,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_country.smallText ' > <span>present_country
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_country.smallText ' > <span>Present Country
 
 
 
@@ -2642,7 +2689,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_line1.smallText ' > <span>permanent_line1
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_line1.smallText ' > <span>Permanent Address Line1
 
 
 
@@ -2664,7 +2711,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_post_code.smallText ' > <span>permanent_post_code
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_post_code.smallText ' > <span>Permanent Post Code
 
 
 
@@ -2687,7 +2734,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_district.smallText ' > <span>permanent_district
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_district.smallText ' > <span>Permanent District
 
 
 
@@ -2706,7 +2753,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_country.smallText ' > <span>permanent_country
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_country.smallText ' > <span>Permanent Country
 
 
 
@@ -3086,9 +3133,7 @@ Vue.component('address1' , {
 					.catch(function(error){
 
 
-
-        //console.log(error);
-    }.bind(this));
+					}.bind(this));
 
 					this.status_text = 'all fields are valid';
 					this.dialog = true;
@@ -3132,10 +3177,6 @@ Vue.component('address1' , {
 
         //console.log(error);
     }.bind(this));
-
-
-
-
 			}
 
 
@@ -3176,16 +3217,7 @@ Vue.component('address1' , {
 				
 
         //console.log(error);
-    }.bind(this));
-
-
-
-
-
-
-
-
-			
+    }.bind(this));			
 		}
 	})
 
@@ -3236,7 +3268,6 @@ var reg_req = new Vue({
 	},
 	updated(){
 		//alert(this.CSRF_TOKEN);
-
 		var dashboard_height = $('#dashboard_height').height();
 		var windowHeight = $(document).height();
 		console.log('dashboard height= '+dashboard_height);
