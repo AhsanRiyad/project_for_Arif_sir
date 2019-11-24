@@ -4,7 +4,7 @@
 	var code = `
 	<div class="row">
 	<p id="user_id" hidden ></p>
-	<div class="col-lg-8 col-7 offset-1 mt-4">
+	<div class="col-xl-8 col-md-10 col-10 offset-1  mt-4">
 	<div class="row  text-center bg-info">
 	<div class="col text-center bg-info">
 	<h2 class="text-white py-2 ">Change Request</h2>
@@ -702,7 +702,7 @@
 	var code = `
 	<div class="row">
 	<p id="user_id" hidden ></p>
-	<div class="col-lg-8 col-7 offset-1 mt-4">
+	<div class="col-xl-8 col-md-10 col-10 offset-1  mt-4">
 	<div class="row  text-center bg-info">
 	<div class="col text-center bg-info">
 	<h2 class="text-white py-2 ">New Account Request</h2>

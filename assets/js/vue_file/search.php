@@ -1107,12 +1107,12 @@ var code = `
 <div class="container">
 <div class="row justify-content-center">
 
-<div class="col-md-7 text-center bg-info ">
+<div class="col-xl-7 col-md-9 col-12 text-center bg-info ">
 <h2 class="text-white py-2 ">Search</h2>
 </div>
 
 <div class="w-100"></div>
-<div class="col-md-5">	
+<div class="col-md-5 col-xl-4">	
 <div>
 <p>Search</p>
 <v-text-field
@@ -1125,7 +1125,7 @@ required
 </div>
 
 
-<div class="col-md-2">	
+<div class="col-md-4 col-xl-3">	
 
 <p>Categories</p>
 <v-select @change="search()"
@@ -1143,7 +1143,7 @@ required
 
 
 <div class="row justify-content-center">
-<div class="col-md-7   mt-4">
+<div class="col-xl-7 col-md-9 col-12   mt-4">
 <div class="row  text-center bg-info">
 <div class="col text-center bg-success">
 <h2 class="text-white py-2 ">Search Results</h2>

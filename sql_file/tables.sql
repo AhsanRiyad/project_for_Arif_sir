@@ -6,6 +6,20 @@ drop table `verification_info`;
 drop table `user_uploads`;
 drop table `user_photos`;
 drop table `users_address`;
+drop table `log_table`;
+
+
+DROP TABLE IF EXISTS intern_project.users_registration;
+DROP TABLE IF EXISTS intern_project.users_info;
+DROP TABLE IF EXISTS intern_project.verification_info;
+DROP TABLE IF EXISTS intern_project.user_uploads;
+DROP TABLE IF EXISTS intern_project.user_photos;
+DROP TABLE IF EXISTS intern_project.users_address;
+DROP TABLE IF EXISTS intern_project.log_table;
+
+
+
+drop procedure registration if exists;
 
 
 truncate table `users_registration`;
@@ -14,6 +28,7 @@ truncate table `verification_info`;
 truncate table `user_uploads`;
 truncate table `user_photos`;
 truncate table `users_address`;
+truncate table `log_table`;
 
 
 CREATE TABLE `users_info` (

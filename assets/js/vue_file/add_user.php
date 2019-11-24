@@ -1,4 +1,3 @@
-
 <script>
 
 // registration page
@@ -6,18 +5,18 @@
 
 
 
-
 var code = `<!-- registration page starts now -->
 
 <div class="container-fluid">
-<div style="height: 100vh;" class="row justify-content-xl-center align-items-center reg_background ">
-<div class="col-12 col-md-7 ">
+<div  class="row justify-content-xl-center align-items-center 
+ justify-content-md-center reg_background no-gutters">
+<div class="col-12 col-md-9 col-xl-6 ">
 <div class="container">
 <div class="row pt-4 pb-1">
 
 
 <p class="text-dark  h4" id='msg'>
-Hi Admin, Create a new Account 
+Hi Admin, create a new account!
 
 <span  class="red--text" v-if='registratrion_status === "NO"'> Email Already used! </span>
 
@@ -28,7 +27,7 @@ Hi Admin, Create a new Account
 
 
 
-<span class="ml-auto mt-auto pt-3"><small ></small></span>
+<span class="ml-auto mt-xl-auto mt-md-0 pt-3"><small >  </small></span>
 </div>
 
 <div class="row justify-content-xl-center bg-white py-5 mb-5">
@@ -89,7 +88,7 @@ Hi Admin, Create a new Account
 
 
 <!-- mobile number input -->
-<div class="form-group mb-xl-3">
+<div class="form-group mb-xl-3 mb-md-0">
 <label for="exampleInputEmail1"><small id="exampleLabelMobile">Mobile Number*
 
 <span v-show="mobile_validity == 'valid'" class="text-success"> {{ mobile_validity }} </span>
@@ -128,7 +127,7 @@ value="">
 
 
 <!-- Email input -->
-<div class="form-group mb-xl-3 mt-3">
+<div class="form-group mb-xl-3  mt-xl-3 mt-md-0 mb-md-0">
 <label for="exampleInputEmail1"><small id="exampleLabelMobile">Email*
 
 
@@ -396,7 +395,7 @@ Vue.component('add_user' , {
 
 
 
-var add_user = new Vue({
+var registration_page = new Vue({
 	el: '#app' , 
 	vuetify: new Vuetify(),
 	data : {
@@ -456,15 +455,3 @@ var add_user = new Vue({
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-

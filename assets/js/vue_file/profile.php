@@ -22,7 +22,7 @@
 	var code = `	
 	<div class="container">
 	<div class="row justify-content-center no-gutters">
-	<div class="col col-md-4">
+	<div class="col col-xl-4 col-md-7 ">
 	<a @click="verify_email_otp()">
 	<v-alert type="error" v-if="email_verification_status == 'not_verified'">
 	Your email is not verified , click to solve
@@ -283,7 +283,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 <!-- update top part starts-->
 
-<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
 <div class="row bg-white mx-1">
@@ -567,7 +567,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 <!-- update top part starts-->
 
-<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
 <div class="row bg-white mx-1">
@@ -824,7 +824,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 <!-- update top part starts-->
 
-<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
 <div class="row bg-white mx-1">
@@ -1075,7 +1075,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 <!-- update top part starts-->
 
-<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+<div class=" col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
 <div class="row bg-white mx-1">
@@ -1608,7 +1608,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 <!-- update top part starts-->
 
-<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
 <div class="row bg-white mx-1">
@@ -2006,7 +2006,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 <!-- update top part starts-->
 
-<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
 <div class="row bg-white mx-1">
@@ -2573,7 +2573,7 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 
 <!-- update top part starts-->
 
-<div class="  col-4  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 
 
 <div class="row bg-white mx-1">

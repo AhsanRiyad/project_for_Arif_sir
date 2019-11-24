@@ -1,14 +1,14 @@
 
 <style>
 
-label {
-	color: #428df5;
-	font-size: 20px;
-	font-weight: bolder;
-}
+    label {
+       color: #428df5;
+       font-size: 20px;
+       font-weight: bolder;
+   }
 
 
-.dashboard_backgorund_color{
+   .dashboard_backgorund_color{
     background-color: #d3d3d3;
 }
 
@@ -38,6 +38,7 @@ label {
 .reg_background{
 	
 	background-color:  #d3d3d3 ;
+    height: 100vh;
 }
 
 /*registration page*/
@@ -81,9 +82,9 @@ label {
 }
 
 
- /*mouse clickable*/
+/*mouse clickable*/
 a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
-       cursor: pointer;
+ cursor: pointer;
 } 
 
 /*registration page msg show*/
@@ -99,7 +100,7 @@ a:hover{
 /*main body styles*/
 body{
 	font-family: 'PT Sans', sans-serif;
-    
+
 } 
 
 /*bootstrap testing starts*/
@@ -126,9 +127,9 @@ body{
 }
 /*category details ends*/
 
-    /*admin page starts*/
+/*admin page starts*/
 .admin_navbar_veritcal{
-    
+
     /*height: 100vh;*/
     /* z-index: 1001;
     top: 0;
@@ -139,9 +140,9 @@ body{
 
 .admin_navbar_horizontal{
 
-/*position: relative;*/
-/*width: calc(100vw - 250px);*/
-color: white;
+    /*position: relative;*/
+    /*width: calc(100vw - 250px);*/
+    color: white;
 /* z-index: 1000;
 top:0;
 left:250px; */
@@ -245,7 +246,31 @@ height: 59px;
         background-color: white;
 
     }
+
+
+
+    .reg_background{
+
+        background-color:  #d3d3d3 ;
+        height: 800px ;
+        margin-top: 10px;
+    }
+
     /*index page media query starts*/
+
+}
+
+
+
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+    .reg_background{
+
+        background-color:  #d3d3d3 ;
+        height: 900px ;
+        margin-top: 10px;
+    }
+
+    
 
 }
 
@@ -276,7 +301,7 @@ height: 59px;
 }
 .small_button:hover{
 
-   
+
     cursor: pointer;
 }
 
@@ -284,7 +309,7 @@ height: 59px;
 
 /*view add product css */
 .classFormAddProductBySeller{
-   /*margin-top:200px;*/
+ /*margin-top:200px;*/
 }
 
 
@@ -320,13 +345,13 @@ height: 59px;
 
 
 @media only screen and (max-width: 768px) {
-  
-/*login page*/
-/*main margin*/
-.margin_{
-	/*margin-top: 5%;*/
-}
-/*login page*/
+
+    /*login page*/
+    /*main margin*/
+    .margin_{
+       /*margin-top: 5%;*/
+   }
+   /*login page*/
 
 
 }
