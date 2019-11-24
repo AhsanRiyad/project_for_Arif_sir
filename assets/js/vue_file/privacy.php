@@ -135,6 +135,8 @@
         return "Account Created at";
       }else if(name == 'institution'){
           return "Workplace/Institution";
+        }else if(name == 'email_verification_status'){
+          return "Email Verification Status";
         }
     }
 

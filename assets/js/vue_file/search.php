@@ -31,30 +31,29 @@
 
 	<v-alert type="success">
 	<h1> Verified User  </h1>
+	<p v-if="change_request_status == 'requested' "> This user has a change request </p>
 	<v-btn @click.stop="reject_user_button()" color="error" v-if="users_info_as_props.type == 'admin'" >Reject User</v-btn>
 	<div class="w-100 mb-2"></div>
 
-	<v-btn v-if="users_info_as_props.type == 'admin' && profile_user_type != 'admin'" @click.stop="make_admin_button()" color="primary" >Make Admin</v-btn>
+	<v-btn v-if="users_info_as_props.type == 'admin' && profile_user_type != 'admin' " @click.stop="make_admin_button()" color="primary" >Make Admin</v-btn>
 
-	<v-btn v-else-if="users_info_as_props.type == 'admin' && profile_user_type != 'user'" @click.stop="make_user_button()" color="primary" >Make user</v-btn>
+	<v-btn v-else-if="users_info_as_props.type == 'admin' && profile_user_type != 'user' " @click.stop="make_user_button()" color="primary" >Make user</v-btn>
 	</v-alert>
 	
-
-	
-
-
-
 
 	</v-col>
 	</v-row>
 
 
-	<v-row v-if="profile_user_status == 'rejected'" justify="center" class="mb-5">
+	<v-row v-if="profile_user_status == 'rejected' || profile_user_status == 'not_verified'" justify="center" class="mb-5">
 	<v-col lg="8" class="text-center danger white--text" >
 
 
 	<v-alert type="error">
-	<h1> Rejected User  </h1>
+
+	<h1 v-if="profile_user_status == 'rejected'"> Rejected User  </h1>
+	<h1 v-else-if="profile_user_status == 'not_verified'"> New User  </h1>
+	<p v-if="change_request_status == 'requested' "> This user has a change request </p>
 	<v-btn @click.stop="approve_user_button()" color="success" v-if="users_info_as_props.type == 'admin'" >Aprrove User</v-btn>
 	<div class="w-100 mb-2"></div>
 
@@ -86,6 +85,7 @@
 	<tr>
 	<th class="text-left title">Index</th>
 	<th class="text-left title">Details</th>
+	<th class="text-left title">Edit</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -95,6 +95,15 @@
 	
 	{{ item[1] }} 
 	
+
+	</td>
+	<td>
+	
+	<v-text-field v-model="item[1]" v-show="item[0] != 'blood_group' " :disabled="item[0]=='membership_number' || item[0]=='registration_date' || item[0] == 'change_request' || item[0] == 'status' || item[0] == 'email_verification_status'  || item[0] == 'type'   || change_request_status == 'requested' "  @change="changeInfo(item[0])"></v-text-field>
+	<v-select v-model="item[1]" v-show="item[0] == 'blood_group' "
+      :items="blood_group_list" @change="changeInfo(item[0] , item[1])"
+    ></v-select>
+
 
 	</td>
 	</tr>
@@ -272,13 +281,6 @@
 	</v-row>
 	</template>
 
-	
-
-
-
-
-
-
 	</v-row>
 	`;
 
@@ -313,6 +315,11 @@
 				dialog3_btn_disabled: false,
 				dialog4_btn_disabled: false,
 				dialog5_btn_disabled: false,
+				items_email_status: ['Aprroved' , 'Rejected'] ,
+				blood_group_list: ['A+' , 'B+' ,'AB+' , 'O+' , 'A-' , 'B-' , 'AB-' , 'O-'],
+				change_data: '',
+				counter: 0 ,
+
 			}
 		},
 		methods : {
@@ -369,7 +376,23 @@
 					return "Account Created at";
 				}else if(name == 'institution'){
 					return "Workplace/Institution";
+				}else if(name == 'email_verification_status'){
+					return "Email Verification Status";
+				}else if(name == 'change_request'){
+					return "Change Request Status";
 				}
+			},
+			changeInfo(name , value){
+
+
+
+
+
+
+
+			},
+			couter_meth(){
+				return this.counter++;
 			},
 			close_dialog(){
 
@@ -383,6 +406,16 @@
 				this.dialog2_body = 'Are you sure you want to block the user?';
 				this.dialog2_title = 'Block user?';
 				this.dialog2_btn_disabled = false;
+
+			},
+			status_name_check(name){
+
+				if(name == 'email_verification_status' || name == 'status'){
+					return true;
+				}else{
+					return false;
+				}
+
 
 			},
 			approve_user_button(){
@@ -520,7 +553,8 @@
 					this.users_info = response.data;
 					console.log(response);
 					this.profile_user_status = this.users_info[22][1];
-					this.profile_user_type = this.users_info[23][1];
+					this.profile_user_type = this.users_info[25][1];
+					this.change_request_status= this.users_info[24][1];
 				}.bind(this))
 				.catch(function(error){
 
@@ -541,6 +575,8 @@
 				console.log(response);
 				this.profile_user_status = this.users_info[22][1];
 				this.profile_user_type = this.users_info[23][1];
+				this.change_request_status= this.users_info[24][1];
+
 				console.log(this.users_info[22][0]);
 			}.bind(this))
 			.catch(function(error){
@@ -872,7 +908,7 @@ Vue.component('search' , {
 				
 			})
 
-			this.users_info__.admin__ == true ? this.category_items.push("rejected_user") : '';
+			this.users_info__.admin__ == true ? this.category_items.push("rejected_user" , "newly_registered") : '';
 			axios.post( this.model.modelProfile_update ,
 			{
 				purpose: 'getProfileBasicInfo',
