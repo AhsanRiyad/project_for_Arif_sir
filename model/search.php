@@ -33,10 +33,6 @@ else if($d2->purpose == 'rejected_user'){
 $sql = "select * from all_info_together where status = 'rejected' and  full_name  REGEXP '$name' limit 20 ";
 }
 
-else if($d2->purpose == 'newly_registered'){
-$sql = "select * from all_info_together where status = 'not_verified' and  full_name  REGEXP '$name' limit 20 ";
-}
-
 
 
 
