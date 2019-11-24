@@ -73,6 +73,7 @@ $modelPrivacy = $rootAdress."model/privacy.php";
 $modelGallery = $rootAdress."model/gallery.php";
 $modelProfile_update = $rootAdress."model/profile_update.php";
 $modelSearch = $rootAdress."model/search.php";
+$modelAdminChangeInfo = $rootAdress."model/admin_change_info.php";
 
 
 

@@ -73,6 +73,9 @@
 	<h1>
 	Profile
 	</h1>
+
+	<v-btn v-if="users_info_as_props.type == 'admin' && profile_user_type != 'admin' " @click.stop="edit_info=!edit_info" color="warning" >Edit</v-btn>
+
 	</v-col>
 	</v-row>
 	
@@ -85,7 +88,7 @@
 	<tr>
 	<th class="text-left title">Index</th>
 	<th class="text-left title">Details</th>
-	<th class="text-left title">Edit</th>
+	<th class="text-left title" v-if="edit_info">Edit</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -97,12 +100,19 @@
 	
 
 	</td>
-	<td>
+	<td v-if="edit_info">
 	
-	<v-text-field v-model="item[1]" v-show="item[0] != 'blood_group' " :disabled="item[0]=='membership_number' || item[0]=='registration_date' || item[0] == 'change_request' || item[0] == 'status' || item[0] == 'email_verification_status'  || item[0] == 'type'   || change_request_status == 'requested' "  @change="changeInfo(item[0])"></v-text-field>
+	<v-text-field v-model="item[1]" v-show="item[0] != 'blood_group' && item[0] != 'date_of_birth' " :disabled="item[0]=='membership_number' || item[0]=='registration_date' || item[0] == 'change_request' || item[0] == 'status' || item[0] == 'email_verification_status'  || item[0] == 'type'   || change_request_status == 'requested' "  @change="changeInfo(item[0] , item[1] , this)"></v-text-field>
+
+
 	<v-select v-model="item[1]" v-show="item[0] == 'blood_group' "
-      :items="blood_group_list" @change="changeInfo(item[0] , item[1])"
-    ></v-select>
+	:items="blood_group_list" @change="changeInfo(item[0] , item[1] , this)"
+	></v-select>
+	
+	<input v-model="item[1]" type="date" class="form-control" v-if="item[0] == 'date_of_birth' "
+	:items="blood_group_list" @change="changeInfo(item[0] , item[1] , this )">
+
+
 
 
 	</td>
@@ -135,13 +145,7 @@
 	<v-card-actions>
 	<v-spacer></v-spacer>
 
-	<v-btn
-	color="green darken-1"
-	text
-	@click="dialog2_reject_user_no()"
-	>
-	No
-	</v-btn>
+
 
 	<v-btn
 	color="green darken-1"
@@ -177,13 +181,6 @@
 	<v-card-actions>
 	<v-spacer></v-spacer>
 
-	<v-btn
-	color="green darken-1"
-	text
-	@click="dialog3_make_admin_no()"
-	>
-	No
-	</v-btn>
 
 	<v-btn
 	color="green darken-1"
@@ -219,13 +216,7 @@
 	<v-card-actions>
 	<v-spacer></v-spacer>
 
-	<v-btn
-	color="green darken-1"
-	text
-	@click="dialog4_approve_user_no()"
-	>
-	No
-	</v-btn>
+
 
 	<v-btn
 	color="green darken-1"
@@ -240,12 +231,9 @@
 	</v-row>
 	</template>
 
-	
-
 	<template>
 	<v-row justify="center">
 	
-
 	<v-dialog
 	v-model="dialog5"
 	max-width="290"
@@ -260,13 +248,6 @@
 	<v-card-actions>
 	<v-spacer></v-spacer>
 
-	<v-btn
-	color="green darken-1"
-	text
-	@click="dialog5_make_user_no()"
-	>
-	No
-	</v-btn>
 
 	<v-btn
 	color="green darken-1"
@@ -275,6 +256,29 @@
 	>
 	Yes
 	</v-btn>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
+	</template>
+
+
+	<template>
+	<v-row justify="center">
+	
+	<v-dialog
+	v-model="dialog6"
+	max-width="290"
+	>
+	<v-card>
+	<v-card-title class="headline green--text">{{ dialog6_title }}</v-card-title>
+
+	<v-card-text class="black--text">
+	{{ dialog6_body }}
+	</v-card-text>
+
+	<v-card-actions>
+	<v-spacer></v-spacer>
 	</v-card-actions>
 	</v-card>
 	</v-dialog>
@@ -295,6 +299,7 @@
 				dialog3: false,
 				dialog4: false,
 				dialog5: false,
+				dialog6: false,
 				notifications: false,
 				sound: true,
 				widgets: false,
@@ -303,9 +308,11 @@
 				dialog3_body: 'Are you sure that you want make this user an Admin?',
 				dialog4_body: 'Are you sure that you want to approve this user?',
 				dialog5_body: 'Are you sure that you want to change the user roll?',
+				dialog6_body: 'Are you sure that you want to change the user roll?',
 				dialog3_title: 'Make admin?',
 				dialog4_title: 'Approve User?',
 				dialog5_title: 'Make User?',
+				dialog6_title: 'Status',
 				users_info: [],
 				radioGroup: [],
 				disabled: false,
@@ -315,10 +322,13 @@
 				dialog3_btn_disabled: false,
 				dialog4_btn_disabled: false,
 				dialog5_btn_disabled: false,
+				dialog6_btn_disabled: false,
 				items_email_status: ['Aprroved' , 'Rejected'] ,
 				blood_group_list: ['A+' , 'B+' ,'AB+' , 'O+' , 'A-' , 'B-' , 'AB-' , 'O-'],
 				change_data: '',
 				counter: 0 ,
+				edit_info: false,
+
 
 			}
 		},
@@ -382,17 +392,363 @@
 					return "Change Request Status";
 				}
 			},
-			changeInfo(name , value){
+			changeInfo(name , value , ev){
+
+				if(name=='full_name'){
+
+					//console.log(ev);
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Name must be at least 6 characters";
+
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "Name changed successfully";
+					}
+
+				}else if(name=='email'){
+					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Email';
+						this.dialog6_body = "Email must be in a valid format , abc@bcd.com"
+					}else{
+						var res =  this.change_info_database(name , value);
+						
+
+					}
+
+				}else if(name=='mobile'){
+					var patt= /[\+]{0,1}[\d]{11,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Number';
+						this.dialog6_body = "Name must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "Name changed successfully";
+					}
+					
+				}else if(name=='institution_id'){
+					var patt= /[\S]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Id';
+						this.dialog6_body = "Id at least 5 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "Id changed successfully";
+					}
+				}else if(name=='nid_or_passport'){
+					var patt= /[\S]{10,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid NID/Passport';
+						this.dialog6_body = "NID/passport number at least 10 digit"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "NID/passport changed successfully";
+					}
+				}else if(name=='fathers_name'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Name must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "fathers name changed successfully";
+					}
+				}else if(name=='mother_name'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "mother name changed successfully";
+					}else{
+
+					}
+				}else if(name=='spouse_name'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Name must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "spouse name changed successfully";
+					}
+				}else if(name=='number_of_children'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Must be digit "
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "number_of_children changed successfully";
+					}
+				}else if(name=='profession'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Name must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "profession changed successfully";
+					}
+				}else if(name=='designation'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Name must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "designation changed successfully";
+					}
+				}else if(name=='institution'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Name must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "institution name changed successfully";
+					}
+				}else if(name=='workplace_or_institution'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Name';
+						this.dialog6_body = "Name must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "workplace_or_institution changed successfully";
+					}
+				}else if(name=='blood_group'){
+					var patt= /[\+-A-O]{1,3}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Blood Group';
+						this.dialog6_body = "Name must be a valid format"
+					}else{
 
 
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "blood_group changed successfully";
+					}
+				}else if(name=='date_of_birth'){
+					var patt= /^([0-9]{4})([-]{1}[0-9]{2}[-]{1}[0-9]{2}$)/igm;
+					var result = patt.test(value);
 
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Date';
+						this.dialog6_body = "Date must be a valid format"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "date_of_birth changed successfully";
+					}
+				}else if(name=='present_line1'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
 
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Address';
+						this.dialog6_body = "Address must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "present address line1 changed successfully";
+					}
+				}else if(name=='present_post_code'){
+					var patt= /[\+]{0,1}[\d]{4,}/g;
+					var result = patt.test(value);
 
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Post Code';
+						this.dialog6_body = "at least 4 digit";
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "present post code changed successfully";
+					}
+				}else if(name=='present_district'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
 
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid District';
+						this.dialog6_body = "Address must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "present district changed successfully";
+					}
+				}else if(name=='present_country'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
 
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Country';
+						this.dialog6_body = "Country must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "present country changed successfully";
+					}
+				}else if(name=='parmanent_line1'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Address';
+						this.dialog6_body = "Address must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "parmanent address line1 changed successfully";
+					}
+				}else if(name=='parmanent_post_code'){
+					var patt= /[\+]{0,1}[\d]{4,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Post Code';
+						this.dialog6_body = "at least 4 digit";
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "parmanent post code changed successfully";
+					}
+				}else if(name=='parmanent_district'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid District';
+						this.dialog6_body = "Address must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "parmanent district changed successfully";
+					}
+				}else if(name=='parmanent_country'){
+					var patt= /[A-Za-z.\s]{5,}/g;
+					var result = patt.test(value);
+
+					if(result == false){
+						this.dialog6 = true;
+						this.dialog6_title = 'Invalid Country';
+						this.dialog6_body = "Country must be at least 6 characters"
+					}else{
+						this.change_info_database(name , value);
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "parmanent country changed successfully";
+					}
+				}
 			},
-			couter_meth(){
-				return this.counter++;
+			change_info_database(purpose , value){
+				axios.post(this.model.modelAdminChangeInfo , {
+					purpose : purpose,
+					email: this.email,
+					user_id : this.user_id,
+					value: value , 
+				})
+				.then(function (response) {
+					console.log(response);
+
+					if(response.data == 'email_updated'){
+
+						this.dialog6 = true;
+						this.dialog6_title = 'Success';
+						this.dialog6_body = "Email changed successfully";
+					}else if(response.data == 'email_already_used'){
+						this.dialog6 = true;
+						this.dialog6_title = 'Failed';
+						this.dialog6_body = "Email already used";
+					}
+					
+					return response.data;
+
+				}.bind(this))
+				.catch(function (error) {
+					console.log(error);
+				});
+
 			},
 			close_dialog(){
 
@@ -467,7 +823,7 @@
 					console.log(error);
 				});
 
-
+				this.edit_info = false;
 				this.dialog3_body = 'Made admin successfully';
 				this.dialog3_title = 'Success';
 				this.dialog3_btn_disabled = true;
@@ -574,7 +930,7 @@
 				this.users_info = response.data;
 				console.log(response);
 				this.profile_user_status = this.users_info[22][1];
-				this.profile_user_type = this.users_info[23][1];
+				this.profile_user_type = this.users_info[25][1];
 				this.change_request_status= this.users_info[24][1];
 
 				console.log(this.users_info[22][0]);

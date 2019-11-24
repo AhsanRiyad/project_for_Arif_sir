@@ -84,6 +84,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelGallery: '<?php echo $modelGallery; ?>',
                     modelProfile_update: '<?php echo $modelProfile_update; ?>',
                     modelSearch: '<?php echo $modelSearch; ?>',
+                    modelAdminChangeInfo: '<?php echo $modelAdminChangeInfo; ?>',
 
                 },
                 users_info__:{
