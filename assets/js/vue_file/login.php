@@ -165,10 +165,10 @@
 					response.data == 'YES_USER' || response.data == 'YES_ADMIN' ? window.location.href = this.address.profilePage : this.login_status = 'email/password doesnt match';  
 
 					
-					
+					console.log(response);	
 				}.bind(this))
 					.catch(function (error) {
-						
+						console.log(error);
 						this.loading = false;
                 //return 'hi';
             }.bind(this)); 
@@ -184,17 +184,17 @@
 			},
 			onChangeValidity(inputName){
 
-				
+				console.log(this.password);
 
 				if(inputName == 'email'){
-					
+					console.log(this.email);
 					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
 					var result = patt.test(this.email);
 
 					result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
 
 				}else if(inputName == 'password'){
-					
+					console.log(this.password);
 					var patt= /[\S]{6,}/g;
 					var result = patt.test(this.password);
 

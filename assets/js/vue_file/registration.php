@@ -5,7 +5,7 @@
 
 
 
-var registration = `<!-- registration page starts now -->
+var code = `<!-- registration page starts now -->
 
 <div class="container-fluid">
 <div  class="row justify-content-xl-center align-items-center 
@@ -237,7 +237,7 @@ value="">
 registratrion_status = '';
 
 Vue.component('registration' , {
-	template: registration, 
+	template: code, 
 	data(){
 		return {
 			name: 'riyad---vue',
