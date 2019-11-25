@@ -1,5 +1,5 @@
 <script>
-	var code = `
+	var privacy = `
 	<v-container>
   <v-row  justify="center">
   <v-col lg="8" class="text-center success white--text" >
@@ -48,7 +48,7 @@
 
 
   Vue.component('privacy' , {
-    template: code,
+    template: privacy,
     data(){
      return{
       users_info: [],

@@ -19,7 +19,7 @@
 
 
 
-  var code = `
+  var gallery = `
  <div class="container">
   <div class="row justify-content-md-center">
 
@@ -141,7 +141,7 @@
 
 
   Vue.component('gallery' , {
-   template: code,
+   template: gallery,
    data(){
     return {
       dialogm1: '',

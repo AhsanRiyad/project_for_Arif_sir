@@ -22,7 +22,7 @@
 
 
 
-	var code = `<div class="container-fluid bg-light " style="margin-top: 150px;">
+	var password_recovery = `<div class="container-fluid bg-light " style="margin-top: 150px;">
 	<div class="row justify-content-center ">
 
 	<!-- update top part starts-->
@@ -136,7 +136,7 @@
 	</div>`;
 
 	Vue.component('password_recovery' , {
-		template: code,
+		template: password_recovery,
 		data(){
 			return {
 				name: 'riyad---vue',
@@ -253,7 +253,7 @@
 
 
 
-	var code = `
+	var forgot_password = `
 	
 	<div class="container-fluid">
 	<div class="row justify-content-xl-center justify-content-md-center _background ">
@@ -344,7 +344,7 @@
 	
 
 	Vue.component('forgot_password' , {
-		template: code,
+		template: forgot_password,
 		props: ['invalid_link'],
 		data(){
 			return{

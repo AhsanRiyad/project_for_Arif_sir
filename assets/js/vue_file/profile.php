@@ -19,266 +19,13 @@
 
 	const bus = new Vue();
 	
-	var code = `	
-	<div class="container">
-	<div class="row justify-content-center no-gutters">
-	<div class="col col-xl-4 col-md-7 ">
-	<a @click="verify_email_otp()">
-	<v-alert type="error" v-if="email_verification_status == 'not_verified'">
-	Your email is not verified , click to solve
-	</v-alert></a>
-	<a>
-	<v-alert type="warning" v-if="completeness < 100"> {{ profile_completeness_msg }} 
-	</v-alert></a>
-	<a>
-	<v-alert type="warning" v-if="completeness == 100 && users_info.status == 'not_verified' "> You are not verified yet, wait for verifiaction 
-	</v-alert></a>
-	</div>
-	</div>
-	</div>
-	`;
-
-	Vue.component('alert' , {
-		template: code ,
-
-		data(){
-			return {
-				email_verification_status: true,
-				status: true,
-				completeness: '',
-				change_request: '',
-				profile_completeness_msg: 'default',
-				users_info: ''
-
-			}
-		},
-		methods: {
-			verify_email_otp(){
-				//alert('veriy');
-				bus.$emit('changeComponent' , 'verify_email_otp' );
-				bus.$emit('buttonRelease' , 'verify_email_otp' );
-			},
-			profile_completeness_bus(){
-			}
-		},
-		created(){
-
-			bus.$on('email_verification_status' , (data)=>{
-				this.email_verification_status = data;
-			});
-
-			
-			bus.$on('users_info' , (data)=>{
-				
-				console.log(data);
-				this.users_info = data;
-
-
-				if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
-					this.profile_completeness_msg = 'full_name is not set';
-				}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
-					this.profile_completeness_msg = 'mobile is not set';	
-				}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
-					this.profile_completeness_msg = 'institution_id is not set';	
-				}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
-					this.profile_completeness_msg = 'nid_or_passport is not set';	
-				}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
-					this.profile_completeness_msg = 'blood_group is not set';	
-				}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
-					this.profile_completeness_msg = 'date_of_birth is not set';	
-				}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
-					this.profile_completeness_msg = 'fathers_name is not set';	
-				}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
-					this.profile_completeness_msg = 'mother_name is not set';	
-				}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
-					this.profile_completeness_msg = 'spouse_name is not set';	
-				}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
-					this.profile_completeness_msg = 'number_of_children is not set';	
-				}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
-					this.profile_completeness_msg = 'profession is not set';	
-				}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
-					this.profile_completeness_msg = 'institution is not set';	
-				}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
-					this.profile_completeness_msg = 'designation is not set';	
-				}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
-					this.profile_completeness_msg = 'present_line1 is not set';	
-				}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
-					this.profile_completeness_msg = 'present_district is not set';	
-				}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
-					this.profile_completeness_msg = 'present_post_code is not set';	
-				}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
-					this.profile_completeness_msg = 'present_country is not set';	
-				}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
-					this.profile_completeness_msg = 'parmanent_line1 is not set';	
-				}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
-					this.profile_completeness_msg = 'parmanent_district is not set';	
-				}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
-					this.profile_completeness_msg = 'parmanent_post_code is not set';	
-				}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
-					this.profile_completeness_msg = 'parmanent_country is not set';	
-				}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
-					this.profile_completeness_msg = 'recent_photo is not set';	
-				}else{
-
-					axios.post( this.model.modelProfile_update ,
-					{
-						purpose: 'profile_completeness_100',
-						user_type: this.users_info.type ,
-
-					}
-					).then(function(response){
-
-						console.log(response);
-
-						this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
-
-
-					}.bind(this))
-					.catch(function(error){
-        //console.log(error);
-    }.bind(this));
-
-				}
-
-
-			});
-
-
-
-axios.post( this.model.modelProfile_update ,
-{
-	purpose: 'getProfileBasicInfo',
-
-}
-).then(function(response){
-
-	console.log(response);
-				//this.email = response.data.full_name;
-				this.email_verification_status = response.data.email_verification_status;
-				this.completeness = response.data.completeness;
-				this.users_info = response.data;
-
-
-			}.bind(this))
-.catch(function(error){
-        //console.log(error);
-    }.bind(this));
-
-
-},
-updated(){
-
-	if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
-		this.profile_completeness_msg = 'full_name is not set';
-	}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
-		this.profile_completeness_msg = 'mobile is not set';	
-	}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
-		this.profile_completeness_msg = 'institution_id is not set';	
-	}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
-		this.profile_completeness_msg = 'nid_or_passport is not set';	
-	}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
-		this.profile_completeness_msg = 'blood_group is not set';	
-	}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
-		this.profile_completeness_msg = 'date_of_birth is not set';	
-	}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
-		this.profile_completeness_msg = 'fathers_name is not set';	
-	}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
-		this.profile_completeness_msg = 'mother_name is not set';	
-	}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
-		this.profile_completeness_msg = 'spouse_name is not set';	
-	}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
-		this.profile_completeness_msg = 'number_of_children is not set';	
-	}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
-		this.profile_completeness_msg = 'profession is not set';	
-	}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
-		this.profile_completeness_msg = 'institution is not set';	
-	}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
-		this.profile_completeness_msg = 'designation is not set';	
-	}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
-		this.profile_completeness_msg = 'present_line1 is not set';	
-	}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
-		this.profile_completeness_msg = 'present_district is not set';	
-	}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
-		this.profile_completeness_msg = 'present_post_code is not set';	
-	}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
-		this.profile_completeness_msg = 'present_country is not set';	
-	}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
-		this.profile_completeness_msg = 'parmanent_line1 is not set';	
-	}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
-		this.profile_completeness_msg = 'parmanent_district is not set';	
-	}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
-		this.profile_completeness_msg = 'parmanent_post_code is not set';	
-	}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
-		this.profile_completeness_msg = 'parmanent_country is not set';	
-	}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
-		this.profile_completeness_msg = 'recent_photo is not set';	
-	}else{
-		
-		this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
-
-	}
-
-	console.log(this.profile_completeness_msg);
-
-}
-})
-
-
-
-
-var code = `
-<div class="container-fluid bg-light mt-1 mb-5">
-<div class="row justify-content-center align-items-center">
-
-
-<v-btn :disabled="componet_name == 'basic'" @click="changeComponent('basic')" large class="ml-1" color="success">Basic</v-btn>
-<v-btn :disabled="componet_name == 'personal'" @click="changeComponent('personal')" large class="ml-1" color="success">Personal</v-btn>
-<v-btn :disabled="componet_name == 'address1'" @click="changeComponent('address1')" large class="ml-1" color="success">address</v-btn>
-<v-btn :disabled="componet_name == 'photos'" @click="changeComponent('photos')" large class="ml-1" color="success">photo</v-btn>
-<div class="w-100"></div>
-<v-btn :disabled="componet_name == 'password'" @click="changeComponent('password')" large class="ml-1 mt-2" color="success">change Password</v-btn>
-<v-btn :disabled="componet_name == 'email'" @click="changeComponent('email')" large class="ml-1 mt-2" color="success">change Email</v-btn>
-
-</div>
-
-</div>
-
-`;
-
-
-Vue.component('buttons' , {
-	props: ['profile_photo' , 'CSRF_TOKEN'  ],
-	template: code,
-	data(){
-		return {
-			name: 'Riyad',
-				//input_disabled: 'basic'
-			}
-		},
-		methods: {
-			changeComponent: function(comp_type){
-				//this.input_disabled = comp_type;
-				this.componet_name = comp_type;
-				bus.$emit('changeComponent' , comp_type );
-				
-			}
-
-		},
-		created(){
-			bus.$on('buttonRelease' , (data)=>{
-				this.componet_name = data;
-			})
-
-		}
-	})
 
 
 
 
 
 
-
-var code = `<div class="container-fluid bg-light mt-5 ">
+var address1 = `<div class="container-fluid bg-light mt-5 ">
 <div class="row justify-content-center align-items-center">
 
 <!-- update top part starts-->
@@ -307,36 +54,184 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <!-- update field part starts -->
 <div class="row bg-white mt-4 justify-content-center mx-1">
 <div class="w-100 bg-info">
-<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Verify Email</p>
+<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Adress Info</p>
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallverify_email_otpChangeDashboard'  class="" v-bind:style=' changes.verify_email_otp.smallText ' > <span>Enter OTP
-
-
-<span v-show="verify_email_otp_validity == 'valid'" class="text-success"> {{ verify_email_otp_validity }} </span>
-<span v-show="verify_email_otp_validity == 'invalid'" class="text-danger"> {{ verify_email_otp_validity }} </span>
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_line1.smallText ' > <span>Present Address Line1
 
 
 
 
-</span> <span @click="enable_input('verify_email_otp')" id="idSpanverify_email_otpChangeDashboard" v-bind:style="changes.verify_email_otp.smallButton" class="small_button">Change</span></small>
+<span v-show="present_line1_validity == 'valid'" class="text-success"> {{ present_line1_validity }} </span>
+<span v-show="present_line1_validity == 'invalid'" class="text-danger"> {{ present_line1_validity }} </span>
 
-<input @keyup="validityCheckInput('verify_email_otp')" v-model="verify_email_otp" :disabled='verify_email_otp_input == true' id="idInputverify_email_otpUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="verify_email_otp" value="" >
+
+
+</span> <span @click="enable_input('present_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_line1.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="present_line1" @keyup="onChangeValidity('present_line1')" :disabled='present_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_line1 Here" type="text" value="" >
 
 </div>
 
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_post_code.smallText ' > <span>Present Post Code
+
+
+
+<span v-show="present_post_code_validity == 'valid'" class="text-success"> {{ present_post_code_validity }} </span>
+<span v-show="present_post_code_validity == 'invalid'" class="text-danger"> {{ present_post_code_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('present_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_post_code.smallButton" class="small_button">Change</span></small>
+
+<input v-model="present_post_code" @keyup="onChangeValidity('present_post_code')"  :disabled='present_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_post_code Here" type="text" value="" >
+
+</div>
+
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_district.smallText ' > <span>Present District
+
+
+
+
+<span v-show="present_district_validity == 'valid'" class="text-success"> {{ present_district_validity }} </span>
+<span v-show="present_district_validity == 'invalid'" class="text-danger"> {{ present_district_validity }} </span>
+
+
+
+
+
+
+</span> <span @click="enable_input('present_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_district.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="present_district" @keyup="onChangeValidity('present_district')" 
+:disabled='present_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_district Here" type="text" value="" >
+
+</div>
+
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_country.smallText ' > <span>Present Country
+
+
+
+
+
+
+<span v-show="present_country_validity == 'valid'" class="text-success"> {{ present_country_validity }} </span>
+<span v-show="present_country_validity == 'invalid'" class="text-danger"> {{ present_country_validity }} </span>
+
+
+
+
+
+</span> <span @click="enable_input('present_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_country.smallButton" class="small_button">Change</span></small>
+
+
+<input  v-model="present_country" @keyup="onChangeValidity('present_country')"   :disabled='present_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_country Here" type="text" value="" >
+
+</div>
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_line1.smallText ' > <span>Permanent Address Line1
+
+
+
+
+<span v-show="permanent_line1_validity == 'valid'" class="text-success"> {{ permanent_line1_validity }} </span>
+<span v-show="permanent_line1_validity == 'invalid'" class="text-danger"> {{ permanent_line1_validity }} </span>
+
+
+
+
+
+</span> <span @click="enable_input('permanent_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_line1.smallButton" class="small_button">Change</span></small>
+
+<input v-model="permanent_line1" @keyup="onChangeValidity('permanent_line1')" :disabled='permanent_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_line1 Here" type="text" value="" >
+
+</div>
+
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_post_code.smallText ' > <span>Permanent Post Code
+
+
+
+
+<span v-show="permanent_post_code_validity == 'valid'" class="text-success"> {{ permanent_post_code_validity }} </span>
+<span v-show="permanent_post_code_validity == 'invalid'" class="text-danger"> {{ permanent_post_code_validity }} </span>
+
+
+
+
+
+</span> <span @click="enable_input('permanent_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_post_code.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="permanent_post_code" @keyup="onChangeValidity('permanent_post_code')" 
+:disabled='permanent_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_post_code Here" type="text" value="" >
+
+</div>
+
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_district.smallText ' > <span>Permanent District
+
+
+
+<span v-show="permanent_district_validity == 'valid'" class="text-success"> {{ permanent_district_validity }} </span>
+<span v-show="permanent_district_validity == 'invalid'" class="text-danger"> {{ permanent_district_validity }} </span>
+
+
+
+</span> <span @click="enable_input('permanent_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_district.smallButton" class="small_button">Change</span></small>
+
+<input v-model="permanent_district" @keyup="onChangeValidity('permanent_district')" 
+:disabled='permanent_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_district Here" type="text" value="" >
+
+</div>
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_country.smallText ' > <span>Permanent Country
+
+
+
+<span v-show="permanent_country_validity == 'valid'" class="text-success"> {{ permanent_country_validity }} </span>
+<span v-show="permanent_country_validity == 'invalid'" class="text-danger"> {{ permanent_country_validity }} </span>
+
+
+
+</span> <span @click="enable_input('permanent_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_country.smallButton" class="small_button">Change</span></small>
+
+<input  v-model="permanent_country" @keyup="onChangeValidity('permanent_country')" 
+:disabled='permanent_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_country Here" type="text" value="" >
+
+</div>
 
 
 
 <div class="col-10 mx-0 px-0 ">
-<v-btn color="success" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
-Verify
-</v-btn>
-
-<v-btn :loading='loading' color="primary" @click="sendOtpAgain()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
-Send OTP again
-</v-btn>
+<button :disabled='submit_disabled' @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
+Update Info
+</button>
 </div>
 
 <!-- update field part ends -->
@@ -344,6 +239,233 @@ Send OTP again
 </div>
 </div>
 </div>
+
+
+
+<v-row justify="center">
+
+
+<v-dialog
+v-model="dialog"
+max-width="290"
+>
+<v-card>
+<v-card-title class="headline">Status</v-card-title>
+
+<v-card-text class="black--text">
+{{ status_text }}
+</v-card-text>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+
+
+
+<v-btn
+color="green darken-1"
+text
+@click="dialog = false"
+>
+Okay
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+</v-row>
+
+
+</div>`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+var personal = `<div class="container-fluid bg-light mt-5 ">
+<div class="row justify-content-center align-items-center">
+
+<!-- update top part starts-->
+
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+
+
+<div class="row bg-white mx-1">
+
+<div class="col-3 mr-0 pr-0 my-2">
+<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+<div class="w-100"></div>
+</div>
+<div class="col-9  ml-0">
+<p class="h3 ">
+
+</p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
+</div>
+
+</div>
+
+<!-- update top part ends-->
+
+
+<!-- update field part starts -->
+<div class="row bg-white mt-4 justify-content-center mx-1">
+<div class="w-100 bg-info">
+<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Personal Info</p>
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>Fathers Name
+
+
+
+
+<span v-show="fathers_name_validity == 'valid'" class="text-success"> {{ fathers_name_validity }} </span>
+<span v-show="fathers_name_validity == 'invalid'" class="text-danger"> {{ fathers_name_validity }} </span>
+
+
+
+
+
+
+
+</span> <span @click="enable_input('fathers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.fathers_name.smallButton" class="small_button">Change</span></small>
+
+<input v-model="fathers_name" @keyup="onChangeValidity('fathers_name')" :disabled='fathers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your fathers name Here" type="text" value="" >
+
+</div>
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>Mothers Name
+
+
+
+<span v-show="mothers_name_validity == 'valid'" class="text-success"> {{ mothers_name_validity }} </span>
+<span v-show="mothers_name_validity == 'invalid'" class="text-danger"> {{ mothers_name_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('mothers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mothers_name.smallButton" class="small_button">Change</span></small>
+
+<input v-model="mothers_name" @keyup="onChangeValidity('mothers_name')"  :disabled='mothers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your mothers_name Here" type="text" value="" >
+
+</div>
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>Spouse Name
+
+
+
+
+<span v-show="spouse_name_validity == 'valid'" class="text-success"> {{ spouse_name_validity }} </span>
+<span v-show="spouse_name_validity == 'invalid'" class="text-danger"> {{ spouse_name_validity }} </span>
+
+
+
+
+
+
+
+</span> <span @click="enable_input('spouse_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.spouse_name.smallButton" class="small_button">Change</span></small>
+
+<input v-model="spouse_name" @keyup="onChangeValidity('spouse_name')" :disabled='spouse_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your spouse_name Here" type="text" value="" >
+
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.number_of_children.smallText ' > <span>Number of children
+
+
+
+
+<span v-show="number_of_children_validity == 'valid'" class="text-success"> {{ number_of_children_validity }} </span>
+<span v-show="number_of_children_validity == 'invalid'" class="text-danger"> {{ number_of_children_validity }} </span>
+
+
+
+
+
+
+
+</span> <span @click="enable_input('number_of_children')" id="idSpanEmailChangeDashboard" v-bind:style="changes.number_of_children.smallButton" class="small_button">Change</span></small>
+
+<input v-model="number_of_children" @keyup="onChangeValidity('number_of_children')"  :disabled='number_of_children_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your number_of_children Here" type="text" value="" >
+
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.profession.smallText ' > <span>Profession
+
+
+<span v-show="profession_validity == 'valid'" class="text-success"> {{ profession_validity }} </span>
+<span v-show="profession_validity == 'invalid'" class="text-danger"> {{ profession_validity }} </span>
+
+
+
+</span> <span @click="enable_input('profession')" id="idSpanEmailChangeDashboard" v-bind:style="changes.profession.smallButton" class="small_button">Change</span></small>
+
+<input v-model="profession" @keyup="onChangeValidity('profession')" 
+:disabled='profession_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your profession Here" type="text" value="" >
+
+</div>
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.workplace_or_institution.smallText ' > <span>Workplace/Institution
+
+
+<span v-show="workplace_or_institution_validity == 'valid'" class="text-success"> {{ workplace_or_institution_validity }} </span>
+<span v-show="workplace_or_institution_validity == 'invalid'" class="text-danger"> {{ workplace_or_institution_validity }} </span>
+
+
+
+</span> <span @click="enable_input('workplace_or_institution')" id="idSpanEmailChangeDashboard" v-bind:style="changes.workplace_or_institution.smallButton" class="small_button">Change</span></small>
+
+<input v-model="workplace_or_institution" @keyup="onChangeValidity('workplace_or_institution')" 
+:disabled='workplace_or_institution_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your workplace_or_institution Here" type="text" value="" >
+
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.designation.smallText ' > <span>Designation
+
+
+
+<span v-show="designation_validity == 'valid'" class="text-success"> {{ designation_validity }} </span>
+<span v-show="designation_validity == 'invalid'" class="text-danger"> {{ designation_validity }} </span>
+
+
+
+
+
+
+</span> <span @click="enable_input('designation')" id="idSpanEmailChangeDashboard" v-bind:style="changes.designation.smallButton" class="small_button">Change</span></small>
+
+<input v-model="designation" @keyup="onChangeValidity('designation')"  :disabled='designation_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your designation Here" type="text" value="" >
+
+</div>
+
+
+<div class="col-10 mx-0 px-0 ">
+<button :disabled = "submit_disabled" @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
+Update Info
+</button>
+</div>
+
+<!-- update field part ends -->
+
+</div>
+</div>
+</div>
+
+
 
 <v-row justify="center">
 
@@ -378,191 +500,20 @@ Okay
 
 
 
+
+
 </div>`;
 
-Vue.component('verify_email_otp' , {
-	props: ['profile_photo' , 'CSRF_TOKEN'],
-	template: code,
-	data(){
-		return {
-			name: 'riyad---vue',
-			dialog: false,
-			status_text: '',
-			verify_email_otp_input: true,
-			verify_email_otp: '',
-			verify_email_otp_validity: '',
-			loading: false,
-			changes:{
-				verify_email_otp:{
-					smallText: {
-						color: '#2196f3'					
-					},
-					smallButton: {
-						color: 'white',
-						backgroundColor: '#2196f3' 
-					}
-				},
 
-			} 
-		}
-	},
-	methods: {
-		enable_input: function(name){
-			if(name=='verify_email_otp'){
-				this.verify_email_otp_input = false;
-				this.changes.verify_email_otp.smallText.color = 'red';
-				this.changes.verify_email_otp.smallButton.color = 'white';
-				this.changes.verify_email_otp.smallButton.backgroundColor = 'red';
-					//alert(this.verify_email_otp_input);
-				}
-			},
-			validityCheckInput( inputName  ){
-				if(inputName == 'verify_email_otp'){
-					console.log(this.verify_email_otp);
-					var patt= /^[\d]{4}$/g;
-					var result = patt.test(this.verify_email_otp);
 
-					result == false ? this.verify_email_otp_validity = 'invalid' : this.verify_email_otp_validity = 'valid';
-				}
-			},
-			submit(){
-				//alert(this.blood_group);
-				this.validityCheckInput('verify_email_otp');
-				
 
-				if(this.verify_email_otp_validity == 'valid' ){
 
-					//alert(this.verify_email_otp);
 
-					axios.post( this.model.modelProfile_update ,
-					{
-						purpose: 'verify_email_otp',
-						verify_email_otp: this.verify_email_otp,
-						
 
-					}
-					).then(function(response){
 
-						console.log(response);
 
-						
 
-						if(response.data == 'email_verified'){
-							this.status_text = 'email verified successfully';
-
-							bus.$emit('email_verification_status' , 'verified' );
-
-
-							this.dialog = true;
-
-
-						}else{
-							this.status_text = 'invalid otp, try again' ;
-							this.dialog = true;
-						}
-
-
-
-
-
-					}.bind(this))
-					.catch(function(error){
-
-
-
-        //console.log(error);
-    }.bind(this));
-
-				}else{
-					this.status_text = 'OTP is not valid ';
-					this.dialog = true;
-					//alert('all filed are not valid');
-				}
-
-
-
-			},
-			sendOtpAgain(){
-				this.loading = true;
-				axios.post( this.model.modelProfile_update ,
-				{
-					purpose: 'send_otp',
-
-				}
-				).then(function(response){
-
-					console.log(response);
-
-
-
-					if(response.data == 'otp_sent'){
-						this.status_text = 'OTP sent, check your email';
-
-
-						this.dialog = true;
-
-
-					}if(response.data == 'server_problem'){
-						this.status_text = 'email server problem, try again later';
-
-
-						this.dialog = true;
-
-
-					}
-
-					this.loading = false;
-
-				}.bind(this))
-				.catch(function(error){
-					this.loading = false;
-
-
-        //console.log(error);
-    }.bind(this));
-
-			}
-
-		},
-		created(){
-			axios.post( this.model.modelProfile_update ,
-			{
-				purpose: 'getProfileBasicInfo',
-				
-			}
-			).then(function(response){
-				
-				//console.log(response);
-				//this.verify_email_otp = response.data.full_name;
-
-			}.bind(this))
-			.catch(function(error){
-        //console.log(error);
-    }.bind(this));
-		}
-	})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var code = `<div class="container-fluid bg-light mt-5 ">
+var photos = `<div class="container-fluid bg-light mt-5 ">
 <div class="row justify-content-center align-items-center">
 
 <!-- update top part starts-->
@@ -591,33 +542,59 @@ var code = `<div class="container-fluid bg-light mt-5 ">
 <!-- update field part starts -->
 <div class="row bg-white mt-4 justify-content-center mx-1">
 <div class="w-100 bg-info">
-<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Change email</p>
+<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Upload Photos</p>
 </div>
 
 <div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.email.smallText ' > <span>New email 
+<small id='idSmallEmailChangeDashboard'  class=""  > <span>recent Photo</span></small>
 
-
-<span v-show="email_validity == 'valid'" class="text-success"> {{ email_validity }} </span>
-<span v-show="email_validity == 'invalid'" class="text-danger"> {{ email_validity }} </span>
-
-
-
-
-</span> <span @click="enable_input('email')" id="idSpanEmailChangeDashboard" v-bind:style="changes.email.smallButton" class="small_button">Change</span></small>
-
-<input @keyup="validityCheckInput('email')" v-model="email" :disabled='email_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="email" value="" >
-
+<div class="custom-file">
+<input type="file" ref="recent_photo" v-on:change="handleFileUpload_recent()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+<label class="custom-file-label" for="inputGroupFile01">{{ recent_photo_name }}</label>
 </div>
 
-
-
+</div>
 
 <div class="col-10 mx-0 px-0 ">
-<v-btn :loading='loading' color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
-Update Info
+<v-btn :loading='loading_recent_photo' @click="uploadPhoto_recent()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+Upload <v-icon right dark>mdi-cloud-upload</v-icon>
 </v-btn>
 </div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class=""  > <span>old Photo</span></small>
+
+
+<div class="custom-file">
+<input type="file" ref="old_photo" v-on:change="handleFileUpload_old()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+<label class="custom-file-label" for="inputGroupFile01">{{ old_photo_name }}</label>
+</div>
+
+</div>
+
+<div class="col-10 mx-0 px-0 ">
+<v-btn :loading='loading_old_photo' @click="uploadPhoto_old()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+Upload <v-icon right dark>mdi-cloud-upload</v-icon>
+</v-btn>
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class=""  > <span>group Photo</span></small>
+
+
+<div class="custom-file">
+<input type="file" ref="group_photo" v-on:change="handleFileUpload_group()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+<label class="custom-file-label" for="inputGroupFile01">{{ group_photo_name }}</label>
+</div>
+
+</div>
+
+<div class="col-10 mx-0 px-0 ">
+<v-btn :loading='loading_group_photo' @click="uploadPhoto_group()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
+Upload <v-icon right dark>mdi-cloud-upload</v-icon>
+</v-btn>
+</div>
+
 
 <!-- update field part ends -->
 
@@ -625,7 +602,6 @@ Update Info
 </div>
 </div>
 
-<v-row justify="center">
 
 
 <v-dialog
@@ -633,445 +609,27 @@ v-model="dialog"
 max-width="290"
 >
 <v-card>
-<v-card-title class="headline">Status</v-card-title>
+<v-card-title class="headline">Photo Upload Status</v-card-title>
 
 <v-card-text class="black--text">
-{{ status_text }}
-</v-card-text>
-<v-col v-if="otp_text_box_show" col="12" class="mt-n8">
-<v-text-field
-label="OTP sent to your email" v-model="otp"
-></v-text-field>
-
-<v-btn @click="changeEmail()" :loading="loading" color="success">
-Validate
-</v-btn>
-
-</v-col>
-
-<v-card-actions>
-<v-spacer></v-spacer>
-
-
-
-<v-btn
-color="green darken-1"
-text
-@click="email_change_logout()"
->
-Okay
-</v-btn>
-</v-card-actions>
-</v-card>
-</v-dialog>
-</v-row>
-
-
-</div>`;
-
-Vue.component('email' , {
-	props: ['profile_photo' , 'CSRF_TOKEN'],
-	template: code,
-	data(){
-		return {
-			name: 'riyad---vue',
-			email_change_status: false,
-			dialog: false,
-			status_text: '',
-			email_input: true,
-			email: '',
-			email_validity: '',
-			status_text_show: false,
-			otp_text_box_show: false,
-			loading: false,
-			otp: '',
-			changes:{
-				email:{
-					smallText: {
-						color: '#2196f3'					
-					},
-					smallButton: {
-						color: 'white',
-						backgroundColor: '#2196f3' 
-					}
-				},
-
-			} 
-		}
-	},
-	methods: {
-		enable_input: function(name){
-			if(name=='email'){
-				this.email_input = false;
-				this.changes.email.smallText.color = 'red';
-				this.changes.email.smallButton.color = 'white';
-				this.changes.email.smallButton.backgroundColor = 'red';
-					//alert(this.email_input);
-				}
-			},
-			validityCheckInput( inputName  ){
-				if(inputName == 'email'){
-					console.log(this.email);
-					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
-					var result = patt.test(this.email);
-
-					result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
-				}
-			},
-			changeEmail(){
-
-				axios.post( this.model.modelProfile_update ,
-					{
-						purpose: 'changeEmail',
-						email: this.email,
-						otp: this.otp,
-
-					}
-					).then(function(response){
-
-						console.log(response);
-						if(response.data == 'success'){
-							this.otp_text_box_show = true;
-							this.status_text = 'email changed successfully';
-							this.email_change_status = true;
-
-
-						}else{
-							this.otp_text_box_show = false;
-							this.status_text = 'invalid otp';
-							this.email_change_status = false;
-						}
-
-						this.loading = false;
-
-						this.dialog = true;
-					}.bind(this))
-					.catch(function(error){
-						this.loading = false;
-
-
-        //console.log(error);
-    }.bind(this));
-
-
-
-
-			},
-			email_change_logout(){
-				this.dialog = false;
-				if(this.email_change_status == true){
-					window.location.href = this.address.loginPage;
-				}
-			},
-			submit(){
-				//alert(this.blood_group);
-				this.validityCheckInput('email');
-				this.loading = true;
-
-				if(this.email_validity == 'valid' ){
-
-					axios.post( this.model.modelProfile_update ,
-					{
-						purpose: 'email',
-						email: this.email,
-
-					}
-					).then(function(response){
-
-						console.log(response);
-						if(response.data == 'success'){
-							this.otp_text_box_show = true;
-							this.status_text = '';
-						}else{
-							this.otp_text_box_show = false;
-							this.status_text = 'email already used';
-						}
-
-						this.loading = false;
-
-						this.dialog = true;
-					}.bind(this))
-					.catch(function(error){
-						this.loading = false;
-
-
-        //console.log(error);
-    }.bind(this));
-
-				}else{
-					this.status_text = 'email is not valid';
-					this.dialog = true;
-					//alert('all filed are not valid');
-				}
-
-
-
-			}
-
-		},
-		created(){
-			axios.post( this.model.modelProfile_update ,
-			{
-				purpose: 'getProfileBasicInfo',
-				
-			}
-			).then(function(response){
-				
-				//console.log(response);
-				//this.email = response.data.full_name;
-
-			}.bind(this))
-			.catch(function(error){
-        //console.log(error);
-    }.bind(this));
-		}
-	})
-
-
-
-
-var code = `<div class="container-fluid bg-light mt-5 ">
-<div class="row justify-content-center align-items-center">
-
-<!-- update top part starts-->
-
-<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
-
-
-<div class="row bg-white mx-1">
-
-<div class="col-3 mr-0 pr-0 my-2">
-<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
-<div class="w-100"></div>
-</div>
-<div class="col-9  ml-0">
-<p class="h3 ">
-
-</p>
-<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
-</div>
-
-</div>
-
-<!-- update top part ends-->
-
-
-<!-- update field part starts -->
-<div class="row bg-white mt-4 justify-content-center mx-1">
-<div class="w-100 bg-info">
-<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Change Password</p>
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.password.smallText ' > <span>New Password 
-
-
-<span v-show="password_validity == 'valid'" class="text-success"> {{ password_validity }} </span>
-<span v-show="password_validity == 'invalid'" class="text-danger"> {{ password_validity }} </span>
-
-
-
-
-</span> <span @click="enable_input('password')" id="idSpanEmailChangeDashboard" v-bind:style="changes.password.smallButton" class="small_button">Change</span></small>
-
-<input @keyup="validityCheckInput('password')" v-model="password" :disabled='password_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="password" value="" >
-
-</div>
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.repassword.smallText ' > <span>Re-enter repassword 
-
-
-<span v-show="repassword_validity == 'valid'" class="text-success"> {{ repassword_validity }} </span>
-<span v-show="repassword_validity == 'invalid'" class="text-danger"> {{ repassword_validity }} </span>
-
-
-
-
-</span> <span @click="enable_input('repassword')" id="idSpanEmailChangeDashboard" v-bind:style="changes.repassword.smallButton" class="small_button">Change</span></small>
-
-<input @keyup="validityCheckInput('repassword')" v-model="repassword" :disabled='repassword_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="password" value="" >
-
-</div>
-
-
-
-
-<div class="col-10 mx-0 px-0 ">
-<v-btn color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
-Update Info
-</v-btn>
-</div>
-
-<!-- update field part ends -->
-
-</div>
-</div>
-</div>
-
-<v-row justify="center">
-
-
-<v-dialog
-v-model="dialog"
-max-width="290"
->
-<v-card>
-<v-card-title class="headline">Status</v-card-title>
-
-<v-card-text class="black--text">
-{{ status_text }}
+{{ status }}
 </v-card-text>
 
 <v-card-actions>
 <v-spacer></v-spacer>
-
-
 
 <v-btn
 color="green darken-1"
 text
 @click="dialog = false"
 >
-Okay
+OK
 </v-btn>
 </v-card-actions>
 </v-card>
 </v-dialog>
-</v-row>
 
-
-
-</div>`;
-
-Vue.component('password' , {
-	props: ['profile_photo' , 'CSRF_TOKEN'],
-	template: code,
-	data(){
-		return {
-			name: 'riyad---vue',
-			dialog: false,
-			status_text: '',
-			password_input: true,
-			password: '',
-			password_validity: '',
-			repassword_input: true,
-			repassword: '',
-			repassword_validity: '',
-			changes:{
-				password:{
-					smallText: {
-						color: '#2196f3'					
-					},
-					smallButton: {
-						color: 'white',
-						backgroundColor: '#2196f3' 
-					}
-				},
-				repassword:{
-					smallText: {
-						color: '#2196f3'					
-					},
-					smallButton: {
-						color: 'white',
-						backgroundColor: '#2196f3' 
-					}
-				},
-
-			} 
-		}
-	},
-	methods: {
-		enable_input: function(name){
-			if(name=='password'){
-				this.password_input = false;
-				this.changes.password.smallText.color = 'red';
-				this.changes.password.smallButton.color = 'white';
-				this.changes.password.smallButton.backgroundColor = 'red';
-					//alert(this.password_input);
-				}
-				if(name=='repassword'){
-					this.repassword_input = false;
-					this.changes.repassword.smallText.color = 'red';
-					this.changes.repassword.smallButton.color = 'white';
-					this.changes.repassword.smallButton.backgroundColor = 'red';
-					//alert(this.password_input);
-				}
-			},
-			validityCheckInput( inputName  ){
-				if(inputName == 'password'){
-					console.log(this.password);
-					var patt= /[\S]{6,}/g;
-					var result = patt.test(this.password);
-
-					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
-				}else if(inputName == 'repassword'){
-					console.log(this.repassword);
-					var patt= /[\S]{6,}/g;
-					var result = patt.test(this.repassword);
-
-					result == false ? this.repassword_validity = 'invalid' : this.repassword_validity = 'valid';
-				}
-			},
-			submit(){
-				//alert(this.blood_group);
-				this.validityCheckInput('password');
-				this.validityCheckInput('repassword');
-
-				if(this.password_validity == 'valid' && this.password == this.repassword){
-
-					axios.post( this.model.modelProfile_update ,
-					{
-						purpose: 'password',
-						password: this.password,
-
-					}
-					).then(function(response){
-
-						console.log(response);
-
-						this.status_text = 'Password Updated successfully';
-						this.dialog = true;
-
-
-					}.bind(this))
-					.catch(function(error){
-
-
-
-        //console.log(error);
-    }.bind(this));
-
-				}else{
-					this.status_text = 'password doesnt match';
-					this.dialog = true;
-					//alert('all filed are not valid');
-				}
-
-
-
-			}
-
-		},
-		created(){
-			axios.post( this.model.modelProfile_update ,
-			{
-				purpose: 'getProfileBasicInfo',
-				
-			}
-			).then(function(response){
-				
-				//console.log(response);
-				//this.password = response.data.full_name;
-
-			}.bind(this))
-			.catch(function(error){
-        //console.log(error);
-    }.bind(this));
-		}
-	})
+</div>	`;
 
 
 
@@ -1079,9 +637,7 @@ Vue.component('password' , {
 
 
 
-
-
-var code = `<div class="container-fluid bg-light mt-5 ">
+var basic = `<div class="container-fluid bg-light mt-5 ">
 <div class="row justify-content-center align-items-center">
 
 <!-- update top part starts-->
@@ -1274,9 +830,1095 @@ Okay
 
 </div>`;
 
+
+
+
+
+
+var password = `<div class="container-fluid bg-light mt-5 ">
+<div class="row justify-content-center align-items-center">
+
+<!-- update top part starts-->
+
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+
+
+<div class="row bg-white mx-1">
+
+<div class="col-3 mr-0 pr-0 my-2">
+<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+<div class="w-100"></div>
+</div>
+<div class="col-9  ml-0">
+<p class="h3 ">
+
+</p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
+</div>
+
+</div>
+
+<!-- update top part ends-->
+
+
+<!-- update field part starts -->
+<div class="row bg-white mt-4 justify-content-center mx-1">
+<div class="w-100 bg-info">
+<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Change Password</p>
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.password.smallText ' > <span>New Password 
+
+
+<span v-show="password_validity == 'valid'" class="text-success"> {{ password_validity }} </span>
+<span v-show="password_validity == 'invalid'" class="text-danger"> {{ password_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('password')" id="idSpanEmailChangeDashboard" v-bind:style="changes.password.smallButton" class="small_button">Change</span></small>
+
+<input @keyup="validityCheckInput('password')" v-model="password" :disabled='password_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="password" value="" >
+
+</div>
+
+
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.repassword.smallText ' > <span>Re-enter repassword 
+
+
+<span v-show="repassword_validity == 'valid'" class="text-success"> {{ repassword_validity }} </span>
+<span v-show="repassword_validity == 'invalid'" class="text-danger"> {{ repassword_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('repassword')" id="idSpanEmailChangeDashboard" v-bind:style="changes.repassword.smallButton" class="small_button">Change</span></small>
+
+<input @keyup="validityCheckInput('repassword')" v-model="repassword" :disabled='repassword_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="password" value="" >
+
+</div>
+
+
+
+
+<div class="col-10 mx-0 px-0 ">
+<v-btn color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+Update Info
+</v-btn>
+</div>
+
+<!-- update field part ends -->
+
+</div>
+</div>
+</div>
+
+<v-row justify="center">
+
+
+<v-dialog
+v-model="dialog"
+max-width="290"
+>
+<v-card>
+<v-card-title class="headline">Status</v-card-title>
+
+<v-card-text class="black--text">
+{{ status_text }}
+</v-card-text>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+
+
+
+<v-btn
+color="green darken-1"
+text
+@click="dialog = false"
+>
+Okay
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+</v-row>
+
+
+
+</div>`;
+
+
+
+
+
+
+
+
+
+var email = `<div class="container-fluid bg-light mt-5 ">
+<div class="row justify-content-center align-items-center">
+
+<!-- update top part starts-->
+
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+
+
+<div class="row bg-white mx-1">
+
+<div class="col-3 mr-0 pr-0 my-2">
+<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+<div class="w-100"></div>
+</div>
+<div class="col-9  ml-0">
+<p class="h3 ">
+
+</p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
+</div>
+
+</div>
+
+<!-- update top part ends-->
+
+
+<!-- update field part starts -->
+<div class="row bg-white mt-4 justify-content-center mx-1">
+<div class="w-100 bg-info">
+<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Change email</p>
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.email.smallText ' > <span>New email 
+
+
+<span v-show="email_validity == 'valid'" class="text-success"> {{ email_validity }} </span>
+<span v-show="email_validity == 'invalid'" class="text-danger"> {{ email_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('email')" id="idSpanEmailChangeDashboard" v-bind:style="changes.email.smallButton" class="small_button">Change</span></small>
+
+<input @keyup="validityCheckInput('email')" v-model="email" :disabled='email_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="email" value="" >
+
+</div>
+
+
+
+
+<div class="col-10 mx-0 px-0 ">
+<v-btn :loading='loading' color="error" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+Update Info
+</v-btn>
+</div>
+
+<!-- update field part ends -->
+
+</div>
+</div>
+</div>
+
+<v-row justify="center">
+
+
+<v-dialog
+v-model="dialog"
+max-width="290"
+>
+<v-card>
+<v-card-title class="headline">Status</v-card-title>
+
+<v-card-text class="black--text">
+{{ status_text }}
+</v-card-text>
+<v-col v-if="otp_text_box_show" col="12" class="mt-n8">
+<v-text-field
+label="OTP sent to your email" v-model="otp"
+></v-text-field>
+
+<v-btn @click="changeEmail()" :loading="loading" color="success">
+Validate
+</v-btn>
+
+</v-col>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+
+
+
+<v-btn
+color="green darken-1"
+text
+@click="email_change_logout()"
+>
+Okay
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+</v-row>
+
+
+</div>`;
+
+
+
+
+
+
+
+
+
+
+var verify_email_otp = `<div class="container-fluid bg-light mt-5 ">
+<div class="row justify-content-center align-items-center">
+
+<!-- update top part starts-->
+
+<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
+
+
+<div class="row bg-white mx-1">
+
+<div class="col-3 mr-0 pr-0 my-2">
+<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+<div class="w-100"></div>
+</div>
+<div class="col-9  ml-0">
+<p class="h3 ">
+
+</p>
+<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
+</div>
+
+</div>
+
+<!-- update top part ends-->
+
+
+<!-- update field part starts -->
+<div class="row bg-white mt-4 justify-content-center mx-1">
+<div class="w-100 bg-info">
+<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Verify Email</p>
+</div>
+
+<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
+<small id='idSmallverify_email_otpChangeDashboard'  class="" v-bind:style=' changes.verify_email_otp.smallText ' > <span>Enter OTP
+
+
+<span v-show="verify_email_otp_validity == 'valid'" class="text-success"> {{ verify_email_otp_validity }} </span>
+<span v-show="verify_email_otp_validity == 'invalid'" class="text-danger"> {{ verify_email_otp_validity }} </span>
+
+
+
+
+</span> <span @click="enable_input('verify_email_otp')" id="idSpanverify_email_otpChangeDashboard" v-bind:style="changes.verify_email_otp.smallButton" class="small_button">Change</span></small>
+
+<input @keyup="validityCheckInput('verify_email_otp')" v-model="verify_email_otp" :disabled='verify_email_otp_input == true' id="idInputverify_email_otpUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your Name Here" type="verify_email_otp" value="" >
+
+</div>
+
+
+
+
+<div class="col-10 mx-0 px-0 ">
+<v-btn color="success" @click="submit()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+Verify
+</v-btn>
+
+<v-btn :loading='loading' color="primary" @click="sendOtpAgain()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
+Send OTP again
+</v-btn>
+</div>
+
+<!-- update field part ends -->
+
+</div>
+</div>
+</div>
+
+<v-row justify="center">
+
+
+<v-dialog
+v-model="dialog"
+max-width="290"
+>
+<v-card>
+<v-card-title class="headline">Status</v-card-title>
+
+<v-card-text class="black--text">
+{{ status_text }}
+</v-card-text>
+
+<v-card-actions>
+<v-spacer></v-spacer>
+
+
+
+<v-btn
+color="green darken-1"
+text
+@click="dialog = false"
+>
+Okay
+</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+</v-row>
+
+
+
+</div>`;
+
+
+
+
+
+
+
+var buttons = `
+<div class="container-fluid bg-light mt-1 mb-5">
+<div class="row justify-content-center align-items-center">
+
+
+<v-btn :disabled="componet_name == 'basic'" @click="changeComponent('basic')" large class="ml-1" color="success">Basic</v-btn>
+<v-btn :disabled="componet_name == 'personal'" @click="changeComponent('personal')" large class="ml-1" color="success">Personal</v-btn>
+<v-btn :disabled="componet_name == 'address1'" @click="changeComponent('address1')" large class="ml-1" color="success">address</v-btn>
+<v-btn :disabled="componet_name == 'photos'" @click="changeComponent('photos')" large class="ml-1" color="success">photo</v-btn>
+<div class="w-100"></div>
+<v-btn :disabled="componet_name == 'password'" @click="changeComponent('password')" large class="ml-1 mt-2" color="success">change Password</v-btn>
+<v-btn :disabled="componet_name == 'email'" @click="changeComponent('email')" large class="ml-1 mt-2" color="success">change Email</v-btn>
+
+</div>
+
+</div>
+
+`;
+
+
+
+
+
+
+
+
+
+	var alert = `	
+	<div class="container">
+	<div class="row justify-content-center no-gutters">
+	<div class="col col-xl-4 col-md-7 ">
+	<a @click="verify_email_otp()">
+	<v-alert type="error" v-if="email_verification_status == 'not_verified'">
+	Your email is not verified , click to solve
+	</v-alert></a>
+	<a>
+	<v-alert type="warning" v-if="completeness < 100"> {{ profile_completeness_msg }} 
+	</v-alert></a>
+	<a>
+	<v-alert type="warning" v-if="completeness == 100 && users_info.status == 'not_verified' "> You are not verified yet, wait for verifiaction 
+	</v-alert></a>
+	</div>
+	</div>
+	</div>
+	`;
+
+	Vue.component('alert' , {
+		template: alert ,
+
+		data(){
+			return {
+				email_verification_status: true,
+				status: true,
+				completeness: '',
+				change_request: '',
+				profile_completeness_msg: 'default',
+				users_info: ''
+
+			}
+		},
+		methods: {
+			verify_email_otp(){
+				//alert('veriy');
+				bus.$emit('changeComponent' , 'verify_email_otp' );
+				bus.$emit('buttonRelease' , 'verify_email_otp' );
+			},
+			profile_completeness_bus(){
+			}
+		},
+		created(){
+
+			bus.$on('email_verification_status' , (data)=>{
+				this.email_verification_status = data;
+			});
+
+			
+			bus.$on('users_info' , (data)=>{
+				
+				console.log(data);
+				this.users_info = data;
+
+
+				if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
+					this.profile_completeness_msg = 'full_name is not set';
+				}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
+					this.profile_completeness_msg = 'mobile is not set';	
+				}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
+					this.profile_completeness_msg = 'institution_id is not set';	
+				}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
+					this.profile_completeness_msg = 'nid_or_passport is not set';	
+				}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
+					this.profile_completeness_msg = 'blood_group is not set';	
+				}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
+					this.profile_completeness_msg = 'date_of_birth is not set';	
+				}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
+					this.profile_completeness_msg = 'fathers_name is not set';	
+				}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
+					this.profile_completeness_msg = 'mother_name is not set';	
+				}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
+					this.profile_completeness_msg = 'spouse_name is not set';	
+				}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
+					this.profile_completeness_msg = 'number_of_children is not set';	
+				}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
+					this.profile_completeness_msg = 'profession is not set';	
+				}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
+					this.profile_completeness_msg = 'institution is not set';	
+				}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
+					this.profile_completeness_msg = 'designation is not set';	
+				}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
+					this.profile_completeness_msg = 'present_line1 is not set';	
+				}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
+					this.profile_completeness_msg = 'present_district is not set';	
+				}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
+					this.profile_completeness_msg = 'present_post_code is not set';	
+				}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
+					this.profile_completeness_msg = 'present_country is not set';	
+				}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
+					this.profile_completeness_msg = 'parmanent_line1 is not set';	
+				}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
+					this.profile_completeness_msg = 'parmanent_district is not set';	
+				}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
+					this.profile_completeness_msg = 'parmanent_post_code is not set';	
+				}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
+					this.profile_completeness_msg = 'parmanent_country is not set';	
+				}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
+					this.profile_completeness_msg = 'recent_photo is not set';	
+				}else{
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'profile_completeness_100',
+						user_type: this.users_info.type ,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
+
+
+					}.bind(this))
+					.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+
+				}
+
+
+			});
+
+
+
+axios.post( this.model.modelProfile_update ,
+{
+	purpose: 'getProfileBasicInfo',
+
+}
+).then(function(response){
+
+	console.log(response);
+				//this.email = response.data.full_name;
+				this.email_verification_status = response.data.email_verification_status;
+				this.completeness = response.data.completeness;
+				this.users_info = response.data;
+
+
+			}.bind(this))
+.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+
+
+},
+updated(){
+
+	if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
+		this.profile_completeness_msg = 'full_name is not set';
+	}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
+		this.profile_completeness_msg = 'mobile is not set';	
+	}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
+		this.profile_completeness_msg = 'institution_id is not set';	
+	}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
+		this.profile_completeness_msg = 'nid_or_passport is not set';	
+	}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
+		this.profile_completeness_msg = 'blood_group is not set';	
+	}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
+		this.profile_completeness_msg = 'date_of_birth is not set';	
+	}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
+		this.profile_completeness_msg = 'fathers_name is not set';	
+	}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
+		this.profile_completeness_msg = 'mother_name is not set';	
+	}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
+		this.profile_completeness_msg = 'spouse_name is not set';	
+	}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
+		this.profile_completeness_msg = 'number_of_children is not set';	
+	}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
+		this.profile_completeness_msg = 'profession is not set';	
+	}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
+		this.profile_completeness_msg = 'institution is not set';	
+	}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
+		this.profile_completeness_msg = 'designation is not set';	
+	}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
+		this.profile_completeness_msg = 'present_line1 is not set';	
+	}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
+		this.profile_completeness_msg = 'present_district is not set';	
+	}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
+		this.profile_completeness_msg = 'present_post_code is not set';	
+	}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
+		this.profile_completeness_msg = 'present_country is not set';	
+	}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
+		this.profile_completeness_msg = 'parmanent_line1 is not set';	
+	}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
+		this.profile_completeness_msg = 'parmanent_district is not set';	
+	}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
+		this.profile_completeness_msg = 'parmanent_post_code is not set';	
+	}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
+		this.profile_completeness_msg = 'parmanent_country is not set';	
+	}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
+		this.profile_completeness_msg = 'recent_photo is not set';	
+	}else{
+		
+		this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
+
+	}
+
+	console.log(this.profile_completeness_msg);
+
+}
+})
+
+
+
+Vue.component('buttons' , {
+	props: ['profile_photo' , 'CSRF_TOKEN'  ],
+	template: buttons,
+	data(){
+		return {
+			name: 'Riyad',
+				//input_disabled: 'basic'
+			}
+		},
+		methods: {
+			changeComponent: function(comp_type){
+				//this.input_disabled = comp_type;
+				this.componet_name = comp_type;
+				bus.$emit('changeComponent' , comp_type );
+				
+			}
+
+		},
+		created(){
+			bus.$on('buttonRelease' , (data)=>{
+				this.componet_name = data;
+			})
+
+		}
+	})
+
+
+
+
+Vue.component('verify_email_otp' , {
+	props: ['profile_photo' , 'CSRF_TOKEN'],
+	template: verify_email_otp,
+	data(){
+		return {
+			name: 'riyad---vue',
+			dialog: false,
+			status_text: '',
+			verify_email_otp_input: true,
+			verify_email_otp: '',
+			verify_email_otp_validity: '',
+			loading: false,
+			changes:{
+				verify_email_otp:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+
+			} 
+		}
+	},
+	methods: {
+		enable_input: function(name){
+			if(name=='verify_email_otp'){
+				this.verify_email_otp_input = false;
+				this.changes.verify_email_otp.smallText.color = 'red';
+				this.changes.verify_email_otp.smallButton.color = 'white';
+				this.changes.verify_email_otp.smallButton.backgroundColor = 'red';
+					//alert(this.verify_email_otp_input);
+				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'verify_email_otp'){
+					console.log(this.verify_email_otp);
+					var patt= /^[\d]{4}$/g;
+					var result = patt.test(this.verify_email_otp);
+
+					result == false ? this.verify_email_otp_validity = 'invalid' : this.verify_email_otp_validity = 'valid';
+				}
+			},
+			submit(){
+				//alert(this.blood_group);
+				this.validityCheckInput('verify_email_otp');
+				
+
+				if(this.verify_email_otp_validity == 'valid' ){
+
+					//alert(this.verify_email_otp);
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'verify_email_otp',
+						verify_email_otp: this.verify_email_otp,
+						
+
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						
+
+						if(response.data == 'email_verified'){
+							this.status_text = 'email verified successfully';
+
+							bus.$emit('email_verification_status' , 'verified' );
+
+
+							this.dialog = true;
+
+
+						}else{
+							this.status_text = 'invalid otp, try again' ;
+							this.dialog = true;
+						}
+
+
+
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+				}else{
+					this.status_text = 'OTP is not valid ';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
+			},
+			sendOtpAgain(){
+				this.loading = true;
+				axios.post( this.model.modelProfile_update ,
+				{
+					purpose: 'send_otp',
+
+				}
+				).then(function(response){
+
+					console.log(response);
+
+
+
+					if(response.data == 'otp_sent'){
+						this.status_text = 'OTP sent, check your email';
+
+
+						this.dialog = true;
+
+
+					}if(response.data == 'server_problem'){
+						this.status_text = 'email server problem, try again later';
+
+
+						this.dialog = true;
+
+
+					}
+
+					this.loading = false;
+
+				}.bind(this))
+				.catch(function(error){
+					this.loading = false;
+
+
+        //console.log(error);
+    }.bind(this));
+
+			}
+
+		},
+		created(){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				//this.verify_email_otp = response.data.full_name;
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+		}
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Vue.component('email' , {
+	props: ['profile_photo' , 'CSRF_TOKEN'],
+	template: email,
+	data(){
+		return {
+			name: 'riyad---vue',
+			email_change_status: false,
+			dialog: false,
+			status_text: '',
+			email_input: true,
+			email: '',
+			email_validity: '',
+			status_text_show: false,
+			otp_text_box_show: false,
+			loading: false,
+			otp: '',
+			changes:{
+				email:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+
+			} 
+		}
+	},
+	methods: {
+		enable_input: function(name){
+			if(name=='email'){
+				this.email_input = false;
+				this.changes.email.smallText.color = 'red';
+				this.changes.email.smallButton.color = 'white';
+				this.changes.email.smallButton.backgroundColor = 'red';
+					//alert(this.email_input);
+				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'email'){
+					console.log(this.email);
+					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
+					var result = patt.test(this.email);
+
+					result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
+				}
+			},
+			changeEmail(){
+
+				axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'changeEmail',
+						email: this.email,
+						otp: this.otp,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+						if(response.data == 'success'){
+							this.otp_text_box_show = true;
+							this.status_text = 'email changed successfully';
+							this.email_change_status = true;
+
+
+						}else{
+							this.otp_text_box_show = false;
+							this.status_text = 'invalid otp';
+							this.email_change_status = false;
+						}
+
+						this.loading = false;
+
+						this.dialog = true;
+					}.bind(this))
+					.catch(function(error){
+						this.loading = false;
+
+
+        //console.log(error);
+    }.bind(this));
+
+
+
+
+			},
+			email_change_logout(){
+				this.dialog = false;
+				if(this.email_change_status == true){
+					window.location.href = this.address.loginPage;
+				}
+			},
+			submit(){
+				//alert(this.blood_group);
+				this.validityCheckInput('email');
+				this.loading = true;
+
+				if(this.email_validity == 'valid' ){
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'email',
+						email: this.email,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+						if(response.data == 'success'){
+							this.otp_text_box_show = true;
+							this.status_text = '';
+						}else{
+							this.otp_text_box_show = false;
+							this.status_text = 'email already used';
+						}
+
+						this.loading = false;
+
+						this.dialog = true;
+					}.bind(this))
+					.catch(function(error){
+						this.loading = false;
+
+
+        //console.log(error);
+    }.bind(this));
+
+				}else{
+					this.status_text = 'email is not valid';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
+			}
+
+		},
+		created(){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				//this.email = response.data.full_name;
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+		}
+	})
+
+
+
+
+Vue.component('password' , {
+	props: ['profile_photo' , 'CSRF_TOKEN'],
+	template: password,
+	data(){
+		return {
+			name: 'riyad---vue',
+			dialog: false,
+			status_text: '',
+			password_input: true,
+			password: '',
+			password_validity: '',
+			repassword_input: true,
+			repassword: '',
+			repassword_validity: '',
+			changes:{
+				password:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+				repassword:{
+					smallText: {
+						color: '#2196f3'					
+					},
+					smallButton: {
+						color: 'white',
+						backgroundColor: '#2196f3' 
+					}
+				},
+
+			} 
+		}
+	},
+	methods: {
+		enable_input: function(name){
+			if(name=='password'){
+				this.password_input = false;
+				this.changes.password.smallText.color = 'red';
+				this.changes.password.smallButton.color = 'white';
+				this.changes.password.smallButton.backgroundColor = 'red';
+					//alert(this.password_input);
+				}
+				if(name=='repassword'){
+					this.repassword_input = false;
+					this.changes.repassword.smallText.color = 'red';
+					this.changes.repassword.smallButton.color = 'white';
+					this.changes.repassword.smallButton.backgroundColor = 'red';
+					//alert(this.password_input);
+				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'password'){
+					console.log(this.password);
+					var patt= /[\S]{6,}/g;
+					var result = patt.test(this.password);
+
+					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
+				}else if(inputName == 'repassword'){
+					console.log(this.repassword);
+					var patt= /[\S]{6,}/g;
+					var result = patt.test(this.repassword);
+
+					result == false ? this.repassword_validity = 'invalid' : this.repassword_validity = 'valid';
+				}
+			},
+			submit(){
+				//alert(this.blood_group);
+				this.validityCheckInput('password');
+				this.validityCheckInput('repassword');
+
+				if(this.password_validity == 'valid' && this.password == this.repassword){
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'password',
+						password: this.password,
+
+					}
+					).then(function(response){
+
+						console.log(response);
+
+						this.status_text = 'Password Updated successfully';
+						this.dialog = true;
+
+
+					}.bind(this))
+					.catch(function(error){
+
+
+
+        //console.log(error);
+    }.bind(this));
+
+				}else{
+					this.status_text = 'password doesnt match';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
+			}
+
+		},
+		created(){
+			axios.post( this.model.modelProfile_update ,
+			{
+				purpose: 'getProfileBasicInfo',
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				//this.password = response.data.full_name;
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+		}
+	})
+
+
+
+
+
+
 Vue.component('basic' , {
 	props: ['profile_photo' , 'CSRF_TOKEN'],
-	template: code,
+	template: basic,
 	data(){
 		return {
 			name: 'riyad---vue',
@@ -1611,130 +2253,9 @@ Vue.component('basic' , {
 
 
 
-
-
-
-var code = `<div class="container-fluid bg-light mt-5 ">
-<div class="row justify-content-center align-items-center">
-
-<!-- update top part starts-->
-
-<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
-
-
-<div class="row bg-white mx-1">
-
-<div class="col-3 mr-0 pr-0 my-2">
-<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
-<div class="w-100"></div>
-</div>
-<div class="col-9  ml-0">
-<p class="h3 ">
-
-</p>
-<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
-</div>
-
-</div>
-
-<!-- update top part ends-->
-
-
-<!-- update field part starts -->
-<div class="row bg-white mt-4 justify-content-center mx-1">
-<div class="w-100 bg-info">
-<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Upload Photos</p>
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class=""  > <span>recent Photo</span></small>
-
-<div class="custom-file">
-<input type="file" ref="recent_photo" v-on:change="handleFileUpload_recent()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-<label class="custom-file-label" for="inputGroupFile01">{{ recent_photo_name }}</label>
-</div>
-
-</div>
-
-<div class="col-10 mx-0 px-0 ">
-<v-btn :loading='loading_recent_photo' @click="uploadPhoto_recent()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
-Upload <v-icon right dark>mdi-cloud-upload</v-icon>
-</v-btn>
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class=""  > <span>old Photo</span></small>
-
-
-<div class="custom-file">
-<input type="file" ref="old_photo" v-on:change="handleFileUpload_old()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-<label class="custom-file-label" for="inputGroupFile01">{{ old_photo_name }}</label>
-</div>
-
-</div>
-
-<div class="col-10 mx-0 px-0 ">
-<v-btn :loading='loading_old_photo' @click="uploadPhoto_old()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
-Upload <v-icon right dark>mdi-cloud-upload</v-icon>
-</v-btn>
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class=""  > <span>group Photo</span></small>
-
-
-<div class="custom-file">
-<input type="file" ref="group_photo" v-on:change="handleFileUpload_group()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-<label class="custom-file-label" for="inputGroupFile01">{{ group_photo_name }}</label>
-</div>
-
-</div>
-
-<div class="col-10 mx-0 px-0 ">
-<v-btn :loading='loading_group_photo' @click="uploadPhoto_group()" block depressed color="blue-grey" id="idButtonUpdateProfileDashboard" class="white--text">
-Upload <v-icon right dark>mdi-cloud-upload</v-icon>
-</v-btn>
-</div>
-
-
-<!-- update field part ends -->
-
-</div>
-</div>
-</div>
-
-
-
-<v-dialog
-v-model="dialog"
-max-width="290"
->
-<v-card>
-<v-card-title class="headline">Photo Upload Status</v-card-title>
-
-<v-card-text class="black--text">
-{{ status }}
-</v-card-text>
-
-<v-card-actions>
-<v-spacer></v-spacer>
-
-<v-btn
-color="green darken-1"
-text
-@click="dialog = false"
->
-OK
-</v-btn>
-</v-card-actions>
-</v-card>
-</v-dialog>
-
-</div>	`;
-
 Vue.component('photos' , {
 	props: ['profile_photo'],
-	template: code,
+	template: photos,
 	data(){
 		return {
 			name: 'riyad---vue',
@@ -2009,228 +2530,9 @@ Vue.component('photos' , {
 
 
 
-
-
-
-var code = `<div class="container-fluid bg-light mt-5 ">
-<div class="row justify-content-center align-items-center">
-
-<!-- update top part starts-->
-
-<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
-
-
-<div class="row bg-white mx-1">
-
-<div class="col-3 mr-0 pr-0 my-2">
-<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
-<div class="w-100"></div>
-</div>
-<div class="col-9  ml-0">
-<p class="h3 ">
-
-</p>
-<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
-</div>
-
-</div>
-
-<!-- update top part ends-->
-
-
-<!-- update field part starts -->
-<div class="row bg-white mt-4 justify-content-center mx-1">
-<div class="w-100 bg-info">
-<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Personal Info</p>
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>Fathers Name
-
-
-
-
-<span v-show="fathers_name_validity == 'valid'" class="text-success"> {{ fathers_name_validity }} </span>
-<span v-show="fathers_name_validity == 'invalid'" class="text-danger"> {{ fathers_name_validity }} </span>
-
-
-
-
-
-
-
-</span> <span @click="enable_input('fathers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.fathers_name.smallButton" class="small_button">Change</span></small>
-
-<input v-model="fathers_name" @keyup="onChangeValidity('fathers_name')" :disabled='fathers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your fathers name Here" type="text" value="" >
-
-</div>
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>Mothers Name
-
-
-
-<span v-show="mothers_name_validity == 'valid'" class="text-success"> {{ mothers_name_validity }} </span>
-<span v-show="mothers_name_validity == 'invalid'" class="text-danger"> {{ mothers_name_validity }} </span>
-
-
-
-
-</span> <span @click="enable_input('mothers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mothers_name.smallButton" class="small_button">Change</span></small>
-
-<input v-model="mothers_name" @keyup="onChangeValidity('mothers_name')"  :disabled='mothers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your mothers_name Here" type="text" value="" >
-
-</div>
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>Spouse Name
-
-
-
-
-<span v-show="spouse_name_validity == 'valid'" class="text-success"> {{ spouse_name_validity }} </span>
-<span v-show="spouse_name_validity == 'invalid'" class="text-danger"> {{ spouse_name_validity }} </span>
-
-
-
-
-
-
-
-</span> <span @click="enable_input('spouse_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.spouse_name.smallButton" class="small_button">Change</span></small>
-
-<input v-model="spouse_name" @keyup="onChangeValidity('spouse_name')" :disabled='spouse_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your spouse_name Here" type="text" value="" >
-
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.number_of_children.smallText ' > <span>Number of children
-
-
-
-
-<span v-show="number_of_children_validity == 'valid'" class="text-success"> {{ number_of_children_validity }} </span>
-<span v-show="number_of_children_validity == 'invalid'" class="text-danger"> {{ number_of_children_validity }} </span>
-
-
-
-
-
-
-
-</span> <span @click="enable_input('number_of_children')" id="idSpanEmailChangeDashboard" v-bind:style="changes.number_of_children.smallButton" class="small_button">Change</span></small>
-
-<input v-model="number_of_children" @keyup="onChangeValidity('number_of_children')"  :disabled='number_of_children_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your number_of_children Here" type="text" value="" >
-
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.profession.smallText ' > <span>Profession
-
-
-<span v-show="profession_validity == 'valid'" class="text-success"> {{ profession_validity }} </span>
-<span v-show="profession_validity == 'invalid'" class="text-danger"> {{ profession_validity }} </span>
-
-
-
-</span> <span @click="enable_input('profession')" id="idSpanEmailChangeDashboard" v-bind:style="changes.profession.smallButton" class="small_button">Change</span></small>
-
-<input v-model="profession" @keyup="onChangeValidity('profession')" 
-:disabled='profession_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your profession Here" type="text" value="" >
-
-</div>
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.workplace_or_institution.smallText ' > <span>Workplace/Institution
-
-
-<span v-show="workplace_or_institution_validity == 'valid'" class="text-success"> {{ workplace_or_institution_validity }} </span>
-<span v-show="workplace_or_institution_validity == 'invalid'" class="text-danger"> {{ workplace_or_institution_validity }} </span>
-
-
-
-</span> <span @click="enable_input('workplace_or_institution')" id="idSpanEmailChangeDashboard" v-bind:style="changes.workplace_or_institution.smallButton" class="small_button">Change</span></small>
-
-<input v-model="workplace_or_institution" @keyup="onChangeValidity('workplace_or_institution')" 
-:disabled='workplace_or_institution_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your workplace_or_institution Here" type="text" value="" >
-
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.designation.smallText ' > <span>Designation
-
-
-
-<span v-show="designation_validity == 'valid'" class="text-success"> {{ designation_validity }} </span>
-<span v-show="designation_validity == 'invalid'" class="text-danger"> {{ designation_validity }} </span>
-
-
-
-
-
-
-</span> <span @click="enable_input('designation')" id="idSpanEmailChangeDashboard" v-bind:style="changes.designation.smallButton" class="small_button">Change</span></small>
-
-<input v-model="designation" @keyup="onChangeValidity('designation')"  :disabled='designation_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your designation Here" type="text" value="" >
-
-</div>
-
-
-<div class="col-10 mx-0 px-0 ">
-<button :disabled = "submit_disabled" @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
-Update Info
-</button>
-</div>
-
-<!-- update field part ends -->
-
-</div>
-</div>
-</div>
-
-
-
-<v-row justify="center">
-
-
-<v-dialog
-v-model="dialog"
-max-width="290"
->
-<v-card>
-<v-card-title class="headline">Status</v-card-title>
-
-<v-card-text class="black--text">
-{{ status_text }}
-</v-card-text>
-
-<v-card-actions>
-<v-spacer></v-spacer>
-
-
-
-<v-btn
-color="green darken-1"
-text
-@click="dialog = false"
->
-Okay
-</v-btn>
-</v-card-actions>
-</v-card>
-</v-dialog>
-</v-row>
-
-
-
-
-
-</div>`;
-
 Vue.component('personal' , {
 	props: ['profile_photo' , 'CSRF_TOKEN' ],
-	template: code,
+	template: personal,
 	data(){
 		return {
 			name: 'riyad---vue',
@@ -2577,262 +2879,9 @@ Vue.component('personal' , {
 
 
 
-
-
-var code = `<div class="container-fluid bg-light mt-5 ">
-<div class="row justify-content-center align-items-center">
-
-<!-- update top part starts-->
-
-<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
-
-
-<div class="row bg-white mx-1">
-
-<div class="col-3 mr-0 pr-0 my-2">
-<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
-<div class="w-100"></div>
-</div>
-<div class="col-9  ml-0">
-<p class="h3 ">
-
-</p>
-<p class="h4 ">Profile <span class="font-weight-bold"></span></p>
-</div>
-
-</div>
-
-<!-- update top part ends-->
-
-
-<!-- update field part starts -->
-<div class="row bg-white mt-4 justify-content-center mx-1">
-<div class="w-100 bg-info">
-<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Adress Info</p>
-</div>
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_line1.smallText ' > <span>Present Address Line1
-
-
-
-
-<span v-show="present_line1_validity == 'valid'" class="text-success"> {{ present_line1_validity }} </span>
-<span v-show="present_line1_validity == 'invalid'" class="text-danger"> {{ present_line1_validity }} </span>
-
-
-
-</span> <span @click="enable_input('present_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_line1.smallButton" class="small_button">Change</span></small>
-
-<input  v-model="present_line1" @keyup="onChangeValidity('present_line1')" :disabled='present_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_line1 Here" type="text" value="" >
-
-</div>
-
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_post_code.smallText ' > <span>Present Post Code
-
-
-
-<span v-show="present_post_code_validity == 'valid'" class="text-success"> {{ present_post_code_validity }} </span>
-<span v-show="present_post_code_validity == 'invalid'" class="text-danger"> {{ present_post_code_validity }} </span>
-
-
-
-
-</span> <span @click="enable_input('present_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_post_code.smallButton" class="small_button">Change</span></small>
-
-<input v-model="present_post_code" @keyup="onChangeValidity('present_post_code')"  :disabled='present_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_post_code Here" type="text" value="" >
-
-</div>
-
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_district.smallText ' > <span>Present District
-
-
-
-
-<span v-show="present_district_validity == 'valid'" class="text-success"> {{ present_district_validity }} </span>
-<span v-show="present_district_validity == 'invalid'" class="text-danger"> {{ present_district_validity }} </span>
-
-
-
-
-
-
-</span> <span @click="enable_input('present_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_district.smallButton" class="small_button">Change</span></small>
-
-<input  v-model="present_district" @keyup="onChangeValidity('present_district')" 
-:disabled='present_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_district Here" type="text" value="" >
-
-</div>
-
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.present_country.smallText ' > <span>Present Country
-
-
-
-
-
-
-<span v-show="present_country_validity == 'valid'" class="text-success"> {{ present_country_validity }} </span>
-<span v-show="present_country_validity == 'invalid'" class="text-danger"> {{ present_country_validity }} </span>
-
-
-
-
-
-</span> <span @click="enable_input('present_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.present_country.smallButton" class="small_button">Change</span></small>
-
-
-<input  v-model="present_country" @keyup="onChangeValidity('present_country')"   :disabled='present_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your present_country Here" type="text" value="" >
-
-</div>
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_line1.smallText ' > <span>Permanent Address Line1
-
-
-
-
-<span v-show="permanent_line1_validity == 'valid'" class="text-success"> {{ permanent_line1_validity }} </span>
-<span v-show="permanent_line1_validity == 'invalid'" class="text-danger"> {{ permanent_line1_validity }} </span>
-
-
-
-
-
-</span> <span @click="enable_input('permanent_line1')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_line1.smallButton" class="small_button">Change</span></small>
-
-<input v-model="permanent_line1" @keyup="onChangeValidity('permanent_line1')" :disabled='permanent_line1_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_line1 Here" type="text" value="" >
-
-</div>
-
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_post_code.smallText ' > <span>Permanent Post Code
-
-
-
-
-<span v-show="permanent_post_code_validity == 'valid'" class="text-success"> {{ permanent_post_code_validity }} </span>
-<span v-show="permanent_post_code_validity == 'invalid'" class="text-danger"> {{ permanent_post_code_validity }} </span>
-
-
-
-
-
-</span> <span @click="enable_input('permanent_post_code')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_post_code.smallButton" class="small_button">Change</span></small>
-
-<input  v-model="permanent_post_code" @keyup="onChangeValidity('permanent_post_code')" 
-:disabled='permanent_post_code_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_post_code Here" type="text" value="" >
-
-</div>
-
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_district.smallText ' > <span>Permanent District
-
-
-
-<span v-show="permanent_district_validity == 'valid'" class="text-success"> {{ permanent_district_validity }} </span>
-<span v-show="permanent_district_validity == 'invalid'" class="text-danger"> {{ permanent_district_validity }} </span>
-
-
-
-</span> <span @click="enable_input('permanent_district')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_district.smallButton" class="small_button">Change</span></small>
-
-<input v-model="permanent_district" @keyup="onChangeValidity('permanent_district')" 
-:disabled='permanent_district_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_district Here" type="text" value="" >
-
-</div>
-
-
-
-<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.permanent_country.smallText ' > <span>Permanent Country
-
-
-
-<span v-show="permanent_country_validity == 'valid'" class="text-success"> {{ permanent_country_validity }} </span>
-<span v-show="permanent_country_validity == 'invalid'" class="text-danger"> {{ permanent_country_validity }} </span>
-
-
-
-</span> <span @click="enable_input('permanent_country')" id="idSpanEmailChangeDashboard" v-bind:style="changes.permanent_country.smallButton" class="small_button">Change</span></small>
-
-<input  v-model="permanent_country" @keyup="onChangeValidity('permanent_country')" 
-:disabled='permanent_country_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your permanent_country Here" type="text" value="" >
-
-</div>
-
-
-
-<div class="col-10 mx-0 px-0 ">
-<button :disabled='submit_disabled' @click="submit()" id="idButtonUpdateProfileDashboard" class="btn btn-danger btn-block mb-3 mx-0 rounded-0">
-Update Info
-</button>
-</div>
-
-<!-- update field part ends -->
-
-</div>
-</div>
-</div>
-
-
-
-<v-row justify="center">
-
-
-<v-dialog
-v-model="dialog"
-max-width="290"
->
-<v-card>
-<v-card-title class="headline">Status</v-card-title>
-
-<v-card-text class="black--text">
-{{ status_text }}
-</v-card-text>
-
-<v-card-actions>
-<v-spacer></v-spacer>
-
-
-
-<v-btn
-color="green darken-1"
-text
-@click="dialog = false"
->
-Okay
-</v-btn>
-</v-card-actions>
-</v-card>
-</v-dialog>
-</v-row>
-
-
-</div>`;
-
 Vue.component('address1' , {
 	props: ['profile_photo' , 'CSRF_TOKEN'],
-	template: code,
+	template: address1,
 	data(){
 		return {
 			name: 'riyad---vue',

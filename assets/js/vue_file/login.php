@@ -14,7 +14,7 @@
 
 
 
-	var code = `
+	var login = `
 
 	<div class="container-fluid">
 	<div class="row justify-content-xl-center justify-content-md-center _background ">
@@ -133,7 +133,7 @@
 	
 
 	Vue.component('login' , {
-		template: code,
+		template: login,
 		data(){
 			return{
 				loading: false,

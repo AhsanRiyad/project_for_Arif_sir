@@ -5,7 +5,7 @@
 
 
 
-var code = `<!-- registration page starts now -->
+var add_user = `<!-- registration page starts now -->
 
 <div class="container-fluid">
 <div  class="row justify-content-xl-center align-items-center 
@@ -237,7 +237,7 @@ value="">
 registratrion_status = '';
 
 Vue.component('add_user' , {
-	template: code, 
+	template: add_user, 
 	data(){
 		return {
 			name: 'riyad---vue',
