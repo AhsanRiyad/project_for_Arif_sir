@@ -105,11 +105,11 @@
 	<v-text-field v-model="item[1]" v-show="item[0] != 'blood_group' && item[0] != 'date_of_birth' " :disabled="item[0]=='membership_number' || item[0]=='registration_date' || item[0] == 'change_request' || item[0] == 'status' || item[0] == 'email_verification_status'  || item[0] == 'type'   || change_request_status == 'requested' "  @change="changeInfo(item[0] , item[1] , this)"></v-text-field>
 
 
-	<v-select v-model="item[1]" v-show="item[0] == 'blood_group' "
+	<v-select :disabled="change_request_status == 'requested'" v-model="item[1]" v-show="item[0] == 'blood_group' "
 	:items="blood_group_list" @change="changeInfo(item[0] , item[1] , this)"
 	></v-select>
 	
-	<input v-model="item[1]" type="date" class="form-control" v-if="item[0] == 'date_of_birth' "
+	<input :disabled="change_request_status == 'requested'" v-model="item[1]" type="date" class="form-control" v-if="item[0] == 'date_of_birth' "
 	:items="blood_group_list" @change="changeInfo(item[0] , item[1] , this )">
 
 

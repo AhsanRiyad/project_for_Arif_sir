@@ -2,6 +2,10 @@
 
 
 
+if($pageName == 'login' || $pageName == 'registration' || $pageName == 'forgot_password' ){
+	$_SESSION['users_info'] = null;
+}
+
 
 function dbGetUserDetails($email){
 	$conn = get_mysqli_connection();

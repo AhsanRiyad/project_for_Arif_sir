@@ -27,7 +27,7 @@ Welcome, Create your Account
 
 
 
-<span class="ml-auto mt-xl-auto mt-md-0 pt-3"><small >Alredy member? <a href="<?php echo $loginPage; ?>">Login</a> here</small></span>
+<span class="ml-auto mt-xl-auto mt-md-0 pt-3"><small >Alredy member? <a v-bind:href="address.loginPage">Login</a> here</small></span>
 </div>
 
 <div class="row justify-content-xl-center bg-white py-5 mb-5">
@@ -289,7 +289,7 @@ Vue.component('registration' , {
 			if(this.full_name_validity == 'valid' && this.institution_id_validity == 'valid' && this.mobile_validity == 'valid' && this.email_validity == 'valid' && this.password_validity == 'valid'){
 
 
-				axios.post('<?php echo $modelRegirstration; ?>', {
+				axios.post(this.model.modelRegirstration, {
 					full_name: this.$refs.full_name.value,
 					institution_id: this.institution_id,
 					email: this.email,

@@ -100,6 +100,8 @@ $id__ = '';
 $email__='';
 $name__ = '';
 
+
+
 if(isset($_SESSION['users_info'])){
 	$email__ = $_SESSION['users_info']['email'];
 	$id__ = $_SESSION['users_info']['id'];

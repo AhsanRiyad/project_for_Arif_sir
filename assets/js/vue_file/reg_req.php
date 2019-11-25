@@ -104,7 +104,7 @@
 				get_users: function(){
 				//alert('get_data_method');
 
-				this.$http.post('<?php echo $modelReg_req; ?>', {
+				this.$http.post( this.model.modelReg_req , {
 					purpose : 'get_change_req_user'
 				} ).then(function(response){
 					console.log(response);
@@ -802,7 +802,7 @@
 				get_users : function(){
 				//alert('get_data_method');
 
-				this.$http.post('<?php echo $modelReg_req; ?>', {
+				this.$http.post(this.model.modelReg_req, {
 					purpose : 'get_data'
 				} ).then(function(response){
 					console.log(response);

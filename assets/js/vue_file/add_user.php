@@ -278,6 +278,7 @@ Vue.component('add_user' , {
 		},
 
 		
+
 		changeType: function(){
 			this.registratrion_status = 'NO';
 		},
@@ -289,7 +290,7 @@ Vue.component('add_user' , {
 			if(this.full_name_validity == 'valid' && this.institution_id_validity == 'valid' && this.mobile_validity == 'valid' && this.email_validity == 'valid' && this.password_validity == 'valid'){
 
 
-				axios.post('<?php echo $modelRegirstration; ?>', {
+				axios.post(this.model.modelRegirstration , {
 					full_name: this.$refs.full_name.value,
 					institution_id: this.institution_id,
 					email: this.email,

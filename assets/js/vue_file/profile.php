@@ -657,7 +657,7 @@ Validate
 <v-btn
 color="green darken-1"
 text
-@click="dialog = false"
+@click="email_change_logout()"
 >
 Okay
 </v-btn>
@@ -675,6 +675,7 @@ Vue.component('email' , {
 	data(){
 		return {
 			name: 'riyad---vue',
+			email_change_status: false,
 			dialog: false,
 			status_text: '',
 			email_input: true,
@@ -732,9 +733,13 @@ Vue.component('email' , {
 						if(response.data == 'success'){
 							this.otp_text_box_show = true;
 							this.status_text = 'email changed successfully';
+							this.email_change_status = true;
+
+
 						}else{
 							this.otp_text_box_show = false;
 							this.status_text = 'invalid otp';
+							this.email_change_status = false;
 						}
 
 						this.loading = false;
@@ -751,6 +756,12 @@ Vue.component('email' , {
 
 
 
+			},
+			email_change_logout(){
+				this.dialog = false;
+				if(this.email_change_status == true){
+					window.location.href = this.address.loginPage;
+				}
 			},
 			submit(){
 				//alert(this.blood_group);

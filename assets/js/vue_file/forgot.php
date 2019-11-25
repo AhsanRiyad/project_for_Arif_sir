@@ -318,7 +318,7 @@
 
 	<div class="row justify-content-end">
 	<div class="col-lg-auto">
-	<a href="<?php echo $loginPage; ?>" class="">Go Back to Login</a>
+	<a v-bind:href="address.loginPage" class="">Go Back to Login</a>
 	</div>
 	</div>
 
