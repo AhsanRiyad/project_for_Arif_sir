@@ -281,13 +281,13 @@
 			},
 			validityCheckInput( inputName  ){
 				if(inputName == 'password'){
-					console.log(this.password);
+					
 					var patt= /[\S]{6,}/g;
 					var result = patt.test(this.password);
 
 					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
 				}else if(inputName == 'repassword'){
-					console.log(this.repassword);
+					
 					var patt= /[\S]{6,}/g;
 					var result = patt.test(this.repassword);
 
@@ -310,7 +310,7 @@
 					}
 					).then(function(response){
 
-						console.log(response);
+						
 
 						this.status_text = 'Password Updated successfully';
 						this.dialog = true;
@@ -375,10 +375,10 @@
 					this.login_status = response.data;
 
 
-					console.log(response);	
+					
 				}.bind(this))
 					.catch(function (error) {
-						console.log(error);
+						
 						this.loading = false;
                 //return 'hi';
             }.bind(this)); 
@@ -393,10 +393,10 @@
 			},
 			onChangeValidity(inputName){
 
-				console.log(this.password);
+				
 
 				if(inputName == 'email'){
-					console.log(this.email);
+					
 					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
 					var result = patt.test(this.email);
 
@@ -456,7 +456,7 @@
 
 			}
 			).then(function(response){
-				console.log(response);
+				
 				
 				
 
@@ -473,7 +473,7 @@
 			}.bind(this))
 			.catch(function(error){
 
-        //console.log(error);
+        
     }.bind(this));
 
 		}

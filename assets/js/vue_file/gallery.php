@@ -188,7 +188,7 @@
         this.group_photo = response.data.group_photo;
         this.photo_delete_status = "Your photo has been deleted";
         this.button_disabled = true ;
-        console.log(response);
+        
 
 
       }.bind(this))
@@ -216,7 +216,7 @@
         //this.users_info = response.data;
         // alert(rootAdress+'/assets/img/uploads/recent_photo/'+recent_photo);
 
-        console.log(response);
+        
         this.recent_photo = response.data.recent_photo;
         this.old_photo = response.data.old_photo;
         this.group_photo = response.data.group_photo;

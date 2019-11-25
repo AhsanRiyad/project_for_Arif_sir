@@ -60,7 +60,7 @@
     updatePrivacy(index){
       //alert('upadate privacy');
 
-      console.log(this.users_info[index][2]);
+      
 
       axios.post( this.model.modelPrivacy ,
       {
@@ -69,18 +69,16 @@
       }
       ).then(function(response){
         //this.users_info = response.data;
-        console.log(response);
+        
         
       }.bind(this))
       .catch(function(error){
 
-        console.log(error);
+        
       }.bind(this));
 
 
 
-
-      //console.log();
     },
     takeName(name){
       if(name=='full_name'){ 
@@ -156,11 +154,12 @@
     }
     ).then(function(response){
       this.users_info = response.data;
-      console.log(response);
+      
     }.bind(this))
     .catch(function(error){
 
-      console.log(error);
+      
+
     }.bind(this));
 
 
@@ -168,7 +167,7 @@
 
   },
   updated(){
-    console.log('updated');
+   
   }
 })
 

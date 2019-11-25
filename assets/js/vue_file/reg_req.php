@@ -494,20 +494,20 @@
 				this.$http.post( this.model.modelReg_req , {
 					purpose : 'get_change_req_user'
 				} ).then(function(response){
-					console.log(response);
+					// console.log(response);
 
 
 				// console.log(JSON.parse(response.data));
 
-				console.log(response.data);
+				// console.log(response.data);
 
 				if(response.data.length == 1){
 					this.user_list = []; 
 					this.user_list[0] =  JSON.parse(response.data);
-					console.log(this.user_list[0]);
+					// console.log(this.user_list[0]);
 				}else if(response.data.length > 1){
 					this.user_list =  response.data;
-					console.log(this.user_list[0].email);
+					// console.log(this.user_list[0].email);
 				}else if(response.data == 0){
 					this.user_list =  [];
 				}
@@ -528,7 +528,7 @@
 				//this.user_list = JSON.parse(data.bodyText);
 				//alert(data);
 				//console.log(obj[0].status);
-				console.log(data);
+				// console.log(data);
 				
 				this.admin_approval_status = 'Changes approved';
 				this.get_users();
@@ -549,7 +549,7 @@
 				})
 				.then(function (response) {
 
-					console.log(response);
+					// console.log(response);
 					this.admin_approval_status = 'User change request is rejected';
 					this.dialog = true;
 					this.get_users();
@@ -569,20 +569,20 @@
 				purpose : 'get_change_req_user'
 			})
 			.then(function (response) {
-				console.log(response);
+				// console.log(response);
 
 
 				// console.log(JSON.parse(response.data));
 
-				console.log(response.data.length);
+				// console.log(response.data.length);
 
 				if(response.data.length == 1){
 					this.user_list = []; 
 					this.user_list[0] =  JSON.parse(response.data);
-					console.log(this.user_list[0]);
+					// console.log(this.user_list[0]);
 				}else if(response.data.length > 1){
 					this.user_list =  response.data;
-					console.log(this.user_list[0].email);
+					// console.log(this.user_list[0].email);
 				}
 
 
@@ -690,7 +690,7 @@
 			}
 			).then(function(response){
 				
-				console.log(response.data);
+				// console.log(response.data);
 				this.user_change_details = response.data;
 				//console.log(this.user_details[0][1])
 				/*if(response.data.recent_photo == 'not_set'){
@@ -718,7 +718,7 @@
 			}
 			).then(function(response){
 				
-				console.log(response.data);
+				// console.log(response.data);
 				this.user_details = response.data;
 				//console.log(this.user_details[0][1])
 				if(response.data.recent_photo == 'not_set'){
@@ -727,7 +727,7 @@
 					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
 					//alert(this.user_details.recent_photo);
 				}
-				console.log(this.user_details);
+				// console.log(this.user_details);
 
 
 
@@ -779,7 +779,7 @@
 			}
 			).then(function(response){
 				
-				//console.log(response);
+				// console.log(response);
 				this.user_details = response.data;
 
 				if(response.data.recent_photo == 'not_set'){
@@ -789,7 +789,7 @@
 					//alert(this.user_details.recent_photo);
 				}
 
-				console.log(this.user_details);
+				// console.log(this.user_details);
 
 
 			}.bind(this))
@@ -822,20 +822,20 @@
 				this.$http.post(this.model.modelReg_req, {
 					purpose : 'get_data'
 				} ).then(function(response){
-					console.log(response);
+					// console.log(response);
 
 
 				// console.log(JSON.parse(response.data));
 
-				console.log(response.data);
+				// console.log(response.data);
 
 				if(response.data.length == 1){
 					this.user_list = []; 
 					this.user_list[0] =  JSON.parse(response.data);
-					console.log(this.user_list[0]);
+					// console.log(this.user_list[0]);
 				}else if(response.data.length > 1){
 					this.user_list =  response.data;
-					console.log(this.user_list[0].email);
+					// console.log(this.user_list[0].email);
 				}else if(response.data == 0){
 					this.user_list =  [];
 				}
@@ -857,7 +857,7 @@
 				//this.user_list = JSON.parse(data.bodyText);
 				//alert(data);
 				//console.log(obj[0].status);
-				console.log(data);
+				// console.log(data);
 				
 				this.admin_approval_status = 'User is approved';
 				this.get_users();
@@ -881,7 +881,7 @@
 				//this.user_list = JSON.parse(data.bodyText);
 				//alert(data);
 				//console.log(obj[0].status);
-				console.log(data);
+				// console.log(data);
 				this.admin_approval_status = 'User is rejected';
 				this.dialog = true;
 				this.get_users();
@@ -901,26 +901,26 @@
 				purpose : 'get_data'
 			})
 			.then(function (response) {
-				console.log(response);
+				// console.log(response);
 
 
 				// console.log(JSON.parse(response.data));
 
-				console.log(response.data.length);
+				// console.log(response.data.length);
 
 				if(response.data.length == 1){
 					this.user_list = []; 
 					this.user_list[0] =  JSON.parse(response.data);
-					console.log(this.user_list[0]);
+					// console.log(this.user_list[0]);
 				}else if(response.data.length > 1){
 					this.user_list =  response.data;
-					console.log(this.user_list[0].email);
+					// console.log(this.user_list[0].email);
 				}
 
 
 			}.bind(this))
 			.catch(function (error) {
-				console.log(error);
+				// console.log(error);
 			});
 
 
@@ -969,7 +969,7 @@
 
 			var dashboard_height = $('#dashboard_height').height();
 			var windowHeight = $(document).height();
-			console.log(dashboard_height);
+			// console.log(dashboard_height);
 			if(dashboard_height<windowHeight){
 
 				$('.dashboard_vertical_menu_height').height('100vh');

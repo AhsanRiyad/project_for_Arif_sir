@@ -1797,7 +1797,7 @@ Vue.component('email' , {
 
 			}.bind(this))
 			.catch(function(error){
-        //console.log(error);
+        
     }.bind(this));
 		}
 	})
@@ -1861,13 +1861,13 @@ Vue.component('password' , {
 			},
 			validityCheckInput( inputName  ){
 				if(inputName == 'password'){
-					console.log(this.password);
+					
 					var patt= /[\S]{6,}/g;
 					var result = patt.test(this.password);
 
 					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
 				}else if(inputName == 'repassword'){
-					console.log(this.repassword);
+					
 					var patt= /[\S]{6,}/g;
 					var result = patt.test(this.repassword);
 
@@ -1927,7 +1927,7 @@ Vue.component('password' , {
 
 			}.bind(this))
 			.catch(function(error){
-        //console.log(error);
+        
     }.bind(this));
 		}
 	})
@@ -2067,7 +2067,7 @@ Vue.component('basic' , {
 			},
 			validityCheckInput( inputName  ){
 				if(inputName == 'full_name'){
-					console.log(this.full_name);
+					
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.full_name);
 
@@ -2075,7 +2075,7 @@ Vue.component('basic' , {
 
 
 				}else if(inputName == 'mobile'){
-					console.log(this.mobile);
+					
 					var patt= /[\+]{0,1}[\d]{11,}/g;
 					var result = patt.test(this.mobile);
 
@@ -2083,7 +2083,7 @@ Vue.component('basic' , {
 
 
 				}else if(inputName == 'institution_id'){
-					console.log(this.institution_id);
+					
 					var patt= /[\S]{5,}/g;
 					var result = patt.test(this.institution_id);
 
@@ -2091,7 +2091,7 @@ Vue.component('basic' , {
 
 
 				}else if(inputName == 'nid_or_passport'){
-					console.log(this.nid_or_passport);
+					
 					var patt= /[\S]{10,}/g;
 					var result = patt.test(this.nid_or_passport);
 
@@ -2102,7 +2102,7 @@ Vue.component('basic' , {
 			},
 			onChangeValidity(inputName){
 				if(inputName == 'blood_group'){
-					console.log(this.blood_group);
+					
 					var patt= /[\+-A-O]{1,3}/g;
 					var result = patt.test(this.blood_group);
 
@@ -2110,13 +2110,13 @@ Vue.component('basic' , {
 
 
 				}else if(inputName == 'dob'){
-					console.log(this.dob);
+					
 					var patt= /^([0-9]{4})([-]{1}[0-9]{2}[-]{1}[0-9]{2}$)/igm;
 					var result = patt.test(this.dob);
-					console.log(result);
+					
 					var patt = /^([0-9]{4})/g;
 					const matches = this.dob.match(patt);
-					console.log(matches[0]);
+					
 
 
 					if(result == true && matches[0]>1950 && matches[0] <2000){
@@ -2330,7 +2330,7 @@ Vue.component('photos' , {
 							this.status = 'You are not authorized';
 							this.dialog = true;
 							this.recent_photo_name = 'choose file';
-							console.log(error);
+							
 						}.bind(this));
 						
 
@@ -2346,8 +2346,8 @@ Vue.component('photos' , {
 				handleFileUpload_recent: function(){
 				//alert('uploading files');
 				this.recent_photo = this.$refs.recent_photo.files[0];
-				console.log(this.recent_photo.size/1024/1024);
-				console.log(this.recent_photo);
+				//console.log(this.recent_photo.size/1024/1024);
+				//console.log(this.recent_photo);
 
 				var patt = /^(image\/){1}[A-Za-z]*/g;
 				var result = patt.test(this.recent_photo.type);
@@ -2435,7 +2435,7 @@ Vue.component('photos' , {
 							this.dialog = true;
 							this.old_photo_name = 'choose file';
 
-							console.log(error);
+							
 						}.bind(this));
 						
 
@@ -2451,8 +2451,8 @@ Vue.component('photos' , {
 				handleFileUpload_old: function(){
 				//alert('uploading files');
 				this.old_photo = this.$refs.old_photo.files[0];
-				console.log(this.old_photo.size/1024/1024);
-				console.log(this.old_photo);
+				//console.log(this.old_photo.size/1024/1024);
+				//console.log(this.old_photo);
 
 				var patt = /^(image\/){1}[A-Za-z]*/g;
 				var result = patt.test(this.old_photo.type);
@@ -2505,7 +2505,7 @@ Vue.component('photos' , {
 							this.dialog = true;
 							this.group_photo_name = 'choose file';
 
-							console.log(error);
+							//console.log(error);
 						}.bind(this));
 						
 
@@ -2521,8 +2521,8 @@ Vue.component('photos' , {
 				handleFileUpload_group: function(){
 				//alert('uploading files');
 				this.group_photo = this.$refs.group_photo.files[0];
-				console.log(this.group_photo.size/1024/1024);
-				console.log(this.group_photo);
+				//console.log(this.group_photo.size/1024/1024);
+				//console.log(this.group_photo);
 
 				var patt = /^(image\/){1}[A-Za-z]*/g;
 				var result = patt.test(this.group_photo.type);
@@ -2702,9 +2702,9 @@ Vue.component('personal' , {
 				}
 			},
 			onChangeValidity(inputName){
-				console.log(this.fathers_name);
+				//console.log(this.fathers_name);
 				if(inputName == 'fathers_name'){
-					console.log(this.fathers_name);
+					//console.log(this.fathers_name);
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.fathers_name);
 
@@ -2712,37 +2712,37 @@ Vue.component('personal' , {
 
 
 				}else if(inputName == 'mothers_name'){
-					console.log(this.mothers_name);
+					//console.log(this.mothers_name);
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.mothers_name);
 
 					result == false ? this.mothers_name_validity = 'invalid' : this.mothers_name_validity = 'valid';
 				}else if(inputName == 'spouse_name'){
-					console.log(this.spouse_name);
+					//console.log(this.spouse_name);
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.spouse_name);
 
 					result == false ? this.spouse_name_validity = 'invalid' : this.spouse_name_validity = 'valid';
 				}else if(inputName == 'number_of_children'){
-					console.log(this.number_of_children);
+					//console.log(this.number_of_children);
 					var patt= /^[\d]{1,2}$/g;
 					var result = patt.test(this.number_of_children);
 
 					result == false ? this.number_of_children_validity = 'invalid' : this.number_of_children_validity = 'valid';
 				}else if(inputName == 'profession'){
-					console.log(this.profession);
+					//console.log(this.profession);
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.profession);
 
 					result == false ? this.profession_validity = 'invalid' : this.profession_validity = 'valid';
 				}else if(inputName == 'workplace_or_institution'){
-					console.log(this.workplace_or_institution);
+					//console.log(this.workplace_or_institution);
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.workplace_or_institution);
 
 					result == false ? this.workplace_or_institution_validity = 'invalid' : this.workplace_or_institution_validity = 'valid';
 				}else if(inputName == 'designation'){
-					console.log(this.designation);
+					//console.log(this.designation);
 					var patt= /[A-Za-z.\s]{5,}/g;
 					var result = patt.test(this.designation);
 
@@ -3111,56 +3111,56 @@ Vue.component('address1' , {
 				// console.log(this.permanent_post_code);
 
 				if(inputName == 'present_line1'){
-					console.log(this.present_line1);
+					//console.log(this.present_line1);
 					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.present_line1);
 
 					result == false ? this.present_line1_validity = 'invalid' : this.present_line1_validity = 'valid';
 
 				}else if(inputName == 'present_district'){
-					console.log(this.present_district);
+					//console.log(this.present_district);
 					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.present_district);
 
 					result == false ? this.present_district_validity = 'invalid' : this.present_district_validity = 'valid';
 
 				}else if(inputName == 'present_country'){
-					console.log(this.present_country);
+					//console.log(this.present_country);
 					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.present_country);
 
 					result == false ? this.present_country_validity = 'invalid' : this.present_country_validity = 'valid';
 
 				}else if(inputName == 'present_post_code'){
-					console.log(this.present_post_code);
+					//console.log(this.present_post_code);
 					var patt= /[\+]{0,1}[\d]{4,}/g;
 					var result = patt.test(this.present_post_code);
 
 					result == false ? this.present_post_code_validity = 'invalid' : this.present_post_code_validity = 'valid';
 
 				}else if(inputName == 'permanent_line1'){
-					console.log(this.permanent_line1);
+					//console.log(this.permanent_line1);
 					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.permanent_line1);
 
 					result == false ? this.permanent_line1_validity = 'invalid' : this.permanent_line1_validity = 'valid';
 
 				}else if(inputName == 'permanent_district'){
-					console.log(this.permanent_district);
+					//console.log(this.permanent_district);
 					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.permanent_district);
 
 					result == false ? this.permanent_district_validity = 'invalid' : this.permanent_district_validity = 'valid';
 
 				}else if(inputName == 'permanent_country'){
-					console.log(this.permanent_country);
+					//console.log(this.permanent_country);
 					var patt= /[A-Za-z.\S]{5,}/g;
 					var result = patt.test(this.permanent_country);
 
 					result == false ? this.permanent_country_validity = 'invalid' : this.permanent_country_validity = 'valid';
 
 				}else if(inputName == 'permanent_post_code'){
-					console.log(this.permanent_post_code);
+					//console.log(this.permanent_post_code);
 					var patt= /[\+]{0,1}[\d]{4,}/g;
 					var result = patt.test(this.permanent_post_code);
 

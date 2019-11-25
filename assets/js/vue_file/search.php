@@ -920,7 +920,7 @@ aspect-ratio="1"
 					value: value , 
 				})
 				.then(function (response) {
-					console.log(response);
+					// console.log(response);
 
 					if(response.data == 'email_updated'){
 
@@ -937,7 +937,7 @@ aspect-ratio="1"
 
 				}.bind(this))
 				.catch(function (error) {
-					console.log(error);
+					
 				});
 
 			},
@@ -985,7 +985,7 @@ aspect-ratio="1"
 
 				}.bind(this))
 				.catch(function (error) {
-					console.log(error);
+					// 
 				});
 
 
@@ -1011,7 +1011,7 @@ aspect-ratio="1"
 
 				}.bind(this))
 				.catch(function (error) {
-					console.log(error);
+					
 				});
 
 				this.edit_info = false;
@@ -1043,7 +1043,7 @@ aspect-ratio="1"
 
 				}.bind(this))
 				.catch(function (error) {
-					console.log(error);
+					
 				});
 
 
@@ -1074,7 +1074,7 @@ aspect-ratio="1"
 
 				}.bind(this))
 				.catch(function (error) {
-					console.log(error);
+					
 				});
 
 
@@ -1098,14 +1098,14 @@ aspect-ratio="1"
 					user_id: this.user_id, 
 				}).then(function(response){
 					this.users_info = response.data;
-					console.log(response);
+					// console.log(response);
 					this.profile_user_status = this.users_info[22][1];
 					this.profile_user_type = this.users_info[25][1];
 					this.change_request_status= this.users_info[24][1];
 				}.bind(this))
 				.catch(function(error){
 
-					console.log(error);
+					
 				}.bind(this));
 			}
 		},
@@ -1119,16 +1119,16 @@ aspect-ratio="1"
 				user_id: this.user_id,
 			}).then(function(response){
 				this.users_info = response.data;
-				console.log(response);
+				// console.log(response);
 				this.profile_user_status = this.users_info[22][1];
 				this.profile_user_type = this.users_info[25][1];
 				this.change_request_status= this.users_info[24][1];
 
-				console.log(this.users_info[22][0]);
+				// console.log(this.users_info[22][0]);
 			}.bind(this))
 			.catch(function(error){
 
-				console.log(error);
+				
 			}.bind(this));
 
 
@@ -1195,7 +1195,7 @@ created(){
         //this.users_info = response.data;
         // alert(rootAdress+'/assets/img/uploads/recent_photo/'+recent_photo);
 
-        console.log(response);
+        // console.log(response);
         this.recent_photo = response.data.recent_photo;
         this.old_photo = response.data.old_photo;
         this.group_photo = response.data.group_photo;
@@ -1206,7 +1206,7 @@ created(){
     }.bind(this))
 	.catch(function(error){
 
-        //console.log(error);
+        //
     }.bind(this));
 }
 })
@@ -1245,15 +1245,15 @@ Vue.component('search' , {
 				}
 				).then(function(response){
 
-					console.log(response);
+					// console.log(response);
 
 					if(response.data.length == 1){
 						this.user_list = []; 
 						this.user_list[0] =  JSON.parse(response.data);
-						console.log(this.user_list[0]);
+						// console.log(this.user_list[0]);
 					}else if(response.data.length > 1){
 						this.user_list =  response.data;
-						console.log(this.user_list[0].email);
+						// console.log(this.user_list[0].email);
 					}else if(response.data == 0){
 						this.user_list =  [];
 					}
@@ -1261,7 +1261,7 @@ Vue.component('search' , {
 				}.bind(this))
 				.catch(function(error){
 
-					console.log(error);
+					// 
 				}.bind(this));
 
 
@@ -1290,7 +1290,7 @@ Vue.component('search' , {
 
 				
 
-        //console.log(error);
+        //
     }.bind(this));
 		}
 	})
