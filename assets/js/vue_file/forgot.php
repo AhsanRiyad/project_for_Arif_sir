@@ -6,15 +6,15 @@
 			return {
 				csrf_token1: '<?php echo $_SESSION['csrf_token1'] = bin2hex(random_bytes(32)); ?>',
 				forgot_password_crypto: '<?php if(isset($_GET['c'])){echo $_GET['c'];
-				} ?>',
-				email: '<?php if(isset($_GET['e'])){echo $_GET['e'];
-				}else {
-					echo 'not_set';
-				} ?>',
+			} ?>',
+			email: '<?php if(isset($_GET['e'])){echo $_GET['e'];
+		}else {
+			echo 'not_set';
+		} ?>',
 
-			}
-		}
-	})
+	}
+}
+})
 
 
 
@@ -22,7 +22,7 @@
 
 
 
-	var code = `<div class="container-fluid bg-light " style="margin-top: 150px;">
+	var password_recovery = `<div class="container-fluid bg-light " style="margin-top: 150px;">
 	<div class="row justify-content-center ">
 
 	<!-- update top part starts-->
@@ -135,125 +135,14 @@
 
 	</div>`;
 
-	Vue.component('password_recovery' , {
-		template: code,
-		data(){
-			return {
-				name: 'riyad---vue',
-				dialog: false,
-				status_text: '',
-				password_input: true,
-				password: '',
-				password_validity: '',
-				repassword_input: true,
-				repassword: '',
-				repassword_validity: '',
-				changes:{
-					password:{
-						smallText: {
-							color: '#2196f3'					
-						},
-						smallButton: {
-							color: 'white',
-							backgroundColor: '#2196f3' 
-						}
-					},
-					repassword:{
-						smallText: {
-							color: '#2196f3'					
-						},
-						smallButton: {
-							color: 'white',
-							backgroundColor: '#2196f3' 
-						}
-					},
-					
-				} 
-			}
-		},
-		methods: {
-			enable_input: function(name){
-				if(name=='password'){
-					this.password_input = false;
-					this.changes.password.smallText.color = 'red';
-					this.changes.password.smallButton.color = 'white';
-					this.changes.password.smallButton.backgroundColor = 'red';
-					//alert(this.password_input);
-				}
-				if(name=='repassword'){
-					this.repassword_input = false;
-					this.changes.repassword.smallText.color = 'red';
-					this.changes.repassword.smallButton.color = 'white';
-					this.changes.repassword.smallButton.backgroundColor = 'red';
-					//alert(this.password_input);
-				}
-			},
-			validityCheckInput( inputName  ){
-				if(inputName == 'password'){
-					console.log(this.password);
-					var patt= /[\S]{6,}/g;
-					var result = patt.test(this.password);
-
-					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
-				}else if(inputName == 'repassword'){
-					console.log(this.repassword);
-					var patt= /[\S]{6,}/g;
-					var result = patt.test(this.repassword);
-
-					result == false ? this.repassword_validity = 'invalid' : this.repassword_validity = 'valid';
-				}
-			},
-			submit(){
-				//alert(this.blood_group);
-				this.validityCheckInput('password');
-				this.validityCheckInput('repassword');
-
-				if(this.password_validity == 'valid' && this.password == this.repassword){
-
-					axios.post( this.model.modelProfile_update ,
-					{
-						purpose: 'password',
-						password: this.password,
-						email: this.email ,
-
-					}
-					).then(function(response){
-
-						console.log(response);
-
-						this.status_text = 'Password Updated successfully';
-						this.dialog = true;
-
-					}.bind(this))
-					.catch(function(error){
-
-        //console.log(error);
-    }.bind(this));
-
-				}else{
-					this.status_text = 'password doesnt match';
-					this.dialog = true;
-					//alert('all filed are not valid');
-				}
 
 
 
-			}
-
-		},
-		created(){}
-	})
+	
 
 
 
-
-
-
-
-
-
-
-	var code = `
+	var forgot_password = `
 	
 	<div class="container-fluid">
 	<div class="row justify-content-xl-center justify-content-md-center _background ">
@@ -343,8 +232,131 @@
 	`;
 	
 
+
+
+
+
+	
+
+	Vue.component('password_recovery' , {
+		template: password_recovery,
+		data(){
+			return {
+				name: 'riyad---vue',
+				dialog: false,
+				status_text: '',
+				password_input: true,
+				password: '',
+				password_validity: '',
+				repassword_input: true,
+				repassword: '',
+				repassword_validity: '',
+				changes:{
+					password:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
+					},
+					repassword:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
+					},
+					
+				} 
+			}
+		},
+		methods: {
+			enable_input: function(name){
+				if(name=='password'){
+					this.password_input = false;
+					this.changes.password.smallText.color = 'red';
+					this.changes.password.smallButton.color = 'white';
+					this.changes.password.smallButton.backgroundColor = 'red';
+					//alert(this.password_input);
+				}
+				if(name=='repassword'){
+					this.repassword_input = false;
+					this.changes.repassword.smallText.color = 'red';
+					this.changes.repassword.smallButton.color = 'white';
+					this.changes.repassword.smallButton.backgroundColor = 'red';
+					//alert(this.password_input);
+				}
+			},
+			validityCheckInput( inputName  ){
+				if(inputName == 'password'){
+					
+
+					var patt= /[\S]{6,}/g;
+					var result = patt.test(this.password);
+
+					result == false ? this.password_validity = 'invalid' : this.password_validity = 'valid';
+				}else if(inputName == 'repassword'){
+					
+					var patt= /[\S]{6,}/g;
+					var result = patt.test(this.repassword);
+
+					result == false ? this.repassword_validity = 'invalid' : this.repassword_validity = 'valid';
+				}
+			},
+			submit(){
+				//alert(this.blood_group);
+				this.validityCheckInput('password');
+				this.validityCheckInput('repassword');
+
+				if(this.password_validity == 'valid' && this.password == this.repassword){
+
+					axios.post( this.model.modelProfile_update ,
+					{
+						purpose: 'password',
+						password: this.password,
+						email: this.email ,
+
+					}
+					).then(function(response){
+
+						
+
+						this.status_text = 'Password Updated successfully';
+						this.dialog = true;
+
+					}.bind(this))
+					.catch(function(error){
+
+						
+					}.bind(this));
+
+				}else{
+					this.status_text = 'password doesnt match';
+					this.dialog = true;
+					//alert('all filed are not valid');
+				}
+
+
+
+			}
+
+		},
+		created(){}
+	})
+
+
+
+
+
+
+
+
 	Vue.component('forgot_password' , {
-		template: code,
+		template: forgot_password,
 		props: ['invalid_link'],
 		data(){
 			return{
@@ -375,10 +387,10 @@
 					this.login_status = response.data;
 
 
-					console.log(response);	
+					
 				}.bind(this))
 					.catch(function (error) {
-						console.log(error);
+						
 						this.loading = false;
                 //return 'hi';
             }.bind(this)); 
@@ -393,10 +405,10 @@
 			},
 			onChangeValidity(inputName){
 
-				console.log(this.password);
+				
 
 				if(inputName == 'email'){
-					console.log(this.email);
+					
 					var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
 					var result = patt.test(this.email);
 
@@ -448,35 +460,34 @@
 				
 
 
-			axios.post( this.model.modelProfile_update ,
-			{
-				purpose: 'forgot_password_recovery',
-				email: this.email.trim(),
-				forgot_password_crypto: this.forgot_password_crypto.trim(),
+				axios.post( this.model.modelProfile_update ,
+				{
+					purpose: 'forgot_password_recovery',
+					email: this.email.trim(),
+					forgot_password_crypto: this.forgot_password_crypto.trim(),
+
+				}
+				).then(function(response){
+					
+					
+
+					if(response.data == 'allow'){
+						
+						this.componet_name = 'password_recovery';
+
+					}else{
+						this.invalid_link = response.data;
+						this.componet_name = 'forgot_password' ;
+					}
+
+
+				}.bind(this))
+				.catch(function(error){
+
+					
+				}.bind(this));
 
 			}
-			).then(function(response){
-				console.log(response);
-				
-				
-
-				if(response.data == 'allow'){
-					
-					this.componet_name = 'password_recovery';
-
-				}else{
-					this.invalid_link = response.data;
-					this.componet_name = 'forgot_password' ;
-				}
-
-
-			}.bind(this))
-			.catch(function(error){
-
-        //console.log(error);
-    }.bind(this));
-
-		}
 
 		},
 		beforeMount(){

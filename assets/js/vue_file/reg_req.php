@@ -1,7 +1,7 @@
 <script>
 
 
-	var code = `
+	var change_request = `
 	<div class="row">
 	<p id="user_id" hidden ></p>
 	<div class="col-xl-8 col-md-10 col-10 offset-1  mt-4">
@@ -89,133 +89,6 @@
 	`;
 
 
-	Vue.component('change_request', {
-		template: code , 
-		data(){
-			return { user_list : [] , 
-				dialog: false,
-				admin_approval_status: '',
-				array_size: true  }
-			}, 
-			methods: {
-				changeName: function(){
-
-				},
-				get_users: function(){
-				//alert('get_data_method');
-
-				this.$http.post( this.model.modelReg_req , {
-					purpose : 'get_change_req_user'
-				} ).then(function(response){
-					console.log(response);
-
-
-				// console.log(JSON.parse(response.data));
-
-				console.log(response.data);
-
-				if(response.data.length == 1){
-					this.user_list = []; 
-					this.user_list[0] =  JSON.parse(response.data);
-					console.log(this.user_list[0]);
-				}else if(response.data.length > 1){
-					this.user_list =  response.data;
-					console.log(this.user_list[0].email);
-				}else if(response.data == 0){
-					this.user_list =  [];
-				}
-
-
-			})
-			},
-			approve_id: function(email , user_id){
-				//console.log(email);
-
-				this.$http.post(this.model.modelReg_req, {
-					purpose : 'approve_user_change_request', 
-					email: email,
-					user_id: user_id,
-				} ).then(function(data){
-				//var obj = JSON.parse(data);
-				// console.log(obj);
-				//this.user_list = JSON.parse(data.bodyText);
-				//alert(data);
-				//console.log(obj[0].status);
-				console.log(data);
-				
-				this.admin_approval_status = 'Changes approved';
-				this.get_users();
-				this.dialog = true;
-				//console.log(obj.length);
-
-
-			})
-
-			},
-			reject_id: function(email , user_id){
-				//console.log(email);
-
-				axios.post(this.model.modelReg_req , {
-					purpose : 'reject_user_user_request', 
-					email: email,
-					user_id: user_id,
-				})
-				.then(function (response) {
-
-					console.log(response);
-					this.admin_approval_status = 'User change request is rejected';
-					this.dialog = true;
-					this.get_users();
-
-				}.bind(this))
-				.catch(function (error) {
-
-				});
-
-
-			}
-		},
-		created(){
-			
-
-			axios.post(this.model.modelReg_req , {
-				purpose : 'get_change_req_user'
-			})
-			.then(function (response) {
-				console.log(response);
-
-
-				// console.log(JSON.parse(response.data));
-
-				console.log(response.data.length);
-
-				if(response.data.length == 1){
-					this.user_list = []; 
-					this.user_list[0] =  JSON.parse(response.data);
-					console.log(this.user_list[0]);
-				}else if(response.data.length > 1){
-					this.user_list =  response.data;
-					console.log(this.user_list[0].email);
-				}
-
-
-			}.bind(this))
-			.catch(function (error) {
-				console.log(error);
-			});
-
-
-
-		},
-		mounted(){
-			//alert('the page is mounted');
-		}
-	}
-	);
-
-
-
-
 
 
 
@@ -268,142 +141,6 @@
 	`;
 
 
-/*<tr v-for="item in desserts" :key="item.name">
-	<td>{{ item.name }}</td>
-	<td>{{ item.calories }}</td>
-	</tr>*/
-
-
-	Vue.component('change_details', {
-		props: ['email' , 'user_id'] , 
-		template: modal_user_details ,
-		data(){
-			return {
-				dialogm1: '',
-				dialog: false,
-				user_details: {},
-				user_change_details: {},
-
-			}
-		},
-		methods:{
-			takeName(name){
-
-				if(name=='full_name'){ 
-					return 'Full Name';
-				}else if(name == 'email'){
-					return 'Email';
-				}else if(name == 'mobile'){
-					return 'Mobile';
-				}else if(name == 'institution_id'){
-					return 'Institution ID';
-				}else if(name == 'nid_or_passport'){
-					return 'NID/Passport';
-				}else if(name == 'fathers_name'){
-					return "Father's Name";
-				}else if(name == 'mother_name'){
-					return "Mother's Name";
-				}else if(name == 'spouse_name'){
-					return "Spouse's Name";
-				}else if(name == 'number_of_children'){
-					return "Number Of Children";
-				}else if(name == 'profession'){
-					return "Profession";
-				}else if(name == 'designation'){
-					return "Designation";
-				}else if(name == 'blood_group'){
-					return "Blood Group";
-				}else if(name == 'date_of_birth'){
-					return "Date Of Birth";
-				}else if(name == 'present_line1'){
-					return "Present Adress Line1";
-				}else if(name == 'present_post_code'){
-					return "Present Post Code";
-				}else if(name == 'present_district'){
-					return "Present District";
-				}else if(name == 'parmanent_country'){
-					return "Present Country";
-				}else if(name == 'parmanent_line1'){
-					return "Permanent Adress Line1";
-				}else if(name == 'parmanent_post_code'){
-					return "Permanent Post Code";
-				}else if(name == 'parmanent_district'){
-					return "Permanent District";
-				}else if(name == 'parmanent_country'){
-					return "Permanent Country";
-				}else if(name == 'membership_number'){
-					return "Member ship Number";
-				}else if(name == 'type'){
-					return "User Type";
-				}else if(name == 'status'){
-					return "Verfication Status";
-				}else if(name == 'registration_date'){
-					return "Account Created at";
-				}else if(name == 'institution'){
-					return "Workplace/Institution";
-				}
-			
-			}
-		},
-		mounted(){
-
-			axios.post( this.model.modelReg_req ,
-			{
-				purpose: 'get_change_req_data',
-				user_id: this.user_id,
-				
-			}
-			).then(function(response){
-				
-				console.log(response.data);
-				this.user_change_details = response.data;
-				//console.log(this.user_details[0][1])
-				/*if(response.data.recent_photo == 'not_set'){
-					this.user_details.recent_photo = rootAdress+'assets/img/uploads/default.jpg';
-				}else{
-					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
-					//alert(this.user_details.recent_photo);
-				}
-				console.log(this.user_details);*/
-
-
-
-
-			}.bind(this))
-			.catch(function(error){
-        //console.log(error);
-    }.bind(this));
-
-
-			axios.post( this.model.modelReg_req ,
-			{
-				purpose: 'getProfileBasicInfo',
-				user_id: this.user_id,
-				
-			}
-			).then(function(response){
-				
-				console.log(response.data);
-				this.user_details = response.data;
-				//console.log(this.user_details[0][1])
-				if(response.data.recent_photo == 'not_set'){
-					this.user_details.recent_photo = rootAdress+'assets/img/uploads/default.jpg';
-				}else{
-					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
-					//alert(this.user_details.recent_photo);
-				}
-				console.log(this.user_details);
-
-
-
-
-			}.bind(this))
-			.catch(function(error){
-        //console.log(error);
-    }.bind(this));
-		}
-	}
-	);
 
 
 
@@ -411,17 +148,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-	var modal_user_details =  `
+	var modal_user_details_2 =  `
 	<v-row justify="center">
 	<v-dialog v-model="dialog" scrollable max-width="400px">
 	<template v-slot:activator="{ on }">
@@ -648,58 +375,12 @@
 	`;
 
 
-/*<tr v-for="item in desserts" :key="item.name">
-	<td>{{ item.name }}</td>
-	<td>{{ item.calories }}</td>
-	</tr>*/
 
 
-	Vue.component('component_user_datails', {
-		props: ['email' , 'user_id'] , 
-		template: modal_user_details ,
-		data(){
-			return {
-				dialogm1: '',
-				dialog: false,
-				user_details: {},
-			}
-		},
-		mounted(){
-
-			axios.post( this.model.modelReg_req ,
-			{
-				purpose: 'getProfileBasicInfo',
-				user_id: this.user_id,
-				
-			}
-			).then(function(response){
-				
-				//console.log(response);
-				this.user_details = response.data;
-
-				if(response.data.recent_photo == 'not_set'){
-					this.user_details.recent_photo = rootAdress+'assets/img/uploads/default.jpg';
-				}else{
-					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
-					//alert(this.user_details.recent_photo);
-				}
-
-				console.log(this.user_details);
 
 
-			}.bind(this))
-			.catch(function(error){
-
-				
-
-        //console.log(error);
-    }.bind(this));
-		}
-	}
-	);
-
-
-	var code = `
+	
+	var reg_req = `
 	<div class="row">
 	<p id="user_id" hidden ></p>
 	<div class="col-xl-8 col-md-10 col-10 offset-1  mt-4">
@@ -787,8 +468,343 @@
 	`;
 
 
+
+
+
+
+
+	Vue.component('change_request', {
+		template: change_request , 
+		data(){
+			return { user_list : [] , 
+				dialog: false,
+				admin_approval_status: '',
+				array_size: true  }
+			}, 
+			methods: {
+				changeName: function(){
+
+				},
+				get_users: function(){
+				//alert('get_data_method');
+
+				this.$http.post( this.model.modelReg_req , {
+					purpose : 'get_change_req_user'
+				} ).then(function(response){
+					console.log(response);
+
+
+				// console.log(JSON.parse(response.data));
+
+				console.log(response.data);
+
+				if(response.data.length == 1){
+					this.user_list = []; 
+					this.user_list[0] =  JSON.parse(response.data);
+					console.log(this.user_list[0]);
+				}else if(response.data.length > 1){
+					this.user_list =  response.data;
+					console.log(this.user_list[0].email);
+				}else if(response.data == 0){
+					this.user_list =  [];
+				}
+
+
+			})
+			},
+			approve_id: function(email , user_id){
+				//console.log(email);
+
+				this.$http.post(this.model.modelReg_req, {
+					purpose : 'approve_user_change_request', 
+					email: email,
+					user_id: user_id,
+				} ).then(function(data){
+				//var obj = JSON.parse(data);
+				// console.log(obj);
+				//this.user_list = JSON.parse(data.bodyText);
+				//alert(data);
+				//console.log(obj[0].status);
+				console.log(data);
+				
+				this.admin_approval_status = 'Changes approved';
+				this.get_users();
+				this.dialog = true;
+				//console.log(obj.length);
+
+
+			})
+
+			},
+			reject_id: function(email , user_id){
+				//console.log(email);
+
+				axios.post(this.model.modelReg_req , {
+					purpose : 'reject_user_user_request', 
+					email: email,
+					user_id: user_id,
+				})
+				.then(function (response) {
+
+					console.log(response);
+					this.admin_approval_status = 'User change request is rejected';
+					this.dialog = true;
+					this.get_users();
+
+				}.bind(this))
+				.catch(function (error) {
+
+				});
+
+
+			}
+		},
+		created(){
+			
+
+			axios.post(this.model.modelReg_req , {
+				purpose : 'get_change_req_user'
+			})
+			.then(function (response) {
+				console.log(response);
+
+
+				// console.log(JSON.parse(response.data));
+
+				console.log(response.data.length);
+
+				if(response.data.length == 1){
+					this.user_list = []; 
+					this.user_list[0] =  JSON.parse(response.data);
+					console.log(this.user_list[0]);
+				}else if(response.data.length > 1){
+					this.user_list =  response.data;
+					console.log(this.user_list[0].email);
+				}
+
+
+			}.bind(this))
+			.catch(function (error) {
+				console.log(error);
+			});
+
+
+
+		},
+		mounted(){
+			//alert('the page is mounted');
+		}
+	}
+	);
+
+
+
+
+
+/*<tr v-for="item in desserts" :key="item.name">
+	<td>{{ item.name }}</td>
+	<td>{{ item.calories }}</td>
+	</tr>*/
+
+
+	Vue.component('change_details', {
+		props: ['email' , 'user_id'] , 
+		template: modal_user_details ,
+		data(){
+			return {
+				dialogm1: '',
+				dialog: false,
+				user_details: {},
+				user_change_details: {},
+
+			}
+		},
+		methods:{
+			takeName(name){
+
+				if(name=='full_name'){ 
+					return 'Full Name';
+				}else if(name == 'email'){
+					return 'Email';
+				}else if(name == 'mobile'){
+					return 'Mobile';
+				}else if(name == 'institution_id'){
+					return 'Institution ID';
+				}else if(name == 'nid_or_passport'){
+					return 'NID/Passport';
+				}else if(name == 'fathers_name'){
+					return "Father's Name";
+				}else if(name == 'mother_name'){
+					return "Mother's Name";
+				}else if(name == 'spouse_name'){
+					return "Spouse's Name";
+				}else if(name == 'number_of_children'){
+					return "Number Of Children";
+				}else if(name == 'profession'){
+					return "Profession";
+				}else if(name == 'designation'){
+					return "Designation";
+				}else if(name == 'blood_group'){
+					return "Blood Group";
+				}else if(name == 'date_of_birth'){
+					return "Date Of Birth";
+				}else if(name == 'present_line1'){
+					return "Present Adress Line1";
+				}else if(name == 'present_post_code'){
+					return "Present Post Code";
+				}else if(name == 'present_district'){
+					return "Present District";
+				}else if(name == 'parmanent_country'){
+					return "Present Country";
+				}else if(name == 'parmanent_line1'){
+					return "Permanent Adress Line1";
+				}else if(name == 'parmanent_post_code'){
+					return "Permanent Post Code";
+				}else if(name == 'parmanent_district'){
+					return "Permanent District";
+				}else if(name == 'parmanent_country'){
+					return "Permanent Country";
+				}else if(name == 'membership_number'){
+					return "Member ship Number";
+				}else if(name == 'type'){
+					return "User Type";
+				}else if(name == 'status'){
+					return "Verfication Status";
+				}else if(name == 'registration_date'){
+					return "Account Created at";
+				}else if(name == 'institution'){
+					return "Workplace/Institution";
+				}
+			
+			}
+		},
+		mounted(){
+
+			axios.post( this.model.modelReg_req ,
+			{
+				purpose: 'get_change_req_data',
+				user_id: this.user_id,
+				
+			}
+			).then(function(response){
+				
+				console.log(response.data);
+				this.user_change_details = response.data;
+				//console.log(this.user_details[0][1])
+				/*if(response.data.recent_photo == 'not_set'){
+					this.user_details.recent_photo = rootAdress+'assets/img/uploads/default.jpg';
+				}else{
+					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
+					//alert(this.user_details.recent_photo);
+				}
+				console.log(this.user_details);*/
+
+
+
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+
+
+			axios.post( this.model.modelReg_req ,
+			{
+				purpose: 'getProfileBasicInfo',
+				user_id: this.user_id,
+				
+			}
+			).then(function(response){
+				
+				console.log(response.data);
+				this.user_details = response.data;
+				//console.log(this.user_details[0][1])
+				if(response.data.recent_photo == 'not_set'){
+					this.user_details.recent_photo = rootAdress+'assets/img/uploads/default.jpg';
+				}else{
+					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
+					//alert(this.user_details.recent_photo);
+				}
+				console.log(this.user_details);
+
+
+
+
+			}.bind(this))
+			.catch(function(error){
+        //console.log(error);
+    }.bind(this));
+		}
+	}
+	);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*<tr v-for="item in desserts" :key="item.name">
+	<td>{{ item.name }}</td>
+	<td>{{ item.calories }}</td>
+	</tr>*/
+
+
+	Vue.component('component_user_datails', {
+		props: ['email' , 'user_id'] , 
+		template: modal_user_details_2 ,
+		data(){
+			return {
+				dialogm1: '',
+				dialog: false,
+				user_details: {},
+			}
+		},
+		mounted(){
+
+			axios.post( this.model.modelReg_req ,
+			{
+				purpose: 'getProfileBasicInfo',
+				user_id: this.user_id,
+				
+			}
+			).then(function(response){
+				
+				//console.log(response);
+				this.user_details = response.data;
+
+				if(response.data.recent_photo == 'not_set'){
+					this.user_details.recent_photo = rootAdress+'assets/img/uploads/default.jpg';
+				}else{
+					this.user_details.recent_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+response.data.recent_photo;
+					//alert(this.user_details.recent_photo);
+				}
+
+				console.log(this.user_details);
+
+
+			}.bind(this))
+			.catch(function(error){
+
+				
+
+        //console.log(error);
+    }.bind(this));
+		}
+	}
+	);
+
+
+
 	Vue.component('reg_req', {
-		template: code , 
+		template: reg_req , 
 		data(){
 			return { user_list : [] , 
 				dialog: false,

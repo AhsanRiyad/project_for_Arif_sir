@@ -5,7 +5,7 @@
 
 
 
-var code = `<!-- registration page starts now -->
+var add_user = `<!-- registration page starts now -->
 
 <div class="container-fluid">
 <div  class="row justify-content-xl-center align-items-center 
@@ -237,7 +237,7 @@ value="">
 registratrion_status = '';
 
 Vue.component('add_user' , {
-	template: code, 
+	template: add_user, 
 	data(){
 		return {
 			name: 'riyad---vue',
@@ -303,7 +303,7 @@ Vue.component('add_user' , {
 
 				}.bind(this))
 				.catch(function (error) {
-					console.log(error);
+					
 					this.loading = false;
 				//return 'hi';
 			});
@@ -325,35 +325,35 @@ Vue.component('add_user' , {
 		},
 		onChangeValidity(inputName){
 			if(inputName == 'full_name'){
-				console.log(this.$refs.full_name.value);
+				
 				var patt= /[A-Za-z.\s]{5,}/g;
 				var result = patt.test(this.$refs.full_name.value);
 
 				result == false ? this.full_name_validity = 'invalid' : this.full_name_validity = 'valid';
 
 			}else if(inputName == 'institution_id'){
-				console.log(this.institution_id);
+				
 				var patt= /[A-Za-z\S]{5,}/g;
 				var result = patt.test(this.institution_id);
 
 				result == false ? this.institution_id_validity = 'invalid' : this.institution_id_validity = 'valid';
 
 			}else if(inputName == 'mobile'){
-				console.log(this.mobile);
+				
 				var patt= /[\+]{0,1}[\d]{11,}/g;
 				var result = patt.test(this.mobile);
 
 				result == false ? this.mobile_validity = 'invalid' : this.mobile_validity = 'valid';
 
 			}else if(inputName == 'email'){
-				console.log(this.email);
+				
 				var patt= /^[a-zA-Z]{1}[a-zA-Z1-9._]{3,15}@[a-zA-Z]{1}[a-zA-Z1-9]{3,15}\.[a-zA-Z]{2,10}(\.[a-zA-Z]{2})*$/g;
 				var result = patt.test(this.email);
 
 				result == false ? this.email_validity = 'invalid' : this.email_validity = 'valid';
 
 			}else if(inputName == 'password'){
-				console.log(this.password);
+				
 				var patt= /[\S]{6,}/g;
 				var result = patt.test(this.password);
 
