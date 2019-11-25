@@ -3,7 +3,198 @@
 	var bus = new Vue();
 
 
-	var code = `
+
+
+
+var search = `
+<div class="container">
+<div class="row justify-content-center">
+
+<div class="col-xl-7 col-md-9 col-12 text-center bg-info ">
+<h2 class="text-white py-2 ">Search</h2>
+</div>
+
+<div class="w-100"></div>
+<div class="col-md-5 col-xl-4">	
+<div>
+<p>Search</p>
+<v-text-field
+v-model="search_text"
+label="search"
+@keyup="search()"
+required
+></v-text-field>
+</div>
+</div>
+
+
+<div class="col-md-4 col-xl-3">	
+
+<p>Categories</p>
+<v-select @change="search()"
+v-model="category"
+:items="category_items"
+label="Select"
+value="true"
+required
+></v-select>
+
+</div>
+
+</div>
+
+
+
+<div class="row justify-content-center">
+<div class="col-xl-7 col-md-9 col-12   mt-4">
+<div class="row  text-center bg-info">
+<div class="col text-center bg-success">
+<h2 class="text-white py-2 ">Search Results</h2>
+</div>
+</div>
+<div class="row">
+<table class="table" >
+<thead  class="thead-dark" >
+<tr >
+<th>Name</th>
+<th>membership_number</th>
+<th>institution_id</th>
+<th>Gallery</th>
+<th>Details</th>
+
+</tr>
+</thead>
+<tbody v-if="array_size && users_info_as_props.id != user.id" id="tbody" v-for="user in user_list"  :key='user.id'>
+<tr>
+<td> {{ user.full_name }} </td>
+<td> {{ user.membership_number }} </td>
+<td> {{ user.institution_id }} </td>
+<td>
+<gallery :email='user.email' :user_id='user.id' ></gallery>
+</td>
+<td>
+<get_details :email='user.email' :user_id='user.id' :users_info_as_props='users_info_as_props' :category="category"></get_details>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<div hidden>
+
+<v-btn class="ma-2" color="orange darken-2" dark>
+<v-icon dark left>mdi-arrow-left</v-icon>Back
+</v-btn>
+
+<v-btn class="ma-2" color="orange darken-2" dark> Next  &nbsp
+<v-icon dark left>mdi-arrow-right </v-icon>
+</v-btn>
+
+</div>
+
+
+
+</div>
+</div>
+
+
+</div>
+
+
+
+</div>
+`;
+
+
+
+
+
+
+
+
+
+
+var gallery = `
+<v-row justify="center">
+<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+<template v-slot:activator="{ on }">
+<v-btn color="primary" dark v-on="on">Gallery</v-btn>
+</template>
+<v-card>
+<v-toolbar dark color="primary">
+<v-btn icon dark @click="dialog = false">
+<v-icon>mdi-close</v-icon>
+</v-btn>
+<v-toolbar-title>Gallery</v-toolbar-title>
+<v-spacer></v-spacer>
+<v-toolbar-items>
+<v-btn dark text @click="dialog = false">Close</v-btn>
+</v-toolbar-items>
+</v-toolbar>
+
+
+
+<div class="container">
+<div class="row justify-content-md-center">
+
+
+
+<div class="col col-md-5">
+<h1 class="text-center">Recent Photo</h1>
+
+
+<img class="text-center img-fluid img-thumbnail" v-if="recent_photo != 'not_set'"
+:src="rootAdress+recent_photos+recent_photo"
+style="max-height: 400px; width: 600px;">
+
+
+<img class="text-center img-fluid img-thumbnail" v-if="recent_photo == 'not_set'"
+:src="images.default_photo"
+style="max-height: 400px; width: 600px;">
+</div>
+
+<div class="w-100">
+</div>
+
+<div class="col col-md-5">
+<h1 class="text-center">old Photo</h1>
+<img class="text-center img-fluid img-thumbnail" v-if="old_photo != 'not_set'"
+:src="rootAdress+old_photos+old_photo"
+style="max-height: 400px; width: 600px;">
+<img class="text-center img-fluid img-thumbnail" v-if="old_photo == 'not_set'"
+:src="images.default_photo"
+style="max-height: 400px; width: 600px;">
+</div>
+</div>
+
+<div class="row  justify-content-center">
+<div class="row col-md-8">
+
+<div class="col-md-12">
+<h1 class="text-center" > Group Photos </h1>
+</div> 
+<div class="col-md-4" v-for="(photo , index) in group_photo">
+<img @click="zoom_in(rootAdress+group_photos+photo , photo)" style="height: 250px; width: 250px;" 
+aspect-ratio="1"
+:src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">
+</div>
+</div>
+</div>
+</div>
+</v-card>
+</v-dialog>
+</v-row>
+`;
+
+
+
+
+
+
+
+
+
+	var get_details = `
 	<v-row justify="center">
 	<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 	<template v-slot:activator="{ on }">
@@ -290,7 +481,7 @@
 
 
 	Vue.component('get_details' , {
-		template: code,
+		template: get_details,
 		props: ['email' , 'user_id' ,  'users_info_as_props' , 'category'],
 		data(){
 			return {
@@ -953,85 +1144,8 @@
 
 
 
-
-
-
-
-var code = `
-<v-row justify="center">
-<v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-<template v-slot:activator="{ on }">
-<v-btn color="primary" dark v-on="on">Gallery</v-btn>
-</template>
-<v-card>
-<v-toolbar dark color="primary">
-<v-btn icon dark @click="dialog = false">
-<v-icon>mdi-close</v-icon>
-</v-btn>
-<v-toolbar-title>Gallery</v-toolbar-title>
-<v-spacer></v-spacer>
-<v-toolbar-items>
-<v-btn dark text @click="dialog = false">Close</v-btn>
-</v-toolbar-items>
-</v-toolbar>
-
-
-
-<div class="container">
-<div class="row justify-content-md-center">
-
-
-
-<div class="col col-md-5">
-<h1 class="text-center">Recent Photo</h1>
-
-
-<img class="text-center img-fluid img-thumbnail" v-if="recent_photo != 'not_set'"
-:src="rootAdress+recent_photos+recent_photo"
-style="max-height: 400px; width: 600px;">
-
-
-<img class="text-center img-fluid img-thumbnail" v-if="recent_photo == 'not_set'"
-:src="images.default_photo"
-style="max-height: 400px; width: 600px;">
-</div>
-
-<div class="w-100">
-</div>
-
-<div class="col col-md-5">
-<h1 class="text-center">old Photo</h1>
-<img class="text-center img-fluid img-thumbnail" v-if="old_photo != 'not_set'"
-:src="rootAdress+old_photos+old_photo"
-style="max-height: 400px; width: 600px;">
-<img class="text-center img-fluid img-thumbnail" v-if="old_photo == 'not_set'"
-:src="images.default_photo"
-style="max-height: 400px; width: 600px;">
-</div>
-</div>
-
-<div class="row  justify-content-center">
-<div class="row col-md-8">
-
-<div class="col-md-12">
-<h1 class="text-center" > Group Photos </h1>
-</div> 
-<div class="col-md-4" v-for="(photo , index) in group_photo">
-<img @click="zoom_in(rootAdress+group_photos+photo , photo)" style="height: 250px; width: 250px;" 
-aspect-ratio="1"
-:src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">
-</div>
-</div>
-</div>
-</div>
-</v-card>
-</v-dialog>
-</v-row>
-`;
-
-
 Vue.component('gallery' , {
-	template: code,
+	template: gallery,
 	props: ['email' , 'user_id'],
 	data(){
 		return {
@@ -1101,110 +1215,8 @@ created(){
 
 
 
-
-
-var code = `
-<div class="container">
-<div class="row justify-content-center">
-
-<div class="col-xl-7 col-md-9 col-12 text-center bg-info ">
-<h2 class="text-white py-2 ">Search</h2>
-</div>
-
-<div class="w-100"></div>
-<div class="col-md-5 col-xl-4">	
-<div>
-<p>Search</p>
-<v-text-field
-v-model="search_text"
-label="search"
-@keyup="search()"
-required
-></v-text-field>
-</div>
-</div>
-
-
-<div class="col-md-4 col-xl-3">	
-
-<p>Categories</p>
-<v-select @change="search()"
-v-model="category"
-:items="category_items"
-label="Select"
-value="true"
-required
-></v-select>
-
-</div>
-
-</div>
-
-
-
-<div class="row justify-content-center">
-<div class="col-xl-7 col-md-9 col-12   mt-4">
-<div class="row  text-center bg-info">
-<div class="col text-center bg-success">
-<h2 class="text-white py-2 ">Search Results</h2>
-</div>
-</div>
-<div class="row">
-<table class="table" >
-<thead  class="thead-dark" >
-<tr >
-<th>Name</th>
-<th>membership_number</th>
-<th>institution_id</th>
-<th>Gallery</th>
-<th>Details</th>
-
-</tr>
-</thead>
-<tbody v-if="array_size && users_info_as_props.id != user.id" id="tbody" v-for="user in user_list"  :key='user.id'>
-<tr>
-<td> {{ user.full_name }} </td>
-<td> {{ user.membership_number }} </td>
-<td> {{ user.institution_id }} </td>
-<td>
-<gallery :email='user.email' :user_id='user.id' ></gallery>
-</td>
-<td>
-<get_details :email='user.email' :user_id='user.id' :users_info_as_props='users_info_as_props' :category="category"></get_details>
-</td>
-</tr>
-</tbody>
-</table>
-
-
-<div hidden>
-
-<v-btn class="ma-2" color="orange darken-2" dark>
-<v-icon dark left>mdi-arrow-left</v-icon>Back
-</v-btn>
-
-<v-btn class="ma-2" color="orange darken-2" dark> Next  &nbsp
-<v-icon dark left>mdi-arrow-right </v-icon>
-</v-btn>
-
-</div>
-
-
-
-</div>
-</div>
-
-
-</div>
-
-
-
-</div>
-`;
-
-
 Vue.component('search' , {
-	template: code,
+	template: search,
 	data(){
 		return {
 			category: 'full_name',
