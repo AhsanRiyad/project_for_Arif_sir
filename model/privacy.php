@@ -167,10 +167,8 @@ echo $row['st'];
 					//print_r($arrayTobeUpdated);
 					//$email = 'riyad298@gmail.com';
 					$conn = get_mysqli_connection();
-					$sql = "UPDATE `all_info_together` SET visibility = (?) WHERE id = (?)";
-					$stmt = $conn->prepare($sql);
-					$stmt->bind_param('si' , $privacyArrayInString ,  $user_id);
-					$stmt->execute();   
+					$sql = "UPDATE `all_info_together` SET visibility = '".$privacyArrayInString."' WHERE id = ".$user_id." ";
+					$result = mysqli_query($conn, $sql); 
 
 					//echo $privacyArrayInString;
 
