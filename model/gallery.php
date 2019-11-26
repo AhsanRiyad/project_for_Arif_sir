@@ -43,23 +43,20 @@ function getPhotos(){
 	$arrayPhoto = array( 'recent_photo' => $recent_photo , 'old_photo' => $old_photo );
 
 
-	$sql = "select * from user_photos up where up.email = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
-	$stmt->execute();
-	$result = $stmt->get_result();
+	$sql = "select * from user_photos up where up.email = '".$email."' ";
+	$result = mysqli_query($conn, $sql);
 // $row = $result->fetch_assoc();
 
 
 	$i = 0;
 // echo json_encode(var_dump($row));
-	while($row = $result->fetch_assoc()) {
+	while($row = mysqli_fetch_assoc($result)) {
 
 		$arrayPhoto['group_photo'][$i] = $row['group_photo']; 
 		$i++;
 	}
 
-	$stmt->close();
+	
 	$conn->close();
 
 
@@ -95,23 +92,20 @@ if($d2->purpose == 'getPhotos'){
 	$arrayPhoto = array( 'recent_photo' => $recent_photo , 'old_photo' => $old_photo );
 
 
-	$sql = "select * from user_photos up where up.email = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
-	$stmt->execute();
-	$result = $stmt->get_result();
+	$sql = "select * from user_photos up where up.email = '".$email."' ";
+	$result = mysqli_query($conn, $sql);
 // $row = $result->fetch_assoc();
 
 
 	$i = 0;
 // echo json_encode(var_dump($row));
-	while($row = $result->fetch_assoc()) {
+	while($row = mysqli_fetch_assoc($result)) {
 
 		$arrayPhoto['group_photo'][$i] = $row['group_photo']; 
 		$i++;
 	}
 
-	$stmt->close();
+	
 	$conn->close();
 
 
@@ -143,23 +137,20 @@ if($d2->purpose == 'getPhotos'){
 	$arrayPhoto = array( 'recent_photo' => $recent_photo , 'old_photo' => $old_photo );
 
 
-	$sql = "select * from user_photos up where up.email = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
-	$stmt->execute();
-	$result = $stmt->get_result();
+	$sql = "select * from user_photos up where up.email = '".$email."' ";
+	$result = mysqli_query($conn, $sql);
 // $row = $result->fetch_assoc();
 
 
 	$i = 0;
 // echo json_encode(var_dump($row));
-	while($row = $result->fetch_assoc()) {
+	while($row = mysqli_fetch_assoc($result)) {
 
 		$arrayPhoto['group_photo'][$i] = $row['group_photo']; 
 		$i++;
 	}
 
-	$stmt->close();
+	
 	$conn->close();
 
 
@@ -194,7 +185,7 @@ if($d2->purpose == 'getPhotos'){
 		unlink($target_file);
 	}
 
-	$stmt->close();
+	
 	$conn->close();
 
 	
@@ -218,23 +209,20 @@ if($d2->purpose == 'getPhotos'){
 	$arrayPhoto = array( 'recent_photo' => $recent_photo , 'old_photo' => $old_photo );
 
 
-	$sql = "select * from user_photos up where up.email = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
-	$stmt->execute();
-	$result = $stmt->get_result();
+	$sql = "select * from user_photos up where up.email = '".$email."' ";
+	$result = mysqli_query($conn, $sql);
 // $row = $result->fetch_assoc();
 
 
 	$i = 0;
 // echo json_encode(var_dump($row));
-	while($row = $result->fetch_assoc()) {
+	while($row = mysqli_fetch_assoc($result)) {
 
 		$arrayPhoto['group_photo'][$i] = $row['group_photo']; 
 		$i++;
 	}
 
-	$stmt->close();
+	
 	$conn->close();
 
 
