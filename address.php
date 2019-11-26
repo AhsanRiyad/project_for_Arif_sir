@@ -11,7 +11,9 @@ session_start();
 $APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/project_for_Arif_sir/";
 
 $rootAdress = 'http://localhost/project_for_Arif_sir/';
-$rootAdress_model = 'http://riyad.friendsbd.website/project_for_Arif_sir/';
+
+//hosting
+//$rootAdress = 'http://riyad.friendsbd.website/project_for_Arif_sir/';
 
 
 
@@ -83,6 +85,19 @@ $hostName = 'localhost';
 $userName = 'root';
 $password = '';
 $databaseName = 'intern_project';
+
+
+// database hosting
+// $hostName = '127.0.0.1';
+// $userName = 'frieomkc_riyad';
+// $password = '01919448787';
+// $databaseName = 'frieomkc_intern_project';
+
+
+
+
+
+
 
 
 //CSRF_TOKEN token securty session
