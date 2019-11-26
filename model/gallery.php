@@ -45,7 +45,6 @@ function getPhotos(){
 
 	$sql = "select * from user_photos up where up.email = '".$email."' ";
 	$result = mysqli_query($conn, $sql);
-	
 // $row = $result->fetch_assoc();
 
 
@@ -186,7 +185,7 @@ if($d2->purpose == 'getPhotos'){
 		unlink($target_file);
 	}
 
-	$stmt->close();
+	
 	$conn->close();
 
 	

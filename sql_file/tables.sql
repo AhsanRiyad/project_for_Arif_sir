@@ -690,3 +690,51 @@ update all_info_together set  present_line1 = present_line11, present_district =
             
             END$$
             DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+BEGIN
+
+DECLARE count int(5);
+
+
+DECLARE verification_status varchar(100);
+DECLARE change_req_status varchar(100);
+DECLARE user_type varchar(100);
+
+
+select status into verification_status from all_info_together where id = id1;
+select change_request into change_req_status from all_info_together where id = id1;
+select type into user_type from all_info_together where id = id1;
+
+
+update all_info_together set  nid_or_passport = nid_or_passport1, date_of_birth = dob1 , blood_group = blood_group1 where id = id1 ;
+
+update all_info_together set full_name = full_name1 , mobile = mobile1 , institution_id = institution_id1  where id = id1 ;
+
+
+
+IF verification_status = 'approved' and user_type !='admin'
+THEN
+
+if change_req_status = 'not_requested' OR change_req_status = 'approved'
+then
+
+UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 , all_info_together.change_request_time = NOW() WHERE id = id1;
+ELSE
+UPDATE all_info_together set change_request = 'requested' , all_info_together.change_request_time = NOW() WHERE id = id1;
+end IF;
+end IF;
+
+set result = 'success' ;
+
+END
