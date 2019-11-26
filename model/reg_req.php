@@ -216,17 +216,17 @@ else if($d2->purpose=='get_user_details'){
 	//echo 'hi';
 	//echo $email;
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration ur , verification_info vi , users_info ui , users_address ua where ur.email = vi.email and ur.email = ui.email and ur.email = ua.email and vi.email = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
-	$stmt->execute();
+	$sql = "select * from users_registration ur , verification_info vi , users_info ui , users_address ua where ur.email = vi.email and ur.email = ui.email and ur.email = ua.email and vi.email = '".$email."' ";
+	$result = mysqli_query($conn, $sql);
+	
 	//print_r($row);
+	if (mysqli_num_rows($result) === 0) {
+		exit('No rows');
+	}
 	$i = 0 ;
-//echo json_encode($row);
 	$array2d ;
-	$result = $stmt->get_result();
-	if($result->num_rows === 0) exit('No rows');
-	while($row = $result->fetch_assoc()) {
+
+	while($row = mysqli_fetch_assoc($result)) {
 		$GLOBALS['array2d'][$i++] = $row;
 	}
 	
