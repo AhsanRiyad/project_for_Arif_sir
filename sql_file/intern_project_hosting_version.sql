@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2019 at 05:06 PM
+-- Generation Time: Nov 26, 2019 at 02:37 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -183,13 +183,19 @@ select type into user_type from all_info_together where id = id1;
 
 update all_info_together set  present_line1 = present_line11, present_district = present_district1, present_post_code = present_post_code1 , present_country = present_country1 , parmanent_line1 = permanent_line11 , parmanent_district = permanent_district1, parmanent_post_code = permanent_post_code1 , parmanent_country = permanent_country1 where id = id1 ;
 
-IF verification_status = 'approved' and change_req_status = 'not_requested' OR change_req_status = 'approved' and user_type !='admin'
+
+
+IF verification_status = 'approved' and user_type !='admin'
 THEN
+
+if change_req_status = 'not_requested' OR change_req_status = 'approved'
+then
+
 UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 , all_info_together.change_request_time = NOW() WHERE id = id1;
-ELSE 
+ELSE
 UPDATE all_info_together set change_request = 'requested' , all_info_together.change_request_time = NOW() WHERE id = id1;
 end IF;
-
+end IF;
 
 
 
@@ -219,13 +225,17 @@ update all_info_together set full_name = full_name1 , mobile = mobile1 , institu
 
 
 
-IF verification_status = 'approved' and change_req_status = 'not_requested' OR change_req_status = 'approved' and user_type !='admin'
+IF verification_status = 'approved' and user_type !='admin'
 THEN
+
+if change_req_status = 'not_requested' OR change_req_status = 'approved'
+then
+
 UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 , all_info_together.change_request_time = NOW() WHERE id = id1;
 ELSE
 UPDATE all_info_together set change_request = 'requested' , all_info_together.change_request_time = NOW() WHERE id = id1;
 end IF;
-
+end IF;
 
 set result = 'success' ;
 
@@ -341,11 +351,16 @@ select type into user_type FROM all_info_together WHERE id = id1;
 update all_info_together set  fathers_name = fathers_name1, mother_name = mothers_name1 , spouse_name = spouse_name1, number_of_children = number_of_children1 , profession = profession1 , institution = workplace_or_institution1 , designation = designation1 where id = id1 ;
 
 
-IF verification_status = 'approved' and change_req_status = 'not_requested' OR change_req_status = 'approved' and user_type !='admin'
+IF verification_status = 'approved' and user_type !='admin'
 THEN
+
+if change_req_status = 'not_requested' OR change_req_status = 'approved'
+then
+
 UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 , all_info_together.change_request_time = NOW() WHERE id = id1;
 ELSE
 UPDATE all_info_together set change_request = 'requested' , all_info_together.change_request_time = NOW() WHERE id = id1;
+end IF;
 end IF;
 
 
@@ -495,8 +510,9 @@ CREATE TABLE `users_address` (
 
 INSERT INTO `users_address` (`email`, `users_address_id`, `present_line1`, `present_line2`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`, `parmanent_line2`, `parmanent_district`, `parmanent_post_code`, `parmanent_country`) VALUES
 ('ahsan.riyad@outlook.com', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@gmail.com', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@yahoo.com', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('riyad298@gmail.com', 2, '', NULL, '', '', '', '', NULL, '', '', ''),
+('riyad298@yahoo.com', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('riyad298@hotmail.com', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -526,8 +542,9 @@ CREATE TABLE `users_info` (
 
 INSERT INTO `users_info` (`email`, `gender`, `ui_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
 ('ahsan.riyad@outlook.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@gmail.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('riyad298@yahoo.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('riyad298@gmail.com', NULL, 0, 'arfraeferferf', 'reaferfearferf', 'aerfaerfaerf', 'refaerfaerf', 3, 'fraeferfaerf', 'aferfaerferf', 'areferfaefe', 'A+', '1992-11-20'),
+('riyad298@yahoo.com', NULL, 0, '15632244886', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('riyad298@hotmail.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -552,8 +569,9 @@ CREATE TABLE `users_registration` (
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
 ('ahsan.riyad@outlook.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 17:51:59.000000', 1000),
-('riyad298@gmail.com', 2, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 18:30:44.000000', 1001),
-('riyad298@yahoo.com', 3, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 20:26:41.000000', 1000);
+('riyad298@gmail.com', 2, 'Md Ahsan Ferdous Riyad', '01919448765', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 18:30:44.000000', 1001),
+('riyad298@yahoo.com', 3, 'Md Ahsan Ferdous Riyad', '01919448788', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 20:26:41.000000', 1002),
+('riyad298@hotmail.com', 4, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-26 16:24:19.000000', 1000);
 
 -- --------------------------------------------------------
 
@@ -585,9 +603,10 @@ CREATE TABLE `user_uploads` (
 --
 
 INSERT INTO `user_uploads` (`id_user_uploads`, `email`, `recent_photo`, `old_photo`) VALUES
-(1, 'ahsan.riyad@outlook.com', '1.jpg', 'not_set'),
-(2, 'riyad298@gmail.com', 'not_set', 'not_set'),
-(3, 'riyad298@yahoo.com', 'not_set', 'not_set');
+(1, 'ahsan.riyad@outlook.com', 'not_set', 'not_set'),
+(2, 'riyad298@gmail.com', '2.jpg', 'not_set'),
+(3, 'riyad298@yahoo.com', 'not_set', 'not_set'),
+(4, 'riyad298@hotmail.com', 'not_set', 'not_set');
 
 -- --------------------------------------------------------
 
@@ -615,9 +634,10 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `change_request_time`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
-(1, 'ahsan.riyad@outlook.com', '6197', NULL, 'approved', 'verified', 'not_requested', NULL, 'admin', 'full_name,institution_id,parmanent_post_code,parmanent_district,parmanent_country,membership_number', 60, NULL),
-(2, 'riyad298@gmail.com', '1800', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'user', 'full_name,email,institution_id,present_district,parmanent_line1,parmanent_post_code,membership_number,email_verification_status,type', 100, NULL),
-(3, 'riyad298@yahoo.com', '2758', NULL, 'not_verified', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 60, NULL);
+(1, 'ahsan.riyad@outlook.com', '6197', NULL, 'approved', 'verified', 'not_requested', NULL, 'admin', 'full_name,email,mobile,institution_id,parmanent_post_code,parmanent_district,parmanent_country,membership_number,email_verification_status,change_request', 60, NULL),
+(2, 'riyad298@gmail.com', '1800', NULL, 'approved', 'not_verified', 'approved', '2019-11-26 18:54:05.000000', 'user', 'full_name,mobile,institution_id,mother_name,present_district,parmanent_line1,parmanent_post_code,parmanent_country,membership_number,status,change_request,type', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Md Ahsan Ferdous Riyad,01919448765,riyad,arfraeferferf,reaferfearferf,aerfaerfaerf,refaerfaerf,3,fraeferfaerf,aferfaerferf,areferfaefe,O+,1992-11-20,,,,,,,,'),
+(3, 'riyad298@yahoo.com', '2758', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'admin', 'full_name,institution_id,membership_number', 100, NULL),
+(4, 'riyad298@hotmail.com', '7771', NULL, 'not_verified', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 60, NULL);
 
 -- --------------------------------------------------------
 
@@ -682,31 +702,31 @@ ALTER TABLE `log_table`
 -- AUTO_INCREMENT for table `users_address`
 --
 ALTER TABLE `users_address`
-  MODIFY `users_address_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `users_address_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users_registration`
 --
 ALTER TABLE `users_registration`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_photos`
 --
 ALTER TABLE `user_photos`
-  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_uploads`
 --
 ALTER TABLE `user_uploads`
-  MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `verification_info`
 --
 ALTER TABLE `verification_info`
-  MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
