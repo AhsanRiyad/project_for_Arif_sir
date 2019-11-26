@@ -38,10 +38,11 @@ if($purpose_type == 'group_photo'){
 
 	move_uploaded_file($_FILES[$purpose_type]["tmp_name"], $target_file) ;
 
-	$sql = "call upload_photo( '".$purpose_type."' , '".$base_name."' , '".$email."' , ".$user_id." , @existing_file_name , @result )";
-	$result = mysqli_query($conn, $sql);
-
-
+	$sql = "call upload_photo( ? , ? , ? , ?, @existing_file_name , @result )";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param('sssi' , $purpose_type ,  $base_name , $email, $user_id );
+	$stmt->execute();
+	$stmt->close();
 	$sql = 'select @existing_file_name as st , @result as rs'; 
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
@@ -59,13 +60,11 @@ if($purpose_type == 'group_photo'){
 
 	move_uploaded_file($_FILES[$purpose_type]["tmp_name"], $target_file) ;
 
-	$sql = "call upload_photo( '".$purpose_type."' , '".$base_name."' , '".$email."' ".$user_id." , @existing_file_name , @result )";
+	$sql = "call upload_photo( ? , ? , ? , ?, @existing_file_name , @result )";
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('sssi' , $purpose_type ,  $base_name , $email, $user_id );
 	$stmt->execute();
 	$stmt->close();
-
-
 	$sql = 'select @existing_file_name as st , @result as rs'; 
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);

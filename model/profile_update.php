@@ -223,10 +223,12 @@ if($d1->purpose == 'basic'){
 	//echo $password1;
 
   $conn = get_mysqli_connection();
-  $sql = "call update_profile_password( ".$id__." , '".$password1."' , @result)";
-  $result = mysqli_query($conn, $sql);
+  $sql = "call update_profile_password( ? , ? , @result)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('is' , $id__ , $password1 );
 
-
+  $stmt->execute();
+  $stmt->close();
   $sql = 'select @result as st'; 
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
@@ -319,10 +321,12 @@ if($d1->purpose == 'basic'){
   $purpose = 'generate_crypto';
 
   $conn = get_mysqli_connection();
-  $sql = "call update_profile_forgot_password( '".$email1."' , '".$randomNumber."' , '".$purpose."' , @result)";
-  $result = mysqli_query($conn, $sql);
+  $sql = "call update_profile_forgot_password( ? , ? , ? , @result)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('sss' , $email1 , $randomNumber , $purpose );
 
-
+  $stmt->execute();
+  $stmt->close();
   $sql = 'select @result as st'; 
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
@@ -382,10 +386,12 @@ if($d1->purpose == 'basic'){
 	//echo $email1;
 
   $conn = get_mysqli_connection();
-  $sql = "call update_profile_forgot_password( '".$email1."' , '".$forgot_password_crypto."' , '".$purpose."' , @result)";
-  $result = mysqli_query($conn, $sql);
+  $sql = "call update_profile_forgot_password( ? , ? , ? , @result)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param('sss' , $email1 , $forgot_password_crypto , $purpose );
 
-
+  $stmt->execute();
+  $stmt->close();
   $sql = 'select @result as st'; 
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
