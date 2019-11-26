@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2019 at 10:42 PM
+-- Generation Time: Nov 26, 2019 at 02:21 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -183,13 +183,19 @@ select type into user_type from all_info_together where id = id1;
 
 update all_info_together set  present_line1 = present_line11, present_district = present_district1, present_post_code = present_post_code1 , present_country = present_country1 , parmanent_line1 = permanent_line11 , parmanent_district = permanent_district1, parmanent_post_code = permanent_post_code1 , parmanent_country = permanent_country1 where id = id1 ;
 
-IF verification_status = 'approved' and change_req_status = 'not_requested' OR change_req_status = 'approved' and user_type !='admin'
+
+
+IF verification_status = 'approved' and user_type !='admin'
 THEN
+
+if change_req_status = 'not_requested' OR change_req_status = 'approved'
+then
+
 UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 , all_info_together.change_request_time = NOW() WHERE id = id1;
-ELSE 
+ELSE
 UPDATE all_info_together set change_request = 'requested' , all_info_together.change_request_time = NOW() WHERE id = id1;
 end IF;
-
+end IF;
 
 
 
@@ -219,13 +225,17 @@ update all_info_together set full_name = full_name1 , mobile = mobile1 , institu
 
 
 
-IF verification_status = 'approved' and change_req_status = 'not_requested' OR change_req_status = 'approved' and user_type !='admin'
+IF verification_status = 'approved' and user_type !='admin'
 THEN
+
+if change_req_status = 'not_requested' OR change_req_status = 'approved'
+then
+
 UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 , all_info_together.change_request_time = NOW() WHERE id = id1;
 ELSE
 UPDATE all_info_together set change_request = 'requested' , all_info_together.change_request_time = NOW() WHERE id = id1;
 end IF;
-
+end IF;
 
 set result = 'success' ;
 
@@ -341,11 +351,16 @@ select type into user_type FROM all_info_together WHERE id = id1;
 update all_info_together set  fathers_name = fathers_name1, mother_name = mothers_name1 , spouse_name = spouse_name1, number_of_children = number_of_children1 , profession = profession1 , institution = workplace_or_institution1 , designation = designation1 where id = id1 ;
 
 
-IF verification_status = 'approved' and change_req_status = 'not_requested' OR change_req_status = 'approved' and user_type !='admin'
+IF verification_status = 'approved' and user_type !='admin'
 THEN
+
+if change_req_status = 'not_requested' OR change_req_status = 'approved'
+then
+
 UPDATE all_info_together set change_request = 'requested' , last_verified_info = last_verified_info1 , all_info_together.change_request_time = NOW() WHERE id = id1;
 ELSE
 UPDATE all_info_together set change_request = 'requested' , all_info_together.change_request_time = NOW() WHERE id = id1;
+end IF;
 end IF;
 
 
@@ -468,557 +483,6 @@ CREATE TABLE `log_table` (
   `log_info` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `log_table`
---
-
-INSERT INTO `log_table` (`log_id`, `user`, `log_info`) VALUES
-(1, NULL, 'riyad298@gmail.com'),
-(2, NULL, 'riyad298@yahoo.com'),
-(3, NULL, 'riyad298@yahoo.com'),
-(4, NULL, 'riyada'),
-(5, NULL, 'riyad298@gmail.com'),
-(6, NULL, 'riyad298@gmail.com'),
-(7, NULL, 'riyad298@gmail.com'),
-(8, NULL, 'riyad298@gmail.com'),
-(9, NULL, 'riyad298@gmail.com'),
-(10, NULL, 'riyad298@gmail.com'),
-(11, NULL, 'riyad298@gmail.com'),
-(12, NULL, 'riyad298@gmail.com'),
-(13, NULL, 'riyad298@gmail.com'),
-(14, NULL, 'riyad298@gmail.com'),
-(15, NULL, 'riyad298@gmail.com'),
-(16, NULL, 'riyad298@gmail.com'),
-(17, NULL, 'riyad298@gmail.com'),
-(18, NULL, 'riyad298@gmail.com'),
-(19, NULL, 'riyad298@gmail.com'),
-(20, NULL, 'riyad298@gmail.com'),
-(21, NULL, 'riyad298@gmail.com'),
-(22, NULL, 'riyad298@gmail.com'),
-(23, NULL, 'riyad298@gmail.com'),
-(24, NULL, 'riyad298@gmail.com'),
-(25, NULL, 'riyad298@gmail.com'),
-(26, NULL, 'riyad298@gmail.com'),
-(27, NULL, 'riyad298@gmail.com'),
-(28, NULL, 'riyad298@gmail.com'),
-(29, NULL, 'riyad298@gmail.com'),
-(30, NULL, 'riyad298@gmail.com'),
-(31, NULL, 'riyad298@gmail.com'),
-(32, NULL, 'riyad298@gmail.com'),
-(33, NULL, 'riyad298@gmail.com'),
-(34, NULL, 'riyad298@gmail.com'),
-(35, NULL, 'riyad298@gmail.com'),
-(36, NULL, 'riyad298@gmail.com'),
-(37, NULL, 'riyad298@gmail.com'),
-(38, NULL, 'riyad298@gmail.com'),
-(39, NULL, 'riyad298@gmail.com'),
-(40, NULL, 'riyad298@gmail.com'),
-(41, NULL, 'riyad298@gmail.com'),
-(42, NULL, 'riyad298@gmail.com'),
-(43, NULL, 'riyad298@gmail.com'),
-(44, NULL, 'riyad298@gmail.com'),
-(45, NULL, 'riyad298@gmail.com'),
-(46, NULL, 'riyad298@gmail.com'),
-(47, NULL, 'riyad298@yahoo.com'),
-(48, NULL, 'riyad298@gmail.com'),
-(49, NULL, 'riyad298@gmail.com'),
-(50, NULL, 'riyad298@gmail.com'),
-(51, NULL, 'riyad298@gmail.com'),
-(52, NULL, 'riyad298@gmail.com'),
-(53, NULL, 'riyad298@gmail.com'),
-(54, NULL, 'riyad298@gmail.com'),
-(55, NULL, 'riyad298@gmail.com'),
-(56, NULL, 'riyad298@gmail.com'),
-(57, NULL, 'riyad298@gmail.com'),
-(58, NULL, 'riyad298@yahoo.com'),
-(59, NULL, 'riyad298@gmail.com'),
-(60, NULL, 'riyad298@gmail.com'),
-(61, NULL, 'riyad298@gmail.com'),
-(62, NULL, 'riyad298@gmail.com'),
-(63, NULL, 'riyad298@gmail.com'),
-(64, NULL, 'riyad298@gmail.com'),
-(65, NULL, 'riyad298@gmail.com'),
-(66, NULL, 'riyad298@gmail.com'),
-(67, NULL, 'riyad298@gmail.com'),
-(68, NULL, 'riyad298@gmail.com'),
-(69, NULL, 'riyad298@gmail.com'),
-(70, NULL, 'riyad298@gmail.com'),
-(71, NULL, 'riyad298@gmail.com'),
-(72, NULL, 'riyad298@gmail.com'),
-(73, NULL, 'riyad298@gmail.com'),
-(74, NULL, 'riyad298@gmail.com'),
-(75, NULL, 'riyad298@gmail.com'),
-(76, NULL, 'riyad298@gmail.com'),
-(77, NULL, 'riyad298@gmail.com'),
-(78, NULL, 'riyad298@gmail.com'),
-(79, NULL, 'riyad298@gmail.com'),
-(80, NULL, 'riyad298@gmail.com'),
-(81, NULL, 'riyad298@gmail.com'),
-(82, NULL, 'riyad298@gmail.com'),
-(83, NULL, 'riyad298@gmail.com'),
-(84, NULL, 'riyad298@gmail.com'),
-(85, NULL, 'riyad298@gmail.com'),
-(86, NULL, 'riyad298@gmail.com'),
-(87, NULL, 'riyad298@yahoo.com'),
-(88, NULL, 'riyad298@yahoo.com'),
-(89, NULL, 'riyad298@yahoo.com'),
-(90, NULL, 'riyad298@yahoo.com'),
-(91, NULL, 'riyad298@yahoo.com'),
-(92, NULL, 'riyad298@yahoo.com'),
-(93, NULL, 'riyad298@yahoo.com'),
-(94, NULL, 'riyad298@yahoo.com'),
-(95, NULL, 'riyad298@gmail.com'),
-(96, NULL, 'riyad298@gmail.com'),
-(97, NULL, 'riyad298@gmail.com'),
-(98, NULL, 'riyad298@gmail.com'),
-(99, NULL, 'riyad298@gmail.com'),
-(100, NULL, 'riyad298@gmail.com'),
-(101, NULL, 'riyad298@yahoo.com'),
-(102, NULL, 'riyad298@yahoo.com'),
-(103, NULL, 'riyad298@yahoo.com'),
-(104, NULL, 'riyad298@yahoo.com'),
-(105, NULL, 'riyad298@yahoo.com'),
-(106, NULL, 'riyad298@yahoo.com'),
-(107, NULL, 'riyad298@gmail.com'),
-(108, NULL, 'riyad298@gmail.com'),
-(109, NULL, 'riyad298@yahoo.com'),
-(110, NULL, 'riyad298@yahoo.com'),
-(111, NULL, 'riyad298@gmail.com'),
-(112, NULL, 'riyad298@yahoo.com'),
-(113, NULL, 'riyad298@gmail.com'),
-(114, NULL, 'riyad298@gmail.com'),
-(115, NULL, 'riyad298@gmail.com'),
-(116, NULL, 'riyad298@yahoo.com'),
-(117, NULL, 'riyad298@yahoo.com'),
-(118, NULL, 'riyad298@yahoo.com'),
-(119, NULL, 'riyad298@gmail.com'),
-(120, NULL, 'riyad298@gmail.com'),
-(121, NULL, 'riyad298@yahoo.com'),
-(122, NULL, 'riyad298@yahoo.com'),
-(123, NULL, 'riyad298@yahoo.com'),
-(124, NULL, 'riyad298@yahoo.com'),
-(125, NULL, 'riyad298@yahoo.com'),
-(126, NULL, 'riyad298@gmail.com'),
-(127, NULL, 'riyad298@gmail.com'),
-(128, NULL, 'riyad298@gmail.com'),
-(129, NULL, 'riyad298@gmail.com'),
-(130, NULL, 'riyad298@gmail.com'),
-(131, NULL, 'riyad298@gmail.com'),
-(132, NULL, 'riyad298@gmail.com'),
-(133, NULL, 'riyad298@gmail.com'),
-(134, NULL, 'riyad298@yahoo.com'),
-(135, NULL, 'riyad298@yahoo.com'),
-(136, NULL, 'riyad298@yahoo.com'),
-(137, NULL, 'riyad298@yahoo.com'),
-(138, NULL, 'riyad298@yahoo.com'),
-(139, NULL, 'riyad298@yahoo.com'),
-(140, NULL, 'riyad298@yahoo.com'),
-(141, NULL, 'riyad298@yahoo.com'),
-(142, NULL, 'riyad298@yahoo.com'),
-(143, NULL, 'riyad298@yahoo.com'),
-(144, NULL, 'riyad298@yahoo.com'),
-(145, NULL, 'riyad298@yahoo.com'),
-(146, NULL, 'riyad298@yahoo.com'),
-(147, NULL, 'riyad298@yahoo.com'),
-(148, NULL, 'riyad298@yahoo.com'),
-(149, NULL, 'riyad298@yahoo.com'),
-(150, NULL, 'riyad298@yahoo.com'),
-(151, NULL, 'riyad298@yahoo.com'),
-(152, NULL, 'riyad298@yahoo.com'),
-(153, NULL, 'riyad298@gmail.com'),
-(154, NULL, 'riyad298@gmail.com'),
-(155, NULL, 'riyad298@yahoo.com'),
-(156, NULL, 'riyad298@gmail.com'),
-(157, NULL, 'riyad298@gmail.com'),
-(158, NULL, 'riyad298@gmail.com'),
-(159, NULL, 'riyad298@yahoo.com'),
-(160, NULL, 'riyad298@yahoo.com'),
-(161, NULL, 'riyad298@yahoo.com'),
-(162, NULL, 'riyad298@yahoo.com'),
-(163, NULL, 'riyad298@yahoo.com'),
-(164, NULL, 'riyad298@yahoo.com'),
-(165, NULL, 'riyad298@yahoo.com'),
-(166, NULL, 'riyad298@yahoo.com'),
-(167, NULL, 'riyad298@yahoo.com'),
-(168, NULL, 'riyad298@yahoo.com'),
-(169, NULL, 'riyad298@yahoo.com'),
-(170, NULL, 'riyad298@yahoo.com'),
-(171, NULL, 'riyad298@yahoo.com'),
-(172, NULL, 'riyad298@yahoo.com'),
-(173, NULL, 'riyad298@yahoo.com'),
-(174, NULL, 'riyad298@yahoo.com'),
-(175, NULL, 'riyad298@yahoo.com'),
-(176, NULL, 'riyad298@yahoo.com'),
-(177, NULL, 'riyad298@yahoo.com'),
-(178, NULL, 'riyad298@yahoo.com'),
-(179, NULL, 'riyad298@yahoo.com'),
-(180, NULL, 'riyad298@yahoo.com'),
-(181, NULL, 'riyad298@yahoo.com'),
-(182, NULL, 'riyad298@yahoo.com'),
-(183, NULL, 'riyad298@yahoo.com'),
-(184, NULL, 'riyad298@yahoo.com'),
-(185, NULL, 'riyad298@yahoo.com'),
-(186, NULL, 'riyad298@yahoo.com'),
-(187, NULL, 'riyad298@yahoo.com'),
-(188, NULL, 'riyad298@yahoo.com'),
-(189, NULL, 'riyad298@yahoo.com'),
-(190, NULL, 'riyad298@yahoo.com'),
-(191, NULL, 'riyad298@yahoo.com'),
-(192, NULL, 'riyad298@yahoo.com'),
-(193, NULL, 'riyad298@yahoo.com'),
-(194, NULL, 'riyad298@yahoo.com'),
-(195, NULL, 'riyad298@yahoo.com'),
-(196, NULL, 'riyad298@yahoo.com'),
-(197, NULL, 'riyad298@yahoo.com'),
-(198, NULL, 'riyad298@hotmail.com'),
-(199, NULL, 'riyad298@hotmail.com'),
-(200, NULL, 'riyad298@hotmail.com'),
-(201, NULL, 'riyad298@hotmail.com'),
-(202, NULL, 'riyad298@hotmail.com'),
-(203, NULL, 'riyad298@hotmail.com'),
-(204, NULL, 'riyad298@hotmail.com'),
-(205, NULL, 'riyad298@yahoo.com'),
-(206, NULL, 'riyad298@yahoo.com'),
-(207, NULL, 'riyad298@hotmail.com'),
-(208, NULL, 'riyad298@hotmail.com'),
-(209, NULL, 'riyad298@hotmail.com'),
-(210, NULL, 'riyad298@hotmail.com'),
-(211, NULL, 'riyad298@hotmail.com'),
-(212, NULL, 'riyad298@hotmail.com'),
-(213, NULL, 'riyad298@hotmail.com'),
-(214, NULL, 'riyad298@hotmail.com'),
-(215, NULL, 'riyad298@hotmail.com'),
-(216, NULL, 'riyad298@hotmail.com'),
-(217, NULL, 'riyad298@hotmail.com'),
-(218, NULL, 'riyad298@hotmail.com'),
-(219, NULL, 'riyad298@hotmail.com'),
-(220, NULL, 'riyad298@hotmail.com'),
-(221, NULL, 'riyad298@hotmail.com'),
-(222, NULL, 'riyad298@hotmail.com'),
-(223, NULL, 'riyad298@yahoo.com'),
-(224, NULL, 'riyad298@gmail.com'),
-(225, NULL, 'riyad298@gmail.com'),
-(226, NULL, 'riyad298@gmail.com'),
-(227, NULL, 'riyad298@gmail.com'),
-(228, NULL, 'riyad298@gmail.com'),
-(229, NULL, 'riyad298@gmail.com'),
-(230, NULL, 'riyad298@gmail.com'),
-(231, NULL, 'riyad298@gmail.com'),
-(232, NULL, 'riyad298@gmail.com'),
-(233, NULL, 'riyad298@gmail.com'),
-(234, NULL, 'riyad298@gmail.com'),
-(235, NULL, 'riyad298@gmail.com'),
-(236, NULL, 'riyad298@gmail.com'),
-(237, NULL, 'riyad298@gmail.com'),
-(238, NULL, 'riyad298@gmail.com'),
-(239, NULL, 'riyad298@gmail.com'),
-(240, NULL, 'riyad298@gmail.com'),
-(241, NULL, 'riyad298@gmail.com'),
-(242, NULL, 'riyad298@gmail.com'),
-(243, NULL, 'riyad298@gmail.com'),
-(244, NULL, 'riyad298@gmail.com'),
-(245, NULL, 'riyad298@gmail.com'),
-(246, NULL, 'riyad298@gmail.com'),
-(247, NULL, 'riyad298@gmail.com'),
-(248, NULL, 'riyad298@gmail.com'),
-(249, NULL, 'riyad298@gmail.com'),
-(250, NULL, 'riyad298@gmail.com'),
-(251, NULL, 'riyad298@gmail.com'),
-(252, NULL, 'riyad298@gmail.com'),
-(253, NULL, 'riyad298@gmail.com'),
-(254, NULL, 'riyad298@gmail.com'),
-(255, NULL, 'riyad298@gmail.com'),
-(256, NULL, 'riyad298@gmail.com'),
-(257, NULL, 'riyad298@gmail.com'),
-(258, NULL, 'riyad298@gmail.com'),
-(259, NULL, 'riyad298@gmail.com'),
-(260, NULL, 'riyad298@gmail.com'),
-(261, NULL, 'riyad298@gmail.com'),
-(262, NULL, 'riyad298@gmail.com'),
-(263, NULL, 'riyad298@gmail.com'),
-(264, NULL, 'riyad298@gmail.com'),
-(265, NULL, 'riyad298@gmail.com'),
-(266, NULL, 'riyad298@gmail.com'),
-(267, NULL, 'riyad298@gmail.com'),
-(268, NULL, 'riyad298@gmail.com'),
-(269, NULL, 'riyad298@gmail.com'),
-(270, NULL, 'riyad298@gmail.com'),
-(271, NULL, 'riyad298@gmail.com'),
-(272, NULL, 'riyad298@gmail.com'),
-(273, NULL, 'riyad298@gmail.com'),
-(274, NULL, 'riyad298@gmail.com'),
-(275, NULL, 'riyad298@gmail.com'),
-(276, NULL, 'riyad298@gmail.com'),
-(277, NULL, 'riyad298@gmail.com'),
-(278, NULL, 'riyad298@gmail.com'),
-(279, NULL, 'riyad298@gmail.com'),
-(280, NULL, 'riyad298@gmail.com'),
-(281, NULL, 'riyad298@gmail.com'),
-(282, NULL, 'riyad298@gmail.com'),
-(283, NULL, 'riyad298@gmail.com'),
-(284, NULL, 'riyad298@gmail.com'),
-(285, NULL, 'riyad298@gmail.com'),
-(286, NULL, 'riyad298@gmail.com'),
-(287, NULL, 'riyad298@gmail.com'),
-(288, NULL, 'riyad298@gmail.com'),
-(289, NULL, 'riyad298@gmail.com'),
-(290, NULL, 'riyad298@gmail.com'),
-(291, NULL, 'riyad298@gmail.com'),
-(292, NULL, 'riyad298@gmail.com'),
-(293, NULL, 'riyad298@gmail.com'),
-(294, NULL, 'riyad298@gmail.com'),
-(295, NULL, 'riyad298@gmail.com'),
-(296, NULL, 'riyad298@gmail.com'),
-(297, NULL, 'riyad298@gmail.com'),
-(298, NULL, 'riyad298@gmail.com'),
-(299, NULL, 'riyad298@gmail.com'),
-(300, NULL, 'riyad298@gmail.com'),
-(301, NULL, 'riyad298@gmail.com'),
-(302, NULL, 'riyad298@gmail.com'),
-(303, NULL, 'riyad298@gmail.com'),
-(304, NULL, 'riyad298@gmail.com'),
-(305, NULL, 'riyad298@gmail.com'),
-(306, NULL, 'riyad298@gmail.com'),
-(307, NULL, 'riyad298@gmail.com'),
-(308, NULL, 'riyad298@gmail.com'),
-(309, NULL, 'riyad298@gmail.com'),
-(310, NULL, 'riyad298@gmail.com'),
-(311, NULL, 'riyad298@gmail.com'),
-(312, NULL, 'riyad298@gmail.com'),
-(313, NULL, 'riyad298@gmail.com'),
-(314, NULL, 'riyad298@gmail.com'),
-(315, NULL, 'riyad298@gmail.com'),
-(316, NULL, 'riyad298@gmail.com'),
-(317, NULL, 'riyad298@gmail.com'),
-(318, NULL, 'riyad298@gmail.com'),
-(319, NULL, 'riyad298@gmail.com'),
-(320, NULL, 'riyad298@gmail.com'),
-(321, NULL, 'riyad298@gmail.com'),
-(322, NULL, 'riyad298@gmail.com'),
-(323, NULL, 'riyad298@gmail.com'),
-(324, NULL, 'riyad298@gmail.com'),
-(325, NULL, 'riyad298@gmail.com'),
-(326, NULL, 'riyad298@gmail.com'),
-(327, NULL, 'riyad298@gmail.com'),
-(328, NULL, 'riyad298@gmail.com'),
-(329, NULL, 'riyad298@gmail.com'),
-(330, NULL, 'riyad298@gmail.com'),
-(331, NULL, 'riyad298@gmail.com'),
-(332, NULL, 'riyad298@gmail.com'),
-(333, NULL, 'riyad298@gmail.com'),
-(334, NULL, 'riyad298@gmail.com'),
-(335, NULL, 'riyad298@gmail.com'),
-(336, NULL, 'riyad298@gmail.com'),
-(337, NULL, 'riyad298@gmail.com'),
-(338, NULL, 'riyad298@gmail.com'),
-(339, NULL, 'riyad298@gmail.com'),
-(340, NULL, 'riyad298@gmail.com'),
-(341, NULL, 'riyad298@gmail.com'),
-(342, NULL, 'riyad298@gmail.com'),
-(343, NULL, 'riyad298@gmail.com'),
-(344, NULL, 'riyad298@gmail.com'),
-(345, NULL, 'riyad298@gmail.com'),
-(346, NULL, 'riyad298@gmail.com'),
-(347, NULL, 'riyad298@gmail.com'),
-(348, NULL, 'riyad298@gmail.com'),
-(349, NULL, 'riyad298@gmail.com'),
-(350, NULL, 'riyad298@gmail.com'),
-(351, NULL, 'riyad298@gmail.com'),
-(352, NULL, 'riyad298@gmail.com'),
-(353, NULL, 'riyad298@gmail.com'),
-(354, NULL, 'riyad298@gmail.com'),
-(355, NULL, 'riyad298@gmail.com'),
-(356, NULL, 'riyad298@gmail.com'),
-(357, NULL, 'riyad298@gmail.com'),
-(358, NULL, 'riyad298@gmail.com'),
-(359, NULL, 'riyad298@gmail.com'),
-(360, NULL, 'riyad298@gmail.com'),
-(361, NULL, 'riyad298@gmail.com'),
-(362, NULL, 'riyad298@yahoo.com'),
-(363, NULL, 'riyad298@yahoo.com'),
-(364, NULL, 'riyad298@yahoo.com'),
-(365, NULL, 'riyad298@yahoo.com'),
-(366, NULL, 'riyad298@yahoo.com'),
-(367, NULL, 'riyad298@yahoo.com'),
-(368, NULL, 'riyad298@yahoo.com'),
-(369, NULL, 'riyad298@yahoo.com'),
-(370, NULL, 'riyad298@yahoo.com'),
-(371, NULL, 'riyad298@yahoo.com'),
-(372, NULL, 'riyad298@yahoo.com'),
-(373, NULL, 'riyad298@yahoo.com'),
-(374, NULL, 'riyad298@hotmail.com'),
-(375, NULL, 'riyad298@gmail.com'),
-(376, NULL, 'riyad298@gmail.com'),
-(377, NULL, 'riyad298@gmail.com'),
-(378, NULL, 'riyad298@gmail.com'),
-(379, NULL, 'riyad298@gmail.com'),
-(380, NULL, 'riyad298@gmail.com'),
-(381, NULL, 'riyad298@gmail.com'),
-(382, NULL, 'riyad298@gmail.com'),
-(383, NULL, 'riyad298@gmail.com'),
-(384, NULL, 'riyad298@gmail.com'),
-(385, NULL, 'riyad298@yahoo.com'),
-(386, NULL, 'riyad298@gmail.com'),
-(387, NULL, 'riyad298@gmail.com'),
-(388, NULL, 'riyad298@gmail.com'),
-(389, NULL, 'riyad298@gmail.com'),
-(390, NULL, 'riyad298@gmail.com'),
-(391, NULL, 'riyad298@gmail.com'),
-(392, NULL, 'riyad298@gmail.com'),
-(393, NULL, 'riyad298@gmail.com'),
-(394, NULL, 'riyad298@gmail.com'),
-(395, NULL, 'riyad298@gmail.com'),
-(396, NULL, 'riyad298@gmail.com'),
-(397, NULL, 'riyad298@yahoo.com'),
-(398, NULL, 'riyad298@yahoo.com'),
-(399, NULL, 'riyad298@yahoo.com'),
-(400, NULL, 'riyad298@yahoo.com'),
-(401, NULL, 'riyad298@yahoo.com'),
-(402, NULL, 'riyad298@gmail.com'),
-(403, NULL, 'riyad298@gmail.com'),
-(404, NULL, 'riyad298@gmail.com'),
-(405, NULL, 'riyad298@gmail.com'),
-(406, NULL, 'riyad298@gmail.com'),
-(407, NULL, 'riyad298@gmail.com'),
-(408, NULL, 'riyad298@gmail.com'),
-(409, NULL, 'riyad298@gmail.com'),
-(410, NULL, 'riyad298@gmail.com'),
-(411, NULL, 'riyad298@gmail.com'),
-(412, NULL, 'riyad298@gmail.com'),
-(413, NULL, 'riyad298@gmail.com'),
-(414, NULL, 'riyad298@gmail.com'),
-(415, NULL, 'riyad298@gmail.com'),
-(416, NULL, 'riyad298@gmail.com'),
-(417, NULL, 'riyad298@gmail.com'),
-(418, NULL, 'riyad298@hotmail.com'),
-(419, NULL, 'riyad298@gmail.com'),
-(420, NULL, 'riyad298@gmail.com'),
-(421, NULL, 'riyad298@gmail.com'),
-(422, NULL, 'riyad298@gmail.com'),
-(423, NULL, 'ahsan.riyad@outlook.com'),
-(424, NULL, 'ahsan.riyad@outlook.com'),
-(425, NULL, 'riyad298@gmail.com'),
-(426, NULL, 'riyad298@gmail.com'),
-(427, NULL, 'riyad298@gmail.com'),
-(428, NULL, 'riyad298@gmail.com'),
-(429, NULL, 'riyad298@gmail.com'),
-(430, NULL, 'ahsan.riyad@outlook.com'),
-(431, NULL, 'ahsan.riyad@outlook.com'),
-(432, NULL, 'ahsan.riyad@outlook.com'),
-(433, NULL, 'riyad298@gmail.com'),
-(434, NULL, 'riyad298@gmail.com'),
-(435, NULL, 'riyad298@gmail.com'),
-(436, NULL, 'riyad298@gmail.com'),
-(437, NULL, 'riyad298@gmail.com'),
-(438, NULL, 'riyad298@gmail.com'),
-(439, NULL, 'riyad298@gmail.com'),
-(440, NULL, 'riyad298@gmail.com'),
-(441, NULL, 'riyad298@gmail.com'),
-(442, NULL, 'riyad298@gmail.com'),
-(443, NULL, 'riyad298@gmail.com'),
-(444, NULL, 'riyad298@gmail.com'),
-(445, NULL, 'riyad298@gmail.com'),
-(446, NULL, 'riyad298@gmail.com'),
-(447, NULL, 'riyad298@gmail.com'),
-(448, NULL, 'riyad298@gmail.com'),
-(449, NULL, 'riyad298@gmail.com'),
-(450, NULL, 'riyad298@gmail.com'),
-(451, NULL, 'ahsan.riyad@outlook.com'),
-(452, NULL, 'ahsan.riyad@outlook.com'),
-(453, NULL, 'ahsan.riyad@outlook.com'),
-(454, NULL, 'ahsan.riyad@outlook.com'),
-(455, NULL, 'ahsan.riyad@outlook.com'),
-(456, NULL, 'ahsan.riyad@outlook.com'),
-(457, NULL, 'ahsan.riyad@outlook.com'),
-(458, NULL, 'ahsan.riyad@outlook.com'),
-(459, NULL, 'ahsan.riyad@outlook.com'),
-(460, NULL, 'ahsan.riyad@outlook.com'),
-(461, NULL, 'ahsan.riyad@outlook.com'),
-(462, NULL, 'ahsan.riyad@outlook.com'),
-(463, NULL, 'ahsan.riyad@outlook.com'),
-(464, NULL, 'ahsan.riyad@outlook.com'),
-(465, NULL, 'ahsan.riyad@outlook.com'),
-(466, NULL, 'ahsan.riyad@outlook.com'),
-(467, NULL, 'ahsan.riyad@outlook.com'),
-(468, NULL, 'ahsan.riyad@outlook.com'),
-(469, NULL, 'ahsan.riyad@outlook.com'),
-(470, NULL, 'ahsan.riyad@outlook.com'),
-(471, NULL, 'ahsan.riyad@outlook.com'),
-(472, NULL, 'ahsan.riyad@outlook.com'),
-(473, NULL, 'ahsan.riyad@outlook.com'),
-(474, NULL, 'ahsan.riyad@outlook.com'),
-(475, NULL, 'ahsan.riyad@outlook.com'),
-(476, NULL, 'ahsan.riyad@outlook.com'),
-(477, NULL, 'ahsan.riyad@outlook.com'),
-(478, NULL, 'ahsan.riyad@outlook.com'),
-(479, NULL, 'ahsan.riyad@outlook.com'),
-(480, NULL, 'ahsan.riyad@outlook.com'),
-(481, NULL, 'ahsan.riyad@outlook.com'),
-(482, NULL, 'ahsan.riyad@outlook.com'),
-(483, NULL, 'ahsan.riyad@outlook.com'),
-(484, NULL, 'ahsan.riyad@outlook.com'),
-(485, NULL, 'ahsan.riyad@outlook.com'),
-(486, NULL, 'ahsan.riyad@outlook.com'),
-(487, NULL, 'ahsan.riyad@outlook.com'),
-(488, NULL, 'ahsan.riyad@outlook.com'),
-(489, NULL, 'ahsan.riyad@outlook.com'),
-(490, NULL, 'ahsan.riyad@outlook.com'),
-(491, NULL, 'ahsan.riyad@outlook.com'),
-(492, NULL, 'ahsan.riyad@outlook.com'),
-(493, NULL, 'ahsan.riyad@outlook.com'),
-(494, NULL, 'ahsan.riyad@outlook.com'),
-(495, NULL, 'ahsan.riyad@outlook.com'),
-(496, NULL, 'ahsan.riyad@outlook.com'),
-(497, NULL, 'ahsan.riyad@outlook.com'),
-(498, NULL, 'ahsan.riyad@outlook.com'),
-(499, NULL, 'ahsan.riyad@outlook.com'),
-(500, NULL, 'riyad298@yahoo.com'),
-(501, NULL, 'riyad298@yahoo.com'),
-(502, NULL, 'riyad298@yahoo.com'),
-(503, NULL, 'riyad298@yahoo.com'),
-(504, NULL, 'riyad298@yahoo.com'),
-(505, NULL, 'riyad298@yahoo.com'),
-(506, NULL, 'riyad298@yahoo.com'),
-(507, NULL, 'riyad298@yahoo.com'),
-(508, NULL, 'ahsan.riyad@outlook.com'),
-(509, NULL, 'ahsan.riyad@outlook.com'),
-(510, NULL, 'ahsan.riyad@outlook.com'),
-(511, NULL, 'ahsan.riyad@outlook.com'),
-(512, NULL, 'ahsan.riyad@outlook.com'),
-(513, NULL, 'ahsan.riyad@outlook.com'),
-(514, NULL, 'riyad298@yahoo.com'),
-(515, NULL, 'riyad298@yahoo.com'),
-(516, NULL, 'riyad298@yahoo.com'),
-(517, NULL, 'ahsan.riyad@outlook.com'),
-(518, NULL, 'ahsan.riyad@outlook.com'),
-(519, NULL, 'ahsan.riyad@outlook.com'),
-(520, NULL, 'ahsan.riyad@outlook.com'),
-(521, NULL, 'ahsan.riyad@outlook.com'),
-(522, NULL, 'ahsan.riyad@outlook.com'),
-(523, NULL, 'ahsan.riyad@outlook.com'),
-(524, NULL, 'ahsan.riyad@outlook.com'),
-(525, NULL, 'ahsan.riyad@outlook.com'),
-(526, NULL, 'ahsan.riyad@outlook.com'),
-(527, NULL, 'ahsan.riyad@outlook.com'),
-(528, NULL, 'ahsan.riyad@outlook.com'),
-(529, NULL, 'ahsan.riyad@outlook.com'),
-(530, NULL, 'ahsan.riyad@outlook.com'),
-(531, NULL, 'ahsan.riyad@outlook.com'),
-(532, NULL, 'ahsan.riyad@outlook.com'),
-(533, NULL, 'ahsan.riyad@outlook.com'),
-(534, NULL, 'ahsan.riyad@outlook.com'),
-(535, NULL, 'ahsan.riyad@outlook.com'),
-(536, NULL, 'ahsan.riyad@outlook.com'),
-(537, NULL, 'ahsan.riyad@outlook.com'),
-(538, NULL, 'ahsan.riyad@outlook.com'),
-(539, NULL, 'ahsan.riyad@outlook.com'),
-(540, NULL, 'ahsan.riyad@outlook.com'),
-(541, NULL, 'ahsan.riyad@outlook.com'),
-(542, NULL, 'ahsan.riyad@outlook.com'),
-(543, NULL, 'ahsan.riyad@outlook.com'),
-(544, NULL, 'ahsan.riyad@outlook.com'),
-(545, NULL, 'ahsan.riyad@outlook.com');
-
 -- --------------------------------------------------------
 
 --
@@ -1045,9 +509,10 @@ CREATE TABLE `users_address` (
 --
 
 INSERT INTO `users_address` (`email`, `users_address_id`, `present_line1`, `present_line2`, `present_district`, `present_post_code`, `present_country`, `parmanent_line1`, `parmanent_line2`, `parmanent_district`, `parmanent_post_code`, `parmanent_country`) VALUES
-('riyad298@gmail.com', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('ahsan.riyad@outlook.com', 2, '', NULL, 'Dhaka', '5600', '', 'Kuril kajibari', NULL, '', '', ''),
-('riyad298@yahoo.com', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('ahsan.riyad@outlook.com', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('riyad298@gmail.com', 2, '', NULL, '', '', '', '', NULL, '', '', ''),
+('riyad298@yahoo.com', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('riyad298@hotmail.com', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1076,9 +541,10 @@ CREATE TABLE `users_info` (
 --
 
 INSERT INTO `users_info` (`email`, `gender`, `ui_id`, `nid_or_passport`, `fathers_name`, `mother_name`, `spouse_name`, `number_of_children`, `profession`, `designation`, `institution`, `blood_group`, `date_of_birth`) VALUES
-('riyad298@gmail.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('ahsan.riyad@outlook.com', NULL, 0, '15-29804-2', NULL, NULL, NULL, NULL, 'Student', NULL, NULL, 'O+', '1987-04-10'),
-('riyad298@yahoo.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('ahsan.riyad@outlook.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('riyad298@gmail.com', NULL, 0, 'arfraeferferf', 'reaferfearferf', 'aerfaerfaerf', 'refaerfaerf', 3, 'fraeferfaerf', 'aferfaerferf', 'areferfaefe', 'A+', '1992-11-20'),
+('riyad298@yahoo.com', NULL, 0, '15632244886', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('riyad298@hotmail.com', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1102,9 +568,10 @@ CREATE TABLE `users_registration` (
 --
 
 INSERT INTO `users_registration` (`email`, `id`, `full_name`, `mobile`, `institution_id`, `password`, `registration_date`, `membership_number`) VALUES
-('riyad298@gmail.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-23 22:54:13.000000', 1000),
-('ahsan.riyad@outlook.com', 2, 'Riyad Ahsan', '01719246822', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-24 14:43:14.000000', 1001),
-('riyad298@yahoo.com', 3, 'Munem', '01719246822', '1256698', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-24 19:29:36.000000', 1002);
+('ahsan.riyad@outlook.com', 1, 'Md Ahsan Ferdous Riyad', '01919448787', '15-29804-2', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 17:51:59.000000', 1000),
+('riyad298@gmail.com', 2, 'Md Ahsan Ferdous Riyad', '01919448765', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 18:30:44.000000', 1001),
+('riyad298@yahoo.com', 3, 'Md Ahsan Ferdous Riyad', '01919448788', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-25 20:26:41.000000', 1002),
+('riyad298@hotmail.com', 4, 'Md Ahsan Ferdous Riyad', '01919448787', 'riyad', '29cf2160ad1165db8dacdfd2eedcf5d0', '2019-11-26 16:24:19.000000', 1000);
 
 -- --------------------------------------------------------
 
@@ -1117,14 +584,6 @@ CREATE TABLE `user_photos` (
   `email` varchar(100) DEFAULT NULL,
   `id_user_photos` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_photos`
---
-
-INSERT INTO `user_photos` (`group_photo`, `email`, `id_user_photos`) VALUES
-('2_1.jpg', 'ahsan.riyad@outlook.com', 1),
-('2_2.jpg', 'ahsan.riyad@outlook.com', 2);
 
 -- --------------------------------------------------------
 
@@ -1144,9 +603,10 @@ CREATE TABLE `user_uploads` (
 --
 
 INSERT INTO `user_uploads` (`id_user_uploads`, `email`, `recent_photo`, `old_photo`) VALUES
-(1, 'riyad298@gmail.com', '1.jpg', 'not_set'),
-(2, 'ahsan.riyad@outlook.com', '2.jpg', '2.jpg'),
-(3, 'riyad298@yahoo.com', 'not_set', 'not_set');
+(1, 'ahsan.riyad@outlook.com', 'not_set', 'not_set'),
+(2, 'riyad298@gmail.com', '2.jpg', 'not_set'),
+(3, 'riyad298@yahoo.com', 'not_set', 'not_set'),
+(4, 'riyad298@hotmail.com', 'not_set', 'not_set');
 
 -- --------------------------------------------------------
 
@@ -1174,19 +634,10 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `change_request_time`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
-(1, 'riyad298@gmail.com', '6137', NULL, 'not_verified', 'verified', 'not_requested', NULL, 'admin', 'full_name,email,mobile,institution_id,spouse_name,number_of_children,profession,parmanent_district,membership_number,status', 60, NULL),
-(2, 'ahsan.riyad@outlook.com', '4574', NULL, 'approved', 'not_verified', 'requested', '2019-11-25 03:26:20.000000', 'user', 'full_name,institution_id,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Riyad Ahsan,01719246822,15-29804-2,15-29804-2,,,,,Student,,,AB-,1987-04-10,,Dhaka,5600,,Kuril kajibari,,,'),
-(3, 'riyad298@yahoo.com', '6041', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 100, NULL);
-
---
--- Triggers `verification_info`
---
-DELIMITER $$
-CREATE TRIGGER `keep_log` AFTER UPDATE ON `verification_info` FOR EACH ROW BEGIN
-INSERT into log_table ( log_table.log_info ) VALUES ( OLD.email );
-END
-$$
-DELIMITER ;
+(1, 'ahsan.riyad@outlook.com', '6197', NULL, 'approved', 'verified', 'not_requested', NULL, 'admin', 'full_name,email,mobile,institution_id,parmanent_post_code,parmanent_district,parmanent_country,membership_number,email_verification_status,change_request', 60, NULL),
+(2, 'riyad298@gmail.com', '1800', NULL, 'approved', 'not_verified', 'approved', '2019-11-26 18:54:05.000000', 'user', 'full_name,email,institution_id,present_district,parmanent_line1,parmanent_post_code,parmanent_country,membership_number,status,change_request,type', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Md Ahsan Ferdous Riyad,01919448765,riyad,arfraeferferf,reaferfearferf,aerfaerfaerf,refaerfaerf,3,fraeferfaerf,aferfaerferf,areferfaefe,O+,1992-11-20,,,,,,,,'),
+(3, 'riyad298@yahoo.com', '2758', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'admin', 'full_name,institution_id,membership_number', 100, NULL),
+(4, 'riyad298@hotmail.com', '7771', NULL, 'not_verified', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 60, NULL);
 
 -- --------------------------------------------------------
 
@@ -1245,19 +696,19 @@ ALTER TABLE `verification_info`
 -- AUTO_INCREMENT for table `log_table`
 --
 ALTER TABLE `log_table`
-  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=546;
+  MODIFY `log_id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users_address`
 --
 ALTER TABLE `users_address`
-  MODIFY `users_address_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `users_address_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users_registration`
 --
 ALTER TABLE `users_registration`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_photos`
@@ -1269,13 +720,13 @@ ALTER TABLE `user_photos`
 -- AUTO_INCREMENT for table `user_uploads`
 --
 ALTER TABLE `user_uploads`
-  MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user_uploads` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `verification_info`
 --
 ALTER TABLE `verification_info`
-  MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_v_info` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
