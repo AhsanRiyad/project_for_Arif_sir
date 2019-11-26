@@ -135,6 +135,8 @@
           return "Workplace/Institution";
         }else if(name == 'email_verification_status'){
           return "Email Verification Status";
+        }else if(name == 'change_request'){
+          return "Information Update Request";
         }
     }
 
