@@ -6,15 +6,244 @@
 
 
 
+  Vue.mixin({
+    data: function() {
+      return {
+
+
+      }
+    }
+  })
 
 
 
 
-Vue.mixin({data:function(){return{}}});var gallery='\n <div class="container">\n  <div class="row justify-content-md-center">\n\n\n\n  <div class="col col-md-5">\n  <h1 class="text-center">Recent Photo</h1>\n\n\n  <img class="text-center img-fluid img-thumbnail" v-if="recent_photo != \'not_set\'"\n  :src="rootAdress+recent_photos+recent_photo"\n   style="max-height: 400px; width: 600px;">\n\n\n  <img class="text-center img-fluid img-thumbnail" v-if="recent_photo == \'not_set\'"\n  :src="images.default_photo"\n  style="max-height: 400px; width: 600px;">\n  </div>\n\n\n\n\n  <div class="w-100">\n  </div>\n  \n  <div class="col col-md-5">\n  <h1 class="text-center">old Photo</h1>\n\n\n  <img class="text-center img-fluid img-thumbnail" v-if="old_photo != \'not_set\'"\n  :src="rootAdress+old_photos+old_photo"\n   style="max-height: 400px; width: 600px;">\n\n\n  <img class="text-center img-fluid img-thumbnail" v-if="old_photo == \'not_set\'"\n  :src="images.default_photo"\n  style="max-height: 400px; width: 600px;">\n  </div>\n\n\n\n  </div>\n\n  <div class="row  justify-content-center">\n  <div class="row col-md-8">\n\n  <div class="col-md-12">\n  <h1 class="text-center" > Group Photos </h1>\n  </div> \n\n  <div class="col-md-4" v-for="(photo , index) in group_photo">\n  <img @click="zoom_in(rootAdress+group_photos+photo , photo)" style="height: 250px; width: 250px;" \n  aspect-ratio="1"\n  :src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">\n  </div>\n  </div>\n  </div>\n  \n\n\n  \n  <v-row justify="center">\n  <v-dialog v-model="dialog" scrollable max-width="700px">\n\n  <v-card>\n  <v-card-title>Image</v-card-title>\n  <v-divider></v-divider>\n  <v-card-text style="height: 400px;">\n  \n  <v-row align="center" justify="center">\n  <v-img\n  :src="dialog_photo"\n  class="grey lighten-2"\n  max-width="600"\n\n  aspect-ratio="1"\n  ></v-img>\n  </v-row>\n\n  </v-card-text>\n  <v-divider></v-divider>\n  <v-card-actions class="mb-5">\n  \n  <v-container>\n  <v-row class="ml-3">\n  \n  <p class="red--text"> <b>{{ photo_delete_status }} </b></p>\n  </v-row>\n  <v-row>\n  <v-col xs="12">\n  <v-btn :disabled="button_disabled" @click="deletePhoto()" large :loading=\'loading\' color="error"  >Delete</v-btn>\n  <v-btn large color="primary"  @click="dialog = false">Close</v-btn>\n  </v-col>\n  </v-row>\n </v-container>\n\n\n  </v-card-actions>\n  </v-card>\n  </v-dialog>\n  </v-row>\n\n\n\n\n\n\n\n\n\n\n\n\n\n  </div>\n\n  ';Vue.component("gallery",{template:gallery,data:()=>({dialogm1:"",dialog:!1,dialog_photo:"",dialog_photo_baseName:"",recent_photo:"",old_photo:"",group_photo:[],recent_photos:"assets/img/uploads/recent_photos/",old_photos:"assets/img/uploads/old_photos/",group_photos:"assets/img/uploads/group_photos/",uploads:"assets/img/uploads/",loading:!1,photo_delete_status:"",button_disabled:!1}),methods:{zoom_in(t,o){this.button_disabled=!1,this.photo_delete_status="",this.dialog_photo_baseName=o,this.dialog_photo=t,this.dialog=!0},deletePhoto(){this.loading=!0,axios.post(this.model.modelGallery,{purpose:"deletePhoto",basename:this.dialog_photo_baseName}).then(function(t){this.loading=!1,this.recent_photo=t.data.recent_photo,this.old_photo=t.data.old_photo,this.group_photo=t.data.group_photo,this.photo_delete_status="Your photo has been deleted",this.button_disabled=!0}.bind(this)).catch(function(t){this.loading=!1}.bind(this))}},created(){axios.post(this.model.modelGallery,{purpose:"getPhotos"}).then(function(t){this.recent_photo=t.data.recent_photo,this.old_photo=t.data.old_photo,this.group_photo=t.data.group_photo}.bind(this)).catch(function(t){}.bind(this))}});gallery=new Vue({el:"#app",vuetify:new Vuetify});
+
+  var gallery = `
+ <div class="container">
+  <div class="row justify-content-md-center">
+
+
+
+  <div class="col col-md-5">
+  <h1 class="text-center">Recent Photo</h1>
+
+
+  <img class="text-center img-fluid img-thumbnail" v-if="recent_photo != 'not_set'"
+  :src="rootAdress+recent_photos+recent_photo"
+   style="max-height: 400px; width: 600px;">
+
+
+  <img class="text-center img-fluid img-thumbnail" v-if="recent_photo == 'not_set'"
+  :src="images.default_photo"
+  style="max-height: 400px; width: 600px;">
+  </div>
 
 
 
 
+  <div class="w-100">
+  </div>
+  
+  <div class="col col-md-5">
+  <h1 class="text-center">old Photo</h1>
+
+
+  <img class="text-center img-fluid img-thumbnail" v-if="old_photo != 'not_set'"
+  :src="rootAdress+old_photos+old_photo"
+   style="max-height: 400px; width: 600px;">
+
+
+  <img class="text-center img-fluid img-thumbnail" v-if="old_photo == 'not_set'"
+  :src="images.default_photo"
+  style="max-height: 400px; width: 600px;">
+  </div>
+
+
+
+  </div>
+
+  <div class="row  justify-content-center">
+  <div class="row col-md-8">
+
+  <div class="col-md-12">
+  <h1 class="text-center" > Group Photos </h1>
+  </div> 
+
+  <div class="col-md-4" v-for="(photo , index) in group_photo">
+  <img @click="zoom_in(rootAdress+group_photos+photo , photo)" style="height: 250px; width: 250px;" 
+  aspect-ratio="1"
+  :src="rootAdress+group_photos+photo" class="rounded mx-auto d-block img-fluid img-thumbnail" alt="...">
+  </div>
+  </div>
+  </div>
+  
+
+
+  
+  <v-row justify="center">
+  <v-dialog v-model="dialog" scrollable max-width="700px">
+
+  <v-card>
+  <v-card-title>Image</v-card-title>
+  <v-divider></v-divider>
+  <v-card-text style="height: 400px;">
+  
+  <v-row align="center" justify="center">
+  <v-img
+  :src="dialog_photo"
+  class="grey lighten-2"
+  max-width="600"
+
+  aspect-ratio="1"
+  ></v-img>
+  </v-row>
+
+  </v-card-text>
+  <v-divider></v-divider>
+  <v-card-actions class="mb-5">
+  
+  <v-container>
+  <v-row class="ml-3">
+  
+  <p class="red--text"> <b>{{ photo_delete_status }} </b></p>
+  </v-row>
+  <v-row>
+  <v-col xs="12">
+  <v-btn :disabled="button_disabled" @click="deletePhoto()" large :loading='loading' color="error"  >Delete</v-btn>
+  <v-btn large color="primary"  @click="dialog = false">Close</v-btn>
+  </v-col>
+  </v-row>
+ </v-container>
+
+
+  </v-card-actions>
+  </v-card>
+  </v-dialog>
+  </v-row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  `;
+
+
+
+  Vue.component('gallery' , {
+   template: gallery,
+   data(){
+    return {
+      dialogm1: '',
+      dialog: false,
+      dialog_photo: '',
+      dialog_photo_baseName: '',
+      recent_photo: '' ,
+      old_photo: '' ,
+      group_photo: [],
+      recent_photos: 'assets/img/uploads/recent_photos/',
+      old_photos: 'assets/img/uploads/old_photos/',
+      group_photos:  'assets/img/uploads/group_photos/',
+      uploads:  'assets/img/uploads/',
+      loading:false,
+      photo_delete_status: '',
+      button_disabled: false,
+
+    }
+  },
+  methods : {
+    zoom_in(photo , baseName){
+      //alert(photo);
+      this.button_disabled = false;
+      this.photo_delete_status = '';
+      this.dialog_photo_baseName = baseName;
+      this.dialog_photo = photo;
+      this.dialog = true;
+      // alert('zooming in photo');
+    },
+    deletePhoto(){
+      this.loading = true;
+
+      //alert('deleting photo');
+      axios.post( this.model.modelGallery ,
+      {
+        purpose: 'deletePhoto',
+        basename: this.dialog_photo_baseName,
+        
+      }
+      ).then(function(response){
+        this.loading = false;
+        this.recent_photo = response.data.recent_photo;
+        this.old_photo = response.data.old_photo;
+        this.group_photo = response.data.group_photo;
+        this.photo_delete_status = "Your photo has been deleted";
+        this.button_disabled = true ;
+        
+
+
+      }.bind(this))
+      .catch(function(error){
+
+        this.loading = false;
+
+
+        //console.log(error);
+      }.bind(this));
+
+
+    },
+  },
+  created(){
+
+      //alert(this.model.modelGallery);
+
+      axios.post( this.model.modelGallery ,
+      {
+
+        purpose: 'getPhotos',
+      }
+      ).then(function(response){
+        //this.users_info = response.data;
+        // alert(rootAdress+'/assets/img/uploads/recent_photo/'+recent_photo);
+
+        
+        this.recent_photo = response.data.recent_photo;
+        this.old_photo = response.data.old_photo;
+        this.group_photo = response.data.group_photo;
+
+        //alert(this.rootAdress+'assets/img/uploads/recent_photos/'+this.recent_photo);
+        //alert(this.rootAdress+'assets/img/uploads/group_photos/'+this.group_photo[0]);
+
+      }.bind(this))
+      .catch(function(error){
+
+        //console.log(error);
+      }.bind(this));
+
+
+
+
+    }
+
+  })
+
+
+
+
+  var gallery = new Vue({
+    el: '#app' ,
+    vuetify: new Vuetify(), 
+  })
 
 
 
