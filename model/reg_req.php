@@ -10,7 +10,7 @@ $d2 = json_decode($data);
 if($d2->purpose=='get_data'){
 	//echo 'get data';
 	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together where status = 'not_verified' and completeness = 100 and email_verification_status = 'verified' limit 0 , 20";
+	$sql = "select * from all_info_together where status = 'not_verified'  and email_verification_status = 'verified' limit 0 , 20";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);
@@ -216,17 +216,13 @@ else if($d2->purpose=='get_user_details'){
 	//echo 'hi';
 	//echo $email;
 	$conn = get_mysqli_connection();
-	$sql = "select * from users_registration ur , verification_info vi , users_info ui , users_address ua where ur.email = vi.email and ur.email = ui.email and ur.email = ua.email and vi.email = (?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param('s' , $email);
-	$stmt->execute();
+	$sql = "select * from users_registration ur , verification_info vi , users_info ui , users_address ua where ur.email = vi.email and ur.email = ui.email and ur.email = ua.email and vi.email = '".$email."' ";
+	$result = mysqli_query($conn, $sql);
 	//print_r($row);
 	$i = 0 ;
 //echo json_encode($row);
 	$array2d ;
-	$result = $stmt->get_result();
-	if($result->num_rows === 0) exit('No rows');
-	while($row = $result->fetch_assoc()) {
+	while($row = mysqli_fetch_assoc($result)) {
 		$GLOBALS['array2d'][$i++] = $row;
 	}
 	
