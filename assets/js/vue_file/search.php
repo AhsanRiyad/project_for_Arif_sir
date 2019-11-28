@@ -3,9 +3,6 @@
 	var bus = new Vue();
 
 
-
-
-
 	var search = `
 	<div class="container">
 	<div class="row justify-content-center">
@@ -915,6 +912,7 @@
 			change_info_database(purpose , value){
 				axios.post(this.model.modelAdminChangeInfo , {
 					purpose : purpose,
+					main_purpose : 'search_other_option',
 					email: this.email,
 					user_id : this.user_id,
 					value: value , 
@@ -976,8 +974,9 @@
 			,
 			reject_user(){
 
-				axios.post(this.model.modelReg_req , {
+				axios.post(this.model.modelSearch , {
 					purpose : 'reject_user',
+					main_purpose : 'search_other_option',
 					email: this.email,
 					user_id : this.user_id,
 				})
@@ -1007,8 +1006,9 @@
 			},
 			make_admin(){
 
-				axios.post(this.model.modelReg_req , {
+				axios.post(this.model.modelSearch , {
 					purpose : 'make_admin',
+					main_purpose : 'search_other_option',
 					email: this.email,
 					user_id: this.user_id,
 				})
@@ -1044,8 +1044,9 @@
 			},
 			make_user(){
 
-				axios.post(this.model.modelReg_req , {
+				axios.post(this.model.modelSearch , {
 					purpose : 'make_user',
+					main_purpose : 'search_other_option',
 					email: this.email,
 					user_id: this.user_id,
 				})
@@ -1077,8 +1078,9 @@
 			approve_user(){
 
 
-				axios.post(this.model.modelReg_req , {
+				axios.post(this.model.modelSearch , {
 					purpose : 'approve_user',
+					main_purpose : 'search_other_option',
 					email: this.email,
 					user_id: this.user_id,
 				})
@@ -1107,9 +1109,10 @@
 			get_updated_data(){
 				// alert(this.user_id);
 				//alert('this.user_id');
-				axios.post( this.model.modelPrivacy ,
+				axios.post( this.model.modelSearch ,
 				{
 					purpose: 'get_profile_details_for_all',
+					main_purpose : 'search_other_option',
 					email: this.email,
 					user_id: this.user_id, 
 				}).then(function(response){
@@ -1128,9 +1131,10 @@
 		created(){
 
 
-			axios.post( this.model.modelPrivacy ,
+			axios.post( this.model.modelSearch ,
 			{
 				purpose: 'get_profile_details_for_all',
+				main_purpose : 'search_other_option',
 				email: this.email,
 				user_id: this.user_id,
 			}).then(function(response){
@@ -1200,10 +1204,11 @@ Vue.component('gallery' , {
 created(){
 
 
-	axios.post( this.model.modelGallery ,
+	axios.post( this.model.modelSearch ,
 	{
 
 		purpose: 'getPhotos_for_all_users',
+		main_purpose : 'search_other_option',
 		email: this.email ,
 		user_id: this.user_id ,
 	}
@@ -1257,6 +1262,7 @@ Vue.component('search' , {
 				{
 					purpose: this.category ,
 					search_text: this.search_text,
+					main_purpose : 'search',
 
 				}
 				).then(function(response){
@@ -1291,14 +1297,16 @@ Vue.component('search' , {
 				this.search();
 				
 			})
-
+			this.users_info__.admin__ = true;
 			this.users_info__.admin__ == true ? this.category_items.push("rejected_user" , "newly_registered") : '';
-			axios.post( this.model.modelProfile_update ,
+			axios.post( this.model.modelSearch ,
 			{
 				purpose: 'getProfileBasicInfo',
+				main_purpose : 'search_other_option',
 				
 			}
 			).then(function(response){
+				console.log(response);
 				this.users_info_as_props = response.data ;
 				
 			}.bind(this))
@@ -1312,10 +1320,12 @@ Vue.component('search' , {
 	})
 
 
-
-
 var search = new Vue({
 	el:'#app',
 	vuetify:new Vuetify(),
 })
+
+
+
+
 </script>
