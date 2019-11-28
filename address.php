@@ -55,6 +55,8 @@ $reg_req = $rootAdress.'pages/reg_req.php';
 $profilePage = $rootAdress.'pages/profile.php?pn=basic';
 
 
+
+
 $profile_basicPage = $rootAdress.'pages/profile_basic.php';
 $profile_personalPage = $rootAdress.'pages/profile_personal.php';
 $profile_addressPage = $rootAdress.'pages/profile_address.php';
@@ -64,6 +66,11 @@ $profile_photo_uploadPage = $rootAdress.'pages/profile_photo_upload.php';
 $profile_verify_emailPage = $rootAdress.'pages/profile_verify_email.php';
 $profile_password_recoveryPage = $rootAdress.'pages/profile_password_recovery.php';
 $profile_forgot_passwordPage = $rootAdress.'pages/profile_forgot_password.php';
+
+
+
+
+$photo_galleryPage = $rootAdress.'pages/photo_gallery.php';
 
 
 
@@ -104,6 +111,11 @@ $modelProfile_photo_upload = $rootAdress."model/profile_photo_upload.php";
 $modelProfile_verify_email = $rootAdress."model/profile_verify_email.php";
 $modelProfile_password_recovery = $rootAdress."model/profile_password_recovery.php";
 $modelProfile_forgot_password = $rootAdress."model/profile_forgot_password.php";
+
+
+
+
+$modelphoto_gallery = $rootAdress."model/photo_gallery.php";
 
 
 

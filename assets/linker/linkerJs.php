@@ -111,6 +111,10 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
 
 
+                    modelphoto_gallery: '<?php echo $modelphoto_gallery; ?>',
+
+
+
                     modelSearch: '<?php echo $modelSearch; ?>',
                     modelAdminChangeInfo: '<?php echo $modelAdminChangeInfo; ?>',
 
@@ -260,6 +264,12 @@ else if($pageName == 'profile_photo_upload'){
     include $APP_ROOT."assets/js/vue_file/profile_password_recovery.php";
 }else if($pageName == 'profile_forgot_password'){
     include $APP_ROOT."assets/js/vue_file/profile_forgot_password.php";
+}
+
+
+
+else if($pageName == 'photo_gallery'){
+    include $APP_ROOT."assets/js/vue_file/photo_gallery.php";
 }
 
 
