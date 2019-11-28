@@ -71,9 +71,17 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     add_user: '<?php echo $add_user; ?>',
                     reg_req: '<?php echo $reg_req; ?>',
                     profilePage: '<?php echo $profilePage; ?>',
+
+
+
                     profile_basicPage: '<?php echo $profile_basicPage; ?>',
                     profile_personalPage: '<?php echo $profile_personalPage; ?>',
                     profile_addressPage: '<?php echo $profile_addressPage; ?>',
+                    profile_change_passwordPage: '<?php echo $profile_change_passwordPage; ?>',
+                    profile_change_emailPage: '<?php echo $profile_change_emailPage; ?>',
+
+
+
                     searchPage: '<?php echo $searchPage; ?>',
 
                 },
@@ -86,9 +94,16 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelPrivacy: '<?php echo $modelPrivacy; ?>',
                     modelGallery: '<?php echo $modelGallery; ?>',
                     modelProfile_update: '<?php echo $modelProfile_update; ?>',
+
+
                     modelProfile_basic: '<?php echo $modelProfile_basic; ?>',
                     modelProfile_personal: '<?php echo $modelProfile_personal; ?>',
                     modelProfile_address: '<?php echo $modelProfile_address; ?>',
+                    modelProfile_change_password: '<?php echo $modelProfile_change_password; ?>',
+                    modelProfile_change_email: '<?php echo $modelProfile_change_email; ?>',
+
+
+
                     modelSearch: '<?php echo $modelSearch; ?>',
                     modelAdminChangeInfo: '<?php echo $modelAdminChangeInfo; ?>',
 
@@ -209,6 +224,9 @@ else if($pageName == 'add_user'){
 else if($pageName == 'profile'){
     include $APP_ROOT."assets/js/vue_file/profile.php";
 }
+
+
+
 else if($pageName == 'profile_basic'){
     include $APP_ROOT."assets/js/vue_file/profile_basic.php";
 }
@@ -218,6 +236,16 @@ else if($pageName == 'profile_personal'){
 else if($pageName == 'profile_address'){
     include $APP_ROOT."assets/js/vue_file/profile_address.php";
 }
+else if($pageName == 'profile_change_password'){
+    include $APP_ROOT."assets/js/vue_file/profile_change_password.php";
+}
+else if($pageName == 'profile_change_email'){
+    include $APP_ROOT."assets/js/vue_file/profile_change_email.php";
+}
+
+
+
+
 else if($pageName == 'privacy'){
     include $APP_ROOT."assets/js/vue_file/privacy.php";
 }

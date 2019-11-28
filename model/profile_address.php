@@ -11,7 +11,6 @@ $d1 = json_decode($data);
 
 
 
-
 if($d1->purpose == 'address1'){
   $present_line1= $d1->present_line1;
   $present_district= $d1->present_district;
