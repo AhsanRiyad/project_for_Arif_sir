@@ -63,6 +63,7 @@ $profile_change_emailPage = $rootAdress.'pages/profile_change_email.php';
 $profile_photo_uploadPage = $rootAdress.'pages/profile_photo_upload.php';
 $profile_verify_emailPage = $rootAdress.'pages/profile_verify_email.php';
 $profile_password_recoveryPage = $rootAdress.'pages/profile_password_recovery.php';
+$profile_forgot_passwordPage = $rootAdress.'pages/profile_forgot_password.php';
 
 
 
@@ -89,6 +90,11 @@ $modelGallery = $rootAdress."model/gallery.php";
 $modelProfile_update = $rootAdress."model/profile_update.php";
 
 
+
+
+
+
+
 $modelProfile_basic = $rootAdress."model/profile_basic.php";
 $modelProfile_personal = $rootAdress."model/profile_personal.php";
 $modelProfile_address = $rootAdress."model/profile_address.php";
@@ -97,6 +103,10 @@ $modelProfile_change_email = $rootAdress."model/profile_change_email.php";
 $modelProfile_photo_upload = $rootAdress."model/profile_photo_upload.php";
 $modelProfile_verify_email = $rootAdress."model/profile_verify_email.php";
 $modelProfile_password_recovery = $rootAdress."model/profile_password_recovery.php";
+$modelProfile_forgot_password = $rootAdress."model/profile_forgot_password.php";
+
+
+
 
 
 
@@ -118,12 +128,6 @@ $databaseName = 'intern_project';
 // $userName = 'frieomkc_riyad';
 // $password = '01919448787';
 // $databaseName = 'frieomkc_intern_project';
-
-
-
-
-
-
 
 
 //CSRF_TOKEN token securty session
