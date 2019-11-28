@@ -1,5 +1,5 @@
 <?php 
-$pageName = 'profile';
+$pageName = 'profile_personal';
 include "../address.php"; 
 include $db; 
 
@@ -13,11 +13,10 @@ include $dashboard_head;
 ?>
 
 <div id="app">	
-
+	
 	<v-app>
-			<basic :profile_photo="profile_photo"></basic>
+		<profile_personal :profile_photo="profile_photo"></profile_personal>
 	</v-app>
-
 
 </div>
 

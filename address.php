@@ -53,6 +53,8 @@ $dashboardPage = $rootAdress.'pages/add_user.php';
 $add_user = $rootAdress.'pages/add_user.php';
 $reg_req = $rootAdress.'pages/reg_req.php';
 $profilePage = $rootAdress.'pages/profile.php?pn=basic';
+$profile_basicPage = $rootAdress.'pages/profile_basic.php';
+$profile_personalPage = $rootAdress.'pages/profile_personal.php';
 $privacyPage = $rootAdress.'pages/privacy.php';
 $galleryPage = $rootAdress.'pages/gallery.php';
 $searchPage = $rootAdress.'pages/search.php';
@@ -74,6 +76,8 @@ $modelUploadPhotos = $rootAdress."model/upload_photos.php";
 $modelPrivacy = $rootAdress."model/privacy.php";
 $modelGallery = $rootAdress."model/gallery.php";
 $modelProfile_update = $rootAdress."model/profile_update.php";
+$modelProfile_basic = $rootAdress."model/profile_basic.php";
+$modelProfile_personal = $rootAdress."model/profile_personal.php";
 $modelSearch = $rootAdress."model/search.php";
 $modelAdminChangeInfo = $rootAdress."model/admin_change_info.php";
 
