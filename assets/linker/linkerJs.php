@@ -72,6 +72,8 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     reg_req: '<?php echo $reg_req; ?>',
                     profilePage: '<?php echo $profilePage; ?>',
                     profile_basicPage: '<?php echo $profile_basicPage; ?>',
+                    profile_personalPage: '<?php echo $profile_personalPage; ?>',
+                    profile_addressPage: '<?php echo $profile_addressPage; ?>',
                     searchPage: '<?php echo $searchPage; ?>',
 
                 },
@@ -86,6 +88,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelProfile_update: '<?php echo $modelProfile_update; ?>',
                     modelProfile_basic: '<?php echo $modelProfile_basic; ?>',
                     modelProfile_personal: '<?php echo $modelProfile_personal; ?>',
+                    modelProfile_address: '<?php echo $modelProfile_address; ?>',
                     modelSearch: '<?php echo $modelSearch; ?>',
                     modelAdminChangeInfo: '<?php echo $modelAdminChangeInfo; ?>',
 
@@ -211,6 +214,9 @@ else if($pageName == 'profile_basic'){
 }
 else if($pageName == 'profile_personal'){
     include $APP_ROOT."assets/js/vue_file/profile_personal.php";
+}
+else if($pageName == 'profile_address'){
+    include $APP_ROOT."assets/js/vue_file/profile_address.php";
 }
 else if($pageName == 'privacy'){
     include $APP_ROOT."assets/js/vue_file/privacy.php";

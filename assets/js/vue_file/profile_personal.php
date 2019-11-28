@@ -365,7 +365,6 @@ Vue.component('profile_personal' , {
 			}
 			).then(function(response){
 				
-				
 				this.full_name = response.data.full_name;
 				this.fathers_name = response.data.fathers_name;
 				this.mothers_name = response.data.mother_name;
