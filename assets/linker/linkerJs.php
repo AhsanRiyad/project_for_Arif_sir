@@ -81,6 +81,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     profile_change_emailPage: '<?php echo $profile_change_emailPage; ?>',
                     profile_photo_uploadPage: '<?php echo $profile_photo_uploadPage; ?>',
                     profile_verify_emailPage: '<?php echo $profile_verify_emailPage; ?>',
+                    profile_password_recoveryPage: '<?php echo $profile_password_recoveryPage; ?>',
 
 
 
@@ -104,6 +105,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelProfile_change_email: '<?php echo $modelProfile_change_email; ?>',
                     modelProfile_photo_upload: '<?php echo $modelProfile_photo_upload; ?>',
                     modelProfile_verify_email: '<?php echo $modelProfile_verify_email; ?>',
+                    modelProfile_password_recovery: '<?php echo $modelProfile_password_recovery; ?>',
 
 
 
@@ -230,6 +232,9 @@ else if($pageName == 'profile'){
 
 
 
+
+
+
 else if($pageName == 'profile_basic'){
     include $APP_ROOT."assets/js/vue_file/profile_basic.php";
 }
@@ -249,7 +254,11 @@ else if($pageName == 'profile_photo_upload'){
     include $APP_ROOT."assets/js/vue_file/profile_photo_upload.php";
 }else if($pageName == 'profile_verify_email'){
     include $APP_ROOT."assets/js/vue_file/profile_verify_email.php";
+}else if($pageName == 'profile_password_recovery'){
+    include $APP_ROOT."assets/js/vue_file/profile_password_recovery.php";
 }
+
+
 
 
 
