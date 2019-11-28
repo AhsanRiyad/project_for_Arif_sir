@@ -17,27 +17,27 @@ if($d2->main_purpose == 'search'){
 
 
 	if($d2->purpose == 'full_name'){
-		$sql = "select * from all_info_together where status = 'approved' and  full_name  REGEXP '$name'  limit 20 ";
+		$sql = "select * from all_info_together where status = 'approved' and  full_name  like '%$name%'  limit 20 ";
 
 	}else if($d2->purpose == 'membership_number'){
 
-		$sql = "select * from all_info_together where  status = 'approved' and membership_number  REGEXP '$name' limit 20 ";
+		$sql = "select * from all_info_together where  status = 'approved' and membership_number  like '%$name%' limit 20 ";
 
 	}else if($d2->purpose == 'permanent_district'){
 
 
-		$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and  ua.parmanent_district  REGEXP '$name' limit 20 ";
+		$sql = "select * from users_registration ur , users_info ui , users_address ua , verification_info  vi ,  user_uploads uu where uu.email = ur.email and ui.email = ur.email and  ua.email = ur.email and vi.email = ur.email and vi.status = 'approved' and  ua.parmanent_district  like '%$name%' limit 20 ";
 
 
 	}else if($d2->purpose == 'institution_id'){
-		$sql = "select * from all_info_together where status = 'approved' and  institution_id  REGEXP '$name' limit 20 ";
+		$sql = "select * from all_info_together where status = 'approved' and  institution_id  like '%$name%' limit 20 ";
 	}
 	else if($d2->purpose == 'rejected_user'){
-		$sql = "select * from all_info_together where status = 'rejected' and  full_name  REGEXP '$name' limit 20 ";
+		$sql = "select * from all_info_together where status = 'rejected' and  full_name  like '%$name%' limit 20 ";
 	}
 
 	else if($d2->purpose == 'newly_registered'){
-		$sql = "select * from all_info_together where status = 'not_verified' and  full_name  REGEXP '$name' limit 20 ";
+		$sql = "select * from all_info_together where status = 'not_verified' and  full_name  like '%$name%' limit 20 ";
 	}
 
 
