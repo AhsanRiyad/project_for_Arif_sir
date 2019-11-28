@@ -61,6 +61,7 @@ $profile_addressPage = $rootAdress.'pages/profile_address.php';
 $profile_change_passwordPage = $rootAdress.'pages/profile_change_password.php';
 $profile_change_emailPage = $rootAdress.'pages/profile_change_email.php';
 $profile_photo_uploadPage = $rootAdress.'pages/profile_photo_upload.php';
+$profile_verify_emailPage = $rootAdress.'pages/profile_verify_email.php';
 
 
 
@@ -93,6 +94,7 @@ $modelProfile_address = $rootAdress."model/profile_address.php";
 $modelProfile_change_password = $rootAdress."model/profile_change_password.php";
 $modelProfile_change_email = $rootAdress."model/profile_change_email.php";
 $modelProfile_photo_upload = $rootAdress."model/profile_photo_upload.php";
+$modelProfile_verify_email = $rootAdress."model/profile_verify_email.php";
 
 
 
