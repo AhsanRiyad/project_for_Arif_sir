@@ -89,6 +89,8 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
                     photo_galleryPage: '<?php echo $photo_galleryPage; ?>',
                     data_privacyPage: '<?php echo $data_privacyPage; ?>',
+                    new_user_requestPage: '<?php echo $new_user_requestPage; ?>',
+                    data_update_requestPage: '<?php echo $data_update_requestPage; ?>',
 
 
 
@@ -122,6 +124,8 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
                     modelphoto_gallery: '<?php echo $modelphoto_gallery; ?>',
                     modeldata_privacy: '<?php echo $modeldata_privacy; ?>',
+                    modelnew_user_request: '<?php echo $modelnew_user_request; ?>',
+                    modeldata_update_request: '<?php echo $modeldata_update_request; ?>',
 
 
 
@@ -283,6 +287,12 @@ else if($pageName == 'photo_gallery'){
 }
 else if($pageName == 'data_privacy'){
     include $APP_ROOT."assets/js/vue_file/data_privacy.php";
+}
+else if($pageName == 'new_user_request'){
+    include $APP_ROOT."assets/js/vue_file/new_user_request.php";
+}
+else if($pageName == 'data_update_request'){
+    include $APP_ROOT."assets/js/vue_file/data_update_request.php";
 }
 
 

@@ -72,6 +72,8 @@ $profile_forgot_passwordPage = $rootAdress.'pages/profile_forgot_password.php';
 
 $photo_galleryPage = $rootAdress.'pages/photo_gallery.php';
 $data_privacyPage = $rootAdress.'pages/data_privacy.php';
+$new_user_requestPage = $rootAdress.'pages/new_user_request.php';
+$data_update_requestPage = $rootAdress.'pages/data_update_request.php';
 
 
 
@@ -118,6 +120,8 @@ $modelProfile_forgot_password = $rootAdress."model/profile_forgot_password.php";
 
 $modelphoto_gallery = $rootAdress."model/photo_gallery.php";
 $modeldata_privacy = $rootAdress."model/data_privacy.php";
+$modelnew_user_request = $rootAdress."model/new_user_request.php";
+$modeldata_update_request = $rootAdress."model/data_update_request.php";
 
 
 
