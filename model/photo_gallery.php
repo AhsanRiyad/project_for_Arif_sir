@@ -232,7 +232,4 @@ if($d2->purpose == 'getPhotos'){
 }
 
 
-
-
-
 ?>

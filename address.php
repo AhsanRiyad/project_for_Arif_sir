@@ -71,6 +71,7 @@ $profile_forgot_passwordPage = $rootAdress.'pages/profile_forgot_password.php';
 
 
 $photo_galleryPage = $rootAdress.'pages/photo_gallery.php';
+$data_privacyPage = $rootAdress.'pages/data_privacy.php';
 
 
 
@@ -116,6 +117,7 @@ $modelProfile_forgot_password = $rootAdress."model/profile_forgot_password.php";
 
 
 $modelphoto_gallery = $rootAdress."model/photo_gallery.php";
+$modeldata_privacy = $rootAdress."model/data_privacy.php";
 
 
 

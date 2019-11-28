@@ -81,8 +81,13 @@ echo $row['st'];
 				echo $row['st'];*/
 
 
-				$email = $email__;
-				$user_id = $id__ ;
+				// $email = $email__;
+				// $user_id = $id__ ;
+				$email = 'riyad298@gmail.com';
+				$user_id = 1 ;
+
+
+
 
 				function getPrivacyData($email , $user_id){
 					$conn = get_mysqli_connection();

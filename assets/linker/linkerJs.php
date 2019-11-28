@@ -86,6 +86,15 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
 
 
+
+                    photo_galleryPage: '<?php echo $photo_galleryPage; ?>',
+                    data_privacyPage: '<?php echo $data_privacyPage; ?>',
+
+
+
+
+
+
                     searchPage: '<?php echo $searchPage; ?>',
 
                 },
@@ -112,6 +121,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
 
                     modelphoto_gallery: '<?php echo $modelphoto_gallery; ?>',
+                    modeldata_privacy: '<?php echo $modeldata_privacy; ?>',
 
 
 
@@ -270,6 +280,9 @@ else if($pageName == 'profile_photo_upload'){
 
 else if($pageName == 'photo_gallery'){
     include $APP_ROOT."assets/js/vue_file/photo_gallery.php";
+}
+else if($pageName == 'data_privacy'){
+    include $APP_ROOT."assets/js/vue_file/data_privacy.php";
 }
 
 

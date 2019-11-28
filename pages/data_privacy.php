@@ -1,5 +1,5 @@
 <?php 
-$pageName = 'privacy';
+$pageName = 'data_privacy';
 include "../address.php"; 
 include $db; 
 include $session_info;
@@ -15,7 +15,7 @@ include $dashboard_head;
 
 	<v-app>
 	<!-- <component v-bind:is="componet_name"> -->
-		<privacy></privacy>
+		<data_privacy></data_privacy>
 	</v-app>
 
 

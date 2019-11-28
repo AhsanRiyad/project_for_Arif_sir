@@ -47,7 +47,7 @@
   </v-container>`;
 
 
-  Vue.component('privacy' , {
+  Vue.component('data_privacy' , {
     template: privacy,
     data(){
      return{
@@ -62,7 +62,7 @@
 
       
 
-      axios.post( this.model.modelPrivacy ,
+      axios.post( this.model.modeldata_privacy ,
       {
         users_info: this.users_info,
         purpose: 'updatePrivacy',
@@ -146,7 +146,7 @@
     
   },
   created(){
-    axios.post( this.model.modelPrivacy ,
+    axios.post( this.model.modeldata_privacy ,
     {
       purpose: 'getPrivacy',
     },

@@ -4,10 +4,6 @@ include $APP_ROOT.'assets/linker/db.php' ;
 
 
 
-
-
-
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
