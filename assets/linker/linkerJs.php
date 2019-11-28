@@ -79,6 +79,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     profile_addressPage: '<?php echo $profile_addressPage; ?>',
                     profile_change_passwordPage: '<?php echo $profile_change_passwordPage; ?>',
                     profile_change_emailPage: '<?php echo $profile_change_emailPage; ?>',
+                    profile_photo_uploadPage: '<?php echo $profile_photo_uploadPage; ?>',
 
 
 
@@ -90,7 +91,6 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelLogin: '<?php echo $modelLogin; ?>',
                     modelReg_req: '<?php echo $modelReg_req; ?>',
                     modeltest: '<?php echo $modeltest; ?>',
-                    modelUploadPhotos: '<?php echo $modelUploadPhotos; ?>',
                     modelPrivacy: '<?php echo $modelPrivacy; ?>',
                     modelGallery: '<?php echo $modelGallery; ?>',
                     modelProfile_update: '<?php echo $modelProfile_update; ?>',
@@ -101,6 +101,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelProfile_address: '<?php echo $modelProfile_address; ?>',
                     modelProfile_change_password: '<?php echo $modelProfile_change_password; ?>',
                     modelProfile_change_email: '<?php echo $modelProfile_change_email; ?>',
+                    modelProfile_photo_upload: '<?php echo $modelProfile_photo_upload; ?>',
 
 
 
@@ -241,6 +242,9 @@ else if($pageName == 'profile_change_password'){
 }
 else if($pageName == 'profile_change_email'){
     include $APP_ROOT."assets/js/vue_file/profile_change_email.php";
+}
+else if($pageName == 'profile_photo_upload'){
+    include $APP_ROOT."assets/js/vue_file/profile_photo_upload.php";
 }
 
 

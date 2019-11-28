@@ -3,6 +3,7 @@ include "../address.php";
 include $APP_ROOT.'assets/linker/db.php' ; 
 
 $id__ = 1;
+$email__ = 'ahsan.riyad@outlook.com';
 
 $data =  file_get_contents('php://input');
 $d1 = json_decode($data);
