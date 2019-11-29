@@ -1,36 +1,13 @@
 <?php 
 include "../address.php";
 include $APP_ROOT.'assets/linker/db.php' ; 
+include 'email_config.php';
 
 // $id__ = 1;
 // $email__ = 'ahsan.riyad@outlook.com';
 
 $data =  file_get_contents('php://input');
 $d1 = json_decode($data);
-
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-// Load Composer's autoloader
-require $APP_ROOT.'vendor/autoload.php';
-
-
-
-
-$mail = new PHPMailer();
-$mail ->IsSmtp();
-$mail ->SMTPDebug = 0;
-$mail ->SMTPAuth = true;
-$mail ->SMTPSecure = 'ssl';
-$mail ->Host = "server165.web-hosting.com";
-$mail ->Port = 465; // or 587
-$mail ->IsHTML(true);
-$mail ->Username = "riyad298@riyad.friendsbd.website";
-$mail ->Password = "Ahsan111";
-$mail ->SetFrom("riyad298@riyad.friendsbd.website");
-
 
 
 if($d1->purpose == 'email'){

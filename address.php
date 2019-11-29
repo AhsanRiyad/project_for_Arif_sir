@@ -18,9 +18,13 @@ $rootAdress = 'http://localhost/project_for_Arif_sir/';
 // $rootAdress = 'http://mdahsanr.sgedu.site/';
 
 
+// $rootAdress = 'http://ndc92.cyberideaz.com/';
+
+
+
 
 //hosting
-//$rootAdress = 'http://riyad.friendsbd.website/project_for_Arif_sir/';
+//$rootAdress = 'http://ndc92.friendsbd.website/';
 
 
 
@@ -167,6 +171,12 @@ $databaseName = 'intern_project';
 // $password = '01919448787';
 // $databaseName = 'frieomkc_intern_project';
 
+// database hosting
+// $hostName = '127.0.0.1';
+// $userName = 'ndc92';
+// $password = 'ndc92';
+// $databaseName = 'ndc92';
+
 
 
 // $hostName = 'localhost';
@@ -189,6 +199,8 @@ $login__ = false;
 $id__ = '';
 $email__='';
 $name__ = '';
+$cr__ = 0;
+$vr__ = 0;
 
 
 

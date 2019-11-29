@@ -56,7 +56,13 @@
 				<div class="  
 				<?php 
 
-				if($pageName=='profile')
+				if(	$pageName=='profile_basic' ||
+					$pageName=='profile_personal' ||
+					$pageName=='profile_address' ||
+					$pageName=='profile_photo_upload' ||
+					$pageName=='profile_change_email' ||
+					$pageName=='profile_change_password'
+				 )
 				{
 					echo 'bg-info';
 				}
@@ -112,7 +118,7 @@
 
 				<i class="fas fa-shopping-cart"></i> User Request 
 
-				<span class="badge badge-primary" id="verification_request_badge">0</span>
+				<span class="badge badge-primary" id="verification_request_badge"><?php echo $vr__; ?></span>
 
 			</div></a>
 		<?php } ?>
@@ -136,7 +142,7 @@
 
 				<i class="fas fa-shopping-cart"></i> Change Request
 
-				<span class="badge badge-primary" id="change_request_badge">0</span>
+				<span class="badge badge-primary" id="change_request_badge"> <?php echo $cr__; ?></span>
 			</div></a>
 		<?php } ?>
 	
@@ -211,3 +217,4 @@
 			</div>		
 		</div>
 	</div>
+</div>

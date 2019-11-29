@@ -172,46 +172,18 @@ echo $_SESSION['users_info']['email'];
 $conn->close();*/
 
 
+$conn = get_mysqli_connection();
+	$sql = "call count_request(@verification_request, @change_request)";
+	$result = mysqli_query($conn , $sql);
+	// $stmt = $conn->prepare($sql);
+	// $stmt->execute();
+	$sql = "select @verification_request as vr , @change_request as cr";
+	$result = mysqli_query($conn , $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+	}
+	$conn->close();
+	echo json_encode($row);
+	echo '<br>';
 
-
-
-$APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/project_for_Arif_sir/";
-
-
-
-
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-// Load Composer's autoloader
-require $APP_ROOT.'vendor/autoload.php';
-
-// Instantiation and passing `true` enables exceptions
-$mailto = 'riyad298@gmail.com';
-$mailMsg = 'farfaerfaref';
-$mail = new PHPMailer();
-		$mail ->IsSmtp();
-		$mail ->SMTPDebug = 0;
-		$mail ->SMTPAuth = true;
-		$mail ->SMTPSecure = 'ssl';
-		$mail ->Host = "smtp.gmail.com";
-   $mail ->Port = 465; // or 587
-   $mail ->IsHTML(true);
-   $mail ->Username = "riyad.for.test@gmail.com";
-   $mail ->Password = "01919448787";
-   $mail ->SetFrom("riyad.for.test@gmail.com");
-   $mail ->Subject = 'arferfr';
-   $mail ->Body = $mailMsg;
-   $mail ->AddAddress($mailto);
-
-
-    if(!$mail->Send())
-   {
-   	echo 'server_problem';
-   }
-   else
-   {
-   	echo 'sent';
-   }
+	echo $row['vr'];

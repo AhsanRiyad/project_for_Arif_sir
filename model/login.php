@@ -2,7 +2,7 @@
 
 include "../address.php";
 
-include $db ; 
+include $APP_ROOT.'assets/linker/db.php' ; 
 
 
 

@@ -2,6 +2,26 @@
 
 
 
+
+$conn = get_mysqli_connection();
+$sql = "call count_request(@verification_request, @change_request)";
+$result = mysqli_query($conn , $sql);
+	// $stmt = $conn->prepare($sql);
+	// $stmt->execute();
+$sql = "select @verification_request as vr , @change_request as cr";
+$result = mysqli_query($conn , $sql);
+if (mysqli_num_rows($result) > 0) {
+	$row = mysqli_fetch_assoc($result);
+}
+$conn->close();
+
+
+$vr__ = $row['vr'];
+$cr__ = $row['cr'];
+
+
+
+
 if($pageName == 'login' || $pageName == 'registration' || $pageName == 'profile_forgot_password' ){
 	$_SESSION['users_info'] = null;
 }
@@ -9,13 +29,15 @@ if($pageName == 'login' || $pageName == 'registration' || $pageName == 'profile_
 
 function dbGetUserDetails($email){
 	$conn = get_mysqli_connection();
-	$sql = 'select * from all_info_together where email ='.'"'.$email.'"';  
+	$sql = 'select * from all_info_together where email = "'.$email.'" ';  
 	$result = mysqli_query($conn, $sql);
 	$row1 = mysqli_fetch_assoc($result);
 	$_SESSION['users_info'] = $row1;	
 	$conn->close();
 
 }
+
+
 
 
 
@@ -51,10 +73,6 @@ if(isset($_SESSION['users_info'])){
 		$email_verified__ = true;
 	}
 
-
-
-
-
 }else if($_SESSION['users_info']['type'] =='admin'){
 	$admin__ = true;
 }
@@ -72,8 +90,6 @@ if(isset($_SESSION['users_info'])){
 	}*/
 
 }
-
-
 
 if($login__ == true){
 

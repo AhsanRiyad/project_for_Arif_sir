@@ -1,7 +1,7 @@
 <?php 
 include "../address.php";
 include $APP_ROOT.'assets/linker/db.php' ; 
-header("Content-Type: application/json; charset=UTF-8");
+// header("Content-Type: application/json; charset=UTF-8");
 //print_r(json_encode($_REQUEST));
 //print_r($_REQUEST['title']);
 $data =  file_get_contents('php://input');
