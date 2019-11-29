@@ -65,4 +65,18 @@ if($d1->purpose == 'basic'){
 
   // $i = 0;
 // echo json_encode(var_dump($row));
+}else if($d1->purpose == 'profile_completeness_100'){
+
+  $user_type = $d1->user_type;
+  $conn = get_mysqli_connection();
+  $sql = '';
+  if($user_type == 'admin'){
+    $sql = "call user_request( ".$id__." , @result)";
+  }else if($user_type == 'user'){
+    $sql = "update all_info_together set completeness = 100 where id = ".$id__." ";
+  }
+  $result = mysqli_query($conn, $sql);
+  
+  $conn->close();
+
 }

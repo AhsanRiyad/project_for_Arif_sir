@@ -6,7 +6,7 @@
 	<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 	<div class="row bg-white mx-1">
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -111,7 +111,7 @@
 	<div class="container-fluid bg-light mt-1 mb-5">
 	<div class="row justify-content-center align-items-center">
 	<a v-bind:href="address.profile_basicPage"><v-btn   large class="ml-1" color="success">Basic</v-btn></a>
-	<a v-bind:href="address.profile_personalPage"><v-btn disabled="true"  large class="ml-1" color="success">Personal</v-btn></a>
+	<a v-bind:href="address.profile_personalPage"><v-btn disabled  large class="ml-1" color="success">Personal</v-btn></a>
 	<a v-bind:href="address.profile_addressPage"><v-btn    large class="ml-1" color="success">address</v-btn></a>
 	<a v-bind:href="address.profile_photo_uploadPage"><v-btn   large class="ml-1" color="success">photo</v-btn></a>
 	<div class="w-100"></div>
@@ -121,14 +121,212 @@
 	</div>
 	`;
 
+
+
+	var alert = `	
+	<div class="container">
+	<div class="row justify-content-center no-gutters">
+	<div class="col col-xl-4 col-md-7 ">
+	<a v-bind:href="address.profile_verify_emailPage">
+	<v-alert type="error" v-if="email_verification_status == 'not_verified'">
+	Your email is not verified , click to solve
+	</v-alert></a>
+	<a>
+	<v-alert type="warning" v-if="completeness < 100"> {{ profile_completeness_msg }} 
+	</v-alert></a>
+	<a>
+	<v-alert type="warning" v-if="completeness == 100 && users_info.status == 'not_verified' "> You are not verified yet, wait for verifiaction 
+	</v-alert></a>
+	</div>
+	</div>
+	</div>
+	`;
+
+
+	var bus = new Vue();
+
+
+	Vue.component('alert' , {
+		template: alert ,
+		data(){
+			return {
+				email_verification_status: true,
+				status: true,
+				completeness: '',
+				change_request: '',
+				profile_completeness_msg: 'default',
+				users_info: ''
+			}
+		},
+		methods: {
+			verify_email_otp(){
+				//alert('veriy');
+				
+			},
+			profile_completeness_bus(){
+			}
+		},
+		created(){
+			/*bus.$on('email_verification_status' , (data)=>{
+				this.email_verification_status = data;
+			});*/
+			
+			bus.$on('users_info' , (response)=>{
+				
+				// console.log('bus received');
+				this.users_info = response;
+				if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
+					this.profile_completeness_msg = 'full_name is not set';
+				}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
+					this.profile_completeness_msg = 'mobile is not set';	
+				}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
+					this.profile_completeness_msg = 'institution_id is not set';	
+				}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
+					this.profile_completeness_msg = 'nid_or_passport is not set';	
+				}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
+					this.profile_completeness_msg = 'blood_group is not set';	
+				}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
+					this.profile_completeness_msg = 'date_of_birth is not set';	
+				}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
+					this.profile_completeness_msg = 'fathers_name is not set';	
+				}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
+					this.profile_completeness_msg = 'mother_name is not set';	
+				}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
+					this.profile_completeness_msg = 'spouse_name is not set';	
+				}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
+					this.profile_completeness_msg = 'number_of_children is not set';	
+				}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
+					this.profile_completeness_msg = 'profession is not set';	
+				}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
+					this.profile_completeness_msg = 'institution is not set';	
+				}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
+					this.profile_completeness_msg = 'designation is not set';	
+				}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
+					this.profile_completeness_msg = 'present_line1 is not set';	
+				}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
+					this.profile_completeness_msg = 'present_district is not set';	
+				}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
+					this.profile_completeness_msg = 'present_post_code is not set';	
+				}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
+					this.profile_completeness_msg = 'present_country is not set';	
+				}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
+					this.profile_completeness_msg = 'parmanent_line1 is not set';	
+				}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
+					this.profile_completeness_msg = 'parmanent_district is not set';	
+				}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
+					this.profile_completeness_msg = 'parmanent_post_code is not set';	
+				}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
+					this.profile_completeness_msg = 'parmanent_country is not set';	
+				}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
+					this.profile_completeness_msg = 'recent_photo is not set';	
+				}else{
+					axios.post( this.model.modelProfile_basic ,
+					{
+						purpose: 'profile_completeness_100',
+						user_type: this.users_info.type ,
+					}
+					).then(function(response){
+						
+						this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
+					}.bind(this))
+					.catch(function(error){
+						
+					}.bind(this));
+				}
+			});
+axios.post( this.model.modelProfile_basic ,
+{
+	purpose: 'getProfileBasicInfo',
+}
+).then(function(response){
+	// console.log(response);
+				//this.email = response.data.full_name;
+				this.email_verification_status = response.data.email_verification_status;
+				this.completeness = response.data.completeness;
+				this.users_info = response.data;
+			}.bind(this))
+.catch(function(error){
+	
+}.bind(this));
+},
+updated(){
+	if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
+		this.profile_completeness_msg = 'full_name is not set';
+	}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
+		this.profile_completeness_msg = 'mobile is not set';	
+	}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
+		this.profile_completeness_msg = 'institution_id is not set';	
+	}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
+		this.profile_completeness_msg = 'nid_or_passport is not set';	
+	}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
+		this.profile_completeness_msg = 'blood_group is not set';	
+	}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
+		this.profile_completeness_msg = 'date_of_birth is not set';	
+	}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
+		this.profile_completeness_msg = 'fathers_name is not set';	
+	}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
+		this.profile_completeness_msg = 'mother_name is not set';	
+	}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
+		this.profile_completeness_msg = 'spouse_name is not set';	
+	}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
+		this.profile_completeness_msg = 'number_of_children is not set';	
+	}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
+		this.profile_completeness_msg = 'profession is not set';	
+	}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
+		this.profile_completeness_msg = 'institution is not set';	
+	}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
+		this.profile_completeness_msg = 'designation is not set';	
+	}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
+		this.profile_completeness_msg = 'present_line1 is not set';	
+	}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
+		this.profile_completeness_msg = 'present_district is not set';	
+	}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
+		this.profile_completeness_msg = 'present_post_code is not set';	
+	}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
+		this.profile_completeness_msg = 'present_country is not set';	
+	}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
+		this.profile_completeness_msg = 'parmanent_line1 is not set';	
+	}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
+		this.profile_completeness_msg = 'parmanent_district is not set';	
+	}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
+		this.profile_completeness_msg = 'parmanent_post_code is not set';	
+	}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
+		this.profile_completeness_msg = 'parmanent_country is not set';	
+	}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
+		this.profile_completeness_msg = 'recent_photo is not set';	
+	}else{
+		
+		this.users_info.type == 'admin' ? this.profile_completeness_msg = 'Profile completed , Thank You' : this.profile_completeness_msg = 'Profile completed , Wait for verfification';  
+	}
+	
+}
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Vue.component('buttons' , {
 	template: buttons,
 	data(){
 		return {}
-		},
-		methods: {
-		},
-	})
+	},
+	methods: {
+	},
+})
 
 
 
@@ -170,6 +368,7 @@ Vue.component('profile_personal' , {
 			users_info: '',
 			submit_disabled: false,
 			type: '',
+			recent_photo:'',
 			changes:{
 				fathers_name:{
 					smallText: {
@@ -375,6 +574,9 @@ Vue.component('profile_personal' , {
 					this.permanent_post_code = response.data.parmanent_post_code;
 					this.permanent_country = response.data.parmanent_country;
 					this.type = response.data.type;
+
+					bus.$emit('users_info' , response.data);
+
 					
 				}.bind(this))
 				.catch(function(error){
@@ -404,6 +606,18 @@ Vue.component('profile_personal' , {
 				if(this.users_info.completeness == 100 & this.users_info.status == 'not_verified'){
 					this.submit_disabled = true;
 				}
+
+
+				if(response.data.recent_photo !='not_set'){
+					this.recent_photo = this.directories.upload_recent_photo_directory+response.data.recent_photo;
+
+					// console.log(response.data.recent_photo);
+					// console.log(this.directories.upload_recent_photo_directory);
+				}else{
+					this.recent_photo = this.directories.upload_recent_photo_directory+'default.jpg';
+				}
+
+				bus.$emit('users_info' , this.users_info);
 			}.bind(this))
 			.catch(function(error){
 				

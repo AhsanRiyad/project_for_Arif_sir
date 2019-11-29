@@ -15,6 +15,7 @@ include $dashboard_head;
 <div id="app">	
 	
 	<v-app>
+		<alert></alert>
 		<profile_personal :profile_photo="profile_photo"></profile_personal>
 		<buttons></buttons>
 	</v-app>

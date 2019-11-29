@@ -82,7 +82,7 @@ var password = `<div class="container-fluid bg-light mt-5 ">
 	<a v-bind:href="address.profile_addressPage"><v-btn     large class="ml-1" color="success">address</v-btn></a>
 	<a v-bind:href="address.profile_photo_uploadPage"><v-btn    large class="ml-1" color="success">photo</v-btn></a>
 	<div class="w-100"></div>
-	<a v-bind:href="address.profile_change_passwordPage"><v-btn  disabled="true"  large class="ml-1 mt-2" color="success">change Password</v-btn></a>
+	<a v-bind:href="address.profile_change_passwordPage"><v-btn  disabled  large class="ml-1 mt-2" color="success">change Password</v-btn></a>
 	<a v-bind:href="address.profile_change_emailPage"><v-btn large class="ml-1 mt-2" color="success">change Email</v-btn></a>
 	</div>
 	</div>
@@ -238,13 +238,7 @@ var reg_req = new Vue({
 	beforeCreate(){
 	},
 	created(){
-		bus.$on('changeComponent' , (data)=>{
-			this.componet_name = data;
-		})
-		this.profile_photo = this.images.profile_photo;
-		bus.$on('recent_photo' , (data)=>{
-			this.profile_photo = this.rootAdress+'assets/img/uploads/recent_photos/'+data;
-		});
+		
 	},
 	beforeMount(){
 	},

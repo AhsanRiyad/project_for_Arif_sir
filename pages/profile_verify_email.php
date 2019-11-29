@@ -16,6 +16,7 @@ include $dashboard_head;
 	
 	<v-app>
 		<profile_verify_email :profile_photo="profile_photo"></profile_verify_email>
+		<buttons></buttons>
 	</v-app>
 
 </div>

@@ -12,6 +12,13 @@ $APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/project_for_Arif_sir/";
 
 $rootAdress = 'http://localhost/project_for_Arif_sir/';
 
+
+// $APP_ROOT = $_SERVER['DOCUMENT_ROOT']."/";
+
+// $rootAdress = 'http://mdahsanr.sgedu.site/';
+
+
+
 //hosting
 //$rootAdress = 'http://riyad.friendsbd.website/project_for_Arif_sir/';
 
@@ -134,6 +141,15 @@ $modelAdminChangeInfo = $rootAdress."model/admin_change_info.php";
 
 
 
+//directories
+$upload_img_directory = $rootAdress."assets/img/uploads/";
+$upload_group_photo_directory = $rootAdress."assets/img/uploads/group_photos/";
+$upload_recent_photo_directory = $rootAdress."assets/img/uploads/recent_photos/";
+$upload_old_photo_directory = $rootAdress."assets/img/uploads/old_photos/";
+
+
+
+
 // database
 $hostName = 'localhost';
 $userName = 'root';
@@ -147,6 +163,12 @@ $databaseName = 'intern_project';
 // $password = '01919448787';
 // $databaseName = 'frieomkc_intern_project';
 
+
+
+// $hostName = 'localhost';
+// $userName = 'mdahsanr_riyad';
+// $password = '01919448787';
+// $databaseName = 'mdahsanr_intern_project';
 
 //CSRF_TOKEN token securty session
 //$_SESSION['csrf_token1'] = bin2hex(random_bytes(32));

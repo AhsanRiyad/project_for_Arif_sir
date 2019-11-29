@@ -134,6 +134,12 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modelAdminChangeInfo: '<?php echo $modelAdminChangeInfo; ?>',
 
                 },
+                directories:{
+                    upload_img_directory: '<?php echo $upload_img_directory; ?>',
+                    upload_recent_photo_directory: '<?php echo $upload_recent_photo_directory; ?>',
+                    upload_group_photo_directory: '<?php echo $upload_group_photo_directory; ?>',
+                    upload_old_photo_directory: '<?php echo $upload_old_photo_directory; ?>',
+                },
                 users_info__:{
                     email__: '<?= $email__ ?>',
                     id__: '<?= $id__  ?>' , 
@@ -191,7 +197,7 @@ else{
 
 
 
-var verification_request_badge =  document.getElementById('verification_request_badge'); ;
+/*var verification_request_badge =  document.getElementById('verification_request_badge'); ;
             var change_request_badge =  document.getElementById('change_request_badge');
             axios.post( this.model.modelReg_req ,
             {
@@ -208,7 +214,7 @@ var verification_request_badge =  document.getElementById('verification_request_
             }.bind(this))
             .catch(function(error){
 
-            }.bind(this));
+            }.bind(this));*/
 
 
 

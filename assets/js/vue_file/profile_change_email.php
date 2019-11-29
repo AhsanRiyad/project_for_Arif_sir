@@ -85,7 +85,7 @@
 	<a v-bind:href="address.profile_photo_uploadPage"><v-btn    large class="ml-1" color="success">photo</v-btn></a>
 	<div class="w-100"></div>
 	<a v-bind:href="address.profile_change_passwordPage"><v-btn  large class="ml-1 mt-2" color="success">change Password</v-btn></a>
-	<a v-bind:href="address.profile_change_emailPage"><v-btn disabled="true" large class="ml-1 mt-2" color="success">change Email</v-btn></a>
+	<a v-bind:href="address.profile_change_emailPage"><v-btn disabled large class="ml-1 mt-2" color="success">change Email</v-btn></a>
 	</div>
 	</div>
 	`;

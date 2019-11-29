@@ -95,7 +95,7 @@
 	<a v-bind:href="address.profile_basicPage"><v-btn   large class="ml-1" color="success">Basic</v-btn></a>
 	<a v-bind:href="address.profile_personalPage"><v-btn  large class="ml-1" color="success">Personal</v-btn></a>
 	<a v-bind:href="address.profile_addressPage"><v-btn     large class="ml-1" color="success">address</v-btn></a>
-	<a v-bind:href="address.profile_photo_uploadPage"><v-btn disabled="true"    large class="ml-1" color="success">photo</v-btn></a>
+	<a v-bind:href="address.profile_photo_uploadPage"><v-btn disabled    large class="ml-1" color="success">photo</v-btn></a>
 	<div class="w-100"></div>
 	<a v-bind:href="address.profile_change_passwordPage"><v-btn  large class="ml-1 mt-2" color="success">change Password</v-btn></a>
 	<a v-bind:href="address.profile_change_emailPage"><v-btn   large class="ml-1 mt-2" color="success">change Email</v-btn></a>
@@ -103,10 +103,10 @@
 	</div>
 	`;
 
-Vue.component('buttons' , {
-	template: buttons,
-	data(){
-		return {}
+	Vue.component('buttons' , {
+		template: buttons,
+		data(){
+			return {}
 		},
 		methods: {
 		},
@@ -117,27 +117,28 @@ Vue.component('buttons' , {
 
 
 	Vue.component('profile_photo_upload' , {
-	props: ['profile_photo'],
-	template: photos,
-	data(){
-		return {
-			name: 'riyad---vue',
-			dialog: false,
-			status: '',
-			recent_photo: '',
-			recent_photo_name: 'choose file',
-			old_photo: '',
-			old_photo_name: 'choose file',
-			group_photo: '',
-			group_photo_name: 'choose file',
-			loading_recent_photo:false,
-			loading_old_photo:false,
-			loading_group_photo:false,
-			file_type: false,
-		}
-	},
-	methods: {
-		uploadPhoto_recent: function(){
+		template: photos,
+		data(){
+			return {
+				name: 'riyad---vue',
+				dialog: false,
+				status: '',
+				recent_photo: '',
+				recent_photo_name: 'choose file',
+				old_photo: '',
+				old_photo_name: 'choose file',
+				group_photo: '',
+				group_photo_name: 'choose file',
+				loading_recent_photo:false,
+				loading_old_photo:false,
+				loading_group_photo:false,
+				file_type: false,
+				profile_photo: '',
+
+			}
+		},
+		methods: {
+			uploadPhoto_recent: function(){
 				//alert(this.csrf_token1);
 				if(this.file_type == true){
 					this.loading_recent_photo = true;
@@ -198,15 +199,23 @@ Vue.component('buttons' , {
 				
 			},
 			get_users_data(){
-				axios.post( this.model.modelProfile_photo_upload ,
+				axios.post( this.model.modelProfile_basic ,
 				{
 					purpose: 'getProfileBasicInfo',
 				}
 				).then(function(response){
 					
+
+					if(response.data.recent_photo !='not_set'){
+						this.profile_photo = this.directories.upload_recent_photo_directory+response.data.recent_photo;
+
 					
-					
-				}.bind(this))
+				}else{
+					this.profile_photo = this.directories.upload_recent_photo_directory+'default.jpg';
+				}
+
+
+			}.bind(this))
 				.catch(function(error){
         //console.log(error);
     }.bind(this));
@@ -325,6 +334,39 @@ Vue.component('buttons' , {
 					this.group_photo = this.$refs.group_photo.files[0];
 				}
 			}
+		},
+		created(){
+
+
+
+			
+
+			axios.post( this.model.modelProfile_basic ,
+			{
+				purpose: 'getProfileBasicInfo',
+			}
+			).then(function(response){
+
+
+
+				if(response.data.recent_photo !='not_set'){
+					this.profile_photo = this.directories.upload_recent_photo_directory+response.data.recent_photo;
+
+				}else{
+					this.profile_photo = this.directories.upload_recent_photo_directory+'default.jpg';
+				}
+
+
+			}.bind(this))
+			.catch(function(error){
+      
+    }.bind(this));
+
+
+
+
+
+
 		}
 	})
 

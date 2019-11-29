@@ -53,7 +53,7 @@ if($d2->purpose == 'getProfileBasicInfo'){
 }else if($d2->purpose=='get_data'){
 	//echo 'get data';
 	$conn = get_mysqli_connection();
-	$sql = "select * from all_info_together where status = 'not_verified'  and email_verification_status = 'verified' limit 0 , 20";
+	$sql = "select * from all_info_together where status = 'not_verified'  and completeness = 100 and email_verification_status = 'verified' limit 0 , 20";
 	$result = mysqli_query($conn, $sql);
 	//$row = mysqli_fetch_assoc($result);
 	//$array2d[0] = json_encode($row);
