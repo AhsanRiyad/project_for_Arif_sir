@@ -180,6 +180,61 @@
 	</div>
 	</v-card>
 	</v-dialog>
+
+	
+
+
+
+
+
+	<v-row justify="center">
+  <v-dialog v-model="dialog1" scrollable max-width="700px">
+
+  <v-card>
+  <v-card-title>Image</v-card-title>
+  <v-divider></v-divider>
+  <v-card-text style="height: 400px;">
+  
+  <v-row align="center" justify="center">
+  <v-img
+  :src="dialog_photo"
+  class="grey lighten-2"
+  max-width="600"
+
+  aspect-ratio="1"
+  ></v-img>
+  </v-row>
+
+  </v-card-text>
+  <v-divider></v-divider>
+  <v-card-actions class="mb-5">
+  
+  <v-container>
+  <v-row class="ml-3">
+  
+  <p class="red--text"> <b>{{ photo_delete_status }} </b></p>
+  </v-row>
+  <v-row>
+  <v-col xs="12">
+  
+  </v-col>
+  </v-row>
+ </v-container>
+
+
+  </v-card-actions>
+  </v-card>
+  </v-dialog>
+  </v-row>
+
+
+
+
+
+
+
+
+
 	</v-row>
 	`;
 
@@ -1174,7 +1229,7 @@ Vue.component('gallery' , {
 			sound: true,
 			widgets: false,
 
-			dialogm1: '',
+			dialog1: false,
 			dialog: false,
 			dialog_photo: '',
 			dialog_photo_baseName: '',
@@ -1197,7 +1252,7 @@ Vue.component('gallery' , {
       this.photo_delete_status = '';
       this.dialog_photo_baseName = baseName;
       this.dialog_photo = photo;
-      this.dialog = true;
+      this.dialog1 = true;
       // alert('zooming in photo');
   },
 },
