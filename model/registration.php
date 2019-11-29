@@ -12,6 +12,7 @@ $mobile = $d1->mobile;
 $institution_id = $d1->institution_id;
 $password1 = md5($d1->password);
 $otp = rand(1000,9999);
+$who_is_doing_registration = $d1->who_is_doing_registration;
 
 // echo $password;
 
@@ -26,7 +27,7 @@ $otp = rand(1000,9999);
 
 $conn = get_mysqli_connection();
 
-$sql = "CALL REGISTRATION( ?, ?, ?, ?, ?, ?, @result)";
+$sql = "CALL REGISTRATION( ?, ?, ?, ?, ?, ? , ? , @result)";
 $stmt = $conn->prepare($sql);
 // $email =  'riyad298@afhorfooefoe.com';
 // $full_name = 'Ahsan Riyad';
@@ -35,7 +36,7 @@ $stmt = $conn->prepare($sql);
 // $password = '1';
  // $otp = 'aofhoerf';
 
-$stmt->bind_param('ssssss' , $email, $full_name, $mobile, $institution_id, $password1, $otp);
+$stmt->bind_param('sssssss' , $email, $full_name, $mobile, $institution_id, $password1, $otp , $who_is_doing_registration);
 $stmt->execute();   
 
 $stmt->close();

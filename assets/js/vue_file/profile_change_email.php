@@ -8,7 +8,7 @@
 	<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 	<div class="row bg-white mx-1">
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -90,10 +90,10 @@
 	</div>
 	`;
 
-Vue.component('buttons' , {
-	template: buttons,
-	data(){
-		return {}
+	Vue.component('buttons' , {
+		template: buttons,
+		data(){
+			return {}
 		},
 		methods: {
 		},
@@ -107,42 +107,43 @@ Vue.component('buttons' , {
 
 
 
-Vue.component('profile_change_email' , {
-	props: ['profile_photo' ],
-	template: email,
-	data(){
-		return {
-			name: 'riyad---vue',
-			email_change_status: false,
-			dialog: false,
-			status_text: '',
-			email_input: true,
-			email: '',
-			email_validity: '',
-			status_text_show: false,
-			otp_text_box_show: false,
-			loading: false,
-			otp: '',
-			changes:{
-				email:{
-					smallText: {
-						color: '#2196f3'					
+	Vue.component('profile_change_email' , {
+		props: ['profile_photo' ],
+		template: email,
+		data(){
+			return {
+				name: 'riyad---vue',
+				email_change_status: false,
+				dialog: false,
+				status_text: '',
+				email_input: true,
+				email: '',
+				email_validity: '',
+				status_text_show: false,
+				otp_text_box_show: false,
+				loading: false,
+				recent_photo: '',
+				otp: '',
+				changes:{
+					email:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
 					},
-					smallButton: {
-						color: 'white',
-						backgroundColor: '#2196f3' 
-					}
-				},
-			} 
-		}
-	},
-	methods: {
-		enable_input: function(name){
-			if(name=='email'){
-				this.email_input = false;
-				this.changes.email.smallText.color = 'red';
-				this.changes.email.smallButton.color = 'white';
-				this.changes.email.smallButton.backgroundColor = 'red';
+				} 
+			}
+		},
+		methods: {
+			enable_input: function(name){
+				if(name=='email'){
+					this.email_input = false;
+					this.changes.email.smallText.color = 'red';
+					this.changes.email.smallButton.color = 'white';
+					this.changes.email.smallButton.backgroundColor = 'red';
 					//alert(this.email_input);
 				}
 			},
@@ -225,56 +226,69 @@ Vue.component('profile_change_email' , {
 			}
 		},
 		created(){
-			axios.post( this.model.modelProfile_change_email ,
+			axios.post( this.model.modelProfile_basic ,
 			{
 				purpose: 'getProfileBasicInfo',
 				
 			}
 			).then(function(response){
 				
+
+				if(response.data.recent_photo !='not_set'){
+					this.recent_photo = this.directories.upload_recent_photo_directory+response.data.recent_photo;
+
+					// console.log(response.data.recent_photo);
+					// console.log(this.directories.upload_recent_photo_directory);
+				}else{
+					this.recent_photo = this.directories.upload_recent_photo_directory+'default.jpg';
+				}
+
+
+
+
 				//
 				//this.email = response.data.full_name;
 			}.bind(this))
 			.catch(function(error){
-        
-    }.bind(this));
+
+			}.bind(this));
 		}
 	})
 
 
 
 
-var reg_req = new Vue({
-	el: '#app' ,
-	vuetify: new Vuetify(), 
-	data : {
-		name: 'riyad---vue',
-		full_name_input: true,
-		mobile_input: true,
-		institution_id_input: true,
-		number_of_children_input: true,
-		dob_input: true,
-		profile_photo: '',
-		
-		
-	}, 
-	methods : {
-		enable_input: function(name){
-			
-		}
-	},
-	beforeCreate(){
-	},
-	created(){
-		
-	},
-	beforeMount(){
-	},
-	mounted(){
-	},
-	beforeUpdated(){
-	},
-	updated(){
+	var reg_req = new Vue({
+		el: '#app' ,
+		vuetify: new Vuetify(), 
+		data : {
+			name: 'riyad---vue',
+			full_name_input: true,
+			mobile_input: true,
+			institution_id_input: true,
+			number_of_children_input: true,
+			dob_input: true,
+			profile_photo: '',
+
+
+		}, 
+		methods : {
+			enable_input: function(name){
+
+			}
+		},
+		beforeCreate(){
+		},
+		created(){
+
+		},
+		beforeMount(){
+		},
+		mounted(){
+		},
+		beforeUpdated(){
+		},
+		updated(){
 		//alert(this.CSRF_TOKEN);
 		var dashboard_height = $('#dashboard_height').height();
 		var windowHeight = $(document).height();

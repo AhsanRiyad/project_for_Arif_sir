@@ -294,7 +294,8 @@ Vue.component('registration' , {
 					institution_id: this.institution_id,
 					email: this.email,
 					mobile: this.mobile,
-					password: this.password
+					password: this.password,
+					who_is_doing_registration: 'user',
 				})
 				.then( function(response){
 					this.registratrion_status = response.data ; 

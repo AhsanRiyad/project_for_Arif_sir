@@ -169,7 +169,8 @@ Vue.component('add_user' , {
 					institution_id: this.institution_id,
 					email: this.email,
 					mobile: this.mobile,
-					password: this.password
+					password: this.password,
+					who_is_doing_registration: 'admin'
 				})
 				.then( function(response){
 					this.registratrion_status = response.data ; 

@@ -128,7 +128,7 @@
    template: gallery,
    data(){
     return {
-      dialogm1: '',
+      dialog1: '',
       dialog: false,
       dialog_photo: '',
       dialog_photo_baseName: '',
@@ -139,7 +139,7 @@
       old_photos: 'assets/img/uploads/old_photos/',
       group_photos:  'assets/img/uploads/group_photos/',
       uploads:  'assets/img/uploads/',
-      loading:false,
+      loading: false,
       photo_delete_status: '',
       button_disabled: false,
 
@@ -172,19 +172,11 @@
         this.group_photo = response.data.group_photo;
         this.photo_delete_status = "Your photo has been deleted";
         this.button_disabled = true ;
-        
-
-
       }.bind(this))
       .catch(function(error){
-
         this.loading = false;
-
-
         //console.log(error);
       }.bind(this));
-
-
     },
   },
   created(){
@@ -199,7 +191,7 @@
       ).then(function(response){
         //this.users_info = response.data;
         // alert(rootAdress+'/assets/img/uploads/recent_photo/'+recent_photo);
-        console.log(response)
+        // console.log(response);
         
         this.recent_photo = response.data.recent_photo;
         this.old_photo = response.data.old_photo;
@@ -213,10 +205,6 @@
 
         //console.log(error);
       }.bind(this));
-
-
-
-
     }
 
   })

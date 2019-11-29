@@ -2,13 +2,13 @@
 <script>
 
 
-var password = `<div class="container-fluid bg-light mt-5 ">
+	var password = `<div class="container-fluid bg-light mt-5 ">
 	<div class="row justify-content-center align-items-center">
 	<!-- update top part starts-->
 	<div class="  col-12 col-xl-4 col-md-7  px-0 py-1" style="box-shadow: 0 0 10px lightgrey; ">
 	<div class="row bg-white mx-1">
 	<div class="col-3 mr-0 pr-0 my-2">
-	<img class="rounded img-thumbnail img-fluid" v-bind:src="profile_photo" alt="">
+	<img class="rounded img-thumbnail img-fluid" v-bind:src="recent_photo" alt="">
 	<div class="w-100"></div>
 	</div>
 	<div class="col-9  ml-0">
@@ -88,10 +88,10 @@ var password = `<div class="container-fluid bg-light mt-5 ">
 	</div>
 	`;
 
-Vue.component('buttons' , {
-	template: buttons,
-	data(){
-		return {}
+	Vue.component('buttons' , {
+		template: buttons,
+		data(){
+			return {}
 		},
 		methods: {
 		},
@@ -106,48 +106,49 @@ Vue.component('buttons' , {
 
 
 	Vue.component('profile_change_password' , {
-	props: ['profile_photo' ],
-	template: password,
-	data(){
-		return {
-			name: 'riyad---vue',
-			dialog: false,
-			status_text: '',
-			password_input: true,
-			password: '',
-			password_validity: '',
-			repassword_input: true,
-			repassword: '',
-			repassword_validity: '',
-			changes:{
-				password:{
-					smallText: {
-						color: '#2196f3'					
+		props: ['profile_photo' ],
+		template: password,
+		data(){
+			return {
+				name: 'riyad---vue',
+				dialog: false,
+				status_text: '',
+				password_input: true,
+				password: '',
+				password_validity: '',
+				repassword_input: true,
+				repassword: '',
+				repassword_validity: '',
+				recent_photo: '',
+				changes:{
+					password:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
 					},
-					smallButton: {
-						color: 'white',
-						backgroundColor: '#2196f3' 
-					}
-				},
-				repassword:{
-					smallText: {
-						color: '#2196f3'					
+					repassword:{
+						smallText: {
+							color: '#2196f3'					
+						},
+						smallButton: {
+							color: 'white',
+							backgroundColor: '#2196f3' 
+						}
 					},
-					smallButton: {
-						color: 'white',
-						backgroundColor: '#2196f3' 
-					}
-				},
-			} 
-		}
-	},
-	methods: {
-		enable_input: function(name){
-			if(name=='password'){
-				this.password_input = false;
-				this.changes.password.smallText.color = 'red';
-				this.changes.password.smallButton.color = 'white';
-				this.changes.password.smallButton.backgroundColor = 'red';
+				} 
+			}
+		},
+		methods: {
+			enable_input: function(name){
+				if(name=='password'){
+					this.password_input = false;
+					this.changes.password.smallText.color = 'red';
+					this.changes.password.smallButton.color = 'white';
+					this.changes.password.smallButton.backgroundColor = 'red';
 					//alert(this.password_input);
 				}
 				if(name=='repassword'){
@@ -197,7 +198,7 @@ Vue.component('buttons' , {
 			}
 		},
 		created(){
-			axios.post( this.model.modelProfile_change_password ,
+			axios.post( this.model.modelProfile_basic ,
 			{
 				purpose: 'getProfileBasicInfo',
 				
@@ -206,47 +207,56 @@ Vue.component('buttons' , {
 				
 				//
 				//this.password = response.data.full_name;
+
+				if(response.data.recent_photo !='not_set'){
+					this.recent_photo = this.directories.upload_recent_photo_directory+response.data.recent_photo;
+				}else{
+					this.recent_photo = this.directories.upload_recent_photo_directory+'default.jpg';
+				}
+
+
+
 			}.bind(this))
 			.catch(function(error){
-        
-    }.bind(this));
+
+			}.bind(this));
 		}
 	})
 
 
 
 
-var reg_req = new Vue({
-	el: '#app' ,
-	vuetify: new Vuetify(), 
-	data : {
-		name: 'riyad---vue',
-		full_name_input: true,
-		mobile_input: true,
-		institution_id_input: true,
-		number_of_children_input: true,
-		dob_input: true,
-		profile_photo: '',
-		
-		
-	}, 
-	methods : {
-		enable_input: function(name){
-			
-		}
-	},
-	beforeCreate(){
-	},
-	created(){
-		
-	},
-	beforeMount(){
-	},
-	mounted(){
-	},
-	beforeUpdated(){
-	},
-	updated(){
+	var reg_req = new Vue({
+		el: '#app' ,
+		vuetify: new Vuetify(), 
+		data : {
+			name: 'riyad---vue',
+			full_name_input: true,
+			mobile_input: true,
+			institution_id_input: true,
+			number_of_children_input: true,
+			dob_input: true,
+			profile_photo: '',
+
+
+		}, 
+		methods : {
+			enable_input: function(name){
+
+			}
+		},
+		beforeCreate(){
+		},
+		created(){
+
+		},
+		beforeMount(){
+		},
+		mounted(){
+		},
+		beforeUpdated(){
+		},
+		updated(){
 		//alert(this.CSRF_TOKEN);
 		var dashboard_height = $('#dashboard_height').height();
 		var windowHeight = $(document).height();
