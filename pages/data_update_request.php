@@ -2,6 +2,7 @@
 $pageName = 'data_update_request';
 include "../address.php"; 
 include $db; 
+include $session_info;
 
 
 include $linkerCss;

@@ -2,8 +2,7 @@
 $pageName = 'new_user_request';
 include "../address.php"; 
 include $db; 
-
-
+include $session_info;
 include $linkerCss;
 ?>
 

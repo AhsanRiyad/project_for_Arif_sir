@@ -52,7 +52,7 @@
 		<?php 
 		if($admin__ == true || $user__ == true){
 			?>
-			<a class="text-light" href="<?php echo $profilePage; ?>">
+			<a class="text-light" href="<?php echo $profile_basicPage; ?>">
 				<div class="  
 				<?php 
 
@@ -96,11 +96,11 @@
 		<?php 
 		if($admin__ == true  ){
 			?>
-			<a class="text-light" href="<?php echo $reg_req; ?>">
+			<a class="text-light" href="<?php echo $new_user_requestPage; ?>">
 				<div class="  
 				<?php 
 
-				if($pageName=='reg_req' &&  !isset($_GET['pname']))
+				if( $pageName=='new_user_request')
 				{
 					echo 'bg-info';
 				}
@@ -120,11 +120,11 @@
 		<?php 
 		if($admin__ == true ){
 			?>
-			<a class="text-light" href="<?php echo $reg_req.'?pname=change_request'; ?>">
+			<a class="text-light" href="<?php echo $data_update_requestPage ?>">
 				<div class="  
 				<?php 
 
-				if( isset($_GET['pname']) && $_GET['pname'] == 'change_request')
+				if( $pageName=='data_update_request' )
 				{
 					echo 'bg-info';
 				}
@@ -145,13 +145,13 @@
 		if($admin__ == true || $user__ == true){
 			?>
 
-		<a class="text-white" href="<?php echo $privacyPage; ?>">
+		<a class="text-white" href="<?php echo $data_privacyPage; ?>">
 			<div class=" 
 
 
 			<?php 
 
-			if($pageName=='privacy')
+			if($pageName=='data_privacy')
 			{
 				echo 'bg-info';
 			}
@@ -177,13 +177,13 @@
 
 
 
-		<a class="text-white" href="<?=  $galleryPage; ?>">
+		<a class="text-white" href="<?=  $photo_galleryPage; ?>">
 			<div class=" 
 			
 
 			<?php 
 
-			if($pageName=='gallery')
+			if($pageName=='photo_gallery')
 			{
 				echo 'bg-info';
 			}

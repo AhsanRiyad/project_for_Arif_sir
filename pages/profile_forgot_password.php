@@ -2,6 +2,8 @@
 $pageName = 'profile_forgot_password';
 include "../address.php"; 
 include $db; 
+include $session_info;
+
 include $linkerCss;
 ?>
 

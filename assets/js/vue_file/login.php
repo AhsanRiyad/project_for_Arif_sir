@@ -72,7 +72,7 @@
 
 	>
 	<p class="text-right text-danger">
-	<small><a v-bind:href="address.forgotPage">Forgot password?</a></small>
+	<small><a v-bind:href="address.profile_forgot_passwordPage">Forgot password?</a></small>
 	</p>
 	</div>
 
@@ -162,7 +162,7 @@
 					.then( function(response){
 						this.loading = false;
 					//window.location.href = 'http://google.com';
-					response.data == 'YES_USER' || response.data == 'YES_ADMIN' ? window.location.href = this.address.profilePage : this.login_status = 'email/password doesnt match';  
+					response.data == 'YES_USER' || response.data == 'YES_ADMIN' ? window.location.href = this.address.profile_basicPage : this.login_status = 'email/password doesnt match';  
 
 					
 					

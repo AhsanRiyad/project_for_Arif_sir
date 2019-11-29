@@ -7,7 +7,7 @@ include $APP_ROOT.'assets/linker/db.php' ;
 $data =  file_get_contents('php://input');
 $d2 = json_decode($data);
 
-$id__ = 1;
+// $id__ = 1;
 
 if($d2->main_purpose == 'search'){
 	$sql = '';

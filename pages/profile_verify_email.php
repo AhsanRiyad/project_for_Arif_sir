@@ -2,6 +2,7 @@
 $pageName = 'profile_verify_email';
 include "../address.php"; 
 include $db; 
+include $session_info;
 
 
 include $linkerCss;

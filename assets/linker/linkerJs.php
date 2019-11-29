@@ -58,6 +58,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     fev_icon: '<?php echo $fev_icon; ?>',
                     profile_photo: '<?php echo $profile_photo; ?>',
                     default_photo: '<?php echo $default_photo; ?>',
+                    
 
                 },
                 pages:{
@@ -127,6 +128,11 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modeldata_privacy: '<?php echo $modeldata_privacy; ?>',
                     modelnew_user_request: '<?php echo $modelnew_user_request; ?>',
                     modeldata_update_request: '<?php echo $modeldata_update_request; ?>',
+                    
+
+                    modelcommon_request: '<?php echo $modelcommon_request; ?>',
+
+
 
 
 
@@ -154,11 +160,33 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
             }
         },
         created(){
+            this.pageName = '<?php echo $pageName ?>';
 
-            var date1 = new Date();
+
+            if( this.pageName == 'profile_basic' ||
+                this.pageName == 'profile_personal' ||
+                this.pageName == 'profile_address' ||
+                this.pageName == 'profile_photo_upload' ||
+                this.pageName == 'profile_change_password' ||
+                this.pageName == 'profile_change_email' ||
+                this.pageName == 'profile_verify_email' ||
+                this.pageName == 'profile_verify_email' ||
+                this.pageName == 'add_user' ||
+                this.pageName == 'photo_gallery' || 
+                this.pageName == 'search' || 
+                this.pageName == 'data_privacy' || 
+                this.pageName == 'data_update_request' || 
+                this.pageName == 'new_user_request'
+                ){
+
+
+
+                
+
+                var date1 = new Date();
             var hourMin =  date1.getHours();
 
-            var greeting_text__ =  document.getElementById('greeting_text__'); ;
+            var greeting_text__ =  document.getElementById('greeting_text__');
 
 //alert(name);
 if (hourMin >=5  && hourMin < 12)  {
@@ -166,7 +194,7 @@ if (hourMin >=5  && hourMin < 12)  {
 }
 
 else if (hourMin >= 12 && hourMin < 17){
-    
+
     greeting_text__.innerHTML = 'Good Afternoon, '+this.users_info__.name__;
 
 }
@@ -177,7 +205,7 @@ else if (hourMin >= 17 && hourMin < 21){
 }
 
 else if (hourMin >= 21 && hourMin < 24){
-    
+
 
     greeting_text__.innerHTML = this.users_info__.name__+ ',its time to sleep ';
 }
@@ -195,32 +223,54 @@ else{
 
 }
 
+// console.log('inside response');
+var verification_request_badge =  document.getElementById('verification_request_badge'); ;
+var change_request_badge =  document.getElementById('change_request_badge');
+axios.post( this.model.modelcommon_request ,
+{
+    purpose: 'number_of_request',
+
+}
+).then(function(response){
+    // console.log(response.data.cr);
+
+    change_request_badge.innerHTML = response.data.cr;
+    verification_request_badge.innerHTML = response.data.vr;
 
 
-/*var verification_request_badge =  document.getElementById('verification_request_badge'); ;
-            var change_request_badge =  document.getElementById('change_request_badge');
-            axios.post( this.model.modelReg_req ,
-            {
-                purpose: 'number_of_request',
+}.bind(this))
+.catch(function(error){
 
-            }
-            ).then(function(response){
-                console.log(response.data.cr);
-
-                change_request_badge.innerHTML = response.data.cr;
-                verification_request_badge.innerHTML = response.data.vr;
+}.bind(this));
 
 
-            }.bind(this))
-            .catch(function(error){
 
-            }.bind(this));*/
+
+
+
+
+
+
+}else{
+
+
+}
+
+
+
+
+
+
+
 
 
 
 
 
 }
+
+
+
 })
 
 

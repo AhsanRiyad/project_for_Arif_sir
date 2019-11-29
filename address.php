@@ -132,6 +132,10 @@ $modeldata_update_request = $rootAdress."model/data_update_request.php";
 
 
 
+$modelcommon_request = $rootAdress."model/common_request.php";
+
+
+
 
 
 
@@ -180,6 +184,7 @@ $session_info = $APP_ROOT.'assets/linker/session_info.php';
 $admin__ = false;
 $user__ = false;
 $verified__ = false;
+$email_verified__ = false;
 $login__ = false;
 $id__ = '';
 $email__='';

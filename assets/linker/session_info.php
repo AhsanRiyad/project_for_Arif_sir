@@ -2,7 +2,7 @@
 
 
 
-if($pageName == 'login' || $pageName == 'registration' || $pageName == 'forgot_password' ){
+if($pageName == 'login' || $pageName == 'registration' || $pageName == 'profile_forgot_password' ){
 	$_SESSION['users_info'] = null;
 }
 
@@ -30,7 +30,7 @@ if(isset($_SESSION['users_info'])){
 
 
 	if($photo__ != 'not_set'){
-	$profile_photo = $rootAdress."assets/img/uploads/recent_photos/".$photo__;
+		$profile_photo = $rootAdress."assets/img/uploads/recent_photos/".$photo__;
 	}
 	
 	if($_SESSION['users_info']['type'] =='user' ){
@@ -46,6 +46,12 @@ if(isset($_SESSION['users_info'])){
 
 		$verified__ = true;
 	}
+	if($_SESSION['users_info']['email_verification_status'] =='verified' ){
+
+		$email_verified__ = true;
+	}
+
+
 
 
 
@@ -59,6 +65,7 @@ if(isset($_SESSION['users_info'])){
 	$admin__ = false;
 	$user__ = false;
 	$verified__ = false;
+	$email_verified__ = false;
 
 	/*if($pageName != 'login' || $pageName != 'registration' || $pageName != 'forgot_password' ){
 		header('location:'.$not_authorisedPage);
@@ -74,29 +81,46 @@ if($login__ == true){
 
 		if($verified__ == true ){
 
-			if($pageName == 'reg_req' || $pageName == 'add_user'){	
-				header('location:'.$profilePage);
+			if($pageName == 'new_user_request' || $pageName == 'add_user'  || $pageName == 'data_update_request'){	
+				header('location:'.$profile_basicPage);
+			}else if ($pageName == 'profile_verify_email') {
+				header('location:'.$profile_basicPage);
 			}
 
 		}else{
 
-			if($pageName != 'profile'){	
-				header('location:'.$profilePage);
-			}
-
+			if($pageName == 'photo_gallery' || 
+				$pageName == 'search' || 
+				$pageName == 'data_privacy'){
+				header('location:'.$profile_basicPage);
 		}
 
-	}else if($admin__ == true){
-
 	}
+
+}else if($admin__ == true){
+
+}
 
 
 }else if($login__ == false){
 
-	if($pageName == 'profile' || $pageName == 'add_user' || $pageName == 'gallery' || $pageName == 'search' || $pageName == 'privacy' || $pageName == 'gallery'  || $pageName == 'reg_req' ){
+	if(	$pageName == 'profile_basic' ||
+		$pageName == 'profile_personal' ||
+		$pageName == 'profile_address' ||
+		$pageName == 'profile_photo_upload' ||
+		$pageName == 'profile_change_password' ||
+		$pageName == 'profile_change_email' ||
+		$pageName == 'profile_verify_email' ||
+		$pageName == 'profile_verify_email' ||
+		$pageName == 'add_user' ||
+		$pageName == 'photo_gallery' || 
+		$pageName == 'search' || 
+		$pageName == 'data_privacy' || 
+		$pageName == 'data_update_request' || 
+		$pageName == 'new_user_request' ){
 
 		header('location:'.$loginPage);
-	}
+}
 
 }
 

@@ -3,7 +3,7 @@ include "../address.php";
 include $APP_ROOT.'assets/linker/db.php' ; 
 
 
-$id__ = 1;
+// $id__ = 1;
 
 $data =  file_get_contents('php://input');
 $d1 = json_decode($data);

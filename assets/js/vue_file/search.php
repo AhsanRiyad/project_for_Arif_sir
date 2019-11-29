@@ -1297,7 +1297,7 @@ Vue.component('search' , {
 				this.search();
 				
 			})
-			this.users_info__.admin__ = true;
+			// this.users_info__.admin__ = true;
 			this.users_info__.admin__ == true ? this.category_items.push("rejected_user" , "newly_registered") : '';
 			axios.post( this.model.modelSearch ,
 			{

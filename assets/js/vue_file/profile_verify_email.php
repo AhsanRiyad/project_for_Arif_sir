@@ -34,7 +34,7 @@ var verify_email_otp = `<div class="container-fluid bg-light mt-5 ">
 	Verify
 	</v-btn>
 	<v-btn :loading='loading' color="primary" @click="sendOtpAgain()" id="idButtonUpdateProfileDashboard" class=" btn-block mb-3 mx-0 rounded-0">
-	Send OTP again
+	Send OTP
 	</v-btn>
 	</div>
 	<!-- update field part ends -->
@@ -73,7 +73,7 @@ var verify_email_otp = `<div class="container-fluid bg-light mt-5 ">
 	<div class="container-fluid bg-light mt-1 mb-5">
 	<div class="row justify-content-center align-items-center">
 	<a v-bind:href="address.profile_basicPage"><v-btn   large class="ml-1" color="success">Basic</v-btn></a>
-	<a v-bind:href="address.profile_personalPage"><v-btn disabled  large class="ml-1" color="success">Personal</v-btn></a>
+	<a v-bind:href="address.profile_personalPage"><v-btn   large class="ml-1" color="success">Personal</v-btn></a>
 	<a v-bind:href="address.profile_addressPage"><v-btn    large class="ml-1" color="success">address</v-btn></a>
 	<a v-bind:href="address.profile_photo_uploadPage"><v-btn   large class="ml-1" color="success">photo</v-btn></a>
 	<div class="w-100"></div>

@@ -260,7 +260,7 @@
 		},
 		created(){
 			
-			alert(this.email);
+			// alert(this.email);
 
 			axios.post( this.model.modelProfile_password_recovery ,
 			{

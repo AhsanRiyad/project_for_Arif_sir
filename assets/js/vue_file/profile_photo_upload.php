@@ -145,10 +145,10 @@
 					let formData = new FormData();
 					formData.append('recent_photo', this.recent_photo);
 					formData.append('purpose', 'recent_photo');
-					// formData.append('email', this.users_info__.email__);
-					// formData.append('user_id', this.users_info__.id__);
-					formData.append('email', 'riyad298@gmail.com');
-					formData.append('user_id', 1);
+					formData.append('email', this.users_info__.email__);
+					formData.append('user_id', this.users_info__.id__);
+					// formData.append('email', 'riyad298@gmail.com');
+					// formData.append('user_id', 1);
 					formData.append('csrf_token1', this.csrf_token1);
 					axios.post( this.model.modelProfile_photo_upload ,
 						formData,
@@ -227,10 +227,10 @@
 					let formData = new FormData();
 					formData.append('old_photo', this.old_photo);
 					formData.append('purpose', 'old_photo');
-					// formData.append('email', this.users_info__.email__);
-					// formData.append('user_id', this.users_info__.id__);
-					formData.append('email', 'riyad298@gmail.com');
-					formData.append('user_id', 1);
+					formData.append('email', this.users_info__.email__);
+					formData.append('user_id', this.users_info__.id__);
+					// formData.append('email', 'riyad298@gmail.com');
+					// formData.append('user_id', 1);
 					formData.append('csrf_token1', this.csrf_token1);
 					axios.post( this.model.modelProfile_photo_upload,
 						formData,
@@ -284,10 +284,10 @@
 					let formData = new FormData();
 					formData.append('group_photo', this.group_photo);
 					formData.append('purpose', 'group_photo');
-					// formData.append('email', this.users_info__.email__);
-					// formData.append('user_id', this.users_info__.id__);
-					formData.append('email', 'riyad298@gmail.com');
-					formData.append('user_id', 1);
+					formData.append('email', this.users_info__.email__);
+					formData.append('user_id', this.users_info__.id__);
+					// formData.append('email', 'riyad298@gmail.com');
+					// formData.append('user_id', 1);
 					formData.append('csrf_token1', this.csrf_token1);
 					axios.post( this.model.modelProfile_photo_upload,
 						formData,

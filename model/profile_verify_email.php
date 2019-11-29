@@ -30,7 +30,7 @@ $d1 = json_decode($data);
 // $email = 'riyad298@gmail.com';
 
 //echo $d1->purpose;
-$email__ = 'riyad298@gmail.com';
+// $email__ = 'riyad298@gmail.com';
 
 
 if($d1->purpose == 'verify_email_otp'){

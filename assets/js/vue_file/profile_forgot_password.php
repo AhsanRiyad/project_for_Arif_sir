@@ -13,12 +13,10 @@
 	Please enter your email to recover..
 	<br>
 	<span v-show="login_status=='no_email_found'" class="red--text"> Account not found </span>
-	<span v-show="login_status=='invalid_email'" class="red--text"> {{ login_status }} </span>
+	
 	<span v-show="login_status== 'crypto_added' " class="green--text"> recovery link sent to your email </span>
 
-	<span v-show="invalid_link=='invalid_link'" class="red--text"> link expired/invalid, try again </span>
 
-	<span v-show="login_status=='link_sent_successfully'" class="red--text"> link expired/invalid, try again </span>
 	</p>
 	<span v-show="login_status=='server_problem'" class="red--text"> Email server problem , try later. </span>
 	</p>

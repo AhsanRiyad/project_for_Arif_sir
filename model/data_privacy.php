@@ -7,9 +7,11 @@ include $APP_ROOT.'assets/linker/db.php' ;
 
 
 
-$email = 'riyad298@gmail.com';
+// $email = 'riyad298@gmail.com';
 
-$user_id = 1 ;
+// $user_id = 1 ;
+$email = $email__;
+$user_id = $id__ ;
 
 
 

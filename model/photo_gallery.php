@@ -12,10 +12,10 @@ $d2 = json_decode($data);
 
 // echo $d2->purpose;
 
-// $email = $email__;
-// $user_id = $id__;
-$email = 'riyad298@gmail.com';
-$user_id = 1;
+$email = $email__;
+$user_id = $id__;
+// $email = 'riyad298@gmail.com';
+// $user_id = 1;
 
 
 

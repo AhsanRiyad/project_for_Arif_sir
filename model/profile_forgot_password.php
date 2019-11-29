@@ -61,7 +61,7 @@ if($d1->purpose == 'forgot_password'){
 
     $mailto = $email1;
     $mailSub = 'Password recovery , friends Forever';
-    $mailMsg = 'Click to recover your password <br>'. $rootAdress.'pages/forgot.php?e='.$email1.'&c='.$randomNumber;
+    $mailMsg = 'Click to recover your password <br>'. $rootAdress.'pages/profile_password_recovery.php?e='.$email1.'&c='.$randomNumber;
 
 
     $mail ->Subject = $mailSub;

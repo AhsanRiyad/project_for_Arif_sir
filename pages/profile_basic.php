@@ -2,8 +2,7 @@
 $pageName = 'profile_basic';
 include "../address.php"; 
 include $db; 
-
-
+include $session_info;
 include $linkerCss;
 ?>
 
