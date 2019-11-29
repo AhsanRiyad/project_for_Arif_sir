@@ -15,6 +15,7 @@ include $dashboard_head;
 	
 	<v-app>
 		<profile_change_password :profile_photo="profile_photo"></profile_change_password>
+		<buttons></buttons>
 	</v-app>
 
 </div>

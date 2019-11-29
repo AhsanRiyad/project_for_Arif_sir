@@ -52,6 +52,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
             return {
                 APP_ROOT: '<?= $APP_ROOT ?>' , 
                 rootAdress: '<?= $rootAdress ?>',
+                pageName: '<?php $pageName; ?>',
                 images:{
                     logoSrc: '<?php echo $logoSrc; ?>',
                     fev_icon: '<?php echo $fev_icon; ?>',

@@ -107,6 +107,31 @@
 	</div>`;
 
 
+	var buttons = `
+	<div class="container-fluid bg-light mt-1 mb-5">
+	<div class="row justify-content-center align-items-center">
+	<a v-bind:href="address.profile_basicPage"><v-btn   large class="ml-1" color="success">Basic</v-btn></a>
+	<a v-bind:href="address.profile_personalPage"><v-btn disabled="true"  large class="ml-1" color="success">Personal</v-btn></a>
+	<a v-bind:href="address.profile_addressPage"><v-btn    large class="ml-1" color="success">address</v-btn></a>
+	<a v-bind:href="address.profile_photo_uploadPage"><v-btn   large class="ml-1" color="success">photo</v-btn></a>
+	<div class="w-100"></div>
+	<a v-bind:href="address.profile_change_passwordPage"><v-btn  large class="ml-1 mt-2" color="success">change Password</v-btn></a>
+	<a v-bind:href="address.profile_change_emailPage"><v-btn   large class="ml-1 mt-2" color="success">change Email</v-btn></a>
+	</div>
+	</div>
+	`;
+
+Vue.component('buttons' , {
+	template: buttons,
+	data(){
+		return {}
+		},
+		methods: {
+		},
+	})
+
+
+
 
 
 Vue.component('profile_personal' , {

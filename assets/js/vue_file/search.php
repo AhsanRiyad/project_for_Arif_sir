@@ -1306,7 +1306,7 @@ Vue.component('search' , {
 				
 			}
 			).then(function(response){
-				console.log(response);
+				// console.log(response);
 				this.users_info_as_props = response.data ;
 				
 			}.bind(this))
