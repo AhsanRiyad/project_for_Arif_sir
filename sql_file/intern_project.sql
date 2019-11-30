@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2019 at 03:09 PM
+-- Generation Time: Nov 30, 2019 at 05:00 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -598,6 +598,14 @@ CREATE TABLE `user_photos` (
   `id_user_photos` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `user_photos`
+--
+
+INSERT INTO `user_photos` (`group_photo`, `email`, `id_user_photos`) VALUES
+('1_1.jpg', 'riyad298@gmail.com', 3),
+('3_1.jpg', 'riyad298@yahoo.com', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -647,7 +655,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `change_request_time`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
-(1, 'riyad298@gmail.com', '7344', 'acf4b89d3d503d8252c9c4ba75ddbf6d', 'approved', 'verified', 'rejected', '2019-11-29 01:45:23.000000', 'admin', 'full_name,email,mobile,institution_id,mother_name,parmanent_district,parmanent_country,membership_number,status,email_verification_status,type,registration_date', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$riyad298@gmail.com,01719246822,riyad,riyad298@gmail.com,,,,,,,,B+,1990-11-20,arferferf,afreferf,2222,arfraefrae,aferff,arfarferf,44444,aferferf'),
+(1, 'riyad298@gmail.com', '7344', '3a066bda8c96b9478bb0512f0a43028c', 'approved', 'verified', 'rejected', '2019-11-29 01:45:23.000000', 'admin', 'full_name,email,institution_id,nid_or_passport,fathers_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,parmanent_district,parmanent_country,membership_number,status,email_verification_status,type,registration_date', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$riyad298@gmail.com,01719246822,riyad,riyad298@gmail.com,,,,,,,,B+,1990-11-20,arferferf,afreferf,2222,arfraefrae,aferff,arfarferf,44444,aferferf'),
 (2, 'ahsan.riyad@outlook.com', '4982', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 100, NULL),
 (3, 'riyad298@yahoo.com', '8456', NULL, 'approved', 'verified', 'requested', '2019-11-29 14:27:41.000000', 'user', 'full_name,institution_id,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Ferdous,017192246822,15-2804-2,5555555555555555,afaerfeaf,aferferf,aferfaef,1,arfaf,afferfaref,arfefearf,A+,1992-11-01,arfaerferf,arferfer,3444,arfarfe,aerfearfe,arferferf,1111,arfefaerf'),
 (4, 'riyad298@hotmail.com', '2591', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 60, NULL);
@@ -727,7 +735,7 @@ ALTER TABLE `users_registration`
 -- AUTO_INCREMENT for table `user_photos`
 --
 ALTER TABLE `user_photos`
-  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user_photos` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_uploads`
