@@ -61,7 +61,7 @@
 
 	</tr>
 	</thead>
-	<tbody v-if="array_size && users_info_as_props.id != user.id" id="tbody" v-for="user in user_list"  :key='user.id'>
+	<tbody v-if="array_size && users_info_as_props.id != user.id && user.email != 'admin@admin.com' " id="tbody" v-for="user in user_list"  :key='user.id'>
 	<tr>
 	<td> {{ user.full_name }} </td>
 	<td> {{ user.membership_number }} </td>
@@ -211,8 +211,7 @@
   
   <v-container>
   <v-row class="ml-3">
-  
-  <p class="red--text"> <b>{{ photo_delete_status }} </b></p>
+
   </v-row>
   <v-row>
   <v-col xs="12">

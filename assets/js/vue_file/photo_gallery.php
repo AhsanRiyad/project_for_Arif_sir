@@ -1,45 +1,19 @@
-
-
-
-
 <script>
-
-
-
-  Vue.mixin({
-    data: function() {
-      return {
-
-
-      }
-    }
-  })
-
-
-
-
-
   var gallery = `
   <div class="container">
   <div class="row justify-content-md-center">
 
-
-
   <div class="col col-md-5">
   <h1 class="text-center">Recent Photo</h1>
-
 
   <img class="text-center img-fluid img-thumbnail" v-if="recent_photo != 'not_set'"
   :src="rootAdress+recent_photos+recent_photo"
    style="max-height: 400px; width: 600px;">
 
-
   <img class="text-center img-fluid img-thumbnail" v-if="recent_photo == 'not_set'"
   :src="images.default_photo"
   style="max-height: 400px; width: 600px;">
   </div>
-
-
 
 
   <div class="w-100">

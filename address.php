@@ -26,7 +26,7 @@ $rootAdress = 'http://localhost/project_for_Arif_sir/';
 //hosting
 //$rootAdress = 'http://ndc92.friendsbd.website/';
 
-
+$rootAdress_model = 'http://mdahsanr.sgedu.site/';
 
 
 // assets
@@ -96,10 +96,6 @@ $not_authorisedPage = $rootAdress.'pages/not_authorised.php';
 
 
 
-
-
-
-
 //model
 $modelRegirstration = $rootAdress."model/registration.php" ; 
 $modelLogin = $rootAdress."model/login.php" ; 
@@ -109,9 +105,6 @@ $modelUploadPhotos = $rootAdress."model/upload_photos.php";
 $modelPrivacy = $rootAdress."model/privacy.php";
 $modelGallery = $rootAdress."model/gallery.php";
 $modelProfile_update = $rootAdress."model/profile_update.php";
-
-
-
 
 
 
