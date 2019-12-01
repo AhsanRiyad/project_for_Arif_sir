@@ -24,7 +24,7 @@ $rootAdress = 'http://localhost/project_for_Arif_sir/';
 
 
 //hosting
-//$rootAdress = 'http://ndc92.friendsbd.website/';
+//$rootAdress = 'https://ndc92.friendsbd.website/';
 
 $rootAdress_model = 'http://mdahsanr.sgedu.site/';
 
