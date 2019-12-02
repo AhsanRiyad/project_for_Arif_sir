@@ -1,189 +1,71 @@
 <?php 
 include "../address.php";
 include $APP_ROOT.'assets/linker/db.php' ; 
+header("Content-Type: application/json; charset=UTF-8");
+$data =  file_get_contents('php://input');
+$d2 = json_decode($data);
 
 
-//print_r($_REQUEST);
-
-//echo 'hellow';
-
-//echo json_encode($_REQUEST['term']);
-//echo file_get_contents('php://input');
 
 
-// $data = json_decode(file_get_contents('php://input'), true);
+	
+	$email = 'riyad.for.test@gmail.com';
+	$user_id = 7;
+	$conn = get_mysqli_connection();
+	$sql = "select last_verified_info from all_info_together where  id = ".$user_id." ";
 
-// echo $data;
-// print_r($data);
-//echo $data["purpose"];
-
-// header("Content-Type: application/json; charset=UTF-8");
-
-/*$data =  file_get_contents('php://input');*/
-// echo $data->purpose;
-
-//print_r($_REQUEST['purpose']);
-
-//$data = '{"purpose":"get_data"}';
-
-/*$d2 = json_decode($data);
-
-echo $d2->purpose;*/
-
-// echo 'hellow';
-
-// echo $data;
-
-// print_r($_FILES);
-
-
-/*$conn = get_mysqli_connection();
-
-$sql = "CALL current_photo( ?, ?, @result)";
-$stmt = $conn->prepare($sql);*/
-// $email =  'riyad298@afhorfooefoe.com';
-// $full_name = 'Ahsan Riyad';
-// $mobile = '01919448787';
-// $institution_id = '01919448787';
-// $password = '1';
- // $otp = 'aofhoerf';
-/*
-$email = 'riyad298@gmail.com';
-$basename = 'faerfojrferfoajf';
-$stmt->bind_param('ss' , $basename, $email);
-$stmt->execute();   
-
-$stmt->close();
-$sql = 'select @result as st'; 
 $result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
-
-$conn->close();
-//print_r($row);
-echo $row['st'];
-*/
-
-
-/*
-
-				$conn = get_mysqli_connection();
-				$sql = "call current_photo( ? , ? , @result )";
-				$stmt = $conn->prepare($sql);
-				$email = 'riyad298@gmail.com';
-				$basename = 'jtogstgjoigjsogogosjgiotgoisr';
-				$stmt->bind_param('ss' , $basename , $email );
-				$stmt->execute();
-				$stmt->close();
-				$sql = 'select @result as st';
-				$result = mysqli_query($conn , $sql);
-				$row = mysqli_fetch_assoc($result);
-				$conn->close();
-				echo $row['st'];*/
-
-
-
-
-
-/*
-				//echo $_GET['hellow'];
-
-
-
-				$conn = get_mysqli_connection();
-				$sql = 'select * from verification_info where email = "riyad298@gmail.com"';
-				$result = mysqli_query($conn , $sql);
-				$row_verification_info = mysqli_fetch_assoc($result);
-				//echo $row_verification_info['visibility'];
-				$arrayE =  explode(',', $row_verification_info['visibility']);
-				//print_r($arrayE);
-				
-				//echo '<br>';
-
-
-				$sql = 'select * from users_registration where email = "riyad298@gmail.com"';
-				$result = mysqli_query($conn , $sql);
-				$row_users_registration = mysqli_fetch_assoc($result);
-				
-
-				//print_r($row_users_registration);
-				$privacyArray;
-				$arrayInfo;
-				$i = 0;
-				foreach ($arrayE as $key => $value) {
-
-					
-
-					$arrayInfo[$value] = $row_users_registration[$value];
-					//echo $x;
-				}
-				//echo '<br>' ; 
-				foreach ($row_users_registration as $key => $value) {
-					# code...
-					//echo $value;
-					in_array($key, $arrayE) ? $privacyArray[$i++]= array($key , $value , 'public') : $privacyArray[$i++]= array($key , $value , 'private');
-					//echo $key .'<br>'. $value;
-				}
-
-
-				// echo json_encode($arrayInfo);
-				echo json_encode($privacyArray);
-
-
-				$conn->close();
-
-
-*/
-
-
-
-/*
-$cars = array
-  (
-  array("Volvo",22,18),
-  array("BMW",15,13),
-  array("Saab",5,2),
-  array("Land Rover",17,15)
-  );
-
-
-  echo json_encode($cars);*/
-
-
-
-
-/*  $conn = get_mysqli_connection();
-  //var_dump($conn) ;
-
-    //$sql = "select * from users_registration where email = 'riyad209@gmail.com'";
-    //$stmt = $conn->prepare($sql);
-    //$stmt->bind_param('ss' , $email, $password1);
-    //$stmt->execute();   
-  $conn = get_mysqli_connection();
-  $email = 'riyad298@gmail.com';
-  $email1 = mysqli_real_escape_string($conn, $email);
-  $sql = 'select * from users_registration where email= '.'"'.$email1.'"'; 
-  
-  $result = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_assoc($result);
-
-  $_SESSION['users_info'] = $row;
-
-echo $_SESSION['users_info']['email'];
-$conn->close();*/
-
-
-$conn = get_mysqli_connection();
-	$sql = "call count_request(@verification_request, @change_request)";
-	$result = mysqli_query($conn , $sql);
-	// $stmt = $conn->prepare($sql);
-	// $stmt->execute();
-	$sql = "select @verification_request as vr , @change_request as cr";
-	$result = mysqli_query($conn , $sql);
 	if (mysqli_num_rows($result) > 0) {
 		$row = mysqli_fetch_assoc($result);
 	}
-	$conn->close();
-	echo json_encode($row);
-	echo '<br>';
 
-	echo $row['vr'];
+$array =  explode('@#$' , $row['last_verified_info']);
+$arrayValue_from_database = $stringToArrayValue_from_verified_info = explode(',' , $array[1] );
+
+$arrayKey_from_database = $stringToArrayValue_from_verified_info = explode(',' , $array[0] );
+
+
+print_r($arrayKey_from_database);
+echo '<br>';
+print_r($arrayValue_from_database);
+
+
+
+
+
+$update_sql_users_registration = "update users_registration set `full_name`='".$arrayValue_from_database[0]."', `mobile`='".$arrayValue_from_database[1]."', `institution_id`='".$arrayValue_from_database[2]."'  where  email = '".$email."'";
+mysqli_query($conn , $update_sql_users_registration);
+
+
+
+if($arrayValue_from_database[7] == NULL || $arrayValue_from_database[7] == ''){
+	$arrayValue_from_database[7] = 0;
+}
+
+
+
+$update_sql_users_info = "update users_info set `nid_or_passport`='".$arrayValue_from_database[3]."', `fathers_name`='".$arrayValue_from_database[4]."', `mother_name`='".$arrayValue_from_database[5]."', `spouse_name`='".$arrayValue_from_database[6]."', `number_of_children`=".$arrayValue_from_database[7].", `profession`='".$arrayValue_from_database[8]."', `designation`='".$arrayValue_from_database[9]."', `institution`='".$arrayValue_from_database[10]."', `blood_group`='".$arrayValue_from_database[11]."', `date_of_birth`='".$arrayValue_from_database[12]."'  where  email = '".$email."'";
+mysqli_query($conn , $update_sql_users_info);
+
+
+
+if($arrayValue_from_database[15] == NULL or $arrayValue_from_database[15] == ''){
+	$arrayValue_from_database[15] = 0000;
+}
+if($arrayValue_from_database[19] == NULL or $arrayValue_from_database[19] == ''){
+	$arrayValue_from_database[19] = 0000;
+}
+
+
+
+
+
+$update_sql_users_address = "update users_address set `present_line1`='".$arrayValue_from_database[13]."', `present_district`='".$arrayValue_from_database[14]."', `present_post_code`='".$arrayValue_from_database[15]."', `present_country`='".$arrayValue_from_database[16]."', `parmanent_line1`='".$arrayValue_from_database[17]."',  `parmanent_district`='".$arrayValue_from_database[18]."', `parmanent_post_code`='".$arrayValue_from_database[19]."', `parmanent_country`='".$arrayValue_from_database[20]."'  where  email = '".$email."'";
+mysqli_query($conn , $update_sql_users_address);
+
+
+$update_rejected_sql = "update all_info_together set change_request = 'rejected' where id = ".$user_id."";
+mysqli_query($conn , $update_rejected_sql);
+$conn->close();
+
+

@@ -117,7 +117,7 @@
 	<v-btn
 	color="green darken-1"
 	text
-	@click="dialog = false"
+	@click="gotoForgotPassword()"
 	>
 	Okay
 	</v-btn>
@@ -198,6 +198,10 @@
 					result == false ? this.repassword_validity = 'invalid' : this.repassword_validity = 'valid';
 				}
 			},
+			gotoForgotPassword(){
+				this.dialog= false;
+				location.href = this.address.forgotPage;
+			},
 			submit(){
 				//alert(this.blood_group);
 				this.validityCheckInput('password');
@@ -213,8 +217,6 @@
 
 					}
 					).then(function(response){
-
-						
 
 						this.status_text = 'Password Updated successfully';
 						this.dialog = true;
@@ -236,7 +238,40 @@
 			}
 
 		},
-		created(){}
+		created(){
+
+
+
+			axios.post( this.model.modelProfile_password_recovery ,
+			{
+				purpose: 'forgot_password_recovery',
+				email: this.email.trim(),
+				forgot_password_crypto: this.forgot_password_crypto.trim(),
+
+			}
+			).then(function(response){
+				
+				
+				console.log(response);
+
+				if(response.data == 'allow'){
+	
+					
+				}else {
+					this.status_text = "invalid link or the link meybe expired";
+					this.dialog = true;
+					
+				}
+
+			}.bind(this))
+			.catch(function(error){
+
+
+			}.bind(this));
+
+
+
+		}
 	})
 
 
@@ -262,30 +297,7 @@
 			
 			// alert(this.email);
 
-			axios.post( this.model.modelProfile_password_recovery ,
-			{
-				purpose: 'forgot_password_recovery',
-				email: this.email.trim(),
-				forgot_password_crypto: this.forgot_password_crypto.trim(),
-
-			}
-			).then(function(response){
-				
-				
-				console.log(response);
-
-				if(response.data == 'allow'){
-	
-					
-				}else{
-					
-				}
-
-			}.bind(this))
-			.catch(function(error){
-
-
-			}.bind(this));
+			
 
 
 

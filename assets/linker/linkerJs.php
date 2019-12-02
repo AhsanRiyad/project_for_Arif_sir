@@ -134,8 +134,6 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
 
 
 
-
-
                     modelSearch: '<?php echo $modelSearch; ?>',
                     modelAdminChangeInfo: '<?php echo $modelAdminChangeInfo; ?>',
 

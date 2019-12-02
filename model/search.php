@@ -49,7 +49,7 @@ if($d2->main_purpose == 'search'){
 	else if($d2->purpose == 'rejected_user'){
 
 		if($name == ''){
-			$sql =" select * from all_info_together where status = 'approved' limit 20";
+			$sql =" select * from all_info_together where status = 'rejected' limit 20";
 		}else{
 			
 		$sql = "select * from all_info_together where status = 'rejected' and  full_name  like '%$name%' limit 20 ";
