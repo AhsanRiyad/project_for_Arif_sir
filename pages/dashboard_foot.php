@@ -41,7 +41,7 @@
 
 				py-2 text-center my-4">
 
-				<i class="fas w_f fa-chart-line"></i> Add Users
+				<i class="fas fa-users"></i> Add Users
 
 			</div></a>
 
@@ -72,7 +72,7 @@
 				?> 
 				py-2 text-center my-4">
 
-				<i class="fas w_f fa-user"></i> Profile
+				<i class="fas fa-id-card-alt"></i> Profile
 
 			</div></a>
 			<?php 
@@ -94,7 +94,7 @@
 			?> 
 			py-2 text-center my-4">
 
-			<i class="fas w_f fa-user"></i> Search
+			<i class="fas fa-search"></i> Search
 
 		</div></a>
 
@@ -116,7 +116,7 @@
 				?> 
 				py-2 text-center my-4">
 
-				<i class="fas fa-shopping-cart"></i> User Request 
+				<i class="fas fa-user-check"></i> User Request 
 
 				<span class="badge badge-primary" id="verification_request_badge"><?php echo $vr__; ?></span>
 
@@ -140,7 +140,7 @@
 				?> 
 				py-2 text-center my-4">
 
-				<i class="fas fa-shopping-cart"></i> Change Request
+				<i class="fas fa-users-cog"></i> Change Request
 
 				<span class="badge badge-primary" id="change_request_badge"> <?php echo $cr__; ?></span>
 			</div></a>
@@ -170,7 +170,7 @@
 
 			bg-secondary py-2 text-center my-4">
 
-			<i class="fas w_f fa-envelope"></i> Privacy
+			<i class="fas fa-user-secret"></i> Privacy
 
 		</div></a>
 
@@ -201,7 +201,7 @@
 			
 			  py-2 text-center my-4">
 
-				<i class="fab fa-product-hunt"></i> Gallery
+				<i class="fas fa-images"></i> Gallery
 
 			</div></a>
 
