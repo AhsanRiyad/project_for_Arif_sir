@@ -22,21 +22,21 @@
 	<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Personal Info</p>
 	</div>
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>Fathers Name
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.fathers_name.smallText ' > <span>Father's Name
 	<span v-show="fathers_name_validity == 'valid'" class="text-success"> {{ fathers_name_validity }} </span>
 	<span v-show="fathers_name_validity == 'invalid'" class="text-danger"> {{ fathers_name_validity }} </span>
 	</span> <span @click="enable_input('fathers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.fathers_name.smallButton" class="small_button">Change</span></small>
 	<input v-model="fathers_name" @keyup="onChangeValidity('fathers_name')" :disabled='fathers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your fathers name Here" type="text" value="" >
 	</div>
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>Mothers Name
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.mothers_name.smallText ' > <span>Mother's Name
 	<span v-show="mothers_name_validity == 'valid'" class="text-success"> {{ mothers_name_validity }} </span>
 	<span v-show="mothers_name_validity == 'invalid'" class="text-danger"> {{ mothers_name_validity }} </span>
 	</span> <span @click="enable_input('mothers_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.mothers_name.smallButton" class="small_button">Change</span></small>
 	<input v-model="mothers_name" @keyup="onChangeValidity('mothers_name')"  :disabled='mothers_name_input == true' id="idInputEmailUpdateProfileDashboard" class="d-block border-0 w-100 pb-1 mr-0 pl-2" placeholder="Type Your mothers_name Here" type="text" value="" >
 	</div>
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>Spouse Name
+	<small id='idSmallEmailChangeDashboard'  class="" v-bind:style=' changes.spouse_name.smallText ' > <span>Spous'e Name
 	<span v-show="spouse_name_validity == 'valid'" class="text-success"> {{ spouse_name_validity }} </span>
 	<span v-show="spouse_name_validity == 'invalid'" class="text-danger"> {{ spouse_name_validity }} </span>
 	</span> <span @click="enable_input('spouse_name')" id="idSpanEmailChangeDashboard" v-bind:style="changes.spouse_name.smallButton" class="small_button">Change</span></small>
@@ -176,49 +176,49 @@
 				// console.log('bus received');
 				this.users_info = response;
 				if(this.users_info.full_name == 'not_set' || this.users_info.full_name == null){
-					this.profile_completeness_msg = 'full_name is not set';
+					this.profile_completeness_msg = 'Full Name is not set';
 				}else if(this.users_info.mobile == 'not_set' || this.users_info.mobile == null){
-					this.profile_completeness_msg = 'mobile is not set';	
+					this.profile_completeness_msg = 'Mobile is not set';	
 				}else if(this.users_info.institution_id == 'not_set' || this.users_info.institution_id == null){
-					this.profile_completeness_msg = 'institution_id is not set';	
+					this.profile_completeness_msg = 'Institution Id is not set';	
 				}else if(this.users_info.nid_or_passport == 'not_set' || this.users_info.nid_or_passport == null){
-					this.profile_completeness_msg = 'nid_or_passport is not set';	
+					this.profile_completeness_msg = 'NID/Passport no. is not set';	
 				}else if(this.users_info.blood_group == 'not_set' || this.users_info.blood_group == null){
-					this.profile_completeness_msg = 'blood_group is not set';	
+					this.profile_completeness_msg = 'Blood Group is not set';	
 				}else if(this.users_info.date_of_birth == 'not_set' || this.users_info.date_of_birth == null){
-					this.profile_completeness_msg = 'date_of_birth is not set';	
+					this.profile_completeness_msg = 'Date Of Birth is not set';	
 				}else if(this.users_info.fathers_name == 'not_set' || this.users_info.fathers_name == null){
-					this.profile_completeness_msg = 'fathers_name is not set';	
+					this.profile_completeness_msg = "Father's Name is not set";	
 				}else if(this.users_info.mother_name == 'not_set' || this.users_info.mother_name == null){
-					this.profile_completeness_msg = 'mother_name is not set';	
+					this.profile_completeness_msg = "Mother' Name is not set";	
 				}else if(this.users_info.spouse_name == 'not_set' || this.users_info.spouse_name == null){
-					this.profile_completeness_msg = 'spouse_name is not set';	
+					this.profile_completeness_msg =  "Spouse's is not set";	
 				}else if(this.users_info.number_of_children == 'not_set' || this.users_info.number_of_children == null){
-					this.profile_completeness_msg = 'number_of_children is not set';	
+					this.profile_completeness_msg = "Number of Children is not set";	
 				}else if(this.users_info.profession == 'not_set' || this.users_info.profession == null){
-					this.profile_completeness_msg = 'profession is not set';	
+					this.profile_completeness_msg = 'Profession is not set';	
 				}else if(this.users_info.institution == 'not_set' || this.users_info.institution == null){
-					this.profile_completeness_msg = 'institution is not set';	
+					this.profile_completeness_msg = 'Institution/Workplace is not set';	
 				}else if(this.users_info.designation == 'not_set' || this.users_info.designation == null){
-					this.profile_completeness_msg = 'designation is not set';	
+					this.profile_completeness_msg = 'Designation is not set';	
 				}else if(this.users_info.present_line1 == 'not_set' || this.users_info.present_line1 == null){
-					this.profile_completeness_msg = 'present_line1 is not set';	
+					this.profile_completeness_msg = 'Present Address Line1 is not set';	
 				}else if(this.users_info.present_district == 'not_set' || this.users_info.present_district == null){
-					this.profile_completeness_msg = 'present_district is not set';	
+					this.profile_completeness_msg = 'Present District is not set';	
 				}else if(this.users_info.present_post_code == 'not_set' || this.users_info.present_post_code == null){
-					this.profile_completeness_msg = 'present_post_code is not set';	
+					this.profile_completeness_msg = 'Present Post Code is not set';	
 				}else if(this.users_info.present_country == 'not_set' || this.users_info.present_country == null){
-					this.profile_completeness_msg = 'present_country is not set';	
+					this.profile_completeness_msg = 'Present Country is not set';	
 				}else if(this.users_info.parmanent_line1 == 'not_set' || this.users_info.parmanent_line1 == null){
-					this.profile_completeness_msg = 'parmanent_line1 is not set';	
+					this.profile_completeness_msg = 'Permanent Address Line1 is not set';	
 				}else if(this.users_info.parmanent_district == 'not_set' || this.users_info.parmanent_district == null){
-					this.profile_completeness_msg = 'parmanent_district is not set';	
+					this.profile_completeness_msg = 'Permanent District is not set';	
 				}else if(this.users_info.parmanent_post_code == 'not_set' || this.users_info.parmanent_post_code == null){
-					this.profile_completeness_msg = 'parmanent_post_code is not set';	
+					this.profile_completeness_msg = 'Permanent Post Code is not set';	
 				}else if(this.users_info.parmanent_country == 'not_set' || this.users_info.parmanent_country == null){
-					this.profile_completeness_msg = 'parmanent_country is not set';	
+					this.profile_completeness_msg = 'Permanent Country is not set';	
 				}else if(this.users_info.recent_photo == 'not_set' || this.users_info.recent_photo == null){
-					this.profile_completeness_msg = 'recent_photo is not set';	
+					this.profile_completeness_msg = 'Recent Photo is not set';	
 				}else{
 					axios.post( this.model.modelProfile_basic ,
 					{

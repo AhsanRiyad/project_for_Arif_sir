@@ -207,6 +207,37 @@
 
 				<?php } ?>
 
+
+		<?php 
+		if($admin__ == true ){
+			?>
+
+
+
+		<a class="text-white" href="<?=  $photo_galleryPage; ?>">
+			<div class=" 
+			
+
+			<?php 
+
+			if($pageName=='photo_gallery')
+			{
+				echo 'bg-info';
+			}
+			else{
+				echo 'bg-secondary';
+			}
+			?>  
+
+			
+			  py-2 text-center my-4">
+
+				<i class="fas fa-lock-open"></i> Admin Options
+
+			</div></a>
+
+				<?php } ?>
+
 			<a class="text-white" href="<?php echo $loginPage; ?>">
 				<div class="  bg-danger py-2 text-center my-4">
 
