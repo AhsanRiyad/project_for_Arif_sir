@@ -22,17 +22,17 @@ Hi Admin, create a new account!
 </p>
 <!-- full name input -->
 <div class="form-group mt-3">
-<label for="exampleInputEmail1"><small id="lnLabel">full Name*
+<label for="exampleInputEmail1"><small id="lnLabel">Full Name*
 <span v-show="full_name_validity == 'valid'" class="text-success"> {{ full_name_validity }} </span>
 <span v-show="full_name_validity == 'invalid'" class="text-danger"> {{ full_name_validity }}  </span>
 </small>
 <br>
 </label>
-<input @keyup="onChangeValidity('full_name')" name="full_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="full_nameHelp" placeholder="Enter full name"  ref='full_name' >
+<input @keyup="onChangeValidity('full_name')" name="full_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="full_nameHelp" placeholder="Enter Full Name"  ref='full_name' >
 </div>
 <!-- institution_id input -->
 <div class="form-group mt-3">
-<label for="exampleInputEmail1"><small id="lnLabel">institution_id*
+<label for="exampleInputEmail1"><small id="lnLabel">Institution ID*
 <span v-show="institution_id_validity == 'valid'" class="text-success"> {{ institution_id_validity }} </span>
 <span v-show="institution_id_validity == 'invalid'" class="text-danger"> {{ institution_id_validity }}  </span>
 </small>
@@ -40,7 +40,7 @@ Hi Admin, create a new account!
 </small>
 <br>
 </label>
-<input @keyup="onChangeValidity('institution_id')"  name="institution_id" v-model='institution_id'  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter institution_id" value="">
+<input @keyup="onChangeValidity('institution_id')"  name="institution_id" v-model='institution_id'  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Institution ID" value="">
 </div>
 <!-- mobile number input -->
 <div class="form-group mb-xl-3 mb-md-0">

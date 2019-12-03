@@ -61,7 +61,7 @@ function getPrivacyData($email , $user_id){
 
 
 
-	$sql ='select full_name, email , mobile , institution_id, nid_or_passport, fathers_name , mother_name , spouse_name , number_of_children , profession , designation , institution , blood_group , date_of_birth  , present_line1 , present_post_code , present_district, present_post_code, parmanent_line1, parmanent_post_code, parmanent_district, parmanent_country, membership_number , status , email_verification_status, change_request , type , registration_date from all_info_together WHERE  id = '.$user_id_fresh;
+	$sql ='select full_name, email , mobile , institution_id, nid_or_passport, fathers_name , mother_name , spouse_name , number_of_children , profession , designation , institution , blood_group , date_of_birth  , present_line1 , present_post_code , present_district, present_country, parmanent_line1, parmanent_post_code, parmanent_district, parmanent_country, membership_number , status , email_verification_status, change_request , type , registration_date from all_info_together WHERE  id = '.$user_id_fresh;
 
 	$result = mysqli_query($conn , $sql);
 

@@ -16,14 +16,14 @@ if($d2->main_purpose == 'search'){
 	$name1 =  mysqli_real_escape_string($conn , $name);
 
 
-	if($d2->purpose == 'full_name'){
+	if($d2->purpose == 'Full Name'){
 
 		if($name == ''){
 			$sql =" select * from all_info_together where status = 'approved' limit 20";
 		}else{
 			$sql = "select * from all_info_together where status = 'approved' and  full_name  like '%$name%'  limit 20 ";
 		}
-	}else if($d2->purpose == 'membership_number'){
+	}else if($d2->purpose == 'Membership Number'){
 
 		if($name == ''){
 			$sql =" select * from all_info_together where status = 'approved' limit 20";
@@ -34,7 +34,7 @@ if($d2->main_purpose == 'search'){
 
 		
 
-	}else if($d2->purpose == 'institution_id'){
+	}else if($d2->purpose == 'Institution ID'){
 
 		if($name == ''){
 			$sql =" select * from all_info_together where status = 'approved' limit 20";
@@ -46,7 +46,7 @@ if($d2->main_purpose == 'search'){
 
 		
 	}
-	else if($d2->purpose == 'rejected_user'){
+	else if($d2->purpose == 'Rejected User'){
 
 		if($name == ''){
 			$sql =" select * from all_info_together where status = 'rejected' limit 20";
@@ -58,7 +58,7 @@ if($d2->main_purpose == 'search'){
 
 	}
 
-	else if($d2->purpose == 'newly_registered'){
+	else if($d2->purpose == 'Newly Registered'){
 
 		if($name == ''){
 			$sql =" select * from all_info_together where status = 'not_verified' limit 20";
@@ -266,7 +266,7 @@ function getPrivacyData($email , $user_id){
 					// select ua.parmanent_district , ua.parmanent_country , ua.present_district , ua.present_country ,  ui.email , ui.nid_or_passport, ui.fathers_name , ui.mother_name , ui.spouse_name , ui.number_of_children , ui.profession , ui.designation , ui.institution , ui.blood_group , ui.date_of_birth , ur.mobile , ur.institution_id , ur.registration_date from users_info ui , users_registration ur , users_address ua WHERE ui.email  = ur.email = ua.email and ur.email = "riyad298@gmail.com"
 
 
-	$sql ='select full_name, email , mobile , institution_id, nid_or_passport, fathers_name , mother_name , spouse_name , number_of_children , profession , designation , institution , blood_group , date_of_birth  , present_line1 , present_post_code , present_district, present_post_code, parmanent_line1, parmanent_post_code, parmanent_district, parmanent_country, membership_number , status , email_verification_status, change_request , type , registration_date from all_info_together WHERE  id = '.$user_id_fresh;
+	$sql ='select full_name, email , mobile , institution_id, nid_or_passport, fathers_name , mother_name , spouse_name , number_of_children , profession , designation , institution , blood_group , date_of_birth  , present_line1 , present_post_code , present_district, present_country, present_post_code, parmanent_line1, parmanent_post_code, parmanent_district, parmanent_country, membership_number , status , email_verification_status, change_request , type , registration_date from all_info_together WHERE  id = '.$user_id_fresh;
 	$result = mysqli_query($conn , $sql);
 	$row_users_registration = mysqli_fetch_assoc($result);
 

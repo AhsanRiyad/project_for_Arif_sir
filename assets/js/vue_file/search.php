@@ -17,7 +17,7 @@
 	<p>Search</p>
 	<v-text-field
 	v-model="search_text"
-	label="search"
+	label="Search"
 	@keyup="search()"
 	required
 	></v-text-field>
@@ -54,8 +54,8 @@
 	<thead  class="thead-dark" >
 	<tr >
 	<th>Name</th>
-	<th>membership_number</th>
-	<th>institution_id</th>
+	<th>Membership Number</th>
+	<th>Institution Id</th>
 	<th>Gallery</th>
 	<th>Details</th>
 
@@ -188,43 +188,43 @@
 
 
 	<v-row justify="center">
-  <v-dialog v-model="dialog1" scrollable max-width="700px">
+	<v-dialog v-model="dialog1" scrollable max-width="700px">
 
-  <v-card>
-  <v-card-title>Image</v-card-title>
-  <v-divider></v-divider>
-  <v-card-text style="height: 400px;">
-  
-  <v-row align="center" justify="center">
-  <v-img
-  :src="dialog_photo"
-  class="grey lighten-2"
-  max-width="600"
+	<v-card>
+	<v-card-title>Image</v-card-title>
+	<v-divider></v-divider>
+	<v-card-text style="height: 400px;">
+	
+	<v-row align="center" justify="center">
+	<v-img
+	:src="dialog_photo"
+	class="grey lighten-2"
+	max-width="600"
 
-  aspect-ratio="1"
-  ></v-img>
-  </v-row>
+	aspect-ratio="1"
+	></v-img>
+	</v-row>
 
-  </v-card-text>
-  <v-divider></v-divider>
-  <v-card-actions class="mb-5">
-  
-  <v-container>
-  <v-row class="ml-3">
+	</v-card-text>
+	<v-divider></v-divider>
+	<v-card-actions class="mb-5">
+	
+	<v-container>
+	<v-row class="ml-3">
 
-  </v-row>
-  <v-row>
-  <v-col xs="12">
-  
-  </v-col>
-  </v-row>
- </v-container>
+	</v-row>
+	<v-row>
+	<v-col xs="12">
+	
+	</v-col>
+	</v-row>
+	</v-container>
 
 
-  </v-card-actions>
-  </v-card>
-  </v-dialog>
-  </v-row>
+	</v-card-actions>
+	</v-card>
+	</v-dialog>
+	</v-row>
 
 
 
@@ -608,7 +608,7 @@
 					return "Present Post Code";
 				}else if(name == 'present_district'){
 					return "Present District";
-				}else if(name == 'parmanent_country'){
+				}else if(name == 'present_country'){
 					return "Present Country";
 				}else if(name == 'parmanent_line1'){
 					return "Permanent Adress Line1";
@@ -619,7 +619,7 @@
 				}else if(name == 'parmanent_country'){
 					return "Permanent Country";
 				}else if(name == 'membership_number'){
-					return "Member ship Number";
+					return "Membership Number";
 				}else if(name == 'type'){
 					return "User Type";
 				}else if(name == 'status'){
@@ -1172,9 +1172,9 @@
 				}).then(function(response){
 					this.users_info = response.data;
 					// console.log(response);
-					this.profile_user_status = this.users_info[22][1];
-					this.profile_user_type = this.users_info[25][1];
-					this.change_request_status= this.users_info[24][1];
+					this.profile_user_status = this.users_info[23][1];
+					this.profile_user_type = this.users_info[26][1];
+					this.change_request_status= this.users_info[25][1];
 				}.bind(this))
 				.catch(function(error){
 
@@ -1194,9 +1194,9 @@
 			}).then(function(response){
 				this.users_info = response.data;
 				// console.log(response);
-				this.profile_user_status = this.users_info[22][1];
-				this.profile_user_type = this.users_info[25][1];
-				this.change_request_status= this.users_info[24][1];
+				this.profile_user_status = this.users_info[23][1];
+				this.profile_user_type = this.users_info[26][1];
+				this.change_request_status= this.users_info[25][1];
 
 				// console.log(this.users_info[22][0]);
 			}.bind(this))
@@ -1294,11 +1294,11 @@ Vue.component('search' , {
 	template: search,
 	data(){
 		return {
-			category: 'full_name',
+			category: 'Full Name',
 			category_items: [
-			'full_name',
-			'institution_id',
-			'membership_number',
+			'Full Name',
+			'Institution ID',
+			'Membership Number',
 			],
 			search_text: '',
 			user_list : [] , 
@@ -1352,7 +1352,7 @@ Vue.component('search' , {
 				
 			})
 			// this.users_info__.admin__ = true;
-			this.users_info__.admin__ == true ? this.category_items.push("rejected_user" , "newly_registered") : '';
+			this.users_info__.admin__ == true ? this.category_items.push("Rejected User" , "Newly Registered") : '';
 			axios.post( this.model.modelSearch ,
 			{
 				purpose: 'getProfileBasicInfo',

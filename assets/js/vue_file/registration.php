@@ -43,7 +43,7 @@ Welcome, Create your Account
 
 <!-- full name input -->
 <div class="form-group mt-3">
-<label for="exampleInputEmail1"><small id="lnLabel">full Name*
+<label for="exampleInputEmail1"><small id="lnLabel">Full Name*
 
 
 
@@ -58,12 +58,12 @@ Welcome, Create your Account
 
 
 </label>
-<input @keyup="onChangeValidity('full_name')" name="full_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="full_nameHelp" placeholder="Enter full name"  ref='full_name' >
+<input @keyup="onChangeValidity('full_name')" name="full_name"  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="full_nameHelp" placeholder="Enter Full Nsame"  ref='full_name' >
 </div>
 
 <!-- institution_id input -->
 <div class="form-group mt-3">
-<label for="exampleInputEmail1"><small id="lnLabel">institution_id*
+<label for="exampleInputEmail1"><small id="lnLabel">Institution ID*
 
 
 
@@ -81,7 +81,7 @@ Welcome, Create your Account
 
 </label>
 
-<input @keyup="onChangeValidity('institution_id')"  name="institution_id" v-model='institution_id'  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter institution_id" value="">
+<input @keyup="onChangeValidity('institution_id')"  name="institution_id" v-model='institution_id'  type="text" class="form-control rounded-0" id="lnInput" aria-describedby="emailHelp" placeholder="Enter Institution ID" value="">
 </div>
 
 
@@ -105,7 +105,7 @@ Welcome, Create your Account
 
 </label>
 
-<input @keyup="onChangeValidity('mobile')" v-model='mobile' name="mobile" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter mobile number"
+<input @keyup="onChangeValidity('mobile')" v-model='mobile' name="mobile" type="text" class="form-control rounded-0" id="exampleInputMobile" aria-describedby="emailHelp" placeholder="Enter Mobile Number"
 value="">
 </div>
 
@@ -150,7 +150,7 @@ value="">
 
 </label>
 
-<input @keyup="onChangeValidity('email')" name="email" v-model='email' type="text" class="form-control rounded-0" id="exampleInputemail" aria-describedby="emailHelp" placeholder="Enter email address"
+<input @keyup="onChangeValidity('email')" name="email" v-model='email' type="text" class="form-control rounded-0" id="exampleInputemail" aria-describedby="emailHelp" placeholder="Enter Email Address"
 value="">
 </div>
 

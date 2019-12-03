@@ -113,7 +113,7 @@
         return "Present Post Code";
       }else if(name == 'present_district'){
         return "Present District";
-      }else if(name == 'parmanent_country'){
+      }else if(name == 'present_country'){
         return "Present Country";
       }else if(name == 'parmanent_line1'){
         return "Permanent Adress Line1";
@@ -124,7 +124,7 @@
       }else if(name == 'parmanent_country'){
         return "Permanent Country";
       }else if(name == 'membership_number'){
-        return "Member ship Number";
+        return "Membership Number";
       }else if(name == 'type'){
         return "User Type";
       }else if(name == 'status'){

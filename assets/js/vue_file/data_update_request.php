@@ -74,7 +74,7 @@
 	<table class="table" >
 	<thead  class="thead-dark" >
 	<tr >
-	<th>membership_number</th>
+	<th>Membership Number</th>
 	<th>Req Date</th>
 	<th>Req From</th>
 	<th>Details</th>
@@ -162,17 +162,14 @@
 
 				},
 				get_users: function(){
-				//alert('get_data_method');
-
+	
 				this.$http.post( this.model.modeldata_update_request , {
 					purpose : 'get_change_req_user'
 				} ).then(function(response){
-					// console.log(response);
-
 
 				// console.log(JSON.parse(response.data));
 
-				// console.log(response.data);
+				
 
 				if(response.data.length == 1){
 					this.user_list = []; 

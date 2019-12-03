@@ -138,7 +138,7 @@
 	<option >blood_group</option>
 	<option >A+</option>
 	<option >B+</option>
-	<option ">AB+</option>
+	<option >AB+</option>
 	<option >O+</option>
 	<option >A-</option>
 	<option >B-</option>
@@ -328,7 +328,7 @@ axios.post( this.model.modelProfile_basic ,
 	purpose: 'getProfileBasicInfo',
 }
 ).then(function(response){
-	// console.log(response);
+	
 				//this.email = response.data.full_name;
 				this.email_verification_status = response.data.email_verification_status;
 				this.completeness = response.data.completeness;
@@ -611,12 +611,12 @@ Vue.component('profile_basic' , {
 						this.get_users_data();
 					}.bind(this))
 					.catch(function(error){
-        //console.log(error);
+        
     }.bind(this));
 				}else{
 					this.status_text = 'all field are not valid';
 					this.dialog = true;
-					//alert('all filed are not valid');
+					
 				}
 			},
 
@@ -630,7 +630,7 @@ Vue.component('profile_basic' , {
 				}
 				).then(function(response){
 
-					// console.log(response);
+					
 
 				
 					this.type = response.data.type;
@@ -640,7 +640,7 @@ Vue.component('profile_basic' , {
 				}.bind(this))
 				.catch(function(error){
 
-        //console.log(error);
+        
     }.bind(this));
 
 
@@ -655,7 +655,7 @@ Vue.component('profile_basic' , {
 				
 			}
 			).then(function(response){
-				// console.log(response);
+				
 				
 
 				this.full_name = response.data.full_name;
@@ -690,7 +690,7 @@ Vue.component('profile_basic' , {
 
 				
 
-        //console.log(error);
+        
     }.bind(this));
 		}
 	})

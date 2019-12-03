@@ -22,7 +22,7 @@
 	<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Upload Photos</p>
 	</div>
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class=""  > <span>recent Photo</span></small>
+	<small id='idSmallEmailChangeDashboard'  class=""  > <span>Recent Photo</span></small>
 	<div class="custom-file">
 	<input type="file" ref="recent_photo" v-on:change="handleFileUpload_recent()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 	<label class="custom-file-label" for="inputGroupFile01">{{ recent_photo_name }}</label>
@@ -34,7 +34,7 @@
 	</v-btn>
 	</div>
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class=""  > <span>old Photo</span></small>
+	<small id='idSmallEmailChangeDashboard'  class=""  > <span>Old Photo</span></small>
 	<div class="custom-file">
 	<input type="file" ref="old_photo" v-on:change="handleFileUpload_old()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 	<label class="custom-file-label" for="inputGroupFile01">{{ old_photo_name }}</label>
@@ -46,7 +46,7 @@
 	</v-btn>
 	</div>
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
-	<small id='idSmallEmailChangeDashboard'  class=""  > <span>group Photo</span></small>
+	<small id='idSmallEmailChangeDashboard'  class=""  > <span>Group Photo</span></small>
 	<div class="custom-file">
 	<input type="file" ref="group_photo" v-on:change="handleFileUpload_group()" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 	<label class="custom-file-label" for="inputGroupFile01">{{ group_photo_name }}</label>
@@ -181,10 +181,8 @@
 					}
 				},
 				handleFileUpload_recent: function(){
-				//alert('uploading files');
 				this.recent_photo = this.$refs.recent_photo.files[0];
 				//console.log(this.recent_photo.size/1024/1024);
-				//console.log(this.recent_photo);
 				var patt = /^(image\/){1}[A-Za-z]*/g;
 				var result = patt.test(this.recent_photo.type);
 				if(!result){
@@ -241,6 +239,8 @@
 						}
 						).then(function(response){
 							this.loading_old_photo = false;
+							console.log(response);
+
 							response.data == 'success' ? this.status = 'upload successful' : this.status = 'problem uploading your photo, try again';
 							this.dialog = true;
 							this.old_photo_name = 'choose file';
