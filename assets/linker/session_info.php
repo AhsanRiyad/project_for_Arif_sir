@@ -13,13 +13,22 @@ $result = mysqli_query($conn , $sql);
 if (mysqli_num_rows($result) > 0) {
 	$row = mysqli_fetch_assoc($result);
 }
-$conn->close();
 
 
 $vr__ = $row['vr'];
 $cr__ = $row['cr'];
 
 
+$sql = "SELECT institution_id_label FROM admin_options WHERE admin_options_id = 1 ";
+$result = mysqli_query($conn , $sql);
+if (mysqli_num_rows($result) > 0) {
+	$row = mysqli_fetch_assoc($result);
+}
+$institution_id_label__ = $row['institution_id_label'];
+
+
+
+$conn->close();
 
 
 if($pageName == 'login' || $pageName == 'registration' || $pageName == 'profile_forgot_password' ){
@@ -97,7 +106,7 @@ if($login__ == true){
 
 		if($verified__ == true ){
 
-			if($pageName == 'new_user_request' || $pageName == 'add_user'  || $pageName == 'data_update_request'){	
+			if($pageName == 'new_user_request' || $pageName == 'add_user'  || $pageName == 'data_update_request'  || $pageName == 'admin_options'){	
 				header('location:'.$profile_basicPage);
 			}else if ($pageName == 'profile_verify_email') {
 				header('location:'.$profile_basicPage);
@@ -133,7 +142,8 @@ if($login__ == true){
 		$pageName == 'search' || 
 		$pageName == 'data_privacy' || 
 		$pageName == 'data_update_request' || 
-		$pageName == 'new_user_request' ){
+		$pageName == 'new_user_request' ||
+		$pageName == 'admin_options' ){
 
 		header('location:'.$loginPage);
 }

@@ -146,7 +146,7 @@
 
 	
 	<v-col cols="6">
-	<p>Institution Id</p>
+	<p>{{ institution_id_label__ }}</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.institution_id }} </p>
@@ -154,21 +154,21 @@
 
 
 	<v-col cols="6">
-	<p>nid_or_passport</p>
+	<p>NID/Passport No.</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.nid_or_passport }} </p>
 	</v-col>
 
 	<v-col cols="6">
-	<p>Fathers Name</p>
+	<p>Father's Name</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.fathers_name }} </p>
 	</v-col>
 
 	<v-col cols="6">
-	<p>Mothers Name</p>
+	<p>Mother's Name</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.mother_name }} </p>
@@ -177,7 +177,7 @@
 
 	
 	<v-col cols="6">
-	<p>Spouse Name</p>
+	<p>Spouse's Name</p>
 	</v-col>
 	<v-col  cols="6" >
 	<p> {{ user_details.spouse_name }} </p>

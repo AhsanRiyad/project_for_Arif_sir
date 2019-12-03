@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2019 at 06:15 PM
+-- Generation Time: Dec 03, 2019 at 09:43 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -431,6 +431,24 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin_options`
+--
+
+CREATE TABLE `admin_options` (
+  `admin_options_id` int(100) NOT NULL,
+  `institution_id_label` varchar(100) NOT NULL DEFAULT 'Institution Id'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin_options`
+--
+
+INSERT INTO `admin_options` (`admin_options_id`, `institution_id_label`) VALUES
+(1, 'University Roll');
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `all_info_together`
 -- (See below for the actual view)
 --
@@ -659,7 +677,7 @@ CREATE TABLE `verification_info` (
 --
 
 INSERT INTO `verification_info` (`id_v_info`, `email`, `otp`, `forgot_password_crypto`, `status`, `email_verification_status`, `change_request`, `change_request_time`, `type`, `visibility`, `completeness`, `last_verified_info`) VALUES
-(1, 'riyad298@gmail.com', '3345', '7d04bbbe5494ae9d2f5a76aa1c00fa2f', 'approved', 'verified', 'rejected', '2019-11-29 01:45:23.000000', 'admin', 'full_name,mobile,institution_id,nid_or_passport,fathers_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,parmanent_district,parmanent_country,membership_number,status,change_request,type,registration_date', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$riyad298@gmail.com,01719246822,riyad,riyad298@gmail.com,,,,,,,,B+,1990-11-20,arferferf,afreferf,2222,arfraefrae,aferff,arfarferf,44444,aferferf'),
+(1, 'riyad298@gmail.com', '3345', '7d04bbbe5494ae9d2f5a76aa1c00fa2f', 'approved', 'verified', 'rejected', '2019-11-29 01:45:23.000000', 'admin', 'full_name,email,mobile,institution_id,nid_or_passport,fathers_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,parmanent_district,parmanent_country,membership_number,status,change_request,type,registration_date', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$riyad298@gmail.com,01719246822,riyad,riyad298@gmail.com,,,,,,,,B+,1990-11-20,arferferf,afreferf,2222,arfraefrae,aferff,arfarferf,44444,aferferf'),
 (2, 'ahsan.riyad@outlook.com', '4982', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 100, NULL),
 (3, 'riyad298@yahoo.com', '8456', NULL, 'approved', 'verified', 'approved', '2019-11-29 14:27:41.000000', 'user', 'full_name,institution_id,membership_number', 100, 'full_name,mobile,institution_id,nid_or_passport,fathers_name,mother_name,spouse_name,number_of_children,profession,designation,institution,blood_group,date_of_birth,present_line1,present_district,present_post_code,present_country,parmanent_line1,parmanent_district,parmanent_post_code,parmanent_country@#$Ahsan Ferdous,017192246822,15-2804-2,5555555555555555,afaerfeaf,aferferf,aferfaef,1,arfaf,afferfaref,arfefearf,A+,1992-11-01,arfaerferf,arferfer,3444,arfarfe,aerfearfe,arferferf,1111,arfefaerf'),
 (4, 'riyad298@hotmail.com', '2591', NULL, 'approved', 'not_verified', 'not_requested', NULL, 'user', 'full_name,institution_id,membership_number', 60, NULL),
@@ -677,6 +695,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_options`
+--
+ALTER TABLE `admin_options`
+  ADD PRIMARY KEY (`admin_options_id`);
 
 --
 -- Indexes for table `log_table`
@@ -717,6 +741,12 @@ ALTER TABLE `verification_info`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin_options`
+--
+ALTER TABLE `admin_options`
+  MODIFY `admin_options_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `log_table`

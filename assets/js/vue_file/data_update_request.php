@@ -301,7 +301,7 @@
 				}else if(name == 'mobile'){
 					return 'Mobile';
 				}else if(name == 'institution_id'){
-					return 'Institution ID';
+					return this.institution_id_label__;
 				}else if(name == 'nid_or_passport'){
 					return 'NID/Passport';
 				}else if(name == 'fathers_name'){

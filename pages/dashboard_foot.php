@@ -214,13 +214,13 @@
 
 
 
-		<a class="text-white" href="<?=  $photo_galleryPage; ?>">
+		<a class="text-white" href="<?=  $admin_optionsPage; ?>">
 			<div class=" 
 			
 
 			<?php 
 
-			if($pageName=='photo_gallery')
+			if($pageName=='admin_options')
 			{
 				echo 'bg-info';
 			}

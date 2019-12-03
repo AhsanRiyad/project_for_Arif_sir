@@ -63,7 +63,7 @@ Welcome, Create your Account
 
 <!-- institution_id input -->
 <div class="form-group mt-3">
-<label for="exampleInputEmail1"><small id="lnLabel">Institution ID*
+<label for="exampleInputEmail1"><small id="lnLabel"> {{ institution_id_label__ }}*
 
 
 

@@ -93,6 +93,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     data_privacyPage: '<?php echo $data_privacyPage; ?>',
                     new_user_requestPage: '<?php echo $new_user_requestPage; ?>',
                     data_update_requestPage: '<?php echo $data_update_requestPage; ?>',
+                    admin_optionsPage: '<?php echo $admin_optionsPage; ?>',
 
 
 
@@ -128,6 +129,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     modeldata_privacy: '<?php echo $modeldata_privacy; ?>',
                     modelnew_user_request: '<?php echo $modelnew_user_request; ?>',
                     modeldata_update_request: '<?php echo $modeldata_update_request; ?>',
+                    modeladmin_options: '<?php echo $modeladmin_options; ?>',
                     
 
                     modelcommon_request: '<?php echo $modelcommon_request; ?>',
@@ -154,6 +156,7 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                     name__: '<?= $name__ ?>',
                 },
                 greeting_text__: '',
+                institution_id_label__: '<?php echo $institution_id_label__; ?>'
 
             }
         },
@@ -174,7 +177,9 @@ $jquery_ui = $rootAdress.'assets/js/jquery-ui.js';
                 this.pageName == 'search' || 
                 this.pageName == 'data_privacy' || 
                 this.pageName == 'data_update_request' || 
-                this.pageName == 'new_user_request'
+                this.pageName == 'new_user_request' ||
+                this.pageName == 'admin_options' 
+
                 ){
 
 
@@ -369,6 +374,9 @@ else if($pageName == 'search'){
 }
 else if($pageName == 'add_user'){
     include $APP_ROOT."assets/js/vue_file/add_user.php";
+}
+else if($pageName == 'admin_options'){
+    include $APP_ROOT."assets/js/vue_file/admin_options.php";
 }
 
 

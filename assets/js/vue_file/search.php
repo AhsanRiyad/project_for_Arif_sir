@@ -30,7 +30,7 @@
 	<p>Categories</p>
 	<v-select @change="search()"
 	v-model="category"
-	:items="category_items"
+	:items="institution_id_item"
 	label="Select"
 	value="true"
 	required
@@ -55,7 +55,7 @@
 	<tr >
 	<th>Name</th>
 	<th>Membership Number</th>
-	<th>Institution Id</th>
+	<th>{{ institution_id_label__ }}</th>
 	<th>Gallery</th>
 	<th>Details</th>
 
@@ -583,7 +583,7 @@
 				}else if(name == 'mobile'){
 					return 'Mobile';
 				}else if(name == 'institution_id'){
-					return 'Institution ID';
+					return this.institution_id_label__;
 				}else if(name == 'nid_or_passport'){
 					return 'NID/Passport';
 				}else if(name == 'fathers_name'){
@@ -1306,7 +1306,20 @@ Vue.component('search' , {
 			users_info_as_props: {},
 		}
 	},
+	computed: {
+			institution_id_item(){
+				this.category_items = ['Full Name',
+			this.institution_id_label__,
+			'Membership Number'];
+
+			this.users_info__.admin__ == true ? this.category_items.push("Rejected User" , "Newly Registered") : '';
+
+
+			return this.category_items;
+			}
+	},
 	methods: {
+
 
 		search(){
 				//console.log(this.search_text);
@@ -1352,7 +1365,7 @@ Vue.component('search' , {
 				
 			})
 			// this.users_info__.admin__ = true;
-			this.users_info__.admin__ == true ? this.category_items.push("Rejected User" , "Newly Registered") : '';
+			
 			axios.post( this.model.modelSearch ,
 			{
 				purpose: 'getProfileBasicInfo',

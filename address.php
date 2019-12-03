@@ -118,6 +118,7 @@ $photo_galleryPage = $rootAdress.'pages/photo_gallery.php';
 $data_privacyPage = $rootAdress.'pages/data_privacy.php';
 $new_user_requestPage = $rootAdress.'pages/new_user_request.php';
 $data_update_requestPage = $rootAdress.'pages/data_update_request.php';
+$admin_optionsPage = $rootAdress.'pages/admin_options.php';
 
 
 
@@ -159,6 +160,7 @@ $modelphoto_gallery = $rootAdress."model/photo_gallery.php";
 $modeldata_privacy = $rootAdress."model/data_privacy.php";
 $modelnew_user_request = $rootAdress."model/new_user_request.php";
 $modeldata_update_request = $rootAdress."model/data_update_request.php";
+$modeladmin_options = $rootAdress."model/admin_options.php";
 
 
 
@@ -227,6 +229,7 @@ $email__='';
 $name__ = '';
 $cr__ = 0;
 $vr__ = 0;
+$institution_id_label__ = 'Institution Id';
 
 
 

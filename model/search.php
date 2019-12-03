@@ -34,7 +34,7 @@ if($d2->main_purpose == 'search'){
 
 		
 
-	}else if($d2->purpose == 'Institution ID'){
+	}else if($d2->purpose == 'Institution ID' || $d2->purpose == 'School ID'  || $d2->purpose == 'College ID'  || $d2->purpose == 'School Roll'  || $d2->purpose == 'College Roll'  || $d2->purpose == 'University Roll' ){
 
 		if($name == ''){
 			$sql =" select * from all_info_together where status = 'approved' limit 20";
