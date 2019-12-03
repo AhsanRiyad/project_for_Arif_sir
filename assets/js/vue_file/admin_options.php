@@ -118,7 +118,7 @@
 				}
 				).then(function(response){
 
-					console.log(response);
+				
 					if(response.data == 'success'){
 						this.dialog_text = 'Label Changed Successfully';
 						this.dialog = true;
