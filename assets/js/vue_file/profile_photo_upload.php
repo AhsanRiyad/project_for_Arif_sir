@@ -21,6 +21,14 @@
 	<div class="w-100 bg-info">
 	<p class="h3 text-white pl-4 pt-2"> <i class="fas fa-info-circle mr-0"></i> Upload Photos</p>
 	</div>
+
+	<div class="w-100"></div>
+	<div class="mt-2 bg-danger white--text p-3">
+	<h5 > Maximum photo size is 1.5MB </h5>
+	<h6 > Click here to optimize or compress your photo  </h6>
+	<a target="_blank" href="https://imagecompressor.com" style="color: white" class="bg-success p-2">Photo Optimizer</a>
+	</div>
+
 	<div class="col-10 mt-3 border border-right-0 border-top-0 border-left-0 pl-0 pr-0"> 
 	<small id='idSmallEmailChangeDashboard'  class=""  > <span>Recent Photo</span></small>
 	<div class="custom-file">
@@ -189,7 +197,12 @@
 					this.file_type = false;
 					this.status = 'incorrect file type\n select again';
 					this.dialog = true;
-				}else{
+				}else if(this.recent_photo.size/1024/1024 > 1.5){
+					this.file_type = false;
+					this.status = 'Size limit exceeds, maximum size 1.5MB';
+					this.dialog = true;
+				}
+				else{
 					this.file_type = true;
 					this.recent_photo_name = this.recent_photo.name.slice(0,15);
 					this.recent_photo = this.$refs.recent_photo.files[0];
@@ -271,6 +284,10 @@
 					this.file_type = false;
 					this.status = 'incorrect file type\n select again';
 					this.dialog = true;
+				}else if(this.old_photo.size/1024/1024 > 1.5){
+					this.file_type = false;
+					this.status = 'Size limit exceeds, maximum size 1.5MB';
+					this.dialog = true;
 				}else{
 					this.file_type = true;
 					this.old_photo_name = this.old_photo.name.slice(0,15);
@@ -327,6 +344,10 @@
 				if(!result){
 					this.file_type = false;
 					this.status = 'incorrect file type\n select again';
+					this.dialog = true;
+				}else if(this.group_photo.size/1024/1024 > 1.5){
+					this.file_type = false;
+					this.status = 'Size limit exceeds, maximum size 1.5MB';
 					this.dialog = true;
 				}else{
 					this.file_type = true;

@@ -154,7 +154,7 @@
 	</div>
 
 	<div class="col col-md-5">
-	<h1 class="text-center">old Photo</h1>
+	<h1 class="text-center">Old Photo</h1>
 	<img class="text-center img-fluid img-thumbnail" v-if="old_photo != 'not_set'"
 	:src="rootAdress+old_photos+old_photo"
 	style="max-height: 400px; width: 600px;">
