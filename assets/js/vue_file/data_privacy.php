@@ -133,11 +133,11 @@
         return "Account Created at";
       }else if(name == 'institution'){
           return "Workplace/Institution";
-        }else if(name == 'email_verification_status'){
+      }else if(name == 'email_verification_status'){
           return "Email Verification Status";
-        }else if(name == 'change_request'){
+      }else if(name == 'change_request'){
           return "Information Update Request";
-        }
+      }
     }
 
 
