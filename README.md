@@ -1,21 +1,12 @@
-# riyassss
+# User Management System.
 
-> A Vue.js project
+> A project on Vue.js and PHP
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
+# From the root directory, there is file 'address.php'
+you just need to point the database and root directory from here.
 
-# serve with hot reload at localhost:8080
-npm run dev
+# change the subdirectory variabla if you are keeping the project in a sub directory.
+ 
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# sql file is in the folder 'sql_file'
