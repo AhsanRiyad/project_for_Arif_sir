@@ -6,7 +6,7 @@
 > From the root directory, there is file 'address.php'
 you just need to point the database and root directory from here.
 
-> change the subdirectory variabla if you are keeping the project in a sub directory.
+> change the subdirectory variable if you are keeping the project in a sub directory.
  
 # Database
 > sql file is in the folder 'sql_file'
